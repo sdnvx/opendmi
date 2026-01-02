@@ -117,7 +117,8 @@ const dmi_attribute_t dmi_mgmt_device_attrs[] =
     }),
     DMI_ATTRIBUTE(dmi_mgmt_device_t, addr, ADDRESS, {
         .code    = "address",
-        .name    = "Address"
+        .name    = "Address",
+        .flags   = DMI_ATTRIBUTE_FLAG_HEX
     }),
     DMI_ATTRIBUTE(dmi_mgmt_device_t, addr_type, ENUM, {
         .code    = "address-type",

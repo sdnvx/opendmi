@@ -16,6 +16,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.1.1] - Unreleased
 
 - Fixed incorrect firmware BIOS segment address display format
+- Fixed incorrect memory array stating & ending address display format
+- Fixed incorrect memory device stating & ending address display format
+- Fixed incorrect memory error addresses display format
+- Fixed incorrect management device address display format
 
 ## [0.1] - January 02, 2026
 

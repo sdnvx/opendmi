@@ -156,11 +156,13 @@ const dmi_attribute_t dmi_memory_error_attrs[] =
     }),
     DMI_ATTRIBUTE(dmi_memory_error_t, array_addr, ADDRESS, {
         .code    = "array-addr",
-        .name    = "Array-relative address"
+        .name    = "Array-relative address",
+        .flags   = DMI_ATTRIBUTE_FLAG_HEX
     }),
     DMI_ATTRIBUTE(dmi_memory_error_t, device_addr, ADDRESS, {
         .code    = "device-addr",
-        .name    = "Device-relative address"
+        .name    = "Device-relative address",
+        .flags   = DMI_ATTRIBUTE_FLAG_HEX
     }),
     DMI_ATTRIBUTE(dmi_memory_error_t, resolution, SIZE, {
         .code    = "resolution",
