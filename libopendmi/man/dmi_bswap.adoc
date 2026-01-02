@@ -1,0 +1,42 @@
+= dmi_bswap(3)
+Dmitry Sednev
+OpenDMI 0.2.0
+
+:doctype: manpage
+:release-version: 0.2.0
+:manmanual: OpenDMI Manual
+:mansource: OpenDMI {release-version}
+
+== Name
+
+dmi_bswap16, dmi_bswap32, dmi_bswap64 - reverse order of bytes.
+
+== Library
+
+OpenDMI C library (`libopendmi`, `-lopendmi`)
+
+== Synopsis
+
+[source, c]
+----
+#include <opendmi/endian.h>
+
+uint16_t dmi_bswap16(uint16_t value);
+uint32_t dmi_bswap32(uint32_t value);
+uint64_t dmi_bswap64(uint64_t value);
+----
+
+== Description
+
+These functions return a value in which the order of the bytes in their 16-,
+32-, or 64-bit arguments is reversed.
+
+== Return value
+
+These functions return the value of their argument with the bytes reversed.
+
+== Errors
+
+These functions always succeed.
+
+== See also
