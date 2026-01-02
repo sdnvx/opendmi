@@ -37,6 +37,7 @@ typedef enum dmi_attribute_type
     DMI_ATTRIBUTE_TYPE_ENUM,
     DMI_ATTRIBUTE_TYPE_SET,
     DMI_ATTRIBUTE_TYPE_VERSION,
+    DMI_ATTRIBUTE_TYPE_DATE,
     DMI_ATTRIBUTE_TYPE_UUID
 } dmi_attribute_type_t;
 

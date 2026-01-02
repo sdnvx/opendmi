@@ -9,6 +9,7 @@
 
 #pragma once
 
+#include <opendmi/date.h>
 #include <opendmi/entity.h>
 
 typedef struct dmi_battery_data dmi_battery_data_t;
@@ -210,10 +211,9 @@ struct dmi_battery
     const char *vendor;
 
     /**
-     * @brief String that identifies the date on which the battery was
-     * manufactured.
+     * @brief The date on which the battery was manufactured.
      */
-    const char *manufacture_date;
+    dmi_date_t manufacture_date;
 
     /**
      * @brief Number of the string that contains the serial number for the
@@ -266,11 +266,6 @@ struct dmi_battery
      * field must be set to `0` (no string) for this field to be valid.
      */
     uint16_t sbds_serial_number;
-
-    /**
-     * @brief Date the cell pack was manufactured, in packed format.
-     */
-    uint16_t sbds_manufacture_date;
 
     /**
      * @brief String that identifies the battery chemistry (for example,

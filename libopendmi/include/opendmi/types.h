@@ -84,15 +84,18 @@ typedef uint64_t dmi_size_t;
  */
 typedef uint16_t dmi_i2c_addr_t;
 
+/**
+ * @brief UUID value.
+ */
 typedef union dmi_uuid dmi_uuid_t;
 
 /**
- * DMI UUID type.
+ * @brief UUID type.
  */
 dmi_packed_union(dmi_uuid)
 {
     /**
-     * @brief Raw value;
+     * @brief Raw value.
      */
     dmi_byte_t __value[16];
 

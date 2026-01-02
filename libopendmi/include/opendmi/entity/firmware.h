@@ -9,6 +9,7 @@
 
 #pragma once
 
+#include <opendmi/date.h>
 #include <opendmi/entity.h>
 
 /**
@@ -251,11 +252,9 @@ struct dmi_firmware
     uint16_t bios_segment;
 
     /**
-     * @brief Firmware release date. The date string, if supplied, is in either
-     * mm/dd/yy or mm/dd/yyyy format. If the year portion of the string is two
-     * digits, the year is assumed to be 19yy.
+     * @brief Firmware release date.
      */
-    const char *release_date;
+    dmi_date_t release_date;
 
     /**
      * @brief Extended size of the physical device(s) containing the firmware,

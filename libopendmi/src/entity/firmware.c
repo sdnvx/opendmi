@@ -255,11 +255,13 @@ static const dmi_attribute_t dmi_firmware_attrs[] =
     }),
     DMI_ATTRIBUTE(dmi_firmware_t, bios_segment, ADDRESS, {
         .code   = "bios-segment",
-        .name   = "BIOS segment"
+        .name   = "BIOS segment",
+        .flags  = DMI_ATTRIBUTE_FLAG_HEX
     }),
-    DMI_ATTRIBUTE(dmi_firmware_t, release_date, STRING, {
+    DMI_ATTRIBUTE(dmi_firmware_t, release_date, DATE, {
         .code   = "release-date",
-        .name   = "Release date"
+        .name   = "Release date",
+        .unspec = dmi_value_ptr(DMI_DATE_NONE)
     }),
     DMI_ATTRIBUTE(dmi_firmware_t, rom_size, SIZE, {
         .code   = "rom-size",
@@ -349,7 +351,16 @@ dmi_firmware_t *dmi_firmware_decode(const dmi_entity_t *entity, dmi_version_t *p
     info->vendor       = dmi_entity_string(entity, data->vendor);
     info->version      = dmi_entity_string(entity, data->version);
     info->bios_segment = dmi_value(data->bios_segment);
-    info->release_date = dmi_entity_string(entity, data->release_date);
+
+    const char *release_date = dmi_entity_string(entity, data->release_date);
+    if (release_date != nullptr) {
+        info->release_date = dmi_date_parse(release_date);
+        if (info->release_date == DMI_DATE_NONE)
+            dmi_log_warning(entity->context, "Invalid firmware release date format: '%s'", release_date);
+    } else {
+        info->release_date = DMI_DATE_NONE;
+    }
+
     info->rom_size     = dmi_firmware_rom_size(dmi_value(data->rom_size));
     info->features     = features;
 

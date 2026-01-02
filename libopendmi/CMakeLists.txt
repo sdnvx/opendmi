@@ -20,6 +20,7 @@ target_include_directories(opendmi-object PUBLIC include)
 target_sources(opendmi-object
     PRIVATE
         src/version.c
+        src/date.c
         src/endian.c
         src/utils.c
         src/name.c
@@ -91,6 +92,7 @@ target_sources(opendmi-object
                 include/opendmi/attribute.h
                 include/opendmi/backend.h
                 include/opendmi/context.h
+                include/opendmi/date.h
                 include/opendmi/defs.h
                 include/opendmi/endian.h
                 include/opendmi/entry.h

@@ -9,12 +9,12 @@
 
 #pragma once
 
-#include <opendmi/defs.h>
+#include <opendmi/types.h>
 
 /**
  * @brief SMBIOS version number.
  */
-typedef unsigned int dmi_version_t;
+typedef uint32_t dmi_version_t;
 
 #define DMI_VERSION(major, minor, revision) \
     ((dmi_version_t)((((major) & 0xFFU) << 16) | (((minor) & 0xFFU) << 8) | ((revision) & 0xFFU)))

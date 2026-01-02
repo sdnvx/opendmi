@@ -64,9 +64,10 @@ const dmi_attribute_t dmi_battery_attrs[] =
         .code    = "vendor",
         .name    = "Vendor"
     }),
-    DMI_ATTRIBUTE(dmi_battery_t, manufacture_date, STRING, {
+    DMI_ATTRIBUTE(dmi_battery_t, manufacture_date, DATE, {
         .code    = "manufacture-date",
-        .name    = "Manufacture date"
+        .name    = "Manufacture date",
+        .unspec  = dmi_value_ptr(DMI_DATE_NONE)
     }),
     DMI_ATTRIBUTE(dmi_battery_t, serial_number, STRING, {
         .code    = "serial-number",
@@ -110,12 +111,6 @@ const dmi_attribute_t dmi_battery_attrs[] =
     DMI_ATTRIBUTE(dmi_battery_t, sbds_serial_number, INTEGER, {
         .code    = "sbds-serial-number",
         .name    = "SBDS serial number",
-        .level   = DMI_VERSION(2, 2, 0)
-    }),
-    DMI_ATTRIBUTE(dmi_battery_t, sbds_manufacture_date, INTEGER, {
-        .code    = "sbds-manufacture-date",
-        .name    = "SBDS manufacture date",
-        .flags   = DMI_ATTRIBUTE_FLAG_HEX,
         .level   = DMI_VERSION(2, 2, 0)
     }),
     DMI_ATTRIBUTE(dmi_battery_t, sbds_chemistry, STRING, {
@@ -166,9 +161,16 @@ dmi_battery_decode(const dmi_entity_t *entity, dmi_version_t *plevel)
     if (info == nullptr)
         return nullptr;
 
-    info->location         = dmi_entity_string(entity, data->location);
-    info->vendor           = dmi_entity_string(entity, data->vendor);
-    info->manufacture_date = dmi_entity_string(entity, data->manufacture_date);
+    info->location = dmi_entity_string(entity, data->location);
+    info->vendor   = dmi_entity_string(entity, data->vendor);
+
+    const char *manufacture_date = dmi_entity_string(entity, data->manufacture_date);
+    if (manufacture_date != nullptr) {
+        info->manufacture_date = dmi_date_parse(manufacture_date);
+        if (info->manufacture_date == DMI_DATE_NONE)
+            dmi_log_warning(entity->context, "Invalid battery manufacture date format: '%s'", manufacture_date);
+    }
+
     info->serial_number    = dmi_entity_string(entity, data->serial_number);
     info->name             = dmi_entity_string(entity, data->name);
     info->chemistry        = dmi_value(data->chemistry);
@@ -187,7 +189,15 @@ dmi_battery_decode(const dmi_entity_t *entity, dmi_version_t *plevel)
         level = dmi_version(2, 2, 0);
 
         info->sbds_serial_number    = dmi_value(data->sbds_serial_number);
-        info->sbds_manufacture_date = dmi_value(data->sbds_manufacture_date);
+
+        if (manufacture_date == nullptr) {
+            info->manufacture_date = dmi_date(
+                ((data->sbds_manufacture_date & 0xFF00u) >> 8) + 1980,
+                (data->sbds_manufacture_date & 0x00F0u) >> 4,
+                data->sbds_manufacture_date & 0x000Fu
+            );
+        }
+
         info->sbds_chemistry        = dmi_entity_string(entity, data->sbds_chemistry);
         info->oem_defined           = dmi_value(data->oem_defined);
 

@@ -11,6 +11,7 @@
 #include <assert.h>
 
 #include <opendmi/version.h>
+#include <opendmi/date.h>
 #include <opendmi/attribute.h>
 #include <opendmi/utils.h>
 
@@ -24,6 +25,7 @@ static char *dmi_attribute_format_address(const dmi_attribute_t *attr, const voi
 static char *dmi_attribute_format_enum(const dmi_attribute_t *attr, const void *value, bool pretty);
 static char *dmi_attribute_format_set(const dmi_attribute_t *attr, const void *value, bool pretty);
 static char *dmi_attribute_format_version(const dmi_attribute_t *attr, const void *value, bool pretty);
+static char *dmi_attribute_format_date(const dmi_attribute_t *attr, const void *value, bool pretty);
 static char *dmi_attribute_format_uuid(const dmi_attribute_t *attr, const void *value, bool pretty);
 
 static const dmi_attribute_ops_t dmi_attribute_type_ops[] =
@@ -66,6 +68,10 @@ static const dmi_attribute_ops_t dmi_attribute_type_ops[] =
     },
     [DMI_ATTRIBUTE_TYPE_VERSION] = {
         .format = dmi_attribute_format_version,
+        .parse  = nullptr
+    },
+    [DMI_ATTRIBUTE_TYPE_DATE] = {
+        .format = dmi_attribute_format_date,
         .parse  = nullptr
     },
     [DMI_ATTRIBUTE_TYPE_UUID] = {
@@ -464,6 +470,17 @@ static char *dmi_attribute_format_version(
         return nullptr;
 
     return str;
+}
+
+static char *dmi_attribute_format_date(const dmi_attribute_t *attr, const void *value, bool pretty)
+{
+    assert(attr != nullptr);
+    assert(value != nullptr);
+
+    dmi_unused(attr);
+    dmi_unused(pretty);
+
+    return dmi_date_format(*(dmi_date_t *)value);
 }
 
 static char *dmi_attribute_format_uuid(

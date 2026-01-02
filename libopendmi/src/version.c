@@ -7,6 +7,7 @@
 #include <stdio.h>
 
 #include <opendmi/version.h>
+#include <opendmi/utils.h>
 
 char *dmi_version_format(dmi_version_t version)
 {
@@ -18,9 +19,9 @@ char *dmi_version_format(dmi_version_t version)
     unsigned revision = dmi_version_revision(version);
 
     if (revision != 0) {
-        rv = asprintf(&str, "%d.%d.%d", major, minor, revision);
+        rv = dmi_asprintf(&str, "%d.%d.%d", major, minor, revision);
     } else {
-        rv = asprintf(&str, "%d.%d", major, minor);
+        rv = dmi_asprintf(&str, "%d.%d", major, minor);
     }
 
     if (rv < 0)
