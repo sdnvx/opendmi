@@ -10,14 +10,16 @@
 #pragma once
 
 #include <opendmi/types.h>
+#include <opendmi/utils/vector.h>
 
 typedef struct dmi_filter dmi_filter_t;
 
 struct dmi_filter
 {
     dmi_context_t *context;
-    dmi_handle_t *handles;
-    dmi_type_t *types;
+
+    dmi_vector_t handles;
+    dmi_vector_t types;
 };
 
 __BEGIN_DECLS

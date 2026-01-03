@@ -17,6 +17,7 @@
 #include <limits.h>
 #include <libgen.h>
 #include <getopt.h>
+#include <errno.h>
 #include <assert.h>
 
 #ifdef ENABLE_CURSES
@@ -35,6 +36,7 @@
 #include <opendmi/context.h>
 #include <opendmi/pager.h>
 #include <opendmi/entity.h>
+#include <opendmi/filter.h>
 #include <opendmi/format.h>
 #include <opendmi/format/text.h>
 
@@ -55,9 +57,11 @@ typedef struct dmi_config
     char *input_path;
     char *output_path;
     const dmi_format_t *output_format;
+    dmi_filter_t filter;
 } dmi_config_t;
 
 static bool parse_args(int argc, char *argv[], int *rv);
+static dmi_handle_t parse_handle(const char *str);
 
 static void show_version(void);
 static void show_usage(const char *proc);
@@ -83,7 +87,8 @@ dmi_config_t config =
     .dump          = false,
     .input_path    = nullptr,
     .output_path   = nullptr,
-    .output_format = &dmi_text_format
+    .output_format = &dmi_text_format,
+    .filter        = { 0 }
 };
 
 static bool tty = false;
@@ -111,7 +116,7 @@ int main(int argc, char *argv[])
     // Create DMI context
     context = dmi_create();
     if (context == nullptr) {
-        printf("Unable to create DMI context\n");
+        fprintf(stderr, "Unable to create DMI context\n");
         return EXIT_FAILURE;
     }
 
@@ -172,6 +177,7 @@ static bool parse_args(int argc, char *argv[], int *rv)
         { "quiet",     no_argument,       nullptr, 'q' },
         { "string",    optional_argument, nullptr, 's' },
         { "type",      optional_argument, nullptr, 't' },
+        { "handle",    required_argument, nullptr, 'H' },
         { "dump",      no_argument,       nullptr, 'u' },
         { "dump-bin",  required_argument, nullptr, 'o' },
         { "format",    required_argument, nullptr, 'f' },
@@ -184,7 +190,7 @@ static bool parse_args(int argc, char *argv[], int *rv)
 
     while (true) {
         int idx = 0;
-        int opt = getopt_long(argc, argv, "d:qs?t?uo:i:hv", long_options, &idx);
+        int opt = getopt_long(argc, argv, "d:qs?t?H:uo:i:hv", long_options, &idx);
 
         if (opt < 0)
             break;
@@ -210,6 +216,14 @@ static bool parse_args(int argc, char *argv[], int *rv)
         case 't':
             if (optarg == nullptr)
                 config.command = DMI_COMMAND_LIST_TYPES;
+            break;
+
+        case 'H':
+            dmi_handle_t handle = parse_handle(optarg);
+            if (handle == DMI_HANDLE_INVALID)
+                return EXIT_FAILURE;
+            if (not dmi_filter_add_handle(&config.filter, handle))
+                return EXIT_FAILURE;
             break;
 
         case 'u':
@@ -248,6 +262,26 @@ static bool parse_args(int argc, char *argv[], int *rv)
     }
 
     return true;
+}
+
+static dmi_handle_t parse_handle(const char *str)
+{
+    char *ep;
+    unsigned long value;
+
+    errno = 0;
+    value = strtoul(str, &ep, 16);
+
+    if ((*str == 0) or (*ep != 0)) {
+        fprintf(stderr, "Invalid handle value: %s\n", str);
+        return DMI_HANDLE_INVALID;
+    }
+    if (((errno == ERANGE) and (value == ULONG_MAX)) or (value >= DMI_HANDLE_INVALID)) {
+        fprintf(stderr, "Handle is out of range: %s\n", str);
+        return DMI_HANDLE_INVALID;
+    }
+
+    return (dmi_handle_t)value;
 }
 
 static void show_version(void)
@@ -308,7 +342,7 @@ static void print_all(dmi_context_t *context, const dmi_format_t *format)
     if (format->handlers.table_start != nullptr)
         format->handlers.table_start(session);
 
-    dmi_registry_iter_init(&iter, context->registry, nullptr);
+    dmi_registry_iter_init(&iter, context->registry, &config.filter);
     while ((entity = dmi_registry_iter_next(&iter)) != nullptr) {
         print_entity(format, entity, session);
     }

@@ -321,8 +321,11 @@ bool dmi_registry_iter_has_next(dmi_registry_iter_t *iter)
         next = iter->position->seq_next;
 
     if (iter->filter != nullptr) {
-        while (not dmi_filter_match(iter->filter, next->entity))
+        while ((next != nullptr) and
+               (not dmi_filter_match(iter->filter, next->entity)))
+        {
             next = next->seq_next;
+        }
     }
 
     return next != nullptr;
@@ -339,8 +342,11 @@ dmi_entity_t *dmi_registry_iter_next(dmi_registry_iter_t *iter)
         iter->position = iter->position->seq_next;
 
     if (iter->filter != nullptr) {
-        while (not dmi_filter_match(iter->filter, iter->position->entity))
+        while ((iter->position != nullptr) and
+               (not dmi_filter_match(iter->filter, iter->position->entity)))
+        {
             iter->position = iter->position->seq_next;
+        }
     }
 
     if (iter->position == nullptr) {

@@ -32,6 +32,7 @@ target_sources(opendmi-object
         src/utils/datetime.c
         src/utils/endian.c
         src/utils/uuid.c
+        src/utils/vector.c
         src/utils/version.c
         src/entity/additional-info.c
         src/entity/baseboard.c
@@ -110,6 +111,7 @@ target_sources(opendmi-object
                 include/opendmi/utils/datetime.h
                 include/opendmi/utils/endian.h
                 include/opendmi/utils/uuid.h
+                include/opendmi/utils/vector.h
                 include/opendmi/utils/version.h
                 include/opendmi/backend/dump.h
                 include/opendmi/entity/additional-info.h
