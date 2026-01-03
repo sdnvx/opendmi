@@ -84,55 +84,6 @@ typedef uint64_t dmi_size_t;
 typedef uint16_t dmi_i2c_addr_t;
 
 /**
- * @brief UUID value.
- */
-typedef union dmi_uuid dmi_uuid_t;
-
-/**
- * @brief UUID type.
- */
-dmi_packed_union(dmi_uuid)
-{
-    /**
-     * @brief Raw value.
-     */
-    dmi_byte_t __value[16];
-
-    dmi_packed_struct()
-    {
-        /**
-         * @brief Low field of the timestamp.
-         */
-        uint32_t time_low;
-
-        /**
-         * @brief Middle field of the timestamp.
-         */
-        uint16_t time_mid;
-
-        /**
-         * @brief High field of the timestamp multiplexed with the version number.
-         */
-        uint16_t time_hi_and_version;
-
-        /**
-         * @brief High field of the clock sequence multiplexed with the variant.
-         */
-        uint8_t clock_seq_hi_and_reserved;
-
-        /**
-         * @brief Low field of the clock sequence.
-         */
-        uint8_t clock_seq_low;
-
-        /**
-         * @brief Spatially unique node identifier.
-         */
-        uint8_t node[6];
-    };
-};
-
-/**
  * @brief SMBIOS structure types identifiers. Types 0 through 127 (7Fh) are
  * reserved for and defined by this specification. Types 128 through 256 (0x80
  * to 0xFF) are available for system- and OEM-specific information.

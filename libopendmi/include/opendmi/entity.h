@@ -10,8 +10,8 @@
 #pragma once
 
 #include <opendmi/types.h>
-#include <opendmi/version.h>
 #include <opendmi/attribute.h>
+#include <opendmi/utils/version.h>
 
 typedef struct dmi_entity      dmi_entity_t;
 typedef struct dmi_entity_spec dmi_entity_spec_t;

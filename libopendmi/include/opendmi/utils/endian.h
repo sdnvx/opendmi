@@ -4,8 +4,8 @@
 //
 // SPDX-License-Identifier: BSD-3-Clause
 //
-#ifndef OPENDMI_ENDIAN_H
-#define OPENDMI_ENDIAN_H
+#ifndef OPENDMI_UTILS_ENDIAN_H
+#define OPENDMI_UTILS_ENDIAN_H
 
 #pragma once
 
@@ -94,4 +94,4 @@ __END_DECLS
                                   uint16_t: dmi_ntoh16  \
                                  )(value))
 
-#endif // !OPENDMI_ENDIAN_H
+#endif // !OPENDMI_UTILS_ENDIAN_H

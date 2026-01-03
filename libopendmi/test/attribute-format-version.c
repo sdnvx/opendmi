@@ -7,9 +7,9 @@
 #include <string.h>
 #include <stdlib.h>
 
-#include <opendmi/version.h>
 #include <opendmi/attribute.h>
 #include <opendmi/utils.h>
+#include <opendmi/utils/version.h>
 
 struct test_vector
 {

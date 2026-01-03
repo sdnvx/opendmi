@@ -12,10 +12,10 @@
 #include <opendmi/types.h>
 #include <opendmi/error.h>
 #include <opendmi/log.h>
-#include <opendmi/version.h>
 #include <opendmi/backend.h>
 #include <opendmi/extension.h>
 #include <opendmi/registry.h>
+#include <opendmi/utils/version.h>
 
 /**
  * @brief DMI context descriptor.

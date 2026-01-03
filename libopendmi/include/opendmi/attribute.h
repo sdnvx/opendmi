@@ -10,7 +10,7 @@
 #pragma once
 
 #include <opendmi/name.h>
-#include <opendmi/version.h>
+#include <opendmi/utils/version.h>
 
 typedef struct dmi_attribute        dmi_attribute_t;
 typedef struct dmi_attribute_params dmi_attribute_params_t;

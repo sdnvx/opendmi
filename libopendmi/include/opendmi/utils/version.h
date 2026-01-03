@@ -4,8 +4,8 @@
 //
 // SPDX-License-Identifier: BSD-3-Clause
 //
-#ifndef OPENDMI_VERSION_H
-#define OPENDMI_VERSION_H
+#ifndef OPENDMI_UTILS_VERSION_H
+#define OPENDMI_UTILS_VERSION_H
 
 #pragma once
 
@@ -76,4 +76,4 @@ char *dmi_version_format(dmi_version_t version);
 
 __END_DECLS
 
-#endif // !OPENDMI_VERSION_H
+#endif // !OPENDMI_UTILS_VERSION_H

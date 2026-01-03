@@ -4,8 +4,8 @@
 //
 // SPDX-License-Identifier: BSD-3-Clause
 //
-#ifndef OPENDMI_DATE_H
-#define OPENDMI_DATE_H
+#ifndef OPENDMI_UTILS_DATETIME_H
+#define OPENDMI_UTILS_DATETIME_H
 
 #pragma once
 
@@ -51,4 +51,4 @@ char *dmi_date_format(dmi_date_t date);
 
 __END_DECLS
 
-#endif // !OPENDMI_DATE_T
+#endif // !OPENDMI_UTILS_DATETIME_H

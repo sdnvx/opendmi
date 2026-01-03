@@ -9,8 +9,8 @@
 
 #pragma once
 
-#include <opendmi/date.h>
 #include <opendmi/entity.h>
+#include <opendmi/utils/datetime.h>
 
 /**
  * @brief Platform firmware features.

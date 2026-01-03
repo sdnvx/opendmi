@@ -19,7 +19,7 @@ OpenDMI C library (`libopendmi`, `-lopendmi`)
 
 [source, c]
 ----
-#include <opendmi/endian.h>
+#include <opendmi/utils/endian.h>
 
 uint16_t dmi_bswap16(uint16_t value);
 uint32_t dmi_bswap32(uint32_t value);

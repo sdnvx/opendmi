@@ -19,10 +19,6 @@ add_library(opendmi-object OBJECT)
 target_include_directories(opendmi-object PUBLIC include)
 target_sources(opendmi-object
     PRIVATE
-        src/version.c
-        src/date.c
-        src/endian.c
-        src/utils.c
         src/name.c
         src/error.c
         src/log.c
@@ -32,6 +28,11 @@ target_sources(opendmi-object
         src/filter.c
         src/attribute.c
         src/registry.c
+        src/utils.c
+        src/utils/datetime.c
+        src/utils/endian.c
+        src/utils/uuid.c
+        src/utils/version.c
         src/entity/additional-info.c
         src/entity/baseboard.c
         src/entity/battery.c
@@ -93,9 +94,7 @@ target_sources(opendmi-object
                 include/opendmi/attribute.h
                 include/opendmi/backend.h
                 include/opendmi/context.h
-                include/opendmi/date.h
                 include/opendmi/defs.h
-                include/opendmi/endian.h
                 include/opendmi/entry.h
                 include/opendmi/error.h
                 include/opendmi/extension.h
@@ -108,7 +107,10 @@ target_sources(opendmi-object
                 include/opendmi/types.h
                 include/opendmi/utils.h
                 include/opendmi/value.h
-                include/opendmi/version.h
+                include/opendmi/utils/datetime.h
+                include/opendmi/utils/endian.h
+                include/opendmi/utils/uuid.h
+                include/opendmi/utils/version.h
                 include/opendmi/backend/dump.h
                 include/opendmi/entity/additional-info.h
                 include/opendmi/entity/baseboard.h

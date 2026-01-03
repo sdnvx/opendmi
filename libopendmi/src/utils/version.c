@@ -6,8 +6,8 @@
 //
 #include <stdio.h>
 
-#include <opendmi/version.h>
 #include <opendmi/utils.h>
+#include <opendmi/utils/version.h>
 
 char *dmi_version_format(dmi_version_t version)
 {

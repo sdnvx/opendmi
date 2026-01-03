@@ -9,6 +9,7 @@
 
 #include <opendmi/attribute.h>
 #include <opendmi/utils.h>
+#include <opendmi/utils/uuid.h>
 
 struct test_vector
 {

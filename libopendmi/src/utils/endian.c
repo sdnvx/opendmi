@@ -4,7 +4,7 @@
 //
 // SPDX-License-Identifier: BSD-3-Clause
 //
-#include <opendmi/endian.h>
+#include <opendmi/utils/endian.h>
 
 uint16_t __dmi_bswap16_compat(uint16_t value)
 {

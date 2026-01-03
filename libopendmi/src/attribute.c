@@ -10,10 +10,12 @@
 #include <inttypes.h>
 #include <assert.h>
 
-#include <opendmi/version.h>
-#include <opendmi/date.h>
 #include <opendmi/attribute.h>
+
 #include <opendmi/utils.h>
+#include <opendmi/utils/datetime.h>
+#include <opendmi/utils/uuid.h>
+#include <opendmi/utils/version.h>
 
 static char *dmi_attribute_format_handle(const dmi_attribute_t *attr, const void *value, bool pretty);
 static char *dmi_attribute_format_string(const dmi_attribute_t *attr, const void *value, bool pretty);

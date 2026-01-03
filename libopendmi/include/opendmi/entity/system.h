@@ -10,6 +10,7 @@
 #pragma once
 
 #include <opendmi/entity.h>
+#include <opendmi/utils/uuid.h>
 
 typedef struct dmi_system_data dmi_system_data_t;
 typedef struct dmi_system      dmi_system_t;

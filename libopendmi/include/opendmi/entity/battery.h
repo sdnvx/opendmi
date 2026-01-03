@@ -9,8 +9,8 @@
 
 #pragma once
 
-#include <opendmi/date.h>
 #include <opendmi/entity.h>
+#include <opendmi/utils/datetime.h>
 
 typedef struct dmi_battery_data dmi_battery_data_t;
 typedef struct dmi_battery      dmi_battery_t;

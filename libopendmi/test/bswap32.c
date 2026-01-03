@@ -7,7 +7,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-#include <opendmi/endian.h>
+#include <opendmi/utils/endian.h>
 
 struct test_vector
 {
