@@ -29,6 +29,7 @@ target_sources(opendmi-object
         src/context.c
         src/entry.c
         src/entity.c
+        src/filter.c
         src/attribute.c
         src/registry.c
         src/entity/additional-info.c

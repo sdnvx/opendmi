@@ -5,6 +5,7 @@
 // SPDX-License-Identifier: BSD-3-Clause
 //
 #include <string.h>
+#include <assert.h>
 
 #include <opendmi/registry.h>
 #include <opendmi/context.h>
@@ -199,21 +200,21 @@ exit:
 
 bool dmi_registry_link(dmi_registry_t *registry)
 {
-    dmi_registry_entry_t *entry;
+    dmi_registry_iter_t iter;
+    dmi_entity_t *entity;
 
     dmi_log_debug(registry->context, "Linking SMBIOS structures...");
 
-    for (entry = registry->head; entry != nullptr; entry = entry->seq_next) {
-        dmi_entity_t *entity = entry->entity;
-
+    dmi_registry_iter_init(&iter, registry, nullptr);
+    while ((entity = dmi_registry_iter_next(&iter)) != nullptr) {
         if ((entity->spec == nullptr) or (entity->spec->handlers.link == nullptr))
             continue;
 
-        dmi_log_debug(registry->context, "%p: Handle 0x%04x, length %d, type %d (%s)",
+        dmi_log_debug(registry->context, "%p: Handle 0x%04hx, length %zu, type %d (%s)",
                       entity->data,
-                      (unsigned)entity->handle,
-                      (int)entity->body_length,
-                      (int)entity->type,
+                      entity->handle,
+                      entity->body_length,
+                      entity->type,
                       dmi_type_name(registry->context, entity->type));
 
         if (not entity->spec->handlers.link(entity)) {
@@ -280,4 +281,66 @@ static bool dmi_registry_put(dmi_registry_t *registry, dmi_entity_t *entity)
         registry->head = entry;
 
     return true;
+}
+
+bool dmi_registry_iter_init(
+        dmi_registry_iter_t *iter,
+        dmi_registry_t *registry,
+        dmi_filter_t *filter)
+{
+    assert(iter != nullptr);
+    assert(registry != nullptr);
+
+    if ((iter == nullptr) or (registry == nullptr))
+        return false;
+
+    iter->registry = registry;
+    iter->position = nullptr;
+    iter->filter   = filter;
+    iter->is_done  = false;
+
+    return false;
+}
+
+bool dmi_registry_iter_has_next(dmi_registry_iter_t *iter)
+{
+    dmi_registry_entry_t *next;
+
+    if ((iter == nullptr) or iter->is_done)
+        return false;
+
+    if (iter->position == nullptr)
+        next = iter->registry->head;
+    else
+        next = iter->position->seq_next;
+
+    if (iter->filter != nullptr) {
+        while (not dmi_filter_match(iter->filter, next->entity))
+            next = next->seq_next;
+    }
+
+    return next != nullptr;
+}
+
+dmi_entity_t *dmi_registry_iter_next(dmi_registry_iter_t *iter)
+{
+    if ((iter == nullptr) or iter->is_done)
+        return nullptr;
+
+    if (iter->position == nullptr)
+        iter->position = iter->registry->head;
+    else
+        iter->position = iter->position->seq_next;
+
+    if (iter->filter != nullptr) {
+        while (not dmi_filter_match(iter->filter, iter->position->entity))
+            iter->position = iter->position->seq_next;
+    }
+
+    if (iter->position == nullptr) {
+        iter->is_done = true;
+        return nullptr;
+    }
+
+    return iter->position->entity;
 }

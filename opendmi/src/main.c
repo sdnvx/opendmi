@@ -293,7 +293,8 @@ static bool list_types(dmi_context_t *context)
 static void print_all(dmi_context_t *context, const dmi_format_t *format)
 {
     void *session;
-    dmi_registry_entry_t *entry;
+    dmi_registry_iter_t iter;
+    dmi_entity_t *entity;
 
     session = format->handlers.initialize(context, stdout);
     if (not session)
@@ -307,8 +308,9 @@ static void print_all(dmi_context_t *context, const dmi_format_t *format)
     if (format->handlers.table_start != nullptr)
         format->handlers.table_start(session);
 
-    for (entry = context->registry->head; entry; entry = entry->seq_next) {
-        print_entity(format, entry->entity, session);
+    dmi_registry_iter_init(&iter, context->registry, nullptr);
+    while ((entity = dmi_registry_iter_next(&iter)) != nullptr) {
+        print_entity(format, entity, session);
     }
 
     if (format->handlers.table_end != nullptr)

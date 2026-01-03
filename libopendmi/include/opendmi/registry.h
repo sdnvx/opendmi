@@ -9,7 +9,7 @@
 
 #pragma once
 
-#include <opendmi/types.h>
+#include <opendmi/filter.h>
 
 /**
  * @brief Default DMI registry capacity.
@@ -18,9 +18,10 @@
 
 typedef struct dmi_registry       dmi_registry_t;
 typedef struct dmi_registry_entry dmi_registry_entry_t;
+typedef struct dmi_registry_iter  dmi_registry_iter_t;
 
 /**
- * @brief DMI registry descriptor.
+ * @brief Registry descriptor.
  */
 struct dmi_registry
 {
@@ -56,7 +57,7 @@ struct dmi_registry
 };
 
 /**
- * @brief DMI registry entry descriptor.
+ * @brief Registry entry descriptor.
  */
 struct dmi_registry_entry
 {
@@ -79,6 +80,32 @@ struct dmi_registry_entry
      * @brief Pointer to next entry in entity sequence.
      */
     dmi_registry_entry_t *seq_next;
+};
+
+/**
+ * @brief Registry iterator.
+ */
+struct dmi_registry_iter
+{
+    /**
+     * @brief Registry handle.
+     */
+    dmi_registry_t *registry;
+
+    /**
+     * @brief Filter descriptor.
+     */
+    dmi_filter_t *filter;
+
+    /**
+     * @brief Current position.
+     */
+    dmi_registry_entry_t *position;
+
+    /**
+     * @brief Done flag.
+     */
+    bool is_done;
 };
 
 __BEGIN_DECLS
@@ -125,6 +152,15 @@ dmi_entity_t *dmi_registry_get_any(
  * @param[in] registry Registry handle.
  */
 void dmi_registry_destroy(dmi_registry_t *registry);
+
+bool dmi_registry_iter_init(
+        dmi_registry_iter_t *iter,
+        dmi_registry_t *registry,
+        dmi_filter_t *filter);
+
+bool dmi_registry_iter_has_next(dmi_registry_iter_t *iter);
+
+dmi_entity_t *dmi_registry_iter_next(dmi_registry_iter_t *iter);
 
 __END_DECLS
 
