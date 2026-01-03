@@ -121,7 +121,7 @@ bool dmi_text_entity_attr(
     fprintf(session->stream, "\t%s: ", attr->params.name);
 
     // Print attribute value
-    if (attr->counter < 0) {
+    if (not dmi_member_is_present(attr->counter)) {
         if (attr->type == DMI_ATTRIBUTE_TYPE_STRUCT)
             dmi_text_entity_attr_struct(session, attr, value);
         else
@@ -144,12 +144,13 @@ void dmi_text_entity_attr_array(
     assert(info != nullptr);
     assert(value != nullptr);
 
-    size_t count = *(size_t *)(info + attr->counter);
+    // TODO: Support counters of different sizes
+    size_t count = dmi_member_value(info, attr->counter, size_t);
     const dmi_data_t *ptr = *(const dmi_data_t **)value;
 
     fprintf(session->stream, "%zu items\n", count);
 
-    for (size_t i = 0; i < count; i++, ptr += attr->size) {
+    for (size_t i = 0; i < count; i++, ptr += attr->value.size) {
         fprintf(session->stream, "\t\t%zu: ", i);
 
         if (attr->type == DMI_ATTRIBUTE_TYPE_STRUCT)
@@ -172,7 +173,7 @@ void dmi_text_entity_attr_struct(
 
     fprintf(session->stream, "\n");
     for (child_attr = attr->params.attrs; child_attr->params.name; child_attr++) {
-        const dmi_data_t *ptr = (dmi_data_t *)value + child_attr->offset;
+        const dmi_data_t *ptr = dmi_member_ptr(value, child_attr->value, dmi_data_t);
 
         fprintf(session->stream, "\t\t\t%s: ", child_attr->params.name);
         dmi_text_entity_attr_value(session, child_attr, ptr);
@@ -227,18 +228,18 @@ void dmi_text_entity_attr_set(
 
     uint64_t mask;
 
-    if (attr->size == sizeof(int8_t))
+    if (attr->value.size == sizeof(int8_t))
         mask = *(uint8_t *)value;
-    else if (attr->size == sizeof(uint16_t))
+    else if (attr->value.size == sizeof(uint16_t))
         mask = *(uint16_t *)value;
-    else if (attr->size == sizeof(uint32_t))
+    else if (attr->value.size == sizeof(uint32_t))
         mask = *(uint32_t *)value;
-    else if (attr->size == sizeof(uint64_t))
+    else if (attr->value.size == sizeof(uint64_t))
         mask = *(uint64_t *)value;
     else
         return;
 
-    for (size_t i = 0; i < attr->size * CHAR_BIT; i++) {
+    for (size_t i = 0; i < attr->value.size * CHAR_BIT; i++) {
         const char *name = dmi_name_lookup(attr->params.values, i);
         if (name == nullptr)
             continue;

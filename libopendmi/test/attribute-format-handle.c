@@ -32,10 +32,12 @@ struct test_vector test_data[] =
 int main(void)
 {
     const dmi_attribute_t attr = {
+        .value   = {
+            .size   = sizeof(dmi_handle_t),
+            .offset = 0
+        },
+        .counter = DMI_MEMBER_NULL,
         .type    = DMI_ATTRIBUTE_TYPE_HANDLE,
-        .size    = sizeof(dmi_handle_t),
-        .offset  = 0,
-        .counter = -1,
         .params  = { 0 }
     };
 

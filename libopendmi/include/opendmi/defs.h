@@ -21,6 +21,7 @@
 #   endif
 #endif // _WIN32
 
+#include <stddef.h>
 #include <iso646.h>
 
 // Modern features support on MSVC
@@ -70,8 +71,29 @@
 #   endif
 #endif // !thread_local && !__cplusplus
 
-#define dmi_member_size(type, member)   sizeof(((type *)0)->member)
-#define dmi_element_size(type, member)  sizeof(*((type *)0)->member)
-#define dmi_member_offset(type, member) offsetof(type, member)
+#define dmi_member_size(__type, __member)   sizeof(((__type *)0)->__member)
+#define dmi_member_offset(__type, __member) offsetof(__type, __member)
+#define dmi_element_size(__type, __member)  sizeof(*((__type *)0)->__member)
+
+typedef struct dmi_member_ref
+{
+    size_t offset;
+    size_t size;
+} dmi_member_ref_t;
+
+#define dmi_member(__type, __member)                       \
+        ((dmi_member_ref_t){                               \
+            .offset = dmi_member_offset(__type, __member), \
+            .size   = dmi_member_size(__type, __member)    \
+        })
+
+#define DMI_MEMBER_NULL ((dmi_member_ref_t){ 0, 0 })
+
+#define dmi_member_is_present(__member) ((__member).size != 0)
+
+#define dmi_member_ptr(__object, __member, __type) \
+        ((__type *)((dmi_data_t *)(__object) + __member.offset))
+#define dmi_member_value(__object, __member, __type) \
+        (*dmi_member_ptr(__object, __member, __type))
 
 #endif // !OPENDMI_DEFS_H

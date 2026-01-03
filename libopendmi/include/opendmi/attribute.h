@@ -115,37 +115,34 @@ struct dmi_attribute_params
 
 struct dmi_attribute
 {
-    size_t offset;
-    size_t size;
-    ssize_t counter;
+    dmi_member_ref_t value;
+    dmi_member_ref_t counter;
     dmi_attribute_type_t type;
     dmi_attribute_params_t params;
 };
 
-#define DMI_ATTRIBUTE(__entity, __member, __type, ...)    \
-    {                                                     \
-        .offset  = dmi_member_offset(__entity, __member), \
-        .size    = dmi_member_size(__entity, __member),   \
-        .counter = -1,                                    \
-        .type    = DMI_ATTRIBUTE_TYPE_ ## __type,         \
-        .params  = __VA_ARGS__                            \
+#define DMI_ATTRIBUTE(__entity, __member, __type, ...) \
+    {                                                  \
+        .value   = dmi_member(__entity, __member),     \
+        .counter = DMI_MEMBER_NULL,                    \
+        .type    = DMI_ATTRIBUTE_TYPE_ ## __type,      \
+        .params  = __VA_ARGS__                         \
     }
 
 #define DMI_ATTRIBUTE_ARRAY(__entity, __member, __counter, __type, ...) \
     {                                                                   \
-        .offset  = dmi_member_offset(__entity, __member),               \
-        .size    = dmi_element_size(__entity, __member),                \
-        .counter = offsetof(__entity, __counter),                       \
+        .value   = dmi_member(__entity, __member),                      \
+        .counter = dmi_member(__entity, __counter),                     \
         .type    = DMI_ATTRIBUTE_TYPE_ ## __type,                       \
         .params  = __VA_ARGS__                                          \
     }
 
-#define DMI_ATTRIBUTE_NULL                 \
-    {                                      \
-        .offset = 0,                       \
-        .size   = 0,                       \
-        .type   = DMI_ATTRIBUTE_TYPE_NONE, \
-        .params = { 0 }                    \
+#define DMI_ATTRIBUTE_NULL                  \
+    {                                       \
+        .value   = DMI_MEMBER_NULL,         \
+        .counter = DMI_MEMBER_NULL,         \
+        .type    = DMI_ATTRIBUTE_TYPE_NONE, \
+        .params  = { 0 }                    \
     }
 
 __BEGIN_DECLS

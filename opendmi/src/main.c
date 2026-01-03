@@ -341,7 +341,7 @@ static void print_entity(
             format->handlers.entity_attrs_start(session, entity);
 
         for (attr = spec->attributes; attr->params.name; attr++) {
-            const dmi_data_t *value = (dmi_data_t *)entity->info + attr->offset;
+            const dmi_data_t *value = dmi_member_ptr(entity->info, attr->value, dmi_data_t);
 
             // Check attribute level
             if (attr->params.level != DMI_VERSION_NONE) {

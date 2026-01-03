@@ -86,7 +86,7 @@ bool dmi_attribute_is_unspecified(const dmi_attribute_t *attr, const void *value
     assert(value != nullptr);
 
     if (attr->params.unspec) {
-        if (memcmp(value, attr->params.unspec, attr->size) == 0)
+        if (memcmp(value, attr->params.unspec, attr->value.size) == 0)
             return true;
     } else if (attr->type == DMI_ATTRIBUTE_TYPE_STRING) {
         if (*(const char **)value == nullptr)
@@ -105,7 +105,7 @@ bool dmi_attribute_is_unknown(const dmi_attribute_t *attr, const void *value)
     assert(value != nullptr);
 
     if (attr->params.unknown) {
-        if (memcmp(value, attr->params.unknown, attr->size) == 0)
+        if (memcmp(value, attr->params.unknown, attr->value.size) == 0)
             return true;
     }
 
@@ -208,7 +208,7 @@ static char *dmi_attribute_format_integer(
     // sizeof(int) passed by compiler using int type, we need different casts
     // to make sign extension work properly.
 
-    switch (attr->size) {
+    switch (attr->value.size) {
     case sizeof(int8_t):
         if (is_signed)
             rv = dmi_asprintf(&str, "%" PRId8, *(int8_t *)value);
@@ -273,13 +273,13 @@ static char *dmi_attribute_format_decimal(
         return dmi_attribute_format_integer(attr, value, pretty);
 
     int64_t src;
-    if (attr->size == sizeof(int8_t))
+    if (attr->value.size == sizeof(int8_t))
         src = *(int8_t *)value;
-    else if (attr->size == sizeof(int16_t))
+    else if (attr->value.size == sizeof(int16_t))
         src = *(int16_t *)value;
-    else if (attr->size == sizeof(int32_t))
+    else if (attr->value.size == sizeof(int32_t))
         src = *(int32_t *)value;
-    else if (attr->size == sizeof(int64_t))
+    else if (attr->value.size == sizeof(int64_t))
         src = *(int64_t *)value;
     else
         return nullptr;
@@ -326,13 +326,13 @@ static char *dmi_attribute_format_size(
     assert(attr != nullptr);
     assert(value != nullptr);
 
-    if (attr->size == sizeof(uint8_t))
+    if (attr->value.size == sizeof(uint8_t))
         size = *(uint8_t *)value;
-    else if (attr->size == sizeof(uint16_t))
+    else if (attr->value.size == sizeof(uint16_t))
         size = *(uint16_t *)value;
-    else if (attr->size == sizeof(uint32_t))
+    else if (attr->value.size == sizeof(uint32_t))
         size = *(uint32_t *)value;
-    else if (attr->size == sizeof(uint64_t))
+    else if (attr->value.size == sizeof(uint64_t))
         size = *(uint64_t *)value;
     else
         return nullptr;
@@ -411,7 +411,7 @@ static char *dmi_attribute_format_set(
     int rv;
     char *str;
 
-    switch (attr->size) {
+    switch (attr->value.size) {
     case sizeof(int8_t):
         src = *(uint8_t *)value, fmt = "0x%02" PRIX64;
         break;

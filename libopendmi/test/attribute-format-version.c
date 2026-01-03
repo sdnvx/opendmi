@@ -39,10 +39,12 @@ int main(void)
         char *result;
 
         const dmi_attribute_t attr = {
+            .value   = {
+                .size   = sizeof(dmi_version_t),
+                .offset = 0
+            },
+            .counter = DMI_MEMBER_NULL,
             .type    = DMI_ATTRIBUTE_TYPE_VERSION,
-            .size    = sizeof(dmi_version_t),
-            .offset  = 0,
-            .counter = -1,
             .params  = {
                 .scale = test_data[i].scale
             }

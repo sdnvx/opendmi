@@ -216,7 +216,7 @@ bool dmi_yaml_entity_attr(
         if (not dmi_yaml_label(session, attr->params.code))
             break;
 
-        if (attr->counter < 0) {
+        if (not dmi_member_is_present(attr->counter)) {
             if (attr->type == DMI_ATTRIBUTE_TYPE_STRUCT)
                 rv = dmi_yaml_entity_attr_struct(session, attr, value);
             else
@@ -245,13 +245,14 @@ bool dmi_yaml_entity_attr_array(
     assert(info != nullptr);
     assert(value != nullptr);
 
-    size_t count = *(size_t *)(info + attr->counter);
+    // TODO: Support other types of counters
+    size_t count = *(size_t *)(info + attr->counter.offset);
     const dmi_data_t *ptr = *(const dmi_data_t **)value;
 
     if (not dmi_yaml_sequence_start(session, YAML_BLOCK_SEQUENCE_STYLE))
         return false;
 
-    for (size_t i = 0; i < count; i++, ptr += attr->size) {
+    for (size_t i = 0; i < count; i++, ptr += attr->value.size) {
         if (attr->type == DMI_ATTRIBUTE_TYPE_STRUCT) {
             if (not dmi_yaml_entity_attr_struct(session, attr, ptr))
                 return false;
@@ -282,7 +283,7 @@ bool dmi_yaml_entity_attr_struct(
         return false;
 
     for (child_attr = attr->params.attrs; child_attr->params.name; child_attr++) {
-        const dmi_data_t *ptr = (dmi_data_t *)value + child_attr->offset;
+        const dmi_data_t *ptr = dmi_member_ptr(value, child_attr->value, dmi_data_t);
 
         if (not dmi_yaml_label(session, child_attr->params.code))
             return false;
@@ -354,13 +355,13 @@ bool dmi_yaml_entity_attr_set(
 
     uint64_t mask;
 
-    if (attr->size == sizeof(int8_t))
+    if (attr->value.size == sizeof(int8_t))
         mask = *(uint8_t *)value;
-    else if (attr->size == sizeof(uint16_t))
+    else if (attr->value.size == sizeof(uint16_t))
         mask = *(uint16_t *)value;
-    else if (attr->size == sizeof(uint32_t))
+    else if (attr->value.size == sizeof(uint32_t))
         mask = *(uint32_t *)value;
-    else if (attr->size == sizeof(uint64_t))
+    else if (attr->value.size == sizeof(uint64_t))
         mask = *(uint64_t *)value;
     else
         return false;
@@ -368,7 +369,7 @@ bool dmi_yaml_entity_attr_set(
     if (not dmi_yaml_mapping_start(session, YAML_BLOCK_MAPPING_STYLE))
         return false;
 
-    for (size_t i = 0; i < attr->size * CHAR_BIT; i++) {
+    for (size_t i = 0; i < attr->value.size * CHAR_BIT; i++) {
         const char *name = dmi_code_lookup(attr->params.values, i);
         if (name == nullptr)
             continue;
