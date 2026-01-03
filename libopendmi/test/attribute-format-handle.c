@@ -41,7 +41,7 @@ int main(void)
         .params  = { 0 }
     };
 
-    for (size_t i = 0; i < dmi_array_size(test_data); i++) {
+    for (size_t i = 0; i < countof(test_data); i++) {
         char *result;
         
         result = dmi_attribute_format(&attr, test_data[i].value, test_data[i].pretty);

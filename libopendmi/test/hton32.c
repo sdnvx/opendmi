@@ -24,7 +24,7 @@ struct test_vector test_data[] =
 
 int main(void)
 {
-    for (size_t i = 0; i < dmi_array_size(test_data); i++) {
+    for (size_t i = 0; i < countof(test_data); i++) {
         uint32_t result;
 
         result = dmi_hton32(test_data[i].value);

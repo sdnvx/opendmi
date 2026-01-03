@@ -289,7 +289,7 @@ const dmi_entity_spec_t *dmi_type_spec(dmi_context_t *context, dmi_type_t type)
         spec = context->type_map[type];
 
     if (spec == nullptr) {
-        if ((size_t)type < dmi_array_size(dmi_entity_specs))
+        if ((size_t)type < countof(dmi_entity_specs))
             spec = dmi_entity_specs[type];
     }
 

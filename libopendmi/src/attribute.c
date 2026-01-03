@@ -119,7 +119,7 @@ char *dmi_attribute_format(const dmi_attribute_t *attr, const void *value, bool 
 
     const dmi_attribute_ops_t *ops;
 
-    if (attr->type >= dmi_array_size(dmi_attribute_type_ops))
+    if (attr->type >= countof(dmi_attribute_type_ops))
         return nullptr;
 
     ops = &dmi_attribute_type_ops[attr->type];

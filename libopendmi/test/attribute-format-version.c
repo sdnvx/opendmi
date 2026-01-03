@@ -35,7 +35,7 @@ struct test_vector test_data[] =
 
 int main(void)
 {
-    for (size_t i = 0; i < dmi_array_size(test_data); i++) {
+    for (size_t i = 0; i < countof(test_data); i++) {
         char *result;
 
         const dmi_attribute_t attr = {

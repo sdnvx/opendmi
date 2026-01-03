@@ -40,8 +40,10 @@
 
 #endif // _MSC_VER
 
-// Array size macro
-#define dmi_array_size(x) (sizeof(x) / sizeof((x)[0]))
+// C2y countof() macro
+#ifndef countof
+#define countof(x) (sizeof(x) / sizeof((x)[0]))
+#endif // !countof
 
 // Value pointer macro
 #define dmi_value_ptr(x) &(typeof(x)){ (x) }

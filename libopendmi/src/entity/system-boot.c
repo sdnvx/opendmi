@@ -46,7 +46,7 @@ dmi_system_boot_t *dmi_system_boot_decode(const dmi_entity_t *entity, dmi_versio
         return nullptr;
 
     info->status = data->status[0];
-    memcpy(info->status_data, data->status, dmi_array_size(info->status_data));
+    memcpy(info->status_data, data->status, countof(info->status_data));
 
     if (plevel != nullptr)
         *plevel = dmi_version(2, 3, 0);

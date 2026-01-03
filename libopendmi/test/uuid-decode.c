@@ -72,7 +72,7 @@ struct test_vector test_data[] =
 
 int main(void)
 {
-    for (size_t i = 0; i < dmi_array_size(test_data); i++) {
+    for (size_t i = 0; i < countof(test_data); i++) {
         dmi_uuid_t uuid = dmi_uuid_decode(test_data[i].value);
         if (memcmp(uuid.__value, test_data[i].result.__value, sizeof(uuid)) != 0)
             return EXIT_FAILURE;
