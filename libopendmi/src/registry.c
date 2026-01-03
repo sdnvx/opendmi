@@ -122,7 +122,7 @@ void dmi_registry_destroy(dmi_registry_t *registry)
     dmi_log_debug(registry->context, "Destroying registry...");
 
     if (registry->index) {
-        struct dmi_registry_entry *entry, *next;
+        dmi_registry_entry_t *entry, *next;
 
         for (size_t i = 0; i < registry->capacity; i++) {
             entry = registry->index[i];

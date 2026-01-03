@@ -12,13 +12,16 @@
 #include <opendmi/entity.h>
 #include <opendmi/extension.h>
 
-enum dmi_dell_type
+typedef struct dmi_dell_calling_interface_data dmi_dell_calling_interface_data_t;
+typedef struct dmi_dell_calling_interface_token dmi_dell_calling_interface_token_t;
+
+typedef enum dmi_dell_type
 {
     DMI_TYPE_DELL_INDEXED_IO        = 212, ///< Dell: Indexed IO
 	DMI_TYPE_DELL_PROTECTED_AREA_1  = 214, ///< Dell: Protected Area Type 1
 	DMI_TYPE_DELL_PROTECTED_AREA_2  = 215, ///< Dell: Protected Area Type 2
 	DMI_TYPE_DELL_CALLING_INTERFACE = 218  ///< Dell: Calling interface
-};
+} dmi_dell_type_t;
 
 /**
  * @brief Dell SMI calling interface token.
@@ -69,7 +72,7 @@ dmi_packed_struct(dmi_dell_calling_interface_data)
     /**
      * @brief Tokens.
      */
-	struct dmi_dell_calling_interface_token tokens[];
+	dmi_dell_calling_interface_token_t tokens[];
 };
 
 /**
