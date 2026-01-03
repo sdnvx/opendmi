@@ -182,7 +182,7 @@ const dmi_entity_spec_t dmi_power_supply_spec =
     }
 };
 
-const char *dmi_power_supply_type_name(enum dmi_power_supply_type value)
+const char *dmi_power_supply_type_name(dmi_power_supply_type_t value)
 {
     return dmi_name_lookup(&dmi_power_supply_type_names, value);
 }

@@ -67,7 +67,7 @@ struct dmi_entity_spec
     /**
      * @brief DMI type.
      */
-    enum dmi_type type;
+    dmi_type_t type;
 
     /**
      * @brief Minimum SMBIOS version. Zero means that the minimum version is

@@ -620,9 +620,9 @@ extern const dmi_entity_spec_t dmi_processor_spec;
 
 __BEGIN_DECLS
 
-const char *dmi_processor_type_name(enum dmi_processor_type value);
-const char *dmi_processor_family_name(enum dmi_processor_family value);
-const char *dmi_processor_upgrade_name(enum dmi_processor_upgrade value);
+const char *dmi_processor_type_name(dmi_processor_type_t value);
+const char *dmi_processor_family_name(dmi_processor_family_t value);
+const char *dmi_processor_upgrade_name(dmi_processor_upgrade_t value);
 
 /**
  * @internal

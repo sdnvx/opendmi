@@ -148,7 +148,7 @@ extern const dmi_entity_spec_t dmi_onboard_device_spec;
 
 __BEGIN_DECLS
 
-const char *dmi_onboard_device_type_name(enum dmi_onboard_device_type value);
+const char *dmi_onboard_device_type_name(dmi_onboard_device_type_t value);
 
 /**
  * @internal

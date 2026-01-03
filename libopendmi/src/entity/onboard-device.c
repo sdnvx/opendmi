@@ -138,7 +138,7 @@ const dmi_entity_spec_t dmi_onboard_device_spec =
     }
 };
 
-const char *dmi_onboard_device_type_name(enum dmi_onboard_device_type value)
+const char *dmi_onboard_device_type_name(dmi_onboard_device_type_t value)
 {
     return dmi_name_lookup(&dmi_onboard_device_type_names, value);
 }

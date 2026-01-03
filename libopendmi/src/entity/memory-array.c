@@ -174,12 +174,12 @@ const dmi_entity_spec_t dmi_memory_array_spec =
     }
 };
 
-const char *dmi_memory_array_location_name(enum dmi_memory_array_location value)
+const char *dmi_memory_array_location_name(dmi_memory_array_location_t value)
 {
     return dmi_name_lookup(&dmi_memory_array_location_names, value);
 }
 
-const char *dmi_memory_array_usage_name(enum dmi_memory_array_usage value)
+const char *dmi_memory_array_usage_name(dmi_memory_array_usage_t value)
 {
     return dmi_name_lookup(&dmi_memory_array_usage_names, value);
 }

@@ -607,7 +607,7 @@ extern const dmi_entity_spec_t dmi_memory_device_spec;
 __BEGIN_DECLS
 
 const char *dmi_memory_device_type_name(dmi_memory_device_type_t value);
-const char *dmi_memory_device_form_factor_name(enum dmi_memory_device_form_factor value);
+const char *dmi_memory_device_form_factor_name(dmi_memory_device_form_factor_t value);
 const char *dmi_memory_device_tech_name(dmi_memory_device_tech_t value);
 
 dmi_size_t dmi_memory_device_size(uint16_t value);
