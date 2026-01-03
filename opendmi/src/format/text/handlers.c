@@ -226,18 +226,7 @@ void dmi_text_entity_attr_set(
     assert(attr != nullptr);
     assert(value != nullptr);
 
-    uint64_t mask;
-
-    if (attr->value.size == sizeof(int8_t))
-        mask = *(uint8_t *)value;
-    else if (attr->value.size == sizeof(uint16_t))
-        mask = *(uint16_t *)value;
-    else if (attr->value.size == sizeof(uint32_t))
-        mask = *(uint32_t *)value;
-    else if (attr->value.size == sizeof(uint64_t))
-        mask = *(uint64_t *)value;
-    else
-        return;
+    uintmax_t mask = dmi_attribute_get_uint(attr, value);
 
     for (size_t i = 0; i < attr->value.size * CHAR_BIT; i++) {
         const char *name = dmi_name_lookup(attr->params.values, i);

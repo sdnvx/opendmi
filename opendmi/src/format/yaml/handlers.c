@@ -246,7 +246,7 @@ bool dmi_yaml_entity_attr_array(
     assert(value != nullptr);
 
     // TODO: Support other types of counters
-    size_t count = *(size_t *)(info + attr->counter.offset);
+    size_t count = dmi_member_value(info, attr->counter, size_t);
     const dmi_data_t *ptr = *(const dmi_data_t **)value;
 
     if (not dmi_yaml_sequence_start(session, YAML_BLOCK_SEQUENCE_STYLE))
@@ -353,18 +353,7 @@ bool dmi_yaml_entity_attr_set(
     assert(attr != nullptr);
     assert(value != nullptr);
 
-    uint64_t mask;
-
-    if (attr->value.size == sizeof(int8_t))
-        mask = *(uint8_t *)value;
-    else if (attr->value.size == sizeof(uint16_t))
-        mask = *(uint16_t *)value;
-    else if (attr->value.size == sizeof(uint32_t))
-        mask = *(uint32_t *)value;
-    else if (attr->value.size == sizeof(uint64_t))
-        mask = *(uint64_t *)value;
-    else
-        return false;
+    uintmax_t mask = dmi_attribute_get_uint(attr, value);
 
     if (not dmi_yaml_mapping_start(session, YAML_BLOCK_MAPPING_STYLE))
         return false;

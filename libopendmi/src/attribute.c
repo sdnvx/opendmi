@@ -112,6 +112,48 @@ bool dmi_attribute_is_unknown(const dmi_attribute_t *attr, const void *value)
     return false;
 }
 
+intmax_t dmi_attribute_get_int(const dmi_attribute_t *attr, const void *value)
+{
+    assert(attr != nullptr);
+    assert(value != nullptr);
+
+    intmax_t rv;
+
+    if (attr->value.size == sizeof(int8_t))
+        rv = *(int8_t *)value;
+    else if (attr->value.size == sizeof(int16_t))
+        rv = *(int16_t *)value;
+    else if (attr->value.size == sizeof(int32_t))
+        rv = *(int32_t *)value;
+    else if (attr->value.size == sizeof(int64_t))
+        rv = *(int64_t *)value;
+    else
+        rv = INTMAX_MAX;
+
+    return rv;
+}
+
+uintmax_t dmi_attribute_get_uint(const dmi_attribute_t *attr, const void *value)
+{
+    assert(attr != nullptr);
+    assert(value != nullptr);
+
+    uintmax_t rv;
+
+    if (attr->value.size == sizeof(uint8_t))
+        rv = *(uint8_t *)value;
+    else if (attr->value.size == sizeof(uint16_t))
+        rv = *(uint16_t *)value;
+    else if (attr->value.size == sizeof(uint32_t))
+        rv = *(uint32_t *)value;
+    else if (attr->value.size == sizeof(uint64_t))
+        rv = *(uint64_t *)value;
+    else
+        rv = UINTMAX_MAX;
+
+    return rv;
+}
+
 char *dmi_attribute_format(const dmi_attribute_t *attr, const void *value, bool pretty)
 {
     assert(attr != nullptr);
@@ -272,17 +314,7 @@ static char *dmi_attribute_format_decimal(
     if (attr->params.scale == 0)
         return dmi_attribute_format_integer(attr, value, pretty);
 
-    int64_t src;
-    if (attr->value.size == sizeof(int8_t))
-        src = *(int8_t *)value;
-    else if (attr->value.size == sizeof(int16_t))
-        src = *(int16_t *)value;
-    else if (attr->value.size == sizeof(int32_t))
-        src = *(int32_t *)value;
-    else if (attr->value.size == sizeof(int64_t))
-        src = *(int64_t *)value;
-    else
-        return nullptr;
+    intmax_t src = dmi_attribute_get_int(attr, value);
 
     unsigned int scale = attr->params.scale;
     unsigned int factor = dmi_ipow32(10, scale);
@@ -318,24 +350,14 @@ static char *dmi_attribute_format_size(
         "bytes", "KiB", "MiB", "GiB", "TiB", "PiB", nullptr
     };
 
-    int rv;
-    dmi_size_t size;
-    unsigned int i;
-    char *str;
-
     assert(attr != nullptr);
     assert(value != nullptr);
 
-    if (attr->value.size == sizeof(uint8_t))
-        size = *(uint8_t *)value;
-    else if (attr->value.size == sizeof(uint16_t))
-        size = *(uint16_t *)value;
-    else if (attr->value.size == sizeof(uint32_t))
-        size = *(uint32_t *)value;
-    else if (attr->value.size == sizeof(uint64_t))
-        size = *(uint64_t *)value;
-    else
-        return nullptr;
+    int rv;
+    unsigned int i;
+
+    char *str = nullptr;
+    uintmax_t size = dmi_attribute_get_uint(attr, value);
 
     if (pretty) {
         for (i = 0; units[i]; i++) {
@@ -406,33 +428,13 @@ static char *dmi_attribute_format_set(
 
     dmi_unused(pretty);
 
-    uint64_t src;
-    const char *fmt;
-    int rv;
-    char *str;
+    char fmt[16];
+    char *str = nullptr;
+    uintmax_t src = dmi_attribute_get_uint(attr, value);
 
-    switch (attr->value.size) {
-    case sizeof(int8_t):
-        src = *(uint8_t *)value, fmt = "0x%02" PRIX64;
-        break;
+    snprintf(fmt, sizeof(fmt), "0x%%0%zu" PRIXMAX, attr->value.size * 2);
 
-    case sizeof(uint16_t):
-        src = *(uint16_t *)value, fmt = "0x%04" PRIX64;
-        break;
-
-    case sizeof(uint32_t):
-        src = *(uint32_t *)value, fmt = "0x%08" PRIX64;
-        break;
-
-    case sizeof(uint64_t):
-        src = *(uint64_t *)value, fmt = "0x%016" PRIX64;
-        break;
-
-    default:
-        return nullptr;
-    }
-
-    rv = dmi_asprintf(&str, fmt, src);
+    int rv = dmi_asprintf(&str, fmt, src);
     if (rv < 0)
         return nullptr;
 
