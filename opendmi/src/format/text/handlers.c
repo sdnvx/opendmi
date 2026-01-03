@@ -125,7 +125,7 @@ bool dmi_text_entity_attr(
         if (attr->type == DMI_ATTRIBUTE_TYPE_STRUCT)
             dmi_text_entity_attr_struct(session, attr, value);
         else
-            dmi_text_entity_attr_value(session, attr, value);
+            dmi_text_entity_attr_value(session, attr, value, nullptr);
     } else {
         dmi_text_entity_attr_array(session, attr, entity->info, value);
     }
@@ -153,10 +153,20 @@ void dmi_text_entity_attr_array(
     for (size_t i = 0; i < count; i++, ptr += attr->value.size) {
         fprintf(session->stream, "\t\t%zu: ", i);
 
-        if (attr->type == DMI_ATTRIBUTE_TYPE_STRUCT)
+        if (attr->type == DMI_ATTRIBUTE_TYPE_STRUCT) {
             dmi_text_entity_attr_struct(session, attr, ptr);
-        else
-            dmi_text_entity_attr_value(session, attr, ptr);
+        } else {
+            const char *descr = nullptr;
+
+            if (attr->type == DMI_ATTRIBUTE_TYPE_HANDLE) {
+                dmi_handle_t  handle = *(dmi_handle_t *)ptr;
+                dmi_entity_t *entity = dmi_registry_get(session->context->registry, handle, DMI_TYPE_INVALID, true);
+
+                descr = dmi_entity_name(entity);
+            }
+
+            dmi_text_entity_attr_value(session, attr, ptr, descr);
+        }
     }
 }
 
@@ -176,14 +186,15 @@ void dmi_text_entity_attr_struct(
         const dmi_data_t *ptr = dmi_member_ptr(value, child_attr->value, dmi_data_t);
 
         fprintf(session->stream, "\t\t\t%s: ", child_attr->params.name);
-        dmi_text_entity_attr_value(session, child_attr, ptr);
+        dmi_text_entity_attr_value(session, child_attr, ptr, nullptr);
     }
 }
 
 void dmi_text_entity_attr_value(
         dmi_text_session_t    *session,
         const dmi_attribute_t *attr,
-        const void            *value)
+        const void            *value,
+        const char            *descr)
 {
     assert(session != nullptr);
     assert(attr != nullptr);
@@ -207,9 +218,14 @@ void dmi_text_entity_attr_value(
     }
 
     if (attr->params.unit)
-        fprintf(session->stream, "%s %s\n", text, attr->params.unit);
+        fprintf(session->stream, "%s %s", text, attr->params.unit);
     else
-        fprintf(session->stream, "%s\n", text);
+        fprintf(session->stream, "%s", text);
+
+    if (descr != nullptr)
+        fprintf(session->stream, " - %s", descr);
+
+    fputc('\n', session->stream);
 
     dmi_free(text);
 

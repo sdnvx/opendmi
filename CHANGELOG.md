@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.2] - Unreleased
 
+- Added displaying structure types in handle arrays
 - Unified date handling via `dmi_date_t` type:
   - Firmware strcture now uses `dmi_date_t` for release date
   - Portable battery now used `dmi_date_t` for manufacture date

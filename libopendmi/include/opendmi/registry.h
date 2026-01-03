@@ -139,12 +139,14 @@ bool dmi_registry_link(dmi_registry_t *registry);
 dmi_entity_t *dmi_registry_get(
         dmi_registry_t *registry,
         dmi_handle_t    handle,
-        dmi_type_t      type);
+        dmi_type_t      type,
+        bool            optional);
 
 dmi_entity_t *dmi_registry_get_any(
         dmi_registry_t *registry,
         dmi_handle_t    handle,
-        dmi_type_t     *type);
+        dmi_type_t     *type,
+        bool            optional);
 
 /**
  * @brief Destroy registry.

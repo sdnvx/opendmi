@@ -815,7 +815,7 @@ bool dmi_memory_device_link(dmi_entity_t *entity)
     registry = entity->context->registry;
 
     if (info->array_handle != DMI_HANDLE_INVALID) {
-        info->array = dmi_registry_get(registry, info->array_handle, DMI_TYPE_MEMORY_ARRAY);
+        info->array = dmi_registry_get(registry, info->array_handle, DMI_TYPE_MEMORY_ARRAY, false);
         if (info->array == nullptr) {
             dmi_error_raise_ex(entity->context, DMI_ERROR_ENTITY_NOT_FOUND,
                                "Memory array: 0x%04x", info->array_handle);
@@ -825,7 +825,7 @@ bool dmi_memory_device_link(dmi_entity_t *entity)
     if ((info->error_info_handle != DMI_HANDLE_INVALID) and
         (info->error_info_handle != DMI_HANDLE_UNSUPPORTED))
     {
-        info->error_info = dmi_registry_get_any(registry, info->error_info_handle, error_types);
+        info->error_info = dmi_registry_get_any(registry, info->error_info_handle, error_types, false);
     }
 
     return true;

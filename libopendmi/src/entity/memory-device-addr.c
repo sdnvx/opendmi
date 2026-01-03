@@ -158,11 +158,11 @@ bool dmi_memory_device_addr_link(dmi_entity_t *entity)
 
     registry = entity->context->registry;
 
-    info->device = dmi_registry_get(registry, info->device_handle, DMI_TYPE_MEMORY_DEVICE);
+    info->device = dmi_registry_get(registry, info->device_handle, DMI_TYPE_MEMORY_DEVICE, false);
     if (info->device == nullptr)
         return false;
 
-    info->array_addr = dmi_registry_get(registry, info->array_addr_handle, DMI_TYPE_MEMORY_ARRAY_ADDR);
+    info->array_addr = dmi_registry_get(registry, info->array_addr_handle, DMI_TYPE_MEMORY_ARRAY_ADDR, false);
     if (info->array_addr == nullptr) {
         dmi_log_warning(entity->context, "Memory array address not found: 0x%04x", info->array_addr_handle);
     }

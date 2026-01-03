@@ -189,7 +189,7 @@ bool dmi_cooling_device_link(dmi_entity_t *entity)
     registry = entity->context->registry;
 
     if (info->probe_handle != DMI_HANDLE_INVALID) {
-        info->probe = dmi_registry_get(registry, info->probe_handle, DMI_TYPE_TEMPERATURE_PROBE);
+        info->probe = dmi_registry_get(registry, info->probe_handle, DMI_TYPE_TEMPERATURE_PROBE, false);
     }
 
     return true;

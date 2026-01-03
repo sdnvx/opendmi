@@ -51,7 +51,11 @@ dmi_registry_t *dmi_registry_create(dmi_context_t *context, size_t capacity)
     return registry;
 }
 
-dmi_entity_t *dmi_registry_get(dmi_registry_t *registry, dmi_handle_t handle, dmi_type_t type)
+dmi_entity_t *dmi_registry_get(
+        dmi_registry_t *registry,
+        dmi_handle_t    handle,
+        dmi_type_t      type,
+        bool            optional)
 {
     dmi_registry_entry_t *entry = nullptr;
 
@@ -72,7 +76,8 @@ dmi_entity_t *dmi_registry_get(dmi_registry_t *registry, dmi_handle_t handle, dm
     }
 
     if (entry == nullptr) {
-        dmi_error_raise_ex(registry->context, DMI_ERROR_ENTITY_NOT_FOUND, "0x%04x", handle);
+        if (not optional)
+            dmi_error_raise_ex(registry->context, DMI_ERROR_ENTITY_NOT_FOUND, "0x%04x", handle);
         return nullptr;
     }
 
@@ -87,14 +92,15 @@ dmi_entity_t *dmi_registry_get(dmi_registry_t *registry, dmi_handle_t handle, dm
 dmi_entity_t *dmi_registry_get_any(
         dmi_registry_t *registry,
         dmi_handle_t    handle,
-        dmi_type_t     *type)
+        dmi_type_t     *type,
+        bool            optional)
 {
     dmi_entity_t *entity;
 
     if (registry == nullptr)
         return nullptr;
 
-    entity = dmi_registry_get(registry, handle, DMI_TYPE_INVALID);
+    entity = dmi_registry_get(registry, handle, DMI_TYPE_INVALID, optional);
     if (entity == nullptr)
         return nullptr;
 

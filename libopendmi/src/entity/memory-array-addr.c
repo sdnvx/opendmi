@@ -131,7 +131,7 @@ bool dmi_memory_array_addr_link(dmi_entity_t *entity)
 
     registry = entity->context->registry;
 
-    info->array = dmi_registry_get(registry, info->array_handle, DMI_TYPE_MEMORY_ARRAY);
+    info->array = dmi_registry_get(registry, info->array_handle, DMI_TYPE_MEMORY_ARRAY, false);
 
     return true;
 }

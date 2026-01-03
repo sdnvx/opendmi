@@ -2041,13 +2041,13 @@ bool dmi_processor_link(dmi_entity_t *entity)
     registry = entity->context->registry;
 
     if (info->l1_cache_handle != DMI_HANDLE_INVALID)
-        info->l1_cache = dmi_registry_get_any(registry, info->l1_cache_handle, cache_types);
+        info->l1_cache = dmi_registry_get_any(registry, info->l1_cache_handle, cache_types, false);
 
     if (info->l2_cache_handle != DMI_HANDLE_INVALID)
-        info->l2_cache = dmi_registry_get_any(registry, info->l2_cache_handle, cache_types);
+        info->l2_cache = dmi_registry_get_any(registry, info->l2_cache_handle, cache_types, false);
 
     if (info->l3_cache_handle != DMI_HANDLE_INVALID)
-        info->l3_cache = dmi_registry_get_any(registry, info->l3_cache_handle, cache_types);
+        info->l3_cache = dmi_registry_get_any(registry, info->l3_cache_handle, cache_types, false);
 
     return true;
 }

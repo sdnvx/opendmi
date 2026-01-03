@@ -87,16 +87,16 @@ bool dmi_mgmt_device_component_link(dmi_entity_t *entity)
 
     registry = entity->context->registry;
 
-    info->device = dmi_registry_get(registry, info->device_handle, DMI_TYPE_MGMT_DEVICE);
+    info->device = dmi_registry_get(registry, info->device_handle, DMI_TYPE_MGMT_DEVICE, false);
     if (info->device == nullptr)
         return false;
 
-    info->component = dmi_registry_get_any(registry, info->component_handle, dmi_component_types);
+    info->component = dmi_registry_get_any(registry, info->component_handle, dmi_component_types, false);
     if (info->component == nullptr)
         return false;
 
     if (info->threshold_handle != DMI_HANDLE_INVALID) {
-        info->threshold = dmi_registry_get(registry, info->threshold_handle, DMI_TYPE_MGMT_DEVICE_THRESHOLD);
+        info->threshold = dmi_registry_get(registry, info->threshold_handle, DMI_TYPE_MGMT_DEVICE_THRESHOLD, false);
     }
 
     return true;

@@ -76,7 +76,7 @@ bool dmi_string_property_link(dmi_entity_t *entity)
     registry = entity->context->registry;
 
     if (info->parent_handle != DMI_HANDLE_INVALID) {
-        info->parent = dmi_registry_get(registry, info->parent_handle, DMI_TYPE_INVALID);
+        info->parent = dmi_registry_get(registry, info->parent_handle, DMI_TYPE_INVALID, false);
     }
 
     return true;

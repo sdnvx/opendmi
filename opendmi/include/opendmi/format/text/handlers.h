@@ -38,7 +38,8 @@ void dmi_text_entity_attr_struct(
 void dmi_text_entity_attr_value(
         dmi_text_session_t    *session,
         const dmi_attribute_t *attr,
-        const void            *value);
+        const void            *value,
+        const char            *descr);
 
 void dmi_text_entity_attr_set(
         dmi_text_session_t    *session,

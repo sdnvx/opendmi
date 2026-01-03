@@ -140,7 +140,7 @@ bool dmi_memory_channel_link(dmi_entity_t *entity)
     registry = entity->context->registry;
 
     for (size_t i = 0; i < info->device_count; i++) {
-        device = dmi_registry_get(registry, info->devices[i].handle, DMI_TYPE_MEMORY_DEVICE);
+        device = dmi_registry_get(registry, info->devices[i].handle, DMI_TYPE_MEMORY_DEVICE, false);
         if (device == nullptr)
             continue;
 
