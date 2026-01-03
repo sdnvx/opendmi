@@ -199,49 +199,50 @@ static char *dmi_attribute_format_integer(
 
     dmi_unused(pretty);
 
-    int rv;
-    const char *fmt = nullptr;
-    char *str = nullptr;
+    int   rv        = -1;
+    bool  is_signed = attr->params.flags & DMI_ATTRIBUTE_FLAG_SIGNED;
+    bool  is_hex    = attr->params.flags & DMI_ATTRIBUTE_FLAG_HEX;
+    char *str       = nullptr;
+
+    // Note: as printf() arguments of type integer with sizes less than
+    // sizeof(int) passed by compiler using int type, we need different casts
+    // to make sign extension work properly.
 
     switch (attr->size) {
     case sizeof(int8_t):
-        if (attr->params.flags & DMI_ATTRIBUTE_FLAG_SIGNED)
-            fmt = "%" PRId8;
-        else if (attr->params.flags & DMI_ATTRIBUTE_FLAG_HEX)
-            fmt = "0x%" PRIX8;
+        if (is_signed)
+            rv = dmi_asprintf(&str, "%" PRId8, *(int8_t *)value);
+        else if (is_hex)
+            rv = dmi_asprintf(&str, "0x%" PRIX8, *(uint8_t *)value);
         else
-            fmt = "%" PRIu8;
-        rv = dmi_asprintf(&str, fmt, *(int8_t *)value);
+            rv = dmi_asprintf(&str, "%" PRIu8, *(uint8_t *)value);
         break;
 
     case sizeof(int16_t):
-        if (attr->params.flags & DMI_ATTRIBUTE_FLAG_SIGNED)
-            fmt = "%" PRId16;
-        else if (attr->params.flags & DMI_ATTRIBUTE_FLAG_HEX)
-            fmt = "0x%" PRIX16;
+        if (is_signed)
+            rv = dmi_asprintf(&str, "%" PRId16, *(int16_t *)value);
+        else if (is_hex)
+            rv = dmi_asprintf(&str, "0x%" PRIX16, *(uint16_t *)value);
         else
-            fmt = "%" PRIu16;
-        rv = dmi_asprintf(&str, fmt, *(int16_t *)value);
+            rv = dmi_asprintf(&str, "%" PRIu16, *(uint16_t *)value);
         break;
 
     case sizeof(int32_t):
-        if (attr->params.flags & DMI_ATTRIBUTE_FLAG_SIGNED)
-            fmt = "%" PRId32;
-        else if (attr->params.flags & DMI_ATTRIBUTE_FLAG_HEX)
-            fmt = "0x%" PRIX32;
+        if (is_signed)
+            rv = dmi_asprintf(&str, "%" PRId32, *(int32_t *)value);
+        else if (is_hex)
+            rv = dmi_asprintf(&str, "0x%" PRIX32, *(uint32_t *)value);
         else
-            fmt = "%" PRIu32;
-        rv = dmi_asprintf(&str, fmt, *(int32_t *)value);
+            rv = dmi_asprintf(&str, "%" PRIu32, *(uint32_t *)value);
         break;
 
     case sizeof(int64_t):
-        if (attr->params.flags & DMI_ATTRIBUTE_FLAG_SIGNED)
-            fmt = "%" PRId64;
-        else if (attr->params.flags & DMI_ATTRIBUTE_FLAG_HEX)
-            fmt = "0x%" PRIX64;
+        if (is_signed)
+            rv = dmi_asprintf(&str, "%" PRId64, *(int64_t *)value);
+        else if (is_hex)
+            rv = dmi_asprintf(&str, "0x%" PRIX64, *(uint64_t *)value);
         else
-            fmt = "%" PRIu64;
-        rv = dmi_asprintf(&str, fmt, *(int32_t *)value);
+            rv = dmi_asprintf(&str, "%" PRIu64, *(uint64_t *)value);
         break;
 
     default:
