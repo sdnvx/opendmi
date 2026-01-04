@@ -35,6 +35,15 @@
 #include <opendmi/format/text/handlers.h>
 #include <opendmi/format/text/helpers.h>
 
+#define COLOR_NONE (-1)
+#define COLOR_GREY 8
+
+static void dmi_tprintf(
+        dmi_text_session_t *session,
+        int color,
+        const char *format,
+        ...);
+
 void *dmi_text_initialize(dmi_context_t *context, FILE *stream)
 {
     assert(context != nullptr);
@@ -71,11 +80,11 @@ bool dmi_text_entry(dmi_text_session_t *session)
     if (entity_count == 0)
         entity_count = context->registry->count;
 
-    fprintf(session->stream, "SMBIOS %s present.\n", version);
-    fprintf(session->stream, "%zu structures occupying %zu bytes.\n",
-            entity_count, context->table_area_size);
-    fprintf(session->stream, "Table at 0x%" PRIx64 ".\n", context->table_area_addr);
-    fprintf(session->stream, "\n");
+    dmi_tprintf(session, COLOR_NONE, "SMBIOS %s present.\n", version);
+    dmi_tprintf(session, COLOR_NONE, "%zu structures occupying %zu bytes.\n",
+                entity_count, context->table_area_size);
+    dmi_tprintf(session, COLOR_NONE, "Table at 0x%" PRIx64 ".\n", context->table_area_addr);
+    dmi_tprintf(session, COLOR_NONE, "\n");
 
     dmi_free(version);
 
@@ -87,21 +96,11 @@ bool dmi_text_entity_start(dmi_text_session_t *session, const dmi_entity_t *enti
     assert(session != nullptr);
     assert(entity != nullptr);
 
-#ifdef ENABLE_CURSES
-    if (session->is_tty)
-        tputs(tparm(tigetstr("setaf"), COLOR_YELLOW), 1, putchar);
-#endif // ENABLE_CURSES
-
-    fprintf(session->stream, "Handle 0x%04hx, DMI type %d, %zu bytes\n",
-           dmi_entity_handle(entity),
-           dmi_entity_type(entity),
-           entity->total_length);
-    fprintf(session->stream, "%s\n", dmi_entity_name(entity));
-
-#ifdef ENABLE_CURSES
-    if (session->is_tty)
-        tputs(tparm(tigetstr("sgr0")), 1, putchar);
-#endif // ENABLE_CURSES
+    dmi_tprintf(session, COLOR_YELLOW, "Handle 0x%04hx, DMI type %d, %zu bytes\n",
+                dmi_entity_handle(entity),
+                dmi_entity_type(entity),
+                entity->total_length);
+    dmi_tprintf(session, COLOR_YELLOW, "%s\n", dmi_entity_name(entity));
 
     return true;
 }
@@ -118,7 +117,7 @@ bool dmi_text_entity_attr(
     assert(value != nullptr);
 
     // Print attribute name
-    fprintf(session->stream, "\t%s: ", attr->params.name);
+    dmi_tprintf(session, COLOR_NONE, "\t%s: ", attr->params.name);
 
     // Print attribute value
     if (not dmi_member_is_present(attr->counter)) {
@@ -148,10 +147,10 @@ void dmi_text_entity_attr_array(
     size_t count = dmi_member_value(info, attr->counter, size_t);
     const dmi_data_t *ptr = *(const dmi_data_t **)value;
 
-    fprintf(session->stream, "%zu items\n", count);
+    dmi_tprintf(session, COLOR_NONE, "%zu items\n", count);
 
     for (size_t i = 0; i < count; i++, ptr += attr->value.size) {
-        fprintf(session->stream, "\t\t%zu: ", i);
+        dmi_tprintf(session, COLOR_NONE, "\t\t%zu: ", i);
 
         if (attr->type == DMI_ATTRIBUTE_TYPE_STRUCT) {
             dmi_text_entity_attr_struct(session, attr, ptr);
@@ -181,11 +180,11 @@ void dmi_text_entity_attr_struct(
 
     const dmi_attribute_t *child_attr = nullptr;
 
-    fprintf(session->stream, "\n");
+    dmi_tprintf(session, COLOR_NONE, "\n");
     for (child_attr = attr->params.attrs; child_attr->params.name; child_attr++) {
         const dmi_data_t *ptr = dmi_member_ptr(value, child_attr->value, dmi_data_t);
 
-        fprintf(session->stream, "\t\t\t%s: ", child_attr->params.name);
+        dmi_tprintf(session, COLOR_NONE, "\t\t\t%s: ", child_attr->params.name);
         dmi_text_entity_attr_value(session, child_attr, ptr, nullptr);
     }
 }
@@ -203,27 +202,27 @@ void dmi_text_entity_attr_value(
     char *text;
 
     if (dmi_attribute_is_unspecified(attr, value)) {
-        fprintf(session->stream, "<unspecified>\n");
+        dmi_tprintf(session, COLOR_GREY, "<unspecified>\n");
         return;
     }
     if (dmi_attribute_is_unknown(attr, value)) {
-        fprintf(session->stream, "<unknown>\n");
+        dmi_tprintf(session, COLOR_CYAN, "<unknown>\n");
         return;
     }
 
     text = dmi_attribute_format(attr, value, true);
     if (text == nullptr) {
-        fprintf(session->stream, "<error>\n");
+        dmi_tprintf(session, COLOR_RED, "<error>\n");
         return;
     }
 
     if (attr->params.unit)
-        fprintf(session->stream, "%s %s", text, attr->params.unit);
+        dmi_tprintf(session, COLOR_NONE, "%s %s", text, attr->params.unit);
     else
-        fprintf(session->stream, "%s", text);
+        dmi_tprintf(session, COLOR_NONE, "%s", text);
 
     if (descr != nullptr)
-        fprintf(session->stream, " - %s", descr);
+        dmi_tprintf(session, COLOR_NONE, " - %s", descr);
 
     fputc('\n', session->stream);
 
@@ -250,7 +249,7 @@ void dmi_text_entity_attr_set(
             continue;
 
         bool flag = mask & (1 << i);
-        fprintf(session->stream, "\t\t%s: %s\n", name, flag ? "yes" : "no");
+        dmi_tprintf(session, COLOR_NONE, "\t\t%s: %s\n", name, flag ? "yes" : "no");
     }
 }
 
@@ -259,7 +258,7 @@ bool dmi_text_entity_data(dmi_text_session_t *session, const dmi_entity_t *entit
     assert(session != nullptr);
     assert(entity != nullptr);
 
-    fprintf(session->stream, "\tHeader and data:\n");
+    dmi_tprintf(session, COLOR_NONE, "\tHeader and data:\n");
     dmi_text_hex_data(session, entity->data, entity->body_length);
 
     return true;
@@ -273,13 +272,13 @@ bool dmi_text_entity_strings(dmi_text_session_t *session, const dmi_entity_t *en
     if (entity->string_count == 0)
         return true;
 
-    fprintf(session->stream, "\tStrings:\n");
+    dmi_tprintf(session, COLOR_NONE, "\tStrings:\n");
 
     for (dmi_string_t i = 1; i <= entity->string_count; i++) {
         const char *str = dmi_entity_string(entity, i);
 
         dmi_text_hex_data(session, str, strlen(str) + 1);
-        fprintf(session->stream, "\t\t\"%s\"\n", str);
+        dmi_tprintf(session, COLOR_NONE, "\t\t\"%s\"\n", str);
     }
 
     return true;
@@ -292,7 +291,7 @@ bool dmi_text_entity_end(dmi_text_session_t *session, const dmi_entity_t *entity
 
     dmi_unused(entity);
 
-    fprintf(session->stream, "\n");
+    dmi_tprintf(session, COLOR_NONE, "\n");
 
     return true;
 }
@@ -302,4 +301,27 @@ void dmi_text_finalize(dmi_text_session_t *session)
     assert(session != nullptr);
 
     dmi_free(session);
+}
+
+static void dmi_tprintf(
+        dmi_text_session_t *session,
+        int color,
+        const char *format,
+        ...)
+{
+    va_list args;
+
+#ifdef ENABLE_CURSES
+    if (session->is_tty and (color >= 0))
+        tputs(tparm(tigetstr("setaf"), color), 1, putchar);
+#endif // ENABLE_CURSES
+
+    va_start(args, format);
+    vfprintf(session->stream, format, args);
+    va_end(args);
+
+#ifdef ENABLE_CURSES
+    if (session->is_tty and (color >= 0))
+        tputs(tparm(tigetstr("sgr0")), 1, putchar);
+#endif // ENABLE_CURSES
 }
