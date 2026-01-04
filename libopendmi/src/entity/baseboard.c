@@ -156,7 +156,7 @@ const dmi_attribute_t dmi_baseboard_attrs[] =
         .code    = "children-count",
         .name    = "Children count"
     }),
-    DMI_ATTRIBUTE_ARRAY(dmi_baseboard_t, children, children_count, HANDLE, {
+    DMI_ATTRIBUTE_ARRAY(dmi_baseboard_t, children_handles, children_count, HANDLE, {
         .code    = "children",
         .name    = "Children"
     }),
@@ -211,14 +211,14 @@ dmi_baseboard_decode(const dmi_entity_t *entity, dmi_version_t *plevel)
     info->type           = dmi_value(data->type);
     info->children_count = dmi_value(data->children_count);
 
-    info->children = dmi_alloc_array(entity->context, sizeof(dmi_handle_t), info->children_count);
-    if (info->children == nullptr) {
+    info->children_handles = dmi_alloc_array(entity->context, sizeof(dmi_handle_t), info->children_count);
+    if (info->children_handles == nullptr) {
         dmi_free(info);
         return nullptr;
     }
 
     for (size_t i = 0; i < info->children_count; i++)
-        info->children[i] = dmi_value(data->children_handles[i]);
+        info->children_handles[i] = dmi_value(data->children_handles[i]);
 
     if (plevel != nullptr)
         *plevel = dmi_version(2, 0, 0);
@@ -228,6 +228,6 @@ dmi_baseboard_decode(const dmi_entity_t *entity, dmi_version_t *plevel)
 
 void dmi_baseboard_free(dmi_baseboard_t *info)
 {
-    dmi_free(info->children);
+    dmi_free(info->children_handles);
     dmi_free(info);
 }

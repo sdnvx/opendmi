@@ -131,7 +131,7 @@ struct dmi_attribute
 
 #define DMI_ATTRIBUTE_ARRAY(__entity, __member, __counter, __type, ...) \
     {                                                                   \
-        .value   = dmi_member(__entity, __member),                      \
+        .value   = dmi_member_array(__entity, __member),                \
         .counter = dmi_member(__entity, __counter),                     \
         .type    = DMI_ATTRIBUTE_TYPE_ ## __type,                       \
         .params  = __VA_ARGS__                                          \

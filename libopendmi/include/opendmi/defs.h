@@ -88,6 +88,11 @@ typedef struct dmi_member_ref
             .offset = dmi_member_offset(__type, __member), \
             .size   = dmi_member_size(__type, __member)    \
         })
+#define dmi_member_array(__type, __member)                 \
+        ((dmi_member_ref_t){                               \
+            .offset = dmi_member_offset(__type, __member), \
+            .size   = dmi_element_size(__type, __member)   \
+        })
 
 #define DMI_MEMBER_NULL ((dmi_member_ref_t){ 0, 0 })
 

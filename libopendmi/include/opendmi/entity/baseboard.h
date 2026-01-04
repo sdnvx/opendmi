@@ -232,7 +232,7 @@ struct dmi_baseboard
      * processor, port, system slots, memory device) that are contained by
      * this baseboard.
      */
-    dmi_handle_t *children;
+    dmi_handle_t *children_handles;
 };
 
 extern const dmi_name_set_t dmi_baseboard_type_names;
