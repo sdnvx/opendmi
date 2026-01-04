@@ -76,6 +76,39 @@ const dmi_name_set_t dmi_baseboard_type_names =
     }
 };
 
+const dmi_name_set_t dmi_baseboard_feature_names =
+{
+    .code  = "baseboard-features",
+    .names = {
+        {
+            .id   = 0,
+            .code = "is-hosting-board",
+            .name = "Hosting board"
+        },
+        {
+            .id   = 1,
+            .code = "require-daugther-board",
+            .name = "Require daugther board"
+        },
+        {
+            .id   = 2,
+            .code = "is-removable",
+            .name = "Removable"
+        },
+        {
+            .id   = 3,
+            .code = "is-replaceable",
+            .name = "Replaceable"
+        },
+        {
+            .id   = 4,
+            .code = "is-hot-swappable",
+            .name = "Hot-swappable"
+        },
+        DMI_NAME_NULL
+    }
+};
+
 const dmi_attribute_t dmi_baseboard_attrs[] =
 {
     DMI_ATTRIBUTE(dmi_baseboard_t, vendor, STRING, {
@@ -98,29 +131,19 @@ const dmi_attribute_t dmi_baseboard_attrs[] =
         .code    = "asset-tag",
         .name    = "Asset tag"
     }),
-    DMI_ATTRIBUTE(dmi_baseboard_t, is_hosting_board, BOOL, {
-        .code    = "is-hosting-board",
-        .name    = "Hosting board"
-    }),
-    DMI_ATTRIBUTE(dmi_baseboard_t, require_daughter_board, BOOL, {
-        .code    = "require-daugther-board",
-        .name    = "Require daugther board"
-    }),
-    DMI_ATTRIBUTE(dmi_baseboard_t, is_removable, BOOL, {
-        .code    = "is-removable",
-        .name    = "Removable"
-    }),
-    DMI_ATTRIBUTE(dmi_baseboard_t, is_replaceable, BOOL, {
-        .code    = "is-replaceable",
-        .name    = "Replaceable"
-    }),
-    DMI_ATTRIBUTE(dmi_baseboard_t, is_hot_swappable, BOOL, {
-        .code    = "is-hot-swappable",
-        .name    = "Hot-swappable"
+    DMI_ATTRIBUTE(dmi_baseboard_t, features, SET, {
+        .code    = "features",
+        .name    = "Features",
+        .values  = &dmi_baseboard_feature_names
     }),
     DMI_ATTRIBUTE(dmi_baseboard_t, location, STRING, {
         .code    = "location",
         .name    = "Location"
+    }),
+    DMI_ATTRIBUTE(dmi_baseboard_t, chassis_handle, HANDLE, {
+        .code    = "chassis-handle",
+        .name    = "Chassis handle",
+        .unspec  = dmi_value_ptr(DMI_HANDLE_INVALID)
     }),
     DMI_ATTRIBUTE(dmi_baseboard_t, type, ENUM, {
         .code    = "type",
@@ -182,12 +205,7 @@ dmi_baseboard_decode(const dmi_entity_t *entity, dmi_version_t *plevel)
         .__value = dmi_value(data->features)
     };
 
-    info->is_hosting_board       = features.is_hosting_board;
-    info->require_daughter_board = features.require_daughter_board;
-    info->is_removable           = features.is_removable;
-    info->is_replaceable         = features.is_replaceable;
-    info->is_hot_swappable       = features.is_hot_swappable;
-
+    info->features       = features;
     info->location       = dmi_entity_string(entity, data->location);
     info->chassis_handle = dmi_value(data->chassis_handle);
     info->type           = dmi_value(data->type);

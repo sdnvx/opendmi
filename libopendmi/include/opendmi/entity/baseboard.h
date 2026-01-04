@@ -201,38 +201,9 @@ struct dmi_baseboard
     const char *asset_tag;
 
     /**
-     * @brief Set to `true` if the board is a hosting board (for example, a
-     * motherboard).
+     * @brief Collection of flags that identify features of this baseboard.
      */
-    bool is_hosting_board;
-
-    /**
-     * @brief Set to `true` if the board requires at least one daughter board
-     * or auxiliary card to function properly.
-     */
-    bool require_daughter_board;
-
-    /**
-     * @brief Set to `true` if the board is removable. It is designed to be
-     * taken in and out of the chassis without impairing the function of the
-     * chassis.
-     */
-    bool is_removable;
-
-    /**
-     * @brief Set to `true` if the board is replaceable. It is possible to
-     * replace (either as a field repair or as an upgrade) the board with a
-     * physically different board. The board is inherently removable.
-     */
-    bool is_replaceable;
-
-    /**
-     * @brief Set to `true` if the board is hot swappable; it is possible to
-     * replace the board with a physically different but equivalent board while
-     * power is applied to the board. The board is inherently replaceable and
-     * removable.
-     */
-    bool is_hot_swappable;
+    dmi_baseboard_features_t features;
 
     /**
      * @brief String that describes this board's location within the chassis
