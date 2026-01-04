@@ -21,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed baseboard features set decoding.
 - Fixed incorrect decoding of incomplete structures:
   - system information (`dmi_system_t`);
+  - baseboard (`dmi_baseboard_t`);
   - processor (`dmi_processor_t`);
   - memory device (`dmi_memory_device_t`);
   - system enclosure or chassis (`dmi_chassis_t`).

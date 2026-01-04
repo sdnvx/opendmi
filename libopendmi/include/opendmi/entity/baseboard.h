@@ -163,14 +163,14 @@ dmi_packed_struct(dmi_baseboard_data)
     /**
      * @brief Number (0 to 255) of contained object handles that follow.
      */
-    dmi_byte_t children_count;
+    dmi_byte_t object_count;
 
     /**
      * @brief List of handles of other structures (for example, baseboard,
      * processor, port, system slots, memory device) that are contained by
      * this baseboard.
      */
-    dmi_handle_t children_handles[];
+    dmi_handle_t object_handles[];
 };
 
 struct dmi_baseboard
@@ -223,16 +223,16 @@ struct dmi_baseboard
     dmi_baseboard_type_t type;
 
     /**
-     * @brief Number of children object handles.
+     * @brief Number of contained object handles.
      */
-    size_t children_count;
+    size_t object_count;
 
     /**
      * @brief List of handles of other structures (for example, baseboard,
      * processor, port, system slots, memory device) that are contained by
      * this baseboard.
      */
-    dmi_handle_t *children_handles;
+    dmi_handle_t *object_handles;
 };
 
 extern const dmi_name_set_t dmi_baseboard_type_names;

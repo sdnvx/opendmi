@@ -87,8 +87,8 @@ const dmi_name_set_t dmi_baseboard_feature_names =
         },
         {
             .id   = 1,
-            .code = "require-daugther-board",
-            .name = "Require daugther board"
+            .code = "require-daughter-board",
+            .name = "Require daughter board"
         },
         {
             .id   = 2,
@@ -152,13 +152,9 @@ const dmi_attribute_t dmi_baseboard_attrs[] =
         .unknown = dmi_value_ptr(DMI_BASEBOARD_TYPE_UNKNOWN),
         .values  = &dmi_baseboard_type_names
     }),
-    DMI_ATTRIBUTE(dmi_baseboard_t, children_count, INTEGER, {
-        .code    = "children-count",
-        .name    = "Children count"
-    }),
-    DMI_ATTRIBUTE_ARRAY(dmi_baseboard_t, children_handles, children_count, HANDLE, {
-        .code    = "children",
-        .name    = "Children"
+    DMI_ATTRIBUTE_ARRAY(dmi_baseboard_t, object_handles, object_count, HANDLE, {
+        .code    = "contained-objects",
+        .name    = "Contained objects"
     }),
     DMI_ATTRIBUTE_NULL
 };
@@ -195,30 +191,43 @@ dmi_baseboard_decode(const dmi_entity_t *entity, dmi_version_t *plevel)
     if (info == nullptr)
         return nullptr;
 
-    info->vendor        = dmi_entity_string(entity, data->vendor);
-    info->product       = dmi_entity_string(entity, data->product);
-    info->version       = dmi_entity_string(entity, data->version);
-    info->serial_number = dmi_entity_string(entity, data->serial_number);
-    info->asset_tag     = dmi_entity_string(entity, data->asset_tag);
+    if (entity->body_length > 0x04u)
+        info->vendor = dmi_entity_string(entity, data->vendor);
+    if (entity->body_length > 0x05u)
+        info->product = dmi_entity_string(entity, data->product);
+    if (entity->body_length > 0x06u)
+        info->version = dmi_entity_string(entity, data->version);
+    if (entity->body_length > 0x07u)
+        info->serial_number = dmi_entity_string(entity, data->serial_number);
+    if (entity->body_length > 0x08u)
+        info->asset_tag = dmi_entity_string(entity, data->asset_tag);
 
-    dmi_baseboard_features_t features = {
-        .__value = dmi_value(data->features)
-    };
+    if (entity->body_length > 0x09u)
+        info->features.__value = dmi_value(data->features);
 
-    info->features       = features;
-    info->location       = dmi_entity_string(entity, data->location);
-    info->chassis_handle = dmi_value(data->chassis_handle);
-    info->type           = dmi_value(data->type);
-    info->children_count = dmi_value(data->children_count);
+    if (entity->body_length > 0x0Au)
+        info->location = dmi_entity_string(entity, data->location);
 
-    info->children_handles = dmi_alloc_array(entity->context, sizeof(dmi_handle_t), info->children_count);
-    if (info->children_handles == nullptr) {
-        dmi_free(info);
-        return nullptr;
+    if (entity->body_length > 0x0Bu)
+        info->chassis_handle = dmi_value(data->chassis_handle);
+    else
+        info->chassis_handle = DMI_HANDLE_INVALID;
+
+    if (entity->body_length > 0x0Du)
+        info->type = dmi_value(data->type);
+
+    if (entity->body_length > 0x0Eu) {
+        info->object_count  = dmi_value(data->object_count);
+
+        info->object_handles = dmi_alloc_array(entity->context, sizeof(dmi_handle_t), info->object_count);
+        if (info->object_handles == nullptr) {
+            dmi_free(info);
+            return nullptr;
+        }
+
+        for (size_t i = 0; i < info->object_count; i++)
+            info->object_handles[i] = dmi_value(data->object_handles[i]);
     }
-
-    for (size_t i = 0; i < info->children_count; i++)
-        info->children_handles[i] = dmi_value(data->children_handles[i]);
 
     if (plevel != nullptr)
         *plevel = dmi_version(2, 0, 0);
@@ -228,6 +237,6 @@ dmi_baseboard_decode(const dmi_entity_t *entity, dmi_version_t *plevel)
 
 void dmi_baseboard_free(dmi_baseboard_t *info)
 {
-    dmi_free(info->children_handles);
+    dmi_free(info->object_handles);
     dmi_free(info);
 }
