@@ -6,6 +6,7 @@
 //
 #include <opendmi/context.h>
 #include <opendmi/utils.h>
+#include <opendmi/utils/decode.h>
 
 #include <opendmi/entity/firmware-language.h>
 
@@ -56,7 +57,7 @@ dmi_firmware_language_t *dmi_firmware_language_decode(const dmi_entity_t *entity
     if (info == nullptr)
         return nullptr;
 
-    info->language_count = dmi_value(data->language_count);
+    info->language_count = dmi_decode(data->language_count);
 
     info->languages = dmi_alloc_array(entity->context, sizeof(const char *), info->language_count);
     if (info->languages == nullptr) {
@@ -69,7 +70,7 @@ dmi_firmware_language_t *dmi_firmware_language_decode(const dmi_entity_t *entity
     }
 
     dmi_firmware_language_flags_t flags = {
-        .__value = dmi_value(data->flags)
+        .__value = dmi_decode(data->flags)
     };
 
     info->is_abbreviated   = flags.is_abbreviated;

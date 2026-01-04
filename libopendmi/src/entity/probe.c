@@ -9,6 +9,7 @@
 #include <opendmi/context.h>
 #include <opendmi/name.h>
 #include <opendmi/utils.h>
+#include <opendmi/utils/decode.h>
 
 #include <opendmi/entity/probe.h>
 
@@ -107,7 +108,7 @@ dmi_probe_t * dmi_probe_decode(dmi_entity_t *entity, dmi_version_t *plevel)
     info->description = dmi_entity_string(entity, data->description);
 
     dmi_probe_details_t details = {
-        .__value = dmi_value(data->details)
+        .__value = dmi_decode(data->details)
     };
 
     info->location      = details.location;
@@ -117,7 +118,7 @@ dmi_probe_t * dmi_probe_decode(dmi_entity_t *entity, dmi_version_t *plevel)
     info->resolution    = dmi_probe_value(data->resolution);
     info->tolerance     = dmi_probe_value(data->tolerance);
     info->accuracy      = dmi_probe_value(data->accuracy);
-    info->oem_defined   = dmi_value(data->oem_defined);
+    info->oem_defined   = dmi_decode(data->oem_defined);
 
     if (entity->body_length > 0x14)
         info->nominal_value = dmi_probe_value(data->nominal_value);
@@ -132,7 +133,7 @@ dmi_probe_t * dmi_probe_decode(dmi_entity_t *entity, dmi_version_t *plevel)
 
 static short dmi_probe_value(dmi_word_t value)
 {
-    value = dmi_value(value);
+    value = dmi_decode(value);
 
     if (value == DMI_PROBE_VALUE_UNKNOWN)
         return SHRT_MIN;

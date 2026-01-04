@@ -4,8 +4,10 @@
 //
 // SPDX-License-Identifier: BSD-3-Clause
 //
-#include <opendmi/entity/system-event-log.h>
 #include <opendmi/utils.h>
+#include <opendmi/utils/decode.h>
+
+#include <opendmi/entity/system-event-log.h>
 
 static const dmi_name_set_t dmi_system_log_access_method_names =
 {
@@ -102,8 +104,8 @@ dmi_system_event_log_decode(const dmi_entity_t *entity, dmi_version_t *plevel)
     if (info == nullptr)
         return nullptr;
 
-    info->access_method  = dmi_value(data->access_method);
-    info->status.__value = dmi_value(data->status);
+    info->access_method  = dmi_decode(data->access_method);
+    info->status.__value = dmi_decode(data->status);
 
     if (entity->body_length >= 0x14) {
         level = dmi_version(2, 1, 0);

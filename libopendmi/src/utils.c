@@ -116,25 +116,6 @@ uint64_t dmi_ipow64(uint64_t value, unsigned int factor)
     return value * result;
 }
 
-uint64_t dmi_bcd_decode(const dmi_byte_t *value, size_t length)
-{
-    uint64_t result = 0;
-    uint64_t factor = 1;
-
-    assert(value != nullptr);
-    assert(length > 0);
-
-    while (length > 0) {
-        result += (*value & 0x0F) * factor;
-        result += ((*value & 0xF0) >> 4) * factor * 10;
-        factor *= 100;
-
-        length--, value++;
-    }
-
-    return result;
-}
-
 int dmi_asprintf(char **strp, const char *fmt, ...)
 {
     int rv;

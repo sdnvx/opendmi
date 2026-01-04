@@ -6,6 +6,7 @@
 //
 #include <opendmi/context.h>
 #include <opendmi/utils.h>
+#include <opendmi/utils/decode.h>
 
 #include <opendmi/entity/mgmt-device-component.h>
 
@@ -58,9 +59,9 @@ dmi_mgmt_device_component_t *dmi_mgmt_device_component_decode(const dmi_entity_t
         return nullptr;
 
     info->description      = dmi_entity_string(entity, data->description);
-    info->device_handle    = dmi_value(data->device_handle);
-    info->component_handle = dmi_value(data->component_handle);
-    info->threshold_handle = dmi_value(data->threshold_handle);
+    info->device_handle    = dmi_decode(data->device_handle);
+    info->component_handle = dmi_decode(data->component_handle);
+    info->threshold_handle = dmi_decode(data->threshold_handle);
 
     if (plevel != nullptr)
         *plevel = dmi_version(2, 3, 0);

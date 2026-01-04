@@ -6,6 +6,7 @@
 //
 #include <opendmi/context.h>
 #include <opendmi/utils.h>
+#include <opendmi/utils/decode.h>
 
 #include <opendmi/entity/string-property.h>
 
@@ -54,9 +55,9 @@ dmi_string_property_t *dmi_string_property_decode(const dmi_entity_t *entity, dm
     if (info == nullptr)
         return nullptr;
 
-    info->ident         = dmi_value(data->ident);
+    info->ident         = dmi_decode(data->ident);
     info->value         = dmi_entity_string(entity, data->value);
-    info->parent_handle = dmi_value(data->parent_handle);
+    info->parent_handle = dmi_decode(data->parent_handle);
 
     if (plevel != nullptr)
         *plevel = dmi_version(3, 5, 0);

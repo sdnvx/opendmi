@@ -9,6 +9,7 @@
 
 #include <opendmi/entry.h>
 #include <opendmi/utils.h>
+#include <opendmi/utils/decode.h>
 
 /**
  * @internal
@@ -121,7 +122,7 @@ static bool dmi_entry_decode_legacy(dmi_context_t *context,
     }
 
     // Decode SMBIOS version
-    dmi_byte_t entry_version = dmi_value(entry->version);
+    dmi_byte_t entry_version = dmi_decode(entry->version);
     if ((entry_version != 0) and (context->smbios_version == 0)) {
         uint8_t major = (entry_version & 0xF0) >> 4;
         uint8_t minor = (entry_version & 0x0F);
@@ -130,10 +131,10 @@ static bool dmi_entry_decode_legacy(dmi_context_t *context,
     }
 
     // Decode table area parameters
-    context->entity_count        = dmi_value(entry->entity_count);
-    context->table_area_addr     = dmi_value(entry->table_area_addr);
-    context->table_area_max_size = dmi_value(entry->table_area_size);
-    context->table_area_size     = dmi_value(entry->table_area_size);
+    context->entity_count        = dmi_decode(entry->entity_count);
+    context->table_area_addr     = dmi_decode(entry->table_area_addr);
+    context->table_area_max_size = dmi_decode(entry->table_area_size);
+    context->table_area_size     = dmi_decode(entry->table_area_size);
 
     return true;
 }
@@ -148,7 +149,7 @@ static bool dmi_entry_decode_v21(dmi_context_t *context,
     dmi_unused(length);
 
     const dmi_entry_v21_t *entry = dmi_cast(entry, data);
-    size_t entry_length = dmi_value(entry->length);
+    size_t entry_length = dmi_decode(entry->length);
 
     // Check maximum entry point length to prevent checksum run beyond
     // the buffer.
@@ -172,9 +173,9 @@ static bool dmi_entry_decode_v21(dmi_context_t *context,
     }
 
     // Decode SMBIOS version
-    context->smbios_version = dmi_version(dmi_value(entry->version_major),
-                                          dmi_value(entry->version_minor),
-                                          dmi_value(entry->revision));
+    context->smbios_version = dmi_version(dmi_decode(entry->version_major),
+                                          dmi_decode(entry->version_minor),
+                                          dmi_decode(entry->revision));
 
     // Decode structure parameters
     context->entity_max_size = entry->entity_max_size;
@@ -192,7 +193,7 @@ static bool dmi_entry_decode_v30(dmi_context_t *context,
     dmi_unused(length);
 
     const dmi_entry_v30_t *entry = dmi_cast(entry, data);
-    size_t entry_length = dmi_value(entry->length);
+    size_t entry_length = dmi_decode(entry->length);
 
     // Check maximum entry point length to prevent checksum run beyond
     // the buffer.
@@ -214,13 +215,13 @@ static bool dmi_entry_decode_v30(dmi_context_t *context,
     }
 
     // Decode SMBIOS version
-    context->smbios_version = dmi_version(dmi_value(entry->version_major),
-                                          dmi_value(entry->version_minor),
-                                          dmi_value(entry->revision));
+    context->smbios_version = dmi_version(dmi_decode(entry->version_major),
+                                          dmi_decode(entry->version_minor),
+                                          dmi_decode(entry->revision));
 
     // Decode table parameters
-    context->table_area_addr     = dmi_value(entry->table_area_addr);
-    context->table_area_max_size = dmi_value(entry->table_area_max_size);
+    context->table_area_addr     = dmi_decode(entry->table_area_addr);
+    context->table_area_max_size = dmi_decode(entry->table_area_max_size);
 
     return true;
 }

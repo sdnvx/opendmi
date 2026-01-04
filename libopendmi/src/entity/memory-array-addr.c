@@ -6,6 +6,7 @@
 //
 #include <opendmi/context.h>
 #include <opendmi/utils.h>
+#include <opendmi/utils/decode.h>
 
 #include <opendmi/entity/memory-array-addr.h>
 
@@ -95,17 +96,17 @@ dmi_memory_array_addr_t *dmi_memory_array_addr_decode(const dmi_entity_t *entity
     if (info == nullptr)
         return nullptr;
 
-    info->start_addr      = dmi_value(data->start_addr) << 10;
-    info->end_addr        = dmi_value(data->end_addr) << 10;
-    info->array_handle    = dmi_value(data->array_handle);
-    info->partition_width = dmi_value(data->partition_width);
+    info->start_addr      = dmi_decode(data->start_addr) << 10;
+    info->end_addr        = dmi_decode(data->end_addr) << 10;
+    info->array_handle    = dmi_decode(data->array_handle);
+    info->partition_width = dmi_decode(data->partition_width);
 
     if (entity->body_length >= 0x1F) {
         level = dmi_version(2, 7, 0);
 
         if (data->start_addr == 0xFFFFFFFFu) {
-            info->start_addr = dmi_value(data->start_addr_ex);
-            info->end_addr   = dmi_value(data->end_addr_ex);
+            info->start_addr = dmi_decode(data->start_addr_ex);
+            info->end_addr   = dmi_decode(data->end_addr_ex);
         }
     }
 

@@ -7,6 +7,7 @@
 #include <opendmi/context.h>
 #include <opendmi/name.h>
 #include <opendmi/utils.h>
+#include <opendmi/utils/decode.h>
 
 #include <opendmi/entity/onboard-device.h>
 
@@ -170,7 +171,7 @@ dmi_onboard_device_t *dmi_onboard_device_decode(const dmi_entity_t *entity, dmi_
         const dmi_onboard_device_instance_data_t *instance_data = &data->instances[i];
 
         dmi_onboard_device_instance_details_t details = {
-            .__value = dmi_value(instance_data->details)
+            .__value = dmi_decode(instance_data->details)
         };
 
         instance->type        = details.type;

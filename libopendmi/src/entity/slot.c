@@ -7,6 +7,7 @@
 #include <opendmi/context.h>
 #include <opendmi/name.h>
 #include <opendmi/utils.h>
+#include <opendmi/utils/decode.h>
 
 #include <opendmi/entity/slot.h>
 
@@ -625,11 +626,11 @@ dmi_slot_t *dmi_slot_decode(const dmi_entity_t *entity, dmi_version_t *plevel)
 
     info->designator = dmi_entity_string(entity, data->designator);
 
-    info->type   = dmi_value(data->type);
-    info->width  = dmi_value(data->width);
-    info->usage  = dmi_value(data->usage);
-    info->length = dmi_value(data->length);
-    info->ident  = dmi_value(data->ident);
+    info->type   = dmi_decode(data->type);
+    info->width  = dmi_decode(data->width);
+    info->usage  = dmi_decode(data->usage);
+    info->length = dmi_decode(data->length);
+    info->ident  = dmi_decode(data->ident);
 
     if (plevel != nullptr)
         *plevel = level;

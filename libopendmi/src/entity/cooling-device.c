@@ -10,6 +10,7 @@
 #include <opendmi/name.h>
 #include <opendmi/value.h>
 #include <opendmi/utils.h>
+#include <opendmi/utils/decode.h>
 
 #include <opendmi/entity/cooling-device.h>
 
@@ -145,19 +146,19 @@ dmi_cooling_device_t *dmi_cooling_device_decode(dmi_entity_t *entity, dmi_versio
     if (info == nullptr)
         return nullptr;
 
-    info->probe_handle = dmi_value(data->probe_handle);
+    info->probe_handle = dmi_decode(data->probe_handle);
 
     dmi_cooling_device_details_t details = {
-        .__value = dmi_value(data->details)
+        .__value = dmi_decode(data->details)
     };
 
     info->type        = details.type;
     info->status      = details.status;
-    info->group       = dmi_value(data->group);
-    info->oem_defined = dmi_value(data->oem_defined);
+    info->group       = dmi_decode(data->group);
+    info->oem_defined = dmi_decode(data->oem_defined);
 
     if (entity->body_length > 0x0C) {
-        uint16_t nominal_speed = dmi_value(data->nominal_speed);
+        uint16_t nominal_speed = dmi_decode(data->nominal_speed);
         if (nominal_speed != 0x8000u)
             info->nominal_speed = (short)(nominal_speed & 0x7FFFu);
         else

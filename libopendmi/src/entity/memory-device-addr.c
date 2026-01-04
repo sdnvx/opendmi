@@ -8,6 +8,7 @@
 
 #include <opendmi/context.h>
 #include <opendmi/utils.h>
+#include <opendmi/utils/decode.h>
 
 #include <opendmi/entity/memory-device-addr.h>
 
@@ -112,13 +113,13 @@ dmi_memory_device_addr_t *dmi_memory_device_addr_decode(const dmi_entity_t *enti
     if (info == nullptr)
         return nullptr;
 
-    uint32_t start_addr = dmi_value(data->start_addr);
-    uint32_t end_addr   = dmi_value(data->end_addr);
+    uint32_t start_addr = dmi_decode(data->start_addr);
+    uint32_t end_addr   = dmi_decode(data->end_addr);
 
     info->start_addr        = start_addr << 10;
     info->end_addr          = end_addr << 10;
-    info->device_handle     = dmi_value(data->device_handle);
-    info->array_addr_handle = dmi_value(data->array_addr_handle);
+    info->device_handle     = dmi_decode(data->device_handle);
+    info->array_addr_handle = dmi_decode(data->array_addr_handle);
 
     info->partition_pos    = data->partition_pos != 0xFFu ?
                              data->partition_pos : USHRT_MAX;
@@ -131,9 +132,9 @@ dmi_memory_device_addr_t *dmi_memory_device_addr_decode(const dmi_entity_t *enti
         level = dmi_version(2, 7, 0);
 
         if (start_addr == 0xFFFFFFFFu)
-            info->start_addr = dmi_value(data->start_addr_ex);
+            info->start_addr = dmi_decode(data->start_addr_ex);
         if (end_addr == 0xFFFFFFFFu)
-            info->end_addr   = dmi_value(data->end_addr_ex);
+            info->end_addr   = dmi_decode(data->end_addr_ex);
     }
 
     if (info->end_addr > info->start_addr)

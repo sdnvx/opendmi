@@ -4,11 +4,13 @@
 //
 // SPDX-License-Identifier: BSD-3-Clause
 //
-#include <opendmi/entity/processor.h>
-#include <opendmi/name.h>
-#include <opendmi/utils.h>
-#include <opendmi/value.h>
 #include <opendmi/context.h>
+#include <opendmi/name.h>
+#include <opendmi/value.h>
+#include <opendmi/utils.h>
+#include <opendmi/utils/decode.h>
+
+#include <opendmi/entity/processor.h>
 
 static const dmi_name_set_t dmi_processor_type_names =
 {
@@ -1933,11 +1935,11 @@ dmi_processor_t *dmi_processor_decode(const dmi_entity_t *entity, dmi_version_t 
         return nullptr;
 
     info->socket_designation = dmi_entity_string(entity, data->socket_designation);
-    info->type               = dmi_value(data->type);
-    info->family             = dmi_value(data->family);
+    info->type               = dmi_decode(data->type);
+    info->family             = dmi_decode(data->family);
     info->vendor             = dmi_entity_string(entity, data->vendor);
 
-    info->voltage = dmi_value(data->voltage);
+    info->voltage = dmi_decode(data->voltage);
     // TODO:
     // bool legacy = not (bool)(info->voltage & ((uint8_t)1 << 7));
     // if (legacy) {
@@ -1949,10 +1951,10 @@ dmi_processor_t *dmi_processor_decode(const dmi_entity_t *entity, dmi_version_t 
     //     uint8_t voltage = (info->voltage & ~((uint8_t)1 << 7));
     // }
 
-    info->external_clock = dmi_value(data->external_clock);
-    info->maximum_speed  = dmi_value(data->maximum_speed);
-    info->current_speed  = dmi_value(data->current_speed);
-    info->upgrade        = dmi_value(data->upgrade);
+    info->external_clock = dmi_decode(data->external_clock);
+    info->maximum_speed  = dmi_decode(data->maximum_speed);
+    info->current_speed  = dmi_decode(data->current_speed);
+    info->upgrade        = dmi_decode(data->upgrade);
 
     //
     // SMBIOS 2.1 features
@@ -1960,12 +1962,12 @@ dmi_processor_t *dmi_processor_decode(const dmi_entity_t *entity, dmi_version_t 
 
     if (entity->body_length > 0x1Au) {
         level = dmi_version(2, 1, 0);
-        info->l1_cache_handle = dmi_value(data->l1_cache_handle);
+        info->l1_cache_handle = dmi_decode(data->l1_cache_handle);
     }
     if (entity->body_length > 0x1Cu)
-        info->l2_cache_handle = dmi_value(data->l2_cache_handle);
+        info->l2_cache_handle = dmi_decode(data->l2_cache_handle);
     if (entity->body_length > 0x1Eu)
-        info->l3_cache_handle = dmi_value(data->l3_cache_handle);
+        info->l3_cache_handle = dmi_decode(data->l3_cache_handle);
 
     //
     // SMBIOS 2.3 features
@@ -1986,14 +1988,14 @@ dmi_processor_t *dmi_processor_decode(const dmi_entity_t *entity, dmi_version_t 
 
     if (entity->body_length > 0x23u) {
         level = dmi_version(2, 5, 0);
-        info->core_count = dmi_value(data->core_count);
+        info->core_count = dmi_decode(data->core_count);
     }
     if (entity->body_length > 0x24u)
-        info->core_enabled = dmi_value(data->core_enabled);
+        info->core_enabled = dmi_decode(data->core_enabled);
     if (entity->body_length > 0x25u)
-        info->thread_count = dmi_value(data->thread_count);
+        info->thread_count = dmi_decode(data->thread_count);
     if (entity->body_length > 0x26u)
-        info->features.__value = dmi_value(data->features);
+        info->features.__value = dmi_decode(data->features);
 
     //
     // SMBIOS 2.6 features
@@ -2003,7 +2005,7 @@ dmi_processor_t *dmi_processor_decode(const dmi_entity_t *entity, dmi_version_t 
         level = dmi_version(2, 6, 0);
 
         if (info->family == DMI_PROCESSOR_FAMILY_EXTENDED)
-            info->family = dmi_value(data->family_ex);
+            info->family = dmi_decode(data->family_ex);
     }
 
     //
@@ -2014,15 +2016,15 @@ dmi_processor_t *dmi_processor_decode(const dmi_entity_t *entity, dmi_version_t 
         level = dmi_version(3, 0, 0);
 
         if (info->core_count == 0xFFu)
-            info->core_count = dmi_value(data->core_count_ex);
+            info->core_count = dmi_decode(data->core_count_ex);
     }
     if (entity->body_length > 0x2Cu) {
         if (info->core_enabled == 0xFFu)
-            info->core_enabled = dmi_value(data->core_enabled_ex);
+            info->core_enabled = dmi_decode(data->core_enabled_ex);
     }
     if (entity->body_length > 0x2Eu) {
         if (info->thread_count == 0xFFu)
-            info->thread_count = dmi_value(data->thread_count_ex);
+            info->thread_count = dmi_decode(data->thread_count_ex);
     }
 
     //
@@ -2031,7 +2033,7 @@ dmi_processor_t *dmi_processor_decode(const dmi_entity_t *entity, dmi_version_t 
 
     if (entity->body_length > 0x30u) {
         level = dmi_version(3, 6, 0);
-        info->thread_enabled = dmi_value(data->thread_enabled);
+        info->thread_enabled = dmi_decode(data->thread_enabled);
     }
 
     //

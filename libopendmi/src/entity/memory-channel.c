@@ -7,6 +7,7 @@
 #include <opendmi/context.h>
 #include <opendmi/name.h>
 #include <opendmi/utils.h>
+#include <opendmi/utils/decode.h>
 
 #include <opendmi/entity/memory-channel.h>
 
@@ -102,9 +103,9 @@ dmi_memory_channel_t *dmi_memory_channel_decode(const dmi_entity_t *entity, dmi_
     if (info == nullptr)
         return nullptr;
 
-    info->type         = dmi_value(data->type);
-    info->maximum_load = dmi_value(data->maximum_load);
-    info->device_count = dmi_value(data->device_count);
+    info->type         = dmi_decode(data->type);
+    info->maximum_load = dmi_decode(data->maximum_load);
+    info->device_count = dmi_decode(data->device_count);
 
     info->devices = dmi_alloc_array(entity->context, sizeof(dmi_memory_channel_device_t),
                                     info->device_count);
@@ -117,8 +118,8 @@ dmi_memory_channel_t *dmi_memory_channel_decode(const dmi_entity_t *entity, dmi_
         dmi_memory_channel_device_t *device = &info->devices[i];
         const dmi_memory_channel_device_data_t *device_data = &data->devices[i];
 
-        device->load   = dmi_value(device_data->load);
-        device->handle = dmi_value(device_data->handle);
+        device->load   = dmi_decode(device_data->load);
+        device->handle = dmi_decode(device_data->handle);
     }
 
     if (plevel != nullptr)

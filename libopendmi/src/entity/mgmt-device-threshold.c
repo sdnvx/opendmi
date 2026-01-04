@@ -8,6 +8,7 @@
 
 #include <opendmi/context.h>
 #include <opendmi/utils.h>
+#include <opendmi/utils/decode.h>
 
 #include <opendmi/entity/mgmt-device-threshold.h>
 
@@ -73,12 +74,12 @@ dmi_mgmt_device_threshold_t *dmi_mgmt_device_threshold_decode(const dmi_entity_t
     if (info == nullptr)
         return nullptr;
 
-    info->lower_non_critical    = dmi_value(data->lower_non_critical);
-    info->upper_non_critical    = dmi_value(data->upper_non_critical);
-    info->lower_critical        = dmi_value(data->lower_critical);
-    info->upper_critical        = dmi_value(data->upper_critical);
-    info->lower_non_recoverable = dmi_value(data->lower_non_recoverable);
-    info->upper_non_recoverable = dmi_value(data->upper_non_recoverable);
+    info->lower_non_critical    = dmi_decode(data->lower_non_critical);
+    info->upper_non_critical    = dmi_decode(data->upper_non_critical);
+    info->lower_critical        = dmi_decode(data->lower_critical);
+    info->upper_critical        = dmi_decode(data->upper_critical);
+    info->lower_non_recoverable = dmi_decode(data->lower_non_recoverable);
+    info->upper_non_recoverable = dmi_decode(data->upper_non_recoverable);
 
     if (plevel != nullptr)
         *plevel = dmi_version(2, 3, 0);

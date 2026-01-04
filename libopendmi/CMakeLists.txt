@@ -30,6 +30,7 @@ target_sources(opendmi-object
         src/registry.c
         src/utils.c
         src/utils/datetime.c
+        src/utils/decode.c
         src/utils/endian.c
         src/utils/uuid.c
         src/utils/vector.c
@@ -109,6 +110,7 @@ target_sources(opendmi-object
                 include/opendmi/utils.h
                 include/opendmi/value.h
                 include/opendmi/utils/datetime.h
+                include/opendmi/utils/decode.h
                 include/opendmi/utils/endian.h
                 include/opendmi/utils/uuid.h
                 include/opendmi/utils/vector.h
@@ -271,10 +273,10 @@ opendmi_test(ntoh64 test/ntoh64.c)
 opendmi_test(ipow32 test/ipow32.c)
 opendmi_test(ipow64 test/ipow64.c)
 
-opendmi_test(word-decode test/word-decode.c)
-opendmi_test(dword-decode test/dword-decode.c)
-opendmi_test(qword-decode test/qword-decode.c)
-opendmi_test(bcd-decode test/bcd-decode.c)
+opendmi_test(decode-word test/decode-word.c)
+opendmi_test(decode-dword test/decode-dword.c)
+opendmi_test(decode-qword test/decode-qword.c)
+opendmi_test(decode-bcd test/decode-bcd.c)
 opendmi_test(uuid-decode test/uuid-decode.c)
 opendmi_test(uuid-encode test/uuid-encode.c)
 

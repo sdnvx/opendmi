@@ -7,6 +7,7 @@
 #include <opendmi/context.h>
 #include <opendmi/name.h>
 #include <opendmi/utils.h>
+#include <opendmi/utils/decode.h>
 
 #include <opendmi/entity/pointing-device.h>
 
@@ -182,9 +183,9 @@ dmi_pointing_device_t *dmi_pointing_device_decode(dmi_entity_t *entity, dmi_vers
     if (info == nullptr)
         return nullptr;
 
-    info->type         = data->type;
-    info->interface    = data->interface;
-    info->button_count = data->button_count;
+    info->type         = dmi_decode(data->type);
+    info->interface    = dmi_decode(data->interface);
+    info->button_count = dmi_decode(data->button_count);
 
     if (plevel != nullptr)
         *plevel = dmi_version(2, 1, 0);

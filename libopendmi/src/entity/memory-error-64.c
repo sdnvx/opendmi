@@ -6,6 +6,7 @@
 //
 #include <opendmi/context.h>
 #include <opendmi/utils.h>
+#include <opendmi/utils/decode.h>
 
 #include <opendmi/entity/memory-error-64.h>
 
@@ -36,13 +37,13 @@ dmi_memory_error_t *dmi_memory_error_64_decode(const dmi_entity_t *entity, dmi_v
     if (info == nullptr)
         return nullptr;
 
-    info->type            = dmi_value(data->type);
-    info->granularity     = dmi_value(data->granularity);
-    info->operation       = dmi_value(data->operation);
-    info->vendor_syndrome = dmi_value(data->vendor_syndrome);
-    info->array_addr      = dmi_value(data->array_addr);
-    info->device_addr     = dmi_value(data->device_addr);
-    info->resolution      = dmi_value(data->resolution);
+    info->type            = dmi_decode(data->type);
+    info->granularity     = dmi_decode(data->granularity);
+    info->operation       = dmi_decode(data->operation);
+    info->vendor_syndrome = dmi_decode(data->vendor_syndrome);
+    info->array_addr      = dmi_decode(data->array_addr);
+    info->device_addr     = dmi_decode(data->device_addr);
+    info->resolution      = dmi_decode(data->resolution);
 
     if (plevel != nullptr)
         *plevel = dmi_version(2, 3, 0);

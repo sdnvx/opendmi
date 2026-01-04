@@ -7,6 +7,7 @@
 #include <opendmi/context.h>
 #include <opendmi/name.h>
 #include <opendmi/utils.h>
+#include <opendmi/utils/decode.h>
 
 #include <opendmi/entity/firmware-inventory.h>
 
@@ -223,21 +224,21 @@ dmi_firmware_inventory_t *dmi_firmware_inventory_decode(const dmi_entity_t *enti
 
     info->name           = dmi_entity_string(entity, data->name);
     info->version        = dmi_entity_string(entity, data->version);
-    info->version_format = dmi_value(data->version_format);
+    info->version_format = dmi_decode(data->version_format);
     info->ident          = dmi_entity_string(entity, data->ident);
-    info->ident_format   = dmi_value(data->ident_format);
+    info->ident_format   = dmi_decode(data->ident_format);
     info->release_date   = dmi_entity_string(entity, data->release_date);
     info->vendor         = dmi_entity_string(entity, data->vendor);
     info->lowest_version = dmi_entity_string(entity, data->lowest_version);
-    info->image_size     = dmi_value(data->image_size);
+    info->image_size     = dmi_decode(data->image_size);
 
     dmi_firmware_inventory_features_t features = {
-        .__value = dmi_value(data->features)
+        .__value = dmi_decode(data->features)
     };
     info->features = features;
 
-    info->state           = dmi_value(data->state);
-    info->component_count = dmi_value(data->component_count);
+    info->state           = dmi_decode(data->state);
+    info->component_count = dmi_decode(data->component_count);
 
     info->component_handles = dmi_alloc_array(entity->context, sizeof(dmi_handle_t), info->component_count);
     if (info->component_handles == nullptr) {
@@ -246,7 +247,7 @@ dmi_firmware_inventory_t *dmi_firmware_inventory_decode(const dmi_entity_t *enti
     }
 
     for (size_t i = 0; i < info->component_count; i++) {
-        info->component_handles[i] = dmi_value(data->component_handles[i]);
+        info->component_handles[i] = dmi_decode(data->component_handles[i]);
     }
 
     if (plevel != nullptr)

@@ -10,6 +10,7 @@
 #include <opendmi/name.h>
 #include <opendmi/value.h>
 #include <opendmi/utils.h>
+#include <opendmi/utils/decode.h>
 
 #include <opendmi/entity/power-supply.h>
 
@@ -213,10 +214,10 @@ dmi_power_supply_t *dmi_power_supply_decode(const dmi_entity_t *entity, dmi_vers
     info->asset_tag        = dmi_entity_string(entity, data->asset_tag);
     info->part_number      = dmi_entity_string(entity, data->part_number);
     info->revision         = dmi_entity_string(entity, data->revision);
-    info->maximum_capacity = dmi_value(data->maximum_capacity);
+    info->maximum_capacity = dmi_decode(data->maximum_capacity);
 
     dmi_power_supply_details_t details = {
-        .__value = dmi_value(data->characteristics)
+        .__value = dmi_decode(data->characteristics)
     };
 
     info->hot_swappable   = details.hot_swappable;
@@ -226,9 +227,9 @@ dmi_power_supply_t *dmi_power_supply_decode(const dmi_entity_t *entity, dmi_vers
     info->status          = details.status;
     info->type            = details.type;
 
-    info->voltage_probe_handle  = dmi_value(data->voltage_probe_handle);
-    info->cooling_device_handle = dmi_value(data->cooling_device_handle);
-    info->current_probe_handle  = dmi_value(data->current_probe_handle);
+    info->voltage_probe_handle  = dmi_decode(data->voltage_probe_handle);
+    info->cooling_device_handle = dmi_decode(data->cooling_device_handle);
+    info->current_probe_handle  = dmi_decode(data->current_probe_handle);
 
     if (plevel != nullptr)
         *plevel = dmi_version(2, 3, 1);

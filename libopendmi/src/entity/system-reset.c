@@ -10,6 +10,7 @@
 #include <opendmi/name.h>
 #include <opendmi/value.h>
 #include <opendmi/utils.h>
+#include <opendmi/utils/decode.h>
 
 #include <opendmi/entity/system-reset.h>
 
@@ -115,7 +116,7 @@ dmi_system_reset_t *dmi_system_reset_decode(const dmi_entity_t *entity, dmi_vers
         return nullptr;
 
     dmi_system_reset_caps_t caps = {
-        .__value = dmi_value(data->capabilities)
+        .__value = dmi_decode(data->capabilities)
     };
 
     info->status           = caps.status;
@@ -123,10 +124,10 @@ dmi_system_reset_t *dmi_system_reset_decode(const dmi_entity_t *entity, dmi_vers
     info->boot_on_limit    = caps.boot_on_limit;
     info->watchdog_present = caps.watchdog_present;
 
-    info->reset_count    = dmi_value(data->reset_count);
-    info->reset_limit    = dmi_value(data->reset_limit);
-    info->timer_interval = dmi_value(data->timer_inverval);
-    info->timeout        = dmi_value(data->timeout);
+    info->reset_count    = dmi_decode(data->reset_count);
+    info->reset_limit    = dmi_decode(data->reset_limit);
+    info->timer_interval = dmi_decode(data->timer_inverval);
+    info->timeout        = dmi_decode(data->timeout);
 
     if (plevel != nullptr)
         *plevel = dmi_version(2, 2, 0);

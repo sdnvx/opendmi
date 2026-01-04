@@ -7,6 +7,7 @@
 #include <opendmi/context.h>
 #include <opendmi/name.h>
 #include <opendmi/utils.h>
+#include <opendmi/utils/decode.h>
 
 #include <opendmi/entity/firmware.h>
 
@@ -345,12 +346,12 @@ dmi_firmware_t *dmi_firmware_decode(const dmi_entity_t *entity, dmi_version_t *p
         return nullptr;
 
     dmi_firmware_features_t features = {
-        .__value = dmi_value(data->features)
+        .__value = dmi_decode(data->features)
     };
 
     info->vendor       = dmi_entity_string(entity, data->vendor);
     info->version      = dmi_entity_string(entity, data->version);
-    info->bios_segment = dmi_value(data->bios_segment);
+    info->bios_segment = dmi_decode(data->bios_segment);
 
     const char *release_date = dmi_entity_string(entity, data->release_date);
     if (release_date != nullptr) {
@@ -361,7 +362,7 @@ dmi_firmware_t *dmi_firmware_decode(const dmi_entity_t *entity, dmi_version_t *p
         info->release_date = DMI_DATE_NONE;
     }
 
-    info->rom_size     = dmi_firmware_rom_size(dmi_value(data->rom_size));
+    info->rom_size     = dmi_firmware_rom_size(dmi_decode(data->rom_size));
     info->features     = features;
 
     // SMBIOS 2.1: Extra feature bits
@@ -402,7 +403,7 @@ dmi_firmware_t *dmi_firmware_decode(const dmi_entity_t *entity, dmi_version_t *p
         level = dmi_version(3, 1, 0);
 
         if (data->rom_size == 0xFFU)
-            info->rom_size = dmi_firmware_rom_size_ex(dmi_value(data->rom_size_ex));
+            info->rom_size = dmi_firmware_rom_size_ex(dmi_decode(data->rom_size_ex));
     }
 
     if (plevel != nullptr)

@@ -7,13 +7,13 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-#include <opendmi/utils.h>
+#include <opendmi/utils/decode.h>
 
 struct test_vector
 {
-    uint8_t  value[4];
-    size_t   length;
-    uint64_t result;
+    uint8_t   value[4];
+    size_t    length;
+    uintmax_t result;
 };
 
 struct test_vector test_data[] =
@@ -67,8 +67,34 @@ struct test_vector test_data[] =
 int main(void)
 {
     for (size_t i = 0; i < countof(test_data); i++) {
-        if (dmi_bcd_decode(test_data[i].value, test_data[i].length) != test_data[i].result)
+        uint8_t   *value  = test_data[i].value;
+        uint8_t    length = test_data[i].length;
+        uintmax_t  result = test_data[i].result;
+
+        if (__dmi_decode_bcd(value, length) != result)
             return EXIT_FAILURE;
+
+        switch (length) {
+        case sizeof(uint8_t):
+            if (dmi_decode_bcd(*(uint8_t *)value) != result)
+                return EXIT_FAILURE;
+            break;
+
+        case sizeof(uint16_t):
+            if (dmi_decode_bcd(*(uint16_t *)value) != result)
+                return EXIT_FAILURE;
+            break;
+
+        case sizeof(uint32_t):
+            if (dmi_decode_bcd(*(uint32_t *)value) != result)
+                return EXIT_FAILURE;
+            break;
+
+        case sizeof(uint64_t):
+            if (dmi_decode_bcd(*(uint64_t *)value) != result)
+                return EXIT_FAILURE;
+            break;
+        }
     }
 
     return EXIT_SUCCESS;

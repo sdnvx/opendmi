@@ -7,6 +7,7 @@
 #include <opendmi/context.h>
 #include <opendmi/name.h>
 #include <opendmi/utils.h>
+#include <opendmi/utils/decode.h>
 
 #include <opendmi/entity/memory-controller.h>
 
@@ -257,27 +258,27 @@ dmi_memory_controller_t *dmi_memory_controller_decode(const dmi_entity_t *entity
     if (info == nullptr)
         return nullptr;
 
-    info->error_detection  = dmi_value(data->error_detection);
+    info->error_detection  = dmi_decode(data->error_detection);
     info->error_correction = (dmi_error_correct_caps_t) {
-        .__value = dmi_value(data->error_correction)
+        .__value = dmi_decode(data->error_correction)
     };
 
-    info->supported_interleave = dmi_value(data->supported_interleave);
-    info->current_interleave   = dmi_value(data->current_interleave);
-    info->slot_count           = dmi_value(data->slot_count);
-    info->maximum_module_size  = 1 << dmi_value(data->maximum_module_size);
+    info->supported_interleave = dmi_decode(data->supported_interleave);
+    info->current_interleave   = dmi_decode(data->current_interleave);
+    info->slot_count           = dmi_decode(data->slot_count);
+    info->maximum_module_size  = 1 << dmi_decode(data->maximum_module_size);
     info->maximum_memory_size  = info->maximum_module_size * info->slot_count;
 
     info->supported_speeds = (dmi_memory_module_speed_t) {
-        .__value = dmi_value(data->supported_speeds)
+        .__value = dmi_decode(data->supported_speeds)
     };
 
     info->supported_types = (dmi_memory_module_type_t) {
-        .__value = dmi_value(data->supported_types)
+        .__value = dmi_decode(data->supported_types)
     };
 
     info->required_voltages = (dmi_memory_module_voltage_t) {
-        .__value = dmi_value(data->required_voltages)
+        .__value = dmi_decode(data->required_voltages)
     };
 
     info->module_handles = dmi_alloc_array(entity->context, sizeof(dmi_handle_t),
@@ -288,7 +289,7 @@ dmi_memory_controller_t *dmi_memory_controller_decode(const dmi_entity_t *entity
     }
 
     for (size_t i = 0; i < info->slot_count; i++) {
-        info->module_handles[i] = dmi_value(data->module_handles[i]);
+        info->module_handles[i] = dmi_decode(data->module_handles[i]);
     }
 
     const dmi_data_t *extra_start = entity->data + sizeof(*data) +
@@ -299,7 +300,7 @@ dmi_memory_controller_t *dmi_memory_controller_decode(const dmi_entity_t *entity
         extra = dmi_cast(extra, extra_start);
 
         info->enabled_error_correction = (dmi_error_correct_caps_t) {
-            .__value = dmi_value(extra->enabled_error_correction)
+            .__value = dmi_decode(extra->enabled_error_correction)
         };
     }
 

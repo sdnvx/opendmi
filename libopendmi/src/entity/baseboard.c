@@ -7,6 +7,7 @@
 #include <opendmi/context.h>
 #include <opendmi/name.h>
 #include <opendmi/utils.h>
+#include <opendmi/utils/decode.h>
 
 #include <opendmi/entity/baseboard.h>
 
@@ -203,21 +204,21 @@ dmi_baseboard_decode(const dmi_entity_t *entity, dmi_version_t *plevel)
         info->asset_tag = dmi_entity_string(entity, data->asset_tag);
 
     if (entity->body_length > 0x09u)
-        info->features.__value = dmi_value(data->features);
+        info->features.__value = dmi_decode(data->features);
 
     if (entity->body_length > 0x0Au)
         info->location = dmi_entity_string(entity, data->location);
 
     if (entity->body_length > 0x0Bu)
-        info->chassis_handle = dmi_value(data->chassis_handle);
+        info->chassis_handle = dmi_decode(data->chassis_handle);
     else
         info->chassis_handle = DMI_HANDLE_INVALID;
 
     if (entity->body_length > 0x0Du)
-        info->type = dmi_value(data->type);
+        info->type = dmi_decode(data->type);
 
     if (entity->body_length > 0x0Eu) {
-        info->object_count  = dmi_value(data->object_count);
+        info->object_count  = dmi_decode(data->object_count);
 
         info->object_handles = dmi_alloc_array(entity->context, sizeof(dmi_handle_t), info->object_count);
         if (info->object_handles == nullptr) {
@@ -226,7 +227,7 @@ dmi_baseboard_decode(const dmi_entity_t *entity, dmi_version_t *plevel)
         }
 
         for (size_t i = 0; i < info->object_count; i++)
-            info->object_handles[i] = dmi_value(data->object_handles[i]);
+            info->object_handles[i] = dmi_decode(data->object_handles[i]);
     }
 
     if (plevel != nullptr)

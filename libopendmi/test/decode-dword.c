@@ -7,7 +7,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-#include <opendmi/utils.h>
+#include <opendmi/utils/decode.h>
 
 struct test_vector
 {
@@ -25,7 +25,12 @@ struct test_vector test_data[] =
 int main(void)
 {
     for (size_t i = 0; i < countof(test_data); i++) {
-        if (dmi_dword_decode(*(dmi_dword_t *)test_data[i].value) != test_data[i].result)
+        dmi_dword_t value = *(dmi_dword_t *)test_data[i].value;
+        uint32_t    result = test_data[i].result;
+
+        if (dmi_decode_dword(value) != result)
+            return EXIT_FAILURE;
+        if (dmi_decode(value) != result)
             return EXIT_FAILURE;
     }
 

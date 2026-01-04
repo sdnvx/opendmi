@@ -11,6 +11,7 @@
 #include <opendmi/context.h>
 #include <opendmi/entity.h>
 #include <opendmi/utils.h>
+#include <opendmi/utils/decode.h>
 
 /**
  * @internal
@@ -35,9 +36,9 @@ dmi_entity_t *dmi_entity_decode(dmi_context_t *context, const void *data)
     }
 
     dmi_header_t *header = dmi_cast(header, data);
-    dmi_type_t    type   = dmi_value(header->type);
-    size_t        length = dmi_value(header->length);
-    dmi_handle_t  handle = dmi_value(header->handle);
+    dmi_type_t    type   = dmi_decode(header->type);
+    size_t        length = dmi_decode(header->length);
+    dmi_handle_t  handle = dmi_decode(header->handle);
 
     dmi_log_debug(context, "%p: Handle 0x%04x, length %zu, type %d (%s)",
                   data, (unsigned)handle, length, (int)header->type,

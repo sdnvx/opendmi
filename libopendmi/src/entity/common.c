@@ -7,6 +7,8 @@
 #include <assert.h>
 
 #include <opendmi/utils.h>
+#include <opendmi/utils/decode.h>
+
 #include <opendmi/entity/common.h>
 
 const dmi_name_set_t dmi_status_names =
@@ -116,10 +118,10 @@ void dmi_pci_addr_decode(dmi_pci_addr_t *addr, const dmi_pci_addr_data_t *data)
     assert(addr != nullptr);
     assert(data != nullptr);
 
-    addr->segment_group   = dmi_value(data->segment_group);
-    addr->bus_number      = dmi_value(data->bus_number);
-    addr->device_number   = dmi_value((dmi_byte_t)data->device_number);
-    addr->function_number = dmi_value((dmi_byte_t)data->function_number);
+    addr->segment_group   = dmi_decode(data->segment_group);
+    addr->bus_number      = dmi_decode(data->bus_number);
+    addr->device_number   = dmi_decode((dmi_byte_t)data->device_number);
+    addr->function_number = dmi_decode((dmi_byte_t)data->function_number);
 
     if (addr->bus_number == UINT8_MAX) {
         addr->device_number = UINT8_MAX;

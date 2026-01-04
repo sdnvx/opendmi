@@ -7,6 +7,7 @@
 #include <opendmi/context.h>
 #include <opendmi/name.h>
 #include <opendmi/utils.h>
+#include <opendmi/utils/decode.h>
 
 #include <opendmi/entity/tpm-device.h>
 
@@ -99,15 +100,15 @@ dmi_tpm_device_t *dmi_tpm_device_decode(const dmi_entity_t *entity, dmi_version_
     info->vendor_id[sizeof(info->vendor_id) - 1] = 0;
 
     // Decode specification version
-    info->spec_version = dmi_version(dmi_value(data->spec_version_major),
-                                     dmi_value(data->spec_version_minor), 0);
+    info->spec_version = dmi_version(dmi_decode(data->spec_version_major),
+                                     dmi_decode(data->spec_version_minor), 0);
 
     // Decode firmware version
     if (dmi_version_major(info->spec_version) > 1) {
-        info->firmware_version = ((uint64_t)dmi_value(data->firmware_version_1) << 32) |
-                                 ((uint64_t)dmi_value(data->firmware_version_2));
+        info->firmware_version = ((uint64_t)dmi_decode(data->firmware_version_1) << 32) |
+                                 ((uint64_t)dmi_decode(data->firmware_version_2));
     } else {
-        info->firmware_version = dmi_value(data->firmware_version_1);
+        info->firmware_version = dmi_decode(data->firmware_version_1);
     }
 
     // Decode description
@@ -115,11 +116,11 @@ dmi_tpm_device_t *dmi_tpm_device_decode(const dmi_entity_t *entity, dmi_version_
 
     // Decode characteristics
     dmi_tpm_device_features_t features = {
-        .__value = dmi_value(data->features)
+        .__value = dmi_decode(data->features)
     };
 
     info->features    = features;
-    info->oem_defined = dmi_value(data->oem_defined);
+    info->oem_defined = dmi_decode(data->oem_defined);
 
     if (plevel != nullptr)
         *plevel = dmi_version(2, 0, 0);

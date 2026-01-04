@@ -4,9 +4,12 @@
 //
 // SPDX-License-Identifier: BSD-3-Clause
 //
-#include <opendmi/entity/mgmt-controller.h>
-#include <opendmi/utils.h>
 #include <memory.h>
+
+#include <opendmi/utils.h>
+#include <opendmi/utils/decode.h>
+
+#include <opendmi/entity/mgmt-controller.h>
 
 const dmi_name_set_t dmi_mgmt_if_type_names =
 {
@@ -161,15 +164,15 @@ dmi_mgmt_controller_decode(const dmi_entity_t *entity, dmi_version_t *plevel)
     if (data == nullptr)
         return nullptr;
 
-    const off_t offset = sizeof(*data) + dmi_value(data->if_data_length);
+    const off_t offset = sizeof(*data) + dmi_decode(data->if_data_length);
     extra = dmi_cast(extra, (uint8_t *)data + offset);
 
     info = dmi_alloc(ctx, sizeof(*info));
     if (info == nullptr)
         return nullptr;
 
-    info->if_type        = dmi_value(data->if_type);
-    info->if_data_length = dmi_value(data->if_data_length);
+    info->if_type        = dmi_decode(data->if_type);
+    info->if_data_length = dmi_decode(data->if_data_length);
 
     info->if_data = dmi_alloc(ctx, info->if_data_length);
     if (info->if_data == nullptr) {
@@ -178,7 +181,7 @@ dmi_mgmt_controller_decode(const dmi_entity_t *entity, dmi_version_t *plevel)
     }
     memcpy(info->if_data, data->if_data, info->if_data_length);
 
-    info->protocol_records_count = dmi_value(extra->protocol_records_count);
+    info->protocol_records_count = dmi_decode(extra->protocol_records_count);
 
     const size_t memsize = sizeof(*info->protocol_records) * info->protocol_records_count;
     info->protocol_records = dmi_alloc(ctx, memsize);
@@ -191,8 +194,8 @@ dmi_mgmt_controller_decode(const dmi_entity_t *entity, dmi_version_t *plevel)
     for (size_t i = 0; i < info->protocol_records_count; i++) {
         dmi_mgmt_protocol_record_data_t *rec_data = dmi_cast(rec_data, cursor);
 
-        dmi_mgmt_if_type_t type   = dmi_value(rec_data->type);
-        size_t             length = dmi_value(rec_data->length);
+        dmi_mgmt_if_type_t type   = dmi_decode(rec_data->type);
+        size_t             length = dmi_decode(rec_data->length);
 
         dmi_mgmt_protocol_record_t *rec = dmi_alloc(ctx, sizeof(*rec) + length);
         if (rec == nullptr) {

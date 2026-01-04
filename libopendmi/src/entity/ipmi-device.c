@@ -9,6 +9,7 @@
 #include <opendmi/context.h>
 #include <opendmi/name.h>
 #include <opendmi/utils.h>
+#include <opendmi/utils/decode.h>
 
 #include <opendmi/entity/ipmi-device.h>
 
@@ -205,16 +206,16 @@ dmi_ipmi_device_t *dmi_ipmi_device_decode(const dmi_entity_t *entity, dmi_versio
     if (info == nullptr)
         return nullptr;
 
-    info->interface_type = dmi_value(data->interface_type);
+    info->interface_type = dmi_decode(data->interface_type);
     info->spec_version   = dmi_version((data->spec_version & 0xF0) >> 4, data->spec_version & 0x0F, 0);
 
-    info->i2c_target_addr = dmi_value(data->i2c_target_addr);
+    info->i2c_target_addr = dmi_decode(data->i2c_target_addr);
     if (data->nv_storage_addr != 0xFFu)
-        info->nv_storage_addr = dmi_value(data->nv_storage_addr);
+        info->nv_storage_addr = dmi_decode(data->nv_storage_addr);
     else
         info->nv_storage_addr = USHRT_MAX;
 
-    uint64_t base_addr = dmi_value(data->base_addr);
+    uint64_t base_addr = dmi_decode(data->base_addr);
     info->base_addr = base_addr & 0x7FFFFFFFFFFFFFFFu;
     if (info->base_addr & 0x8000000000000000u)
         info->base_addr_type = DMI_IPMI_ADDR_TYPE_IO;
@@ -222,7 +223,7 @@ dmi_ipmi_device_t *dmi_ipmi_device_decode(const dmi_entity_t *entity, dmi_versio
         info->base_addr_type = DMI_IPMI_ADDR_TYPE_MEMORY;
 
     dmi_ipmi_device_details_t details = {
-        .__value = dmi_value(data->details)
+        .__value = dmi_decode(data->details)
     };
 
     if (details.is_intr_info_specified) {
@@ -258,7 +259,7 @@ dmi_ipmi_device_t *dmi_ipmi_device_decode(const dmi_entity_t *entity, dmi_versio
     }
 
     info->base_addr_lsb = details.base_addr_lsb;
-    info->intr_number   = dmi_value(data->intr_number);
+    info->intr_number   = dmi_decode(data->intr_number);
 
     if (plevel != nullptr)
         *plevel = dmi_version(2, 0, 0);

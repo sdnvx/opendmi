@@ -7,6 +7,7 @@
 #include <opendmi/context.h>
 #include <opendmi/name.h>
 #include <opendmi/utils.h>
+#include <opendmi/utils/decode.h>
 
 #include <opendmi/entity/port-connector.h>
 
@@ -480,10 +481,10 @@ dmi_port_connector_t *dmi_port_connector_decode(const dmi_entity_t *entity, dmi_
         return nullptr;
 
     info->internal_designator = dmi_entity_string(entity, data->internal_designator);
-    info->internal_connector  = data->internal_connector;
+    info->internal_connector  = dmi_decode(data->internal_connector);
     info->external_designator = dmi_entity_string(entity, data->external_designator);
-    info->external_connector  = data->external_connector;
-    info->port_type           = data->port_type;
+    info->external_connector  = dmi_decode(data->external_connector);
+    info->port_type           = dmi_decode(data->port_type);
 
     if (plevel != nullptr)
         *plevel = dmi_version(2, 0, 0);

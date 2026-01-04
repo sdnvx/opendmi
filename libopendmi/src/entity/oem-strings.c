@@ -6,6 +6,7 @@
 //
 #include <opendmi/context.h>
 #include <opendmi/utils.h>
+#include <opendmi/utils/decode.h>
 
 #include <opendmi/entity/oem-strings.h>
 
@@ -48,7 +49,7 @@ dmi_oem_strings_t *dmi_oem_strings_decode(const dmi_entity_t *entity, dmi_versio
     if (info == nullptr)
         return nullptr;
 
-    info->string_count = dmi_value(data->count);
+    info->string_count = dmi_decode(data->count);
 
     info->strings = dmi_alloc_array(entity->context, sizeof(const char *), info->string_count);
     if (info->strings == nullptr) {

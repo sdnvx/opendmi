@@ -6,6 +6,7 @@
 //
 #include <opendmi/context.h>
 #include <opendmi/utils.h>
+#include <opendmi/utils/decode.h>
 
 #include <opendmi/entity/power-controls.h>
 
@@ -62,15 +63,15 @@ dmi_power_controls_t *dmi_power_controls_decode(const dmi_entity_t *entity, dmi_
         return nullptr;
 
     info->poweron_month  = dmi_cast(info->poweron_month,
-                                    dmi_bcd_decode(&data->poweron_month, sizeof(data->poweron_month)));
+                                    dmi_decode_bcd(data->poweron_month));
     info->poweron_day    = dmi_cast(info->poweron_day,
-                                    dmi_bcd_decode(&data->poweron_day, sizeof(data->poweron_day)));
+                                    dmi_decode_bcd(data->poweron_day));
     info->poweron_hour   = dmi_cast(info->poweron_hour,
-                                    dmi_bcd_decode(&data->poweron_hour, sizeof(data->poweron_hour)));
+                                    dmi_decode_bcd(data->poweron_hour));
     info->poweron_minute = dmi_cast(info->poweron_minute,
-                                    dmi_bcd_decode(&data->poweron_minute, sizeof(data->poweron_minute)));
+                                    dmi_decode_bcd(data->poweron_minute));
     info->poweron_second = dmi_cast(info->poweron_second,
-                                    dmi_bcd_decode(&data->poweron_second, sizeof(data->poweron_second)));
+                                    dmi_decode_bcd(data->poweron_second));
 
     if (plevel != nullptr)
         *plevel = dmi_version(2, 2, 0);

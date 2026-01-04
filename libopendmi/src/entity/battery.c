@@ -10,6 +10,7 @@
 #include <opendmi/name.h>
 #include <opendmi/value.h>
 #include <opendmi/utils.h>
+#include <opendmi/utils/decode.h>
 
 #include <opendmi/entity/battery.h>
 
@@ -173,12 +174,12 @@ dmi_battery_decode(const dmi_entity_t *entity, dmi_version_t *plevel)
 
     info->serial_number    = dmi_entity_string(entity, data->serial_number);
     info->name             = dmi_entity_string(entity, data->name);
-    info->chemistry        = dmi_value(data->chemistry);
-    info->capacity         = dmi_value(data->capacity);
-    info->voltage          = dmi_value(data->voltage);
+    info->chemistry        = dmi_decode(data->chemistry);
+    info->capacity         = dmi_decode(data->capacity);
+    info->voltage          = dmi_decode(data->voltage);
     info->sbds_version     = dmi_entity_string(entity, data->sbds_version);
 
-    uint8_t maximum_error = dmi_value(data->maximum_error);
+    uint8_t maximum_error = dmi_decode(data->maximum_error);
     if (maximum_error != 0xFFu)
         info->maximum_error = maximum_error;
     else
@@ -188,7 +189,7 @@ dmi_battery_decode(const dmi_entity_t *entity, dmi_version_t *plevel)
     if (entity->body_length >= 0x10u) {
         level = dmi_version(2, 2, 0);
 
-        info->sbds_serial_number    = dmi_value(data->sbds_serial_number);
+        info->sbds_serial_number    = dmi_decode(data->sbds_serial_number);
 
         if (manufacture_date == nullptr) {
             info->manufacture_date = dmi_date(
@@ -199,9 +200,9 @@ dmi_battery_decode(const dmi_entity_t *entity, dmi_version_t *plevel)
         }
 
         info->sbds_chemistry        = dmi_entity_string(entity, data->sbds_chemistry);
-        info->oem_defined           = dmi_value(data->oem_defined);
+        info->oem_defined           = dmi_decode(data->oem_defined);
 
-        info->capacity *= dmi_value(data->capacity_factor);
+        info->capacity *= dmi_decode(data->capacity_factor);
     }
 
     if (plevel != nullptr)

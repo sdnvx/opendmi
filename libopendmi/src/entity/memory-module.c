@@ -9,6 +9,7 @@
 #include <opendmi/context.h>
 #include <opendmi/value.h>
 #include <opendmi/utils.h>
+#include <opendmi/utils/decode.h>
 
 #include <opendmi/entity/memory-module.h>
 
@@ -164,25 +165,25 @@ dmi_memory_module_t *dmi_memory_module_decode(const dmi_entity_t *entity, dmi_ve
     info->socket = dmi_entity_string(entity, data->socket);
 
     // Decode bank connections
-    dmi_byte_t bank_connections = dmi_value(data->bank_connections);
+    dmi_byte_t bank_connections = dmi_decode(data->bank_connections);
     info->bank_connections[0] = (bank_connections & 0x0Fu);
     info->bank_connections[1] = (bank_connections & 0xF0u) >> 4;
 
     // Decode speed and type
-    info->current_speed = dmi_value(data->current_speed);
+    info->current_speed = dmi_decode(data->current_speed);
     info->current_type  = (dmi_memory_module_type_t){
-        .__value = dmi_value(data->current_type)
+        .__value = dmi_decode(data->current_type)
     };
 
     // Decode installed size
-    dmi_byte_t installed_size = dmi_value(data->installed_size) & 0x7Fu;
+    dmi_byte_t installed_size = dmi_decode(data->installed_size) & 0x7Fu;
     if (installed_size != 0x7Du)
         info->has_installed_size = true;
     if (installed_size != 0x7Fu)
         info->installed_size = (dmi_size_t)(installed_size & 0x7Fu) << 20;
 
     // Decode enabled size
-    dmi_byte_t enabled_size = dmi_value(data->enabled_size) & 0x7Fu;
+    dmi_byte_t enabled_size = dmi_decode(data->enabled_size) & 0x7Fu;
     if (enabled_size != 0x7Du)
         info->has_enabled_size = true;
     if (enabled_size != 0x7Fu) {
@@ -193,11 +194,11 @@ dmi_memory_module_t *dmi_memory_module_decode(const dmi_entity_t *entity, dmi_ve
     }
 
     // Decode bank count
-    info->bank_count = dmi_value(data->enabled_size) & 0x80u ? 2 : 1;
+    info->bank_count = dmi_decode(data->enabled_size) & 0x80u ? 2 : 1;
 
     // Decode error status
     info->error_status = (dmi_memory_module_error_t){
-        .__value = dmi_value(data->error_status)
+        .__value = dmi_decode(data->error_status)
     };
 
     if (plevel != nullptr)

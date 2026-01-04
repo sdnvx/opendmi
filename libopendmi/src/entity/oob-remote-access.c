@@ -7,6 +7,7 @@
 #include <opendmi/context.h>
 #include <opendmi/name.h>
 #include <opendmi/utils.h>
+#include <opendmi/utils/decode.h>
 
 #include <opendmi/entity/oob-remote-access.h>
 
@@ -72,7 +73,7 @@ dmi_oob_remote_access_t *dmi_oob_remote_access_decode(
         return nullptr;
 
     dmi_oob_connections_t connections = {
-        .__value = dmi_value(data->connections)
+        .__value = dmi_decode(data->connections)
     };
 
     info->vendor      = dmi_entity_string(entity, data->vendor);

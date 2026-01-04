@@ -6,6 +6,7 @@
 //
 #include <opendmi/context.h>
 #include <opendmi/utils.h>
+#include <opendmi/utils/decode.h>
 
 #include <opendmi/entity/system-config.h>
 
@@ -48,7 +49,7 @@ dmi_system_config_opts_t *dmi_system_config_opts_decode(const dmi_entity_t *enti
     if (info == nullptr)
         return nullptr;
 
-    info->option_count = dmi_value(data->count);
+    info->option_count = dmi_decode(data->count);
 
     info->options = dmi_alloc_array(entity->context, sizeof(const char *), info->option_count);
     if (info->options == nullptr) {

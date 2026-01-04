@@ -8,6 +8,7 @@
 
 #include <opendmi/context.h>
 #include <opendmi/utils.h>
+#include <opendmi/utils/decode.h>
 
 #include <opendmi/entity/onboard-device-ex.h>
 
@@ -70,12 +71,12 @@ dmi_onboard_device_ex_t *dmi_onboard_device_ex_decode(const dmi_entity_t *entity
     info->designator = dmi_entity_string(entity, data->designator);
 
     dmi_onboard_device_instance_details_t details = {
-        .__value = dmi_value(data->details)
+        .__value = dmi_decode(data->details)
     };
 
     info->type       = details.type;
     info->is_enabled = details.is_enabled;
-    info->instance   = dmi_value(data->instance);
+    info->instance   = dmi_decode(data->instance);
 
     dmi_pci_addr_decode(&info->address, &data->address);
 

@@ -8,6 +8,7 @@
 #include <opendmi/name.h>
 #include <opendmi/value.h>
 #include <opendmi/utils.h>
+#include <opendmi/utils/decode.h>
 
 #include <opendmi/entity/chassis.h>
 
@@ -405,7 +406,7 @@ dmi_chassis_t *dmi_chassis_decode(const dmi_entity_t *entity, dmi_version_t *ple
         return nullptr;
 
     dmi_chassis_type_data_t type = {
-        .__value = dmi_value(data->type)
+        .__value = dmi_decode(data->type)
     };
 
     info->vendor          = dmi_entity_string(entity,  data->vendor);
@@ -421,14 +422,14 @@ dmi_chassis_t *dmi_chassis_decode(const dmi_entity_t *entity, dmi_version_t *ple
 
     if (entity->body_length > 0x09) {
         level = dmi_version(2, 1, 0);
-        info->bootup_state = dmi_value(data->bootup_state);
+        info->bootup_state = dmi_decode(data->bootup_state);
     }
     if (entity->body_length > 0x0A)
-        info->power_supply_state = dmi_value(data->power_supply_state);
+        info->power_supply_state = dmi_decode(data->power_supply_state);
     if (entity->body_length > 0x0B)
-        info->thermal_state = dmi_value(data->thermal_state);
+        info->thermal_state = dmi_decode(data->thermal_state);
     if (entity->body_length > 0x0C)
-        info->security_status = dmi_value(data->security_status);
+        info->security_status = dmi_decode(data->security_status);
 
     //
     // SMBIOS 2.3 features
@@ -436,17 +437,17 @@ dmi_chassis_t *dmi_chassis_decode(const dmi_entity_t *entity, dmi_version_t *ple
 
     if (entity->body_length > 0x0D) {
         level = dmi_version(2, 3, 0);
-        info->oem_defined = dmi_value(data->oem_defined);
+        info->oem_defined = dmi_decode(data->oem_defined);
     }
 
     if (entity->body_length > 0x11)
-        info->height = dmi_value(data->height);
+        info->height = dmi_decode(data->height);
     if (entity->body_length > 0x12)
-        info->power_cord_count = dmi_value(data->power_cord_count);
+        info->power_cord_count = dmi_decode(data->power_cord_count);
 
     if (entity->body_length > 0x13) {
-        info->element_count = dmi_value(data->element_count);
-        info->element_size  = dmi_value(data->element_size);
+        info->element_count = dmi_decode(data->element_count);
+        info->element_size  = dmi_decode(data->element_size);
 
         info->elements = dmi_alloc_array(entity->context, sizeof(dmi_chassis_element_t), info->element_count);
         if (info->elements == nullptr) {
@@ -459,7 +460,7 @@ dmi_chassis_t *dmi_chassis_decode(const dmi_entity_t *entity, dmi_version_t *ple
             dmi_chassis_element_t *element = &info->elements[i];
             const dmi_chassis_element_data_t *element_data = dmi_cast(element_data, element_ptr);
 
-            uint8_t element_type = dmi_value(element_data->type);
+            uint8_t element_type = dmi_decode(element_data->type);
             if (element_type & 0x80u) {
                 element->type = element_type & 0x7Fu;
             } else {
@@ -467,8 +468,8 @@ dmi_chassis_t *dmi_chassis_decode(const dmi_entity_t *entity, dmi_version_t *ple
                 element->board_type = element_type;
             }
 
-            element->minimum_count = dmi_value(element_data->minimum_count);
-            element->maximum_count = dmi_value(element_data->maximum_count);
+            element->minimum_count = dmi_decode(element_data->minimum_count);
+            element->maximum_count = dmi_decode(element_data->maximum_count);
 
             element_ptr += info->element_size;
         }
@@ -493,10 +494,10 @@ dmi_chassis_t *dmi_chassis_decode(const dmi_entity_t *entity, dmi_version_t *ple
 
             if (extra_len > 0x01) {
                 level = dmi_version(3, 9, 0);
-                info->rack_type   = dmi_value(extra->rack_type);
+                info->rack_type   = dmi_decode(extra->rack_type);
             }
             if (extra_len > 0x02)
-                info->rack_height = dmi_value(extra->rack_height);
+                info->rack_height = dmi_decode(extra->rack_height);
         }
     }
 

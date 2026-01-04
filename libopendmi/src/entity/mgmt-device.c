@@ -7,6 +7,7 @@
 #include <opendmi/context.h>
 #include <opendmi/name.h>
 #include <opendmi/utils.h>
+#include <opendmi/utils/decode.h>
 
 #include <opendmi/entity/mgmt-device.h>
 
@@ -168,9 +169,9 @@ dmi_mgmt_device_t *dmi_mgmt_device_decode(const dmi_entity_t *entity, dmi_versio
         return nullptr;
 
     info->description = dmi_entity_string(entity, data->description);
-    info->type        = dmi_value(data->type);
-    info->addr        = dmi_value(data->addr);
-    info->addr_type   = dmi_value(data->addr_type);
+    info->type        = dmi_decode(data->type);
+    info->addr        = dmi_decode(data->addr);
+    info->addr_type   = dmi_decode(data->addr_type);
 
     if (plevel != nullptr)
         *plevel = dmi_version(2, 3, 0);
