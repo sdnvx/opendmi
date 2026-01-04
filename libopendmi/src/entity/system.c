@@ -134,20 +134,27 @@ dmi_system_t *dmi_system_decode(const dmi_entity_t *entity, dmi_version_t *pleve
     info->version       = dmi_entity_string(entity, data->version);
     info->serial_number = dmi_entity_string(entity, data->serial_number);
 
+    //
     // SMBIOS 2.1 features
-    if (entity->body_length >= 0x08) {
+    //
+
+    if (entity->body_length > 0x08u) {
         level = dmi_version(2, 1, 0);
-        info->uuid        = dmi_uuid_decode(data->uuid);
+        info->uuid = dmi_uuid_decode(data->uuid);
+    }
+    if (entity->body_length > 0x18u)
         info->wakeup_type = data->wakeup_type;
-    }
 
+    //
     // SMBIOS 2.4 features
-    if (entity->body_length >= 0x19) {
-        level = dmi_version(2, 4, 0);
+    //
 
+    if (entity->body_length > 0x19u) {
+        level = dmi_version(2, 4, 0);
         info->sku_number = dmi_entity_string(entity, data->sku_number);
-        info->family     = dmi_entity_string(entity, data->family);
     }
+    if (entity->body_length > 0x1Au)
+        info->family = dmi_entity_string(entity, data->family);
 
     if (plevel != nullptr)
         *plevel = level;

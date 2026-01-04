@@ -16,16 +16,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.1.1] - Unreleased
 
-- Fixed incorrect decoding of incomplete processor structures
-- Fixed incorrect decoding of incomplete memory device structures
-- Fixed baseboard features set decoding
-- Fixed incorrect decoding of incomplete chassis structures
-- Fixed formatting signed integers of size less than sizeof(int)
-- Fixed incorrect firmware BIOS segment address display format
-- Fixed incorrect memory array stating & ending address display format
-- Fixed incorrect memory device stating & ending address display format
-- Fixed incorrect memory error addresses display format
-- Fixed incorrect management device address display format
+- Fixed baseboard features set decoding.
+- Fixed incorrect decoding of incomplete structures:
+  - system information (`dmi_system_t`);
+  - processor (`dmi_processor_t`);
+  - memory device (`dmi_memory_device_t`);
+  - system enclosure or chassis (`dmi_chassis_t`).
+- Fixed incorrect address display formats:
+  - firmware BIOS segment address;
+  - memory array stating & ending addresses;
+  - memory device stating & ending addresses;
+  - memory error address;
+  - management device address.
+- Fixed formatting signed integers of size less than sizeof(int).
 
 ## [0.1] - January 02, 2026
 
