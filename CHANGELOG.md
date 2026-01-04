@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.1.1] - Unreleased
 
+- Fixed incorrect decoding of incomplete chassis structures
 - Fixed formatting signed integers of size less than sizeof(int)
 - Fixed incorrect firmware BIOS segment address display format
 - Fixed incorrect memory array stating & ending address display format

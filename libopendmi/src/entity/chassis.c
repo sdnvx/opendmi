@@ -415,23 +415,38 @@ dmi_chassis_t *dmi_chassis_decode(const dmi_entity_t *entity, dmi_version_t *ple
     info->serial_number   = dmi_entity_string(entity, data->serial_number);
     info->asset_tag       = dmi_entity_string(entity, data->asset_tag);
 
-    if (entity->body_length >= 0x09) {
-        level = dmi_version(2, 1, 0);
+    //
+    // SMBIOS 2.1 features
+    //
 
-        info->bootup_state       = dmi_value(data->bootup_state);
+    if (entity->body_length > 0x09) {
+        level = dmi_version(2, 1, 0);
+        info->bootup_state = dmi_value(data->bootup_state);
+    }
+    if (entity->body_length > 0x0A)
         info->power_supply_state = dmi_value(data->power_supply_state);
-        info->thermal_state      = dmi_value(data->thermal_state);
-        info->security_status    = dmi_value(data->security_status);
+    if (entity->body_length > 0x0B)
+        info->thermal_state = dmi_value(data->thermal_state);
+    if (entity->body_length > 0x0C)
+        info->security_status = dmi_value(data->security_status);
+
+    //
+    // SMBIOS 2.3 features
+    //
+
+    if (entity->body_length > 0x0D) {
+        level = dmi_version(2, 3, 0);
+        info->oem_defined = dmi_value(data->oem_defined);
     }
 
-    if (entity->body_length >= 0x0D) {
-        level = dmi_version(2, 3, 0);
+    if (entity->body_length > 0x11)
+        info->height = dmi_value(data->height);
+    if (entity->body_length > 0x12)
+        info->power_cord_count = dmi_value(data->power_cord_count);
 
-        info->oem_defined        = dmi_value(data->oem_defined);
-        info->height             = dmi_value(data->height);
-        info->power_cord_count   = dmi_value(data->power_cord_count);
-        info->element_count      = dmi_value(data->element_count);
-        info->element_size       = dmi_value(data->element_size);
+    if (entity->body_length > 0x13) {
+        info->element_count = dmi_value(data->element_count);
+        info->element_size  = dmi_value(data->element_size);
 
         info->elements = dmi_alloc_array(entity->context, sizeof(dmi_chassis_element_t), info->element_count);
         if (info->elements == nullptr) {
@@ -460,6 +475,10 @@ dmi_chassis_t *dmi_chassis_decode(const dmi_entity_t *entity, dmi_version_t *ple
 
         size_t base_len = (size_t)(element_ptr - entity->data);
 
+        //
+        // SMBIOS 2.7 features
+        //
+    
         if (entity->body_length > base_len) {
             level = dmi_version(2, 7, 0);
 
@@ -468,13 +487,16 @@ dmi_chassis_t *dmi_chassis_decode(const dmi_entity_t *entity, dmi_version_t *ple
 
             info->sku_number = dmi_entity_string(entity, extra->sku_number);
 
+            //
             // SMBIOS 3.9 features
+            //
+
             if (extra_len > 0x01) {
                 level = dmi_version(3, 9, 0);
-
                 info->rack_type   = dmi_value(extra->rack_type);
-                info->rack_height = dmi_value(extra->rack_height);
             }
+            if (extra_len > 0x02)
+                info->rack_height = dmi_value(extra->rack_height);
         }
     }
 
