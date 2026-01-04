@@ -136,11 +136,13 @@ const dmi_attribute_t dmi_ipmi_device_attrs[] =
     DMI_ATTRIBUTE(dmi_ipmi_device_t, intr_trigger, ENUM, {
         .code   = "interrupt-trigger-mode",
         .name   = "Interrupt trigger mode",
+        .unspec = dmi_value_ptr(DMI_IPMI_INTR_TRIGGER_UNSPEC),
         .values = &dmi_ipmi_intr_trigger_names
     }),
     DMI_ATTRIBUTE(dmi_ipmi_device_t, intr_polarity, ENUM, {
         .code   = "interrupt-polarity",
         .name   = "Interrupt polarity",
+        .unspec = dmi_value_ptr(DMI_IPMI_INTR_POLARITY_UNSPEC),
         .values = &dmi_ipmi_intr_polarity_names
     }),
     DMI_ATTRIBUTE(dmi_ipmi_device_t, intr_number, INTEGER, {

@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.1.1] - Unreleased
 
+- Marked unspecified values for IPMI device interrupt trigger mode and polarity.
 - Fixed baseboard features set decoding.
 - Fixed incorrect decoding of incomplete structures:
   - system information (`dmi_system_t`);
