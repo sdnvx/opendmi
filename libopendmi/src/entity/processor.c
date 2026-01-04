@@ -1954,67 +1954,92 @@ dmi_processor_t *dmi_processor_decode(const dmi_entity_t *entity, dmi_version_t 
     info->current_speed  = dmi_value(data->current_speed);
     info->upgrade        = dmi_value(data->upgrade);
 
+    //
     // SMBIOS 2.1 features
-    if (entity->body_length >= 0x1Au) {
+    //
+
+    if (entity->body_length > 0x1Au) {
         level = dmi_version(2, 1, 0);
-
         info->l1_cache_handle = dmi_value(data->l1_cache_handle);
+    }
+    if (entity->body_length > 0x1Cu)
         info->l2_cache_handle = dmi_value(data->l2_cache_handle);
+    if (entity->body_length > 0x1Eu)
         info->l3_cache_handle = dmi_value(data->l3_cache_handle);
-    }
 
+    //
     // SMBIOS 2.3 features
-    if (entity->body_length >= 0x20u) {
+    //
+
+    if (entity->body_length > 0x20u) {
         level = dmi_version(2, 3, 0);
-
         info->serial_number = dmi_entity_string(entity, data->serial_number);
-        info->asset_tag     = dmi_entity_string(entity, data->asset_tag);
+    }
+    if (entity->body_length > 0x21u)
+        info->asset_tag = dmi_entity_string(entity, data->asset_tag);
+    if (entity->body_length > 0x22u)
         info->part_number   = dmi_entity_string(entity, data->part_number);
-    }
 
+    //
     // SMBIOS 2.5 features
-    if (entity->body_length >= 0x23u) {
+    //
+
+    if (entity->body_length > 0x23u) {
         level = dmi_version(2, 5, 0);
-
-        info->core_count       = dmi_value(data->core_count);
-        info->core_enabled     = dmi_value(data->core_enabled);
-        info->thread_count     = dmi_value(data->thread_count);
-        info->features.__value = dmi_value(data->features);
+        info->core_count = dmi_value(data->core_count);
     }
+    if (entity->body_length > 0x24u)
+        info->core_enabled = dmi_value(data->core_enabled);
+    if (entity->body_length > 0x25u)
+        info->thread_count = dmi_value(data->thread_count);
+    if (entity->body_length > 0x26u)
+        info->features.__value = dmi_value(data->features);
 
+    //
     // SMBIOS 2.6 features
-    if (entity->body_length >= 0x28u) {
+    //
+
+    if (entity->body_length > 0x28u) {
         level = dmi_version(2, 6, 0);
 
         if (info->family == DMI_PROCESSOR_FAMILY_EXTENDED)
             info->family = dmi_value(data->family_ex);
     }
 
+    //
     // SMBIOS 3.0 features
-    if (entity->body_length >= 0x2Au) {
+    //
+
+    if (entity->body_length > 0x2Au) {
         level = dmi_version(3, 0, 0);
 
         if (info->core_count == 0xFFu)
             info->core_count = dmi_value(data->core_count_ex);
-
+    }
+    if (entity->body_length > 0x2Cu) {
         if (info->core_enabled == 0xFFu)
             info->core_enabled = dmi_value(data->core_enabled_ex);
-
+    }
+    if (entity->body_length > 0x2Eu) {
         if (info->thread_count == 0xFFu)
             info->thread_count = dmi_value(data->thread_count_ex);
     }
 
+    //
     // SMBIOS 3.6 features
-    if (entity->body_length >= 0x30u) {
-        level = dmi_version(3, 6, 0);
+    //
 
+    if (entity->body_length > 0x30u) {
+        level = dmi_version(3, 6, 0);
         info->thread_enabled = dmi_value(data->thread_enabled);
     }
 
+    //
     // SMBIOS 3.8 features
+    //
+
     if (entity->body_length >= 0x32u) {
         level = dmi_version(3, 8, 0);
-
         info->socket_type = dmi_entity_string(entity, data->socket_type);
     }
 
