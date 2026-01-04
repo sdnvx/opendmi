@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.2] - Unreleased
+## [0.1.1] - Unreleased
 
 - Added colors for unknown and unspecified values
 - Added displaying structure types in handle arrays
@@ -13,10 +13,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Firmware strcture now uses `dmi_date_t` for release date
   - Portable battery now used `dmi_date_t` for manufacture date
   - Removed field `sbds_manufacture_date` from portable battery descriptor
-- Added manpages for `dmi_bswap16()`, `dmi_bswap32()` and `dmi_bswap64()` functions
-
-## [0.1.1] - Unreleased
-
 - Marked unspecified values for IPMI device interrupt trigger mode and polarity.
 - Fixed baseboard features set decoding.
 - Fixed incorrect decoding of incomplete structures:
@@ -32,6 +28,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - memory error address;
   - management device address.
 - Fixed formatting signed integers of size less than sizeof(int).
+- Added manpages for `dmi_bswap16()`, `dmi_bswap32()` and `dmi_bswap64()` functions
 
 ## [0.1] - January 02, 2026
 
