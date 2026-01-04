@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.1.1] - Unreleased
 
+- Fix incorrect decoding of incomplete memory device structures
 - Fixed baseboard features set decoding
 - Fixed incorrect decoding of incomplete chassis structures
 - Fixed formatting signed integers of size less than sizeof(int)

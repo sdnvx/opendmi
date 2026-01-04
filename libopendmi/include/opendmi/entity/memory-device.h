@@ -245,7 +245,7 @@ dmi_packed_struct(dmi_memory_device_data)
      *
      * @since SMBIOS 2.1
      */
-    uint8_t memory_type;
+    dmi_byte_t memory_type;
 
     /**
      * @brief Additional detail on the memory device type.
