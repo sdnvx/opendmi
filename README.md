@@ -49,15 +49,20 @@ The project is under active development, see [ROADMAP](ROADMAP.md) and [CHANGELO
 Use the following command to configure OpenDMI build:
 
 ```sh
-$ cmake -B build
+$ ./build.sh configure
 ```
 
 This produces a debug build by default. Optimization isn't enabled, and debug
-assertions are included. Pass `-DCMAKE_BUILD_TYPE=Release` to `cmake` to
-configure a release build:
+assertions are included. Pass `--release` to configure a release build:
 
 ```sh
-$ cmake -B build -DCMAKE_BUILD_TYPE=Release
+$ ./build.sh configure --release
+```
+
+For advanced configuration options, see usage:
+
+```sh
+$ ./build.sh --help
 ```
 
 ### Building
@@ -65,7 +70,7 @@ $ cmake -B build -DCMAKE_BUILD_TYPE=Release
 Use the following command to build OpenDMI:
 
 ```sh
-$ cmake --build build
+$ ./build.sh build
 ```
 
 ### Testing
@@ -74,7 +79,7 @@ OpenDMI uses the CTest framework for testing. You can simply run it to ensure
 that build was successful:
 
 ```sh
-$ ctest --test-dir build
+$ ./build.sh test
 ```
 
 ## Contributing
