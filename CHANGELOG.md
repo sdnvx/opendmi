@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Removed field `sbds_manufacture_date` from portable battery descriptor
 - Marked unspecified values for IPMI device interrupt trigger mode and polarity.
 - Fixed baseboard features set decoding.
+- Fixed IPMI device non-volatile storage address decoding.
 - Fixed incorrect decoding of incomplete structures:
   - system information (`dmi_system_t`);
   - baseboard (`dmi_baseboard_t`);

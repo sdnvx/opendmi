@@ -119,6 +119,7 @@ const dmi_attribute_t dmi_ipmi_device_attrs[] =
     DMI_ATTRIBUTE(dmi_ipmi_device_t, nv_storage_addr, INTEGER, {
         .code   = "nv-storage-address",
         .name   = "NV storage address",
+        .unspec = dmi_value_ptr((uint8_t)UINT8_MAX),
         .flags  = DMI_ATTRIBUTE_FLAG_HEX
     }),
     DMI_ATTRIBUTE(dmi_ipmi_device_t, base_addr, ADDRESS, {
@@ -213,7 +214,7 @@ dmi_ipmi_device_t *dmi_ipmi_device_decode(const dmi_entity_t *entity, dmi_versio
     if (data->nv_storage_addr != 0xFFu)
         info->nv_storage_addr = dmi_decode(data->nv_storage_addr);
     else
-        info->nv_storage_addr = USHRT_MAX;
+        info->nv_storage_addr = UINT8_MAX;
 
     uint64_t base_addr = dmi_decode(data->base_addr);
     info->base_addr = base_addr & 0x7FFFFFFFFFFFFFFFu;

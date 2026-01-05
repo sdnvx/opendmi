@@ -155,10 +155,10 @@ struct dmi_ipmi_device
     dmi_i2c_addr_t i2c_target_addr;
 
     /**
-     * @brief Bus ID of the NV storage device If no storage device exists for
-     * this BMC, the field is set to `USHRT_MAX`.
+     * @brief Bus ID of the NV storage device. If no storage device exists for
+     * this BMC, the field is set to `UINT8_MAX`.
      */
-    unsigned short nv_storage_addr;
+    uint8_t nv_storage_addr;
 
     /**
      * @brief Base address (either memory-mapped or I/O) of the BMC. If the
