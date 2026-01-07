@@ -62,6 +62,7 @@ typedef struct dmi_config
 
 static bool parse_args(int argc, char *argv[], int *rv);
 static dmi_handle_t parse_handle(const char *str);
+static dmi_type_t parse_type(const char *str);
 
 static void show_version(void);
 static void show_usage(const char *proc);
@@ -214,8 +215,16 @@ static bool parse_args(int argc, char *argv[], int *rv)
             break;
 
         case 't':
-            if (optarg == nullptr)
+            if (optarg == nullptr) {
                 config.command = DMI_COMMAND_LIST_TYPES;
+                break;
+            }
+
+            dmi_type_t type = parse_type(optarg);
+            if (type == DMI_TYPE_INVALID)
+                return EXIT_FAILURE;
+            if (not dmi_filter_add_type(&config.filter, type))
+                return EXIT_FAILURE;
             break;
 
         case 'H':
@@ -282,6 +291,26 @@ static dmi_handle_t parse_handle(const char *str)
     }
 
     return (dmi_handle_t)value;
+}
+
+static dmi_type_t parse_type(const char *str)
+{
+    char *ep;
+    unsigned long value;
+
+    errno = 0;
+    value = strtoul(str, &ep, 10);
+
+    if ((*str == 0) or (*ep != 0)) {
+        fprintf(stderr, "Invalid type value: %s\n", str);
+        return DMI_TYPE_INVALID;
+    }
+    if (((errno == ERANGE) and (value == ULONG_MAX)) or (value > 0xFFu)) {
+        fprintf(stderr, "Type is out of range: %s\n", str);
+        return DMI_TYPE_INVALID;
+    }
+
+    return (dmi_type_t)value;
 }
 
 static void show_version(void)
