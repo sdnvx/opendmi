@@ -280,6 +280,8 @@ opendmi_test(decode-bcd test/decode-bcd.c)
 opendmi_test(uuid-decode test/uuid-decode.c)
 opendmi_test(uuid-encode test/uuid-encode.c)
 
+opendmi_test(date-parse test/date-parse.c)
+
 opendmi_test(attribute-format-handle test/attribute-format-handle.c)
 opendmi_test(attribute-format-string test/attribute-format-string.c)
 opendmi_test(attribute-format-bool test/attribute-format-bool.c)

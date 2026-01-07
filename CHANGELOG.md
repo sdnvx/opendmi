@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.1.2] - Unreleased
 
 - Added `--type` option for filtering by type
+- Added tests for `dmi_date_parse()`
 
 ## [0.1.1] - January 07, 2026
 

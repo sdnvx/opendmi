@@ -35,6 +35,9 @@ dmi_date_t dmi_date_parse(const char *str)
         if (token == nullptr)
             break;
 
+        if (*token == '+' or *token == '-')
+            return DMI_DATE_NONE;
+
         if (++i > 3)
             return DMI_DATE_NONE;
 
