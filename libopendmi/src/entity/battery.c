@@ -193,9 +193,9 @@ dmi_battery_decode(const dmi_entity_t *entity, dmi_version_t *plevel)
 
         if (manufacture_date == nullptr) {
             info->manufacture_date = dmi_date(
-                ((data->sbds_manufacture_date & 0xFF00u) >> 8) + 1980,
-                (data->sbds_manufacture_date & 0x00F0u) >> 4,
-                data->sbds_manufacture_date & 0x000Fu
+                ((data->sbds_manufacture_date >> 9) & 0x7Fu) + 1980,
+                (data->sbds_manufacture_date >> 5) & 0x0Fu,
+                data->sbds_manufacture_date & 0x1Fu
             );
         }
 
