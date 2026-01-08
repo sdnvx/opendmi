@@ -95,7 +95,7 @@ struct dmi_context
     /**
      * @brief Entity specifications map.
      */
-    dmi_entity_spec_t **type_map;
+    const dmi_entity_spec_t **type_map;
 
     /**
      * @brief Entity registry.
@@ -148,6 +148,11 @@ bool dmi_dump_load(dmi_context_t *context, const char *path);
  * @return The function returns `true` on success and `false` otherwise.
  */
 bool dmi_dump_save(dmi_context_t *context, const char *path, bool overwrite);
+
+/**
+ * @brief Find entity type identifier by its code.
+ */
+dmi_type_t dmi_type_find(dmi_context_t *context, const char *code);
 
 /**
  * @brief Get entity type specification.

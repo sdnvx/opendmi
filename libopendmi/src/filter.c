@@ -37,12 +37,20 @@ bool dmi_filter_add_type(dmi_filter_t *filter, dmi_type_t type)
     return dmi_vector_push(&filter->types, (uintptr_t)type);
 }
 
+bool dmi_filter_is_empty(dmi_filter_t *filter)
+{
+    if (filter == nullptr)
+        return true;
+
+    return (filter->handles.length == 0) and (filter->types.length == 0);
+}
+
 bool dmi_filter_match(dmi_filter_t *filter, dmi_entity_t *entity)
 {
     if ((filter == nullptr) or (entity == nullptr))
         return false;
 
-    if ((filter->handles.length == 0) and (filter->types.length == 0))
+    if (dmi_filter_is_empty(filter))
         return true;
 
     if (filter->handles.length > 0) {

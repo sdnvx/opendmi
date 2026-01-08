@@ -143,6 +143,8 @@ typedef enum dmi_type
     __DMI_TYPE_COUNT
 } dmi_type_t;
 
+#define DMI_TYPE_MAX UINT8_MAX
+
 typedef struct dmi_context dmi_context_t;
 typedef struct dmi_entity  dmi_entity_t;
 

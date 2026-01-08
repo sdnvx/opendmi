@@ -29,6 +29,7 @@ dmi_filter_t *dmi_filter_create(dmi_context_t *context);
 bool dmi_filter_add_handle(dmi_filter_t *filter, dmi_handle_t handle);
 bool dmi_filter_add_type(dmi_filter_t *filter, dmi_type_t type);
 
+bool dmi_filter_is_empty(dmi_filter_t *filter);
 bool dmi_filter_match(dmi_filter_t *filter, dmi_entity_t *entity);
 
 void dmi_filter_destroy(dmi_filter_t *filter);

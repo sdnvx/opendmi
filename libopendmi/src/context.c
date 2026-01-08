@@ -182,10 +182,20 @@ dmi_context_t *dmi_create(void)
     context->log_level = DMI_LOG_INFO;
 
     // Allocate type map
-    context->type_map = dmi_alloc_array(context, sizeof(dmi_entity_spec_t *), 0x100);
+    context->type_map = dmi_alloc_array(context, sizeof(dmi_entity_spec_t *), DMI_TYPE_MAX + 1);
     if (context->type_map == nullptr) {
         dmi_free(context);
         return nullptr;
+    }
+
+    // Initialize type map
+    for (size_t i = 0; i < countof(dmi_entity_specs); i++) {
+        const dmi_entity_spec_t *spec = dmi_entity_specs[i];
+
+        if (spec == nullptr)
+            continue;
+
+        context->type_map[spec->type] = spec;
     }
 
     return context;
@@ -276,24 +286,35 @@ bool dmi_dump_save(dmi_context_t *context, const char *path, bool overwrite)
     return success;
 }
 
+dmi_type_t dmi_type_find(dmi_context_t *context, const char *code)
+{
+    if ((context == nullptr) or (code == nullptr))
+        return DMI_TYPE_INVALID;
+
+    for (size_t i = 0; i <= DMI_TYPE_MAX; i++) {
+        const dmi_entity_spec_t *spec = context->type_map[i];
+
+        if (spec == nullptr)
+            continue;
+
+        if (strcmp(spec->code, code) == 0)
+            return spec->type;
+    }
+
+    return DMI_TYPE_INVALID;
+}
+
 const dmi_entity_spec_t *dmi_type_spec(dmi_context_t *context, dmi_type_t type)
 {
-    const dmi_entity_spec_t *spec = nullptr;
+    if (context == nullptr)
+        return nullptr;
 
-    if ((type <= DMI_TYPE_INVALID) or (type > UINT8_MAX)) {
+    if ((type <= DMI_TYPE_INVALID) or (type > DMI_TYPE_MAX)) {
         dmi_error_raise_ex(context, DMI_ERROR_INVALID_ARGUMENT, "type");
         return nullptr;
     }
 
-    if (context != nullptr)
-        spec = context->type_map[type];
-
-    if (spec == nullptr) {
-        if ((size_t)type < countof(dmi_entity_specs))
-            spec = dmi_entity_specs[type];
-    }
-
-    return spec;
+    return context->type_map[type];
 }
 
 const char *dmi_type_name(dmi_context_t *context, dmi_type_t type)
