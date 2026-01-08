@@ -107,7 +107,7 @@ dmi_system_event_log_decode(const dmi_entity_t *entity, dmi_version_t *plevel)
     info->access_method  = dmi_decode(data->access_method);
     info->status.__value = dmi_decode(data->status);
 
-    if (entity->body_length >= 0x14) {
+    if (entity->body_length > 0x14u) {
         level = dmi_version(2, 1, 0);
     }
 

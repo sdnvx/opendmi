@@ -186,7 +186,7 @@ dmi_battery_decode(const dmi_entity_t *entity, dmi_version_t *plevel)
         info->maximum_error = USHRT_MAX;
 
     // SMBIOS 2.2 features
-    if (entity->body_length >= 0x10u) {
+    if (entity->body_length > 0x10u) {
         level = dmi_version(2, 2, 0);
 
         info->sbds_serial_number    = dmi_decode(data->sbds_serial_number);

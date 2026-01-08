@@ -157,7 +157,7 @@ dmi_cooling_device_t *dmi_cooling_device_decode(dmi_entity_t *entity, dmi_versio
     info->group       = dmi_decode(data->group);
     info->oem_defined = dmi_decode(data->oem_defined);
 
-    if (entity->body_length > 0x0C) {
+    if (entity->body_length > 0x0Cu) {
         uint16_t nominal_speed = dmi_decode(data->nominal_speed);
         if (nominal_speed != 0x8000u)
             info->nominal_speed = (short)(nominal_speed & 0x7FFFu);
@@ -167,7 +167,7 @@ dmi_cooling_device_t *dmi_cooling_device_decode(dmi_entity_t *entity, dmi_versio
         info->nominal_speed = SHRT_MIN;
     }
 
-    if (entity->body_length >= 0x0F) {
+    if (entity->body_length > 0x0Eu) {
         level = dmi_version(2, 7, 0);
         info->description = dmi_entity_string(entity, data->description);
     }

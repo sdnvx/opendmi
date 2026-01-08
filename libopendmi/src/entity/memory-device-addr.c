@@ -78,7 +78,7 @@ bool dmi_memory_device_addr_validate(const dmi_entity_t *entity)
         if (data->end_addr != 0xFFFFFFFFu)
             return false;
 
-        if (entity->total_length < 0x13)
+        if (entity->body_length <= 0x13u)
             return false;
         if (data->end_addr_ex <= data->start_addr_ex)
             return false;
@@ -88,7 +88,7 @@ bool dmi_memory_device_addr_validate(const dmi_entity_t *entity)
         if (data->end_addr <= data->start_addr)
             return false;
 
-        if (entity->total_length >= 0x13) {
+        if (entity->body_length > 0x13u) {
             if (data->start_addr_ex != 0)
                 return false;
             if (data->end_addr_ex != 0)
@@ -128,7 +128,7 @@ dmi_memory_device_addr_t *dmi_memory_device_addr_decode(const dmi_entity_t *enti
     info->interleave_depth = data->interleave_depth != 0xFFu ?
                              data->interleave_depth : USHRT_MAX;
 
-    if (entity->body_length >= 0x13) {
+    if (entity->body_length > 0x13u) {
         level = dmi_version(2, 7, 0);
 
         if (start_addr == 0xFFFFFFFFu)

@@ -359,7 +359,7 @@ dmi_cache_t *dmi_cache_decode(const dmi_entity_t *entity, dmi_version_t *plevel)
     info->current_sram.__value   = dmi_decode(data->current_sram);
 
     // SMBIOS 2.1 features
-    if (data->header.length >= 0x0F) {
+    if (entity->body_length > 0x0F) {
         level = dmi_version(2, 1, 0);
 
         info->type             = dmi_decode(data->type);
@@ -369,7 +369,7 @@ dmi_cache_t *dmi_cache_decode(const dmi_entity_t *entity, dmi_version_t *plevel)
     }
 
     // SMBIOS 3.1 features
-    if (data->header.length >= 0x13) {
+    if (entity->body_length > 0x13) {
         level = dmi_version(3, 1, 0);
 
         if (data->maximum_size == 0xFFFFU)

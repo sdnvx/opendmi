@@ -2040,7 +2040,7 @@ dmi_processor_t *dmi_processor_decode(const dmi_entity_t *entity, dmi_version_t 
     // SMBIOS 3.8 features
     //
 
-    if (entity->body_length >= 0x32u) {
+    if (entity->body_length > 0x32u) {
         level = dmi_version(3, 8, 0);
         info->socket_type = dmi_entity_string(entity, data->socket_type);
     }

@@ -209,7 +209,7 @@ dmi_memory_array_t *dmi_memory_array_decode(const dmi_entity_t *entity, dmi_vers
     info->error_handle     = dmi_decode(data->error_handle);
     info->device_count     = dmi_decode(data->device_count);
 
-    if (entity->body_length >= 0x0F) {
+    if (entity->body_length > 0x0Fu) {
         level = dmi_version(2, 7, 0);
 
         if (maximum_capacity & 0x80000000)

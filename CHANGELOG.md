@@ -7,8 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.1.2] - Unreleased
 
-- Added `--type` option for filtering by type
-- Added tests for `dmi_date_parse()`
+- Added `--type` option for filtering by type.
+- Added tests for `dmi_date_parse()`.
+- Fixed firmware ROM size decoding.
+- Fixed platform firmware version decoding.
+- Fixed embedded controller firmware version decoding.
+- Fixed processor socket type decoding.
+- Fixed cache extended maximum and installed sizes decoding.
+- Fixed memory array extended capacity decoding.
+- Fixed memory array mapping extended addresses decoding.
+- Fixed memory device mapping extended addresses decoding.
+- Fixed cooling device description decoding.
+- Fixed portable battery SBDS version decoding.
+- Fixed system event log structure version decoding.
 
 ## [0.1.1] - January 07, 2026
 

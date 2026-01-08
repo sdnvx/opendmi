@@ -61,7 +61,7 @@ bool dmi_memory_array_addr_validate(const dmi_entity_t *entity)
         if (data->end_addr != 0xFFFFFFFFU)
             return false;
 
-        if (entity->total_length < 0x1F)
+        if (entity->body_length <= 0x0Fu)
             return false;
         if (data->end_addr_ex <= data->start_addr_ex)
             return false;
@@ -71,7 +71,7 @@ bool dmi_memory_array_addr_validate(const dmi_entity_t *entity)
         if (data->end_addr <= data->start_addr)
             return false;
 
-        if (entity->total_length >= 0x1F) {
+        if (entity->body_length > 0x0Fu) {
             if (data->start_addr_ex != 0)
                 return false;
             if (data->end_addr_ex != 0)
@@ -101,7 +101,7 @@ dmi_memory_array_addr_t *dmi_memory_array_addr_decode(const dmi_entity_t *entity
     info->array_handle    = dmi_decode(data->array_handle);
     info->partition_width = dmi_decode(data->partition_width);
 
-    if (entity->body_length >= 0x1F) {
+    if (entity->body_length > 0x0Fu) {
         level = dmi_version(2, 7, 0);
 
         if (data->start_addr == 0xFFFFFFFFu) {

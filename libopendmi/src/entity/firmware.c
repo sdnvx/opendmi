@@ -284,12 +284,14 @@ static const dmi_attribute_t dmi_firmware_attrs[] =
         .code   = "platform-version",
         .name   = "Platform firmware version",
         .scale  = 2,
+        .unspec = dmi_value_ptr(DMI_VERSION_NONE),
         .level  = DMI_VERSION(2, 4, 0)
     }),
     DMI_ATTRIBUTE(dmi_firmware_t, controller_version, VERSION, {
         .code   = "controller-version",
         .name   = "Embedded controller firmware version",
         .scale  = 2,
+        .unspec = dmi_value_ptr(DMI_VERSION_NONE),
         .level  = DMI_VERSION(2, 4, 0)
     }),
     DMI_ATTRIBUTE_NULL
@@ -366,21 +368,24 @@ dmi_firmware_t *dmi_firmware_decode(const dmi_entity_t *entity, dmi_version_t *p
     info->features     = features;
 
     // SMBIOS 2.1: Extra feature bits
-    size_t extra = entity->body_length - 0x12;
-    if (extra != 0) {
-        level = dmi_version(2, 1, 0);
+    if (entity->body_length > 0x12) {
+        size_t extra = entity->body_length - 0x12;
 
-        dmi_firmware_features_ex_t features_ex = {
-            .__value = {
-                extra > 0 ? data->features_ex[0] : 0,
-                extra > 1 ? data->features_ex[1] : 0
-            }
-        };
-        info->features_ex = features_ex;
+        if (extra != 0) {
+            level = dmi_version(2, 1, 0);
+
+            dmi_firmware_features_ex_t features_ex = {
+                .__value = {
+                    extra > 0 ? data->features_ex[0] : 0,
+                    extra > 1 ? data->features_ex[1] : 0
+                }
+            };
+            info->features_ex = features_ex;
+        }
     }
 
     // SMBIOS 2.4 features
-    if (entity->body_length >= 0x14) {
+    if (entity->body_length > 0x14) {
         level = dmi_version(2, 4, 0);
 
         if (data->platform_release_major != 0xFFU) {
@@ -399,7 +404,7 @@ dmi_firmware_t *dmi_firmware_decode(const dmi_entity_t *entity, dmi_version_t *p
     }
 
     // SMBIOS 3.1 features
-    if (entity->body_length >= 0x18) {
+    if (entity->body_length > 0x18) {
         level = dmi_version(3, 1, 0);
 
         if (data->rom_size == 0xFFU)
