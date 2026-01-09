@@ -71,7 +71,7 @@ dmi_mgmt_device_component_t *dmi_mgmt_device_component_decode(const dmi_entity_t
 
 bool dmi_mgmt_device_component_link(dmi_entity_t *entity)
 {
-    static dmi_type_t dmi_component_types[] = {
+    static const dmi_type_t dmi_component_types[] = {
         DMI_TYPE_COOLING_DEVICE,
         DMI_TYPE_TEMPERATURE_PROBE,
         DMI_TYPE_VOLTAGE_PROBE,

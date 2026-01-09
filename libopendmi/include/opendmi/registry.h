@@ -143,10 +143,10 @@ dmi_entity_t *dmi_registry_get(
         bool            optional);
 
 dmi_entity_t *dmi_registry_get_any(
-        dmi_registry_t *registry,
-        dmi_handle_t    handle,
-        dmi_type_t     *type,
-        bool            optional);
+        dmi_registry_t   *registry,
+        dmi_handle_t      handle,
+        const dmi_type_t *type,
+        bool              optional);
 
 /**
  * @brief Destroy registry.

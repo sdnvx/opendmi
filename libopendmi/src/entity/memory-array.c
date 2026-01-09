@@ -150,7 +150,7 @@ const dmi_attribute_t dmi_memory_array_attrs[] =
         .code    = "maximum-capacity",
         .name    = "Maximum capacity"
     }),
-    DMI_ATTRIBUTE(dmi_memory_array_t, error_handle, HANDLE, {
+    DMI_ATTRIBUTE(dmi_memory_array_t, error_info_handle, HANDLE, {
         .code    = "error-handle",
         .name    = "Memory error information handle"
     }),
@@ -171,6 +171,7 @@ const dmi_entity_spec_t dmi_memory_array_spec =
     .attributes  = dmi_memory_array_attrs,
     .handlers    = {
         .decode = (dmi_entity_decode_fn_t)dmi_memory_array_decode,
+        .link   = (dmi_entity_link_fn_t)dmi_memory_array_link,
         .free   = (dmi_entity_free_fn_t)dmi_memory_array_free
     }
 };
@@ -202,12 +203,12 @@ dmi_memory_array_t *dmi_memory_array_decode(const dmi_entity_t *entity, dmi_vers
 
     maximum_capacity = dmi_decode(data->maximum_capacity);
 
-    info->location         = dmi_decode(data->location);
-    info->usage            = dmi_decode(data->usage);
-    info->error_correction = dmi_decode(data->error_correction);
-    info->maximum_capacity = (dmi_size_t)(maximum_capacity & 0x7FFFFFFFU) << 10;
-    info->error_handle     = dmi_decode(data->error_handle);
-    info->device_count     = dmi_decode(data->device_count);
+    info->location          = dmi_decode(data->location);
+    info->usage             = dmi_decode(data->usage);
+    info->error_correction  = dmi_decode(data->error_correction);
+    info->maximum_capacity  = (dmi_size_t)(maximum_capacity & 0x7FFFFFFFU) << 10;
+    info->error_info_handle = dmi_decode(data->error_info_handle);
+    info->device_count      = dmi_decode(data->device_count);
 
     if (entity->body_length > 0x0Fu) {
         level = dmi_version(2, 7, 0);
@@ -220,6 +221,31 @@ dmi_memory_array_t *dmi_memory_array_decode(const dmi_entity_t *entity, dmi_vers
         *plevel = level;
 
     return info;
+}
+
+bool dmi_memory_array_link(dmi_entity_t *entity)
+{
+    static const dmi_type_t error_types[] = {
+        DMI_TYPE_MEMORY_ERROR_32,
+        DMI_TYPE_MEMORY_ERROR_64,
+        DMI_TYPE_INVALID
+    };
+
+    dmi_memory_array_t *info = dmi_cast(info, dmi_entity_info(entity, DMI_TYPE_MEMORY_ARRAY));
+
+    if (info == nullptr)
+        return false;
+
+    dmi_registry_t *registry = entity->context->registry;
+
+    if ((info->error_info_handle != DMI_HANDLE_INVALID) and
+        (info->error_info_handle != DMI_HANDLE_UNSUPPORTED))
+    {
+        info->error_info = dmi_registry_get_any(registry, info->error_info_handle,
+                                                error_types, false);
+    }
+
+    return true;
 }
 
 void dmi_memory_array_free(dmi_memory_array_t *info)

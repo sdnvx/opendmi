@@ -841,7 +841,7 @@ dmi_memory_device_t *dmi_memory_device_decode(dmi_entity_t *entity, dmi_version_
 
 bool dmi_memory_device_link(dmi_entity_t *entity)
 {
-    static dmi_type_t error_types[] = {
+    static const dmi_type_t error_types[] = {
         DMI_TYPE_MEMORY_ERROR_32,
         DMI_TYPE_MEMORY_ERROR_64,
         DMI_TYPE_INVALID
