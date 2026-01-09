@@ -89,86 +89,84 @@ target_sources(opendmi-object
         src/extension/dell.c
         src/extension/intel.c
         src/backend/dump.c
-    PUBLIC INTERFACE
-        FILE_SET HEADERS
-            BASE_DIRS include
-            FILES
-                include/opendmi/attribute.h
-                include/opendmi/backend.h
-                include/opendmi/context.h
-                include/opendmi/defs.h
-                include/opendmi/entry.h
-                include/opendmi/error.h
-                include/opendmi/extension.h
-                include/opendmi/filter.h
-                include/opendmi/keyword.h
-                include/opendmi/log.h
-                include/opendmi/name.h
-                include/opendmi/registry.h
-                include/opendmi/entity.h
-                include/opendmi/types.h
-                include/opendmi/utils.h
-                include/opendmi/value.h
-                include/opendmi/utils/datetime.h
-                include/opendmi/utils/decode.h
-                include/opendmi/utils/endian.h
-                include/opendmi/utils/uuid.h
-                include/opendmi/utils/vector.h
-                include/opendmi/utils/version.h
-                include/opendmi/backend/dump.h
-                include/opendmi/entity/additional-info.h
-                include/opendmi/entity/baseboard.h
-                include/opendmi/entity/battery.h
-                include/opendmi/entity/bis-entry-point.h
-                include/opendmi/entity/cache.h
-                include/opendmi/entity/chassis.h
-                include/opendmi/entity/common.h
-                include/opendmi/entity/cooling-device.h
-                include/opendmi/entity/current-probe.h
-                include/opendmi/entity/device.h
-                include/opendmi/entity/firmware-inventory.h
-                include/opendmi/entity/firmware-language.h
-                include/opendmi/entity/firmware.h
-                include/opendmi/entity/group-assoc.h
-                include/opendmi/entity/hardware-security.h
-                include/opendmi/entity/ipmi-device.h
-                include/opendmi/entity/memory-array-addr.h
-                include/opendmi/entity/memory-array.h
-                include/opendmi/entity/memory-channel.h
-                include/opendmi/entity/memory-controller.h
-                include/opendmi/entity/memory-device-addr.h
-                include/opendmi/entity/memory-device.h
-                include/opendmi/entity/memory-error.h
-                include/opendmi/entity/memory-error-32.h
-                include/opendmi/entity/memory-error-64.h
-                include/opendmi/entity/memory-module.h
-                include/opendmi/entity/mgmt-controller.h
-                include/opendmi/entity/mgmt-device.h
-                include/opendmi/entity/mgmt-device-component.h
-                include/opendmi/entity/mgmt-device-threshold.h
-                include/opendmi/entity/oem-strings.h
-                include/opendmi/entity/onboard-device.h
-                include/opendmi/entity/oob-remote-access.h
-                include/opendmi/entity/pointing-device.h
-                include/opendmi/entity/port-connector.h
-                include/opendmi/entity/power-controls.h
-                include/opendmi/entity/power-supply.h
-                include/opendmi/entity/probe.h
-                include/opendmi/entity/processor.h
-                include/opendmi/entity/processor-ex.h
-                include/opendmi/entity/slot.h
-                include/opendmi/entity/string-property.h
-                include/opendmi/entity/system.h
-                include/opendmi/entity/system-boot.h
-                include/opendmi/entity/system-config.h
-                include/opendmi/entity/system-event-log.h
-                include/opendmi/entity/system-reset.h
-                include/opendmi/entity/temperature-probe.h
-                include/opendmi/entity/tpm-device.h
-                include/opendmi/entity/voltage-probe.h
-                include/opendmi/extension/apple.h
-                include/opendmi/extension/dell.h
-                include/opendmi/extension/intel.h
+    PUBLIC FILE_SET HEADERS
+        BASE_DIRS include
+        FILES
+            include/opendmi/attribute.h
+            include/opendmi/backend.h
+            include/opendmi/context.h
+            include/opendmi/defs.h
+            include/opendmi/entry.h
+            include/opendmi/error.h
+            include/opendmi/extension.h
+            include/opendmi/filter.h
+            include/opendmi/keyword.h
+            include/opendmi/log.h
+            include/opendmi/name.h
+            include/opendmi/registry.h
+            include/opendmi/entity.h
+            include/opendmi/types.h
+            include/opendmi/utils.h
+            include/opendmi/value.h
+            include/opendmi/utils/datetime.h
+            include/opendmi/utils/decode.h
+            include/opendmi/utils/endian.h
+            include/opendmi/utils/uuid.h
+            include/opendmi/utils/vector.h
+            include/opendmi/utils/version.h
+            include/opendmi/backend/dump.h
+            include/opendmi/entity/additional-info.h
+            include/opendmi/entity/baseboard.h
+            include/opendmi/entity/battery.h
+            include/opendmi/entity/bis-entry-point.h
+            include/opendmi/entity/cache.h
+            include/opendmi/entity/chassis.h
+            include/opendmi/entity/common.h
+            include/opendmi/entity/cooling-device.h
+            include/opendmi/entity/current-probe.h
+            include/opendmi/entity/firmware-inventory.h
+            include/opendmi/entity/firmware-language.h
+            include/opendmi/entity/firmware.h
+            include/opendmi/entity/group-assoc.h
+            include/opendmi/entity/hardware-security.h
+            include/opendmi/entity/ipmi-device.h
+            include/opendmi/entity/memory-array-addr.h
+            include/opendmi/entity/memory-array.h
+            include/opendmi/entity/memory-channel.h
+            include/opendmi/entity/memory-controller.h
+            include/opendmi/entity/memory-device-addr.h
+            include/opendmi/entity/memory-device.h
+            include/opendmi/entity/memory-error.h
+            include/opendmi/entity/memory-error-32.h
+            include/opendmi/entity/memory-error-64.h
+            include/opendmi/entity/memory-module.h
+            include/opendmi/entity/mgmt-controller.h
+            include/opendmi/entity/mgmt-device.h
+            include/opendmi/entity/mgmt-device-component.h
+            include/opendmi/entity/mgmt-device-threshold.h
+            include/opendmi/entity/oem-strings.h
+            include/opendmi/entity/onboard-device.h
+            include/opendmi/entity/oob-remote-access.h
+            include/opendmi/entity/pointing-device.h
+            include/opendmi/entity/port-connector.h
+            include/opendmi/entity/power-controls.h
+            include/opendmi/entity/power-supply.h
+            include/opendmi/entity/probe.h
+            include/opendmi/entity/processor.h
+            include/opendmi/entity/processor-ex.h
+            include/opendmi/entity/slot.h
+            include/opendmi/entity/string-property.h
+            include/opendmi/entity/system.h
+            include/opendmi/entity/system-boot.h
+            include/opendmi/entity/system-config.h
+            include/opendmi/entity/system-event-log.h
+            include/opendmi/entity/system-reset.h
+            include/opendmi/entity/temperature-probe.h
+            include/opendmi/entity/tpm-device.h
+            include/opendmi/entity/voltage-probe.h
+            include/opendmi/extension/apple.h
+            include/opendmi/extension/dell.h
+            include/opendmi/extension/intel.h
 )
 
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
@@ -176,10 +174,9 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
     target_sources(opendmi-object
         PRIVATE
             src/backend/linux.c
-        PUBLIC INTERFACE
-            FILE_SET HEADERS
-                BASE_DIRS include
-                FILES include/opendmi/backend/linux.h
+        PUBLIC FILE_SET HEADERS
+            BASE_DIRS include
+            FILES include/opendmi/backend/linux.h
     )
 elseif(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
     target_compile_definitions(opendmi-object PRIVATE __APPLE__)
@@ -191,10 +188,9 @@ elseif(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
     target_sources(opendmi-object
         PRIVATE
             src/backend/darwin.c
-        PUBLIC INTERFACE
-            FILE_SET HEADERS
-                BASE_DIRS include
-                FILES include/opendmi/backend/darwin.h
+        PUBLIC FILE_SET HEADERS
+            BASE_DIRS include
+            FILES include/opendmi/backend/darwin.h
     )
 elseif(CMAKE_SYSTEM_NAME STREQUAL "FreeBSD")
     target_compile_definitions(opendmi-object PRIVATE __FreeBSD__)
@@ -202,10 +198,9 @@ elseif(CMAKE_SYSTEM_NAME STREQUAL "FreeBSD")
     target_sources(opendmi-object
         PRIVATE
             src/backend/freebsd.c
-        PUBLIC INTERFACE
-            FILE_SET HEADERS
-                BASE_DIRS include
-                FILES include/opendmi/backend/freebsd.h
+        PUBLIC FILE_SET HEADERS
+            BASE_DIRS include
+            FILES include/opendmi/backend/freebsd.h
     )
 elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
     target_compile_definitions(opendmi-object PRIVATE _WIN32)
@@ -213,10 +208,9 @@ elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
     target_sources(opendmi-object
         PRIVATE
             src/backend/windows.c
-        PUBLIC INTERFACE
-            FILE_SET HEADERS
-                BASE_DIRS include
-                FILES include/opendmi/backend/windows.h
+        PUBLIC FILE_SET HEADERS
+            BASE_DIRS include
+            FILES include/opendmi/backend/windows.h
     )
 endif()
 
@@ -247,7 +241,7 @@ target_include_directories(opendmi-shared INTERFACE include)
 target_link_libraries(opendmi-shared PUBLIC ${LIBOPENDMI_LIBRARIES})
 set_target_properties(opendmi-shared PROPERTIES OUTPUT_NAME opendmi)
 
-install(TARGETS opendmi-object FILE_SET HEADERS DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+install(TARGETS opendmi-object PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 install(TARGETS opendmi-static ARCHIVE DESTINATION lib)
 install(TARGETS opendmi-shared LIBRARY DESTINATION lib)
 

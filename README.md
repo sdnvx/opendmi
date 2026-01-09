@@ -29,7 +29,7 @@ The project is under active development, see [ROADMAP](ROADMAP.md) and [CHANGELO
 ### Prerequisites
 
 * GCC, CLang or MSVC compiler
-* CMake 3.30 or newer
+* CMake 3.25 or newer
 * AsciiDoctor (used to generate documentation and man pages)
 * CppCheck (optional)
 

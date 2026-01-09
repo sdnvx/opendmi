@@ -1,0 +1,56 @@
+# CMake versions
+
+[cols="3,1,1,1", frame=ends, grid=rows]
+|===
+| OS  | Release | EOL | Version
+
+| Fedora 43
+| 2025-10
+| 2026-12
+| 3.31.10
+
+| Fedora 42
+| 2025-04
+| 2026-05
+| 3.31.6
+
+| [line-through]#Fedora 41#
+| 2024-10
+| 2025-12
+| 3.28.3
+
+| [line-through]#Fedora 40#
+| 2024-04
+| 2025-05
+| 3.28.2
+
+| Ubuntu 24.04 LTS (Noble Numbat)
+| 2024-04
+| 2029-06
+| 3.28.3
+
+| Ubuntu 22.04 LTS (Jammy Jellyfish)
+| 2022-04
+| 2027-06
+| 3.22.1
+
+| [line-through]#Ubuntu 20.04 LTS (Focal Fossa)#
+| 2020-04
+| 2025-05
+| 3.16.3
+
+| Debian 13 (Trixie)
+| 2025-08
+| 2028-08
+| 3.31.6
+
+| Debian 12 (Bookworm)
+| 2023-06
+| 2026-06
+| 3.25.1
+
+| [line-through]#Debian 11 (Bullseye)#
+| 2021-08
+| 2024-08
+| 3.18.4
+|===

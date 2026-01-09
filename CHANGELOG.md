@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.1.2] - Unreleased
 
+- Downgraded CMake to version 3.25 to improve compatibility.
 - Added `--type` option for filtering by type.
 - Added tests for `dmi_date_parse()`.
 - Fixed firmware ROM size decoding.

@@ -7,6 +7,8 @@
 #
 SCRIPT=`basename $0`
 OSNAME=`uname -s`
+CMAKE=`which cmake`
+CTEST=`which ctest`
 
 source ./build.conf.dist
 
@@ -160,7 +162,7 @@ _configure() {
         FEATURES="${FEATURES} -DCMAKE_VERBOSE_MAKEFILE=TRUE"
     fi
 
-    cmake -B ${BUILD_DIR} \
+    ${CMAKE} -B ${BUILD_DIR} \
         -DCMAKE_BUILD_TYPE=${BUILD_TYPE} \
         -DENABLE_CXX=${ENABLE_CXX} \
         -DENABLE_GOLANG=${ENABLE_GOLANG} \
@@ -171,7 +173,7 @@ _configure() {
 }
 
 _build() {
-    cmake --build ${BUILD_DIR} --parallel ${NPROC}
+    ${CMAKE} --build ${BUILD_DIR} --parallel ${NPROC}
 }
 
 _test() {
@@ -191,11 +193,11 @@ _test() {
         esac
     done
 
-    ctest --test-dir ${BUILD_DIR} --parallel ${NPROC} ${CTEST_ARGS}
+    ${CTEST} --test-dir ${BUILD_DIR} --parallel ${NPROC} ${CTEST_ARGS}
 }
 
 _clean() {
-    cmake --build ${BUILD_DIR} --target clean
+    ${CMAKE} --build ${BUILD_DIR} --target clean
 }
 
 _distclean()
