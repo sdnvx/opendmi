@@ -44,6 +44,8 @@ typedef struct _stat stat_t;
 typedef struct stat stat_t;
 #endif // !defined(_WIN32)
 
+static ssize_t dmi_file_read_data(int fd, dmi_data_t *data, size_t avail);
+
 void *dmi_alloc(dmi_context_t *context, size_t size)
 {
     void *ptr;
@@ -175,13 +177,16 @@ dmi_data_t *dmi_file_read(dmi_context_t *context, const char *path, size_t *plen
         return nullptr;
     }
 
-    int         fd   = -1;
-    dmi_data_t *data = nullptr;
-    stat_t      st;
-    ssize_t     nread;
+    int         fd     = -1;
+    dmi_data_t *data   = nullptr;
+    ssize_t     length = 0;
 
     bool success = false;
     do {
+        stat_t st;
+
+        dmi_log_debug(context, "Reading %s ...", path);
+
 #if defined(_WIN32)
         if (_sopen_s(&fd, path, _O_RDONLY, _SH_DENYNO, _S_IREAD) != 0)
             break;
@@ -202,17 +207,14 @@ dmi_data_t *dmi_file_read(dmi_context_t *context, const char *path, size_t *plen
             break;
         }
 
-    retry:
-        nread = read(fd, data, st.st_size);
-        if (nread < st.st_size) {
-            if ((nread < 0) and (errno == EINTR))
-                goto retry;
-
+        length = dmi_file_read_data(fd, data, st.st_size);
+        if (length < 0) {
             dmi_error_raise_ex(context, DMI_ERROR_FILE_READ, "%s: %s", path, strerror(errno));
             break;
         }
 
-        *plength = st.st_size;
+        dmi_log_debug(context, "Read %zu bytes", length);
+
         success = true;
     } while (false);
 
@@ -224,7 +226,35 @@ dmi_data_t *dmi_file_read(dmi_context_t *context, const char *path, size_t *plen
         return nullptr;
     }
 
+    *plength = (size_t)length;
+
     return data;
+}
+
+static ssize_t dmi_file_read_data(int fd, dmi_data_t *data, size_t avail)
+{
+    assert(fd >= 0);
+    assert(data != nullptr);
+
+    size_t length = 0;
+
+    while (avail > 0) {
+        ssize_t nread = read(fd, data + length, avail);
+
+        if (nread < 0) {
+            if (errno == EINTR)
+                continue;
+            return -1;
+        }
+
+        if (nread == 0)
+            break;
+
+        length += nread;
+        avail  -= nread;
+    }
+
+    return length;
 }
 
 #if !defined(_WIN32)
@@ -259,7 +289,7 @@ dmi_data_t *dmi_file_map(dmi_context_t *context, const char *path, size_t *pleng
             break;
         }
 
-        if ((data = mmap(nullptr, st.st_size, PROT_READ, MAP_PRIVATE, fd, 0)) == nullptr) {
+        if ((data = mmap(nullptr, st.st_size, PROT_READ, MAP_PRIVATE, fd, 0)) == MAP_FAILED) {
             dmi_error_raise_ex(context, DMI_ERROR_FILE_MAP, "%s: %s", path, strerror(errno));
             break;
         }

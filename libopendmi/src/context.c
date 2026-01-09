@@ -402,11 +402,14 @@ static bool dmi_open_ex(dmi_context_t *context, dmi_backend_t *backend, const vo
             break;
         }
 
-        // Read and decode entry point
+        // Read entry point
         dmi_log_info(context, "Reading DMI entry point...");
         context->entry_data = context->backend->read_entry(context, &context->entry_size);
         if (context->entry_data == nullptr)
             break;
+
+        // Decode entry point
+        dmi_log_info(context, "Decoding DMI entry point...");
         if (not dmi_entry_decode(context, context->entry_data, context->entry_size))
             break;
 

@@ -77,12 +77,12 @@ static bool dmi_linux_open(dmi_context_t *context, const void *arg __attribute__
         char path[PATH_MAX];
 
         snprintf(path, sizeof(path), "%s/%s", dmi_linux_sysfs_path, dmi_linux_entry_file);
-        session->entry = dmi_file_map(context, path, &session->entry_size);
+        session->entry = dmi_file_read(context, path, &session->entry_size);
         if (session->entry == nullptr)
             break;
 
         snprintf(path, sizeof(path), "%s/%s", dmi_linux_sysfs_path, dmi_linux_table_file);
-        session->table = dmi_file_map(context, path, &session->table_size);
+        session->table = dmi_file_read(context, path, &session->table_size);
         if (session->table == nullptr)
             break;
 
@@ -140,10 +140,8 @@ static void dmi_linux_session_free(dmi_linux_session_t *session)
     if (session == nullptr)
         return;
 
-    if (session->entry)
-        munmap(session->entry, session->entry_size);
-    if (session->table)
-        munmap(session->table, session->table_size);
+    dmi_free(session->entry);
+    dmi_free(session->table);
 
     dmi_free(session);
 }
