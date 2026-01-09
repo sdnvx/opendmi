@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Added automatic string trimming
 - Added baseboard structure linking
+- Fixed memory leak in memory channel decoder
 
 ## [0.1.2] - January 09, 2026
 

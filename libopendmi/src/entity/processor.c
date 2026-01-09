@@ -2053,11 +2053,6 @@ dmi_processor_t *dmi_processor_decode(const dmi_entity_t *entity, dmi_version_t 
 
 bool dmi_processor_link(dmi_entity_t *entity)
 {
-    static dmi_type_t cache_types[] = {
-        DMI_TYPE_CACHE,
-        DMI_TYPE_INVALID
-    };
-
     dmi_processor_t *info;
     dmi_registry_t *registry;
 
@@ -2068,13 +2063,13 @@ bool dmi_processor_link(dmi_entity_t *entity)
     registry = entity->context->registry;
 
     if (info->l1_cache_handle != DMI_HANDLE_INVALID)
-        info->l1_cache = dmi_registry_get_any(registry, info->l1_cache_handle, cache_types, false);
+        info->l1_cache = dmi_registry_get(registry, info->l1_cache_handle, DMI_TYPE_CACHE, false);
 
     if (info->l2_cache_handle != DMI_HANDLE_INVALID)
-        info->l2_cache = dmi_registry_get_any(registry, info->l2_cache_handle, cache_types, false);
+        info->l2_cache = dmi_registry_get(registry, info->l2_cache_handle, DMI_TYPE_CACHE, false);
 
     if (info->l3_cache_handle != DMI_HANDLE_INVALID)
-        info->l3_cache = dmi_registry_get_any(registry, info->l3_cache_handle, cache_types, false);
+        info->l3_cache = dmi_registry_get(registry, info->l3_cache_handle, DMI_TYPE_CACHE, false);
 
     return true;
 }

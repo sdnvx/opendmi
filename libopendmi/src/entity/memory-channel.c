@@ -153,5 +153,6 @@ bool dmi_memory_channel_link(dmi_entity_t *entity)
 
 void dmi_memory_channel_free(dmi_memory_channel_t *info)
 {
+    dmi_free(info->devices);
     dmi_free(info);
 }
