@@ -218,6 +218,11 @@ struct dmi_baseboard
     dmi_handle_t chassis_handle;
 
     /**
+     * @brief The chassis in which this board resides.
+     */
+    dmi_entity_t *chassis;
+
+    /**
      * @brief Type of board.
      */
     dmi_baseboard_type_t type;
@@ -233,6 +238,11 @@ struct dmi_baseboard
      * this baseboard.
      */
     dmi_handle_t *object_handles;
+
+    /**
+     * @brief Contained object entities.
+     */
+    dmi_entity_t **objects;
 };
 
 extern const dmi_name_set_t dmi_baseboard_type_names;
@@ -250,6 +260,11 @@ const char *dmi_baseboard_type_name(dmi_baseboard_type_t value);
  * @internal
  */
 dmi_baseboard_t *dmi_baseboard_decode(const dmi_entity_t *entity, dmi_version_t *plevel);
+
+/**
+ * @internal
+ */
+bool dmi_baseboard_link(dmi_entity_t *entity);
 
 /**
  * @internal

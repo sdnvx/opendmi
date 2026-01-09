@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 - Added automatic string trimming
+- Added baseboard structure linking
 
 ## [0.1.2] - January 09, 2026
 

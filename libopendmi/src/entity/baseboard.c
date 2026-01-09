@@ -169,6 +169,7 @@ const dmi_entity_spec_t dmi_baseboard_spec =
     .attributes = dmi_baseboard_attrs,
     .handlers   = {
         .decode = (dmi_entity_decode_fn_t)dmi_baseboard_decode,
+        .link   = (dmi_entity_link_fn_t)dmi_baseboard_link,
         .free   = (dmi_entity_free_fn_t)dmi_baseboard_free
     }
 };
@@ -178,8 +179,7 @@ const char *dmi_baseboard_type_name(dmi_baseboard_type_t value)
     return dmi_name_lookup(&dmi_baseboard_type_names, value);
 }
 
-dmi_baseboard_t *
-dmi_baseboard_decode(const dmi_entity_t *entity, dmi_version_t *plevel)
+dmi_baseboard_t *dmi_baseboard_decode(const dmi_entity_t *entity, dmi_version_t *plevel)
 {
     dmi_baseboard_t *info;
     const dmi_baseboard_data_t *data;
@@ -236,8 +236,49 @@ dmi_baseboard_decode(const dmi_entity_t *entity, dmi_version_t *plevel)
     return info;
 }
 
+bool dmi_baseboard_link(dmi_entity_t *entity)
+{
+    dmi_baseboard_t *info = dmi_cast(info, dmi_entity_info(entity, DMI_TYPE_BASEBOARD));
+
+    if (info == nullptr)
+        return false;
+
+    dmi_context_t  *context  = entity->context;
+    dmi_registry_t *registry = context->registry;
+
+    if (info->chassis_handle != DMI_HANDLE_INVALID) {
+        info->chassis = dmi_registry_get(registry, info->chassis_handle, DMI_TYPE_CHASSIS, false);
+        if (info->chassis == nullptr) {
+            dmi_error_raise_ex(context, DMI_ERROR_ENTITY_NOT_FOUND,
+                               "Chassis: 0x%04x", info->chassis_handle);
+        }
+    }
+
+    if (info->object_count > 0) {
+        info->objects = dmi_alloc_array(context, sizeof(dmi_entity_t *), info->object_count);
+
+        if (info->objects == nullptr) {
+            dmi_error_raise(context, DMI_ERROR_OUT_OF_MEMORY);
+            return false;
+        }
+
+        for (size_t i = 0; i < info->object_count; i++) {
+            dmi_handle_t handle = info->object_handles[i];
+
+            if (handle == DMI_HANDLE_INVALID)
+                continue;
+
+            info->objects[i] = dmi_registry_get(registry, handle, DMI_TYPE_INVALID, false);
+        }
+    }
+
+    return true;
+}
+
 void dmi_baseboard_free(dmi_baseboard_t *info)
 {
     dmi_free(info->object_handles);
+    dmi_free(info->objects);
+
     dmi_free(info);
 }
