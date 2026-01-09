@@ -247,11 +247,8 @@ bool dmi_baseboard_link(dmi_entity_t *entity)
     dmi_registry_t *registry = context->registry;
 
     if (info->chassis_handle != DMI_HANDLE_INVALID) {
-        info->chassis = dmi_registry_get(registry, info->chassis_handle, DMI_TYPE_CHASSIS, false);
-        if (info->chassis == nullptr) {
-            dmi_error_raise_ex(context, DMI_ERROR_ENTITY_NOT_FOUND,
-                               "Chassis: 0x%04x", info->chassis_handle);
-        }
+        info->chassis = dmi_registry_get(registry, info->chassis_handle,
+                                         DMI_TYPE_CHASSIS, false);
     }
 
     if (info->object_count > 0) {

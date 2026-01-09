@@ -276,22 +276,38 @@ struct dmi_power_supply
     dmi_power_supply_type_t type;
 
     /**
-     * @brief Handle, or instance number, of a voltage probe (type 26)
+     * @brief Handle, or instance number, of the voltage probe (type 26)
      * monitoring this power supply’s input voltage.
      */
     dmi_handle_t voltage_probe_handle;
 
     /**
-     * @brief Handle, or instance number, of a cooling device (type 27)
+     * @brief The voltage probe monitoring this power supply’s input voltage.
+     */
+    dmi_entity_t *voltage_probe;
+
+    /**
+     * @brief Handle, or instance number, of the cooling device (type 27)
      * associated with this power supply.
      */
     dmi_handle_t cooling_device_handle;
+
+    /**
+     * @brief The cooling device associated with this power supply.
+     */
+    dmi_entity_t *cooling_device;
 
     /**
      * @brief Handle, or instance number, of the electrical current probe
      * (type 29) monitoring this power supply's input current.
      */
     dmi_handle_t current_probe_handle;
+
+    /**
+     * @brief The electrical current probe monitoring this power supply's
+     * input current.
+     */
+    dmi_entity_t *current_probe;
 };
 
 typedef struct dmi_power_supply dmi_power_supply_t;
@@ -310,6 +326,11 @@ const char *dmi_range_switching_type_name(dmi_range_switching_type_t value);
  * @internal
  */
 dmi_power_supply_t *dmi_power_supply_decode(const dmi_entity_t *entity, dmi_version_t *plevel);
+
+/**
+ * @internal
+ */
+bool dmi_power_supply_link(dmi_entity_t *entity);
 
 /**
  * @internal

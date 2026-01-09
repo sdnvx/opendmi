@@ -179,6 +179,7 @@ const dmi_entity_spec_t dmi_power_supply_spec =
     .attributes  = dmi_power_supply_attrs,
     .handlers    = {
         .decode = (dmi_entity_decode_fn_t)dmi_power_supply_decode,
+        .link   = (dmi_entity_link_fn_t)dmi_power_supply_link,
         .free   = (dmi_entity_free_fn_t)dmi_power_supply_free
     }
 };
@@ -235,6 +236,33 @@ dmi_power_supply_t *dmi_power_supply_decode(const dmi_entity_t *entity, dmi_vers
         *plevel = dmi_version(2, 3, 1);
 
     return info;
+}
+
+bool dmi_power_supply_link(dmi_entity_t *entity)
+{
+    dmi_power_supply_t *info = dmi_cast(info, dmi_entity_info(entity, DMI_TYPE_POWER_SUPPLY));
+
+    if (info == nullptr)
+        return false;
+
+    dmi_registry_t *registry = entity->context->registry;
+
+    if (info->voltage_probe_handle != DMI_HANDLE_INVALID) {
+        info->voltage_probe = dmi_registry_get(registry, info->voltage_probe_handle,
+                                               DMI_TYPE_VOLTAGE_PROBE, false);
+    }
+
+    if (info->cooling_device_handle != DMI_HANDLE_INVALID) {
+        info->cooling_device = dmi_registry_get(registry, info->cooling_device_handle,
+                                                DMI_TYPE_COOLING_DEVICE, false);
+    }
+
+    if (info->current_probe_handle != DMI_HANDLE_INVALID) {
+        info->current_probe = dmi_registry_get(registry, info->current_probe_handle,
+                                               DMI_TYPE_CURRENT_PROBE, false);
+    }
+
+    return true;
 }
 
 void dmi_power_supply_free(dmi_power_supply_t *info)
