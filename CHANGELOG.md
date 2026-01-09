@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Added automatic string trimming
 - Added baseboard structure linking
+- Fixed invalid memory access in `dmi_entity_string_ex()`
 - Fixed memory leak in memory channel decoder
 - Fixed memory leak in context error queue
 

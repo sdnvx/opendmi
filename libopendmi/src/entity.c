@@ -153,7 +153,7 @@ const char *dmi_entity_string_ex(const dmi_entity_t *entity, dmi_string_t num, b
 {
     dmi_string_entry_t *entry;
 
-    if (entity == nullptr)
+    if ((entity == nullptr) || (num == 0))
         return nullptr;
 
     if (num > entity->string_count) {
