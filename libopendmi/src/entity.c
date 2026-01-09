@@ -6,6 +6,7 @@
 //
 #include <string.h>
 #include <stdbool.h>
+#include <ctype.h>
 #include <assert.h>
 
 #include <opendmi/context.h>
@@ -22,6 +23,11 @@ static bool dmi_entity_decode_length(dmi_entity_t *entity);
  * @internal
  */
 static bool dmi_entity_decode_strings(dmi_entity_t *entity);
+
+/**
+ * @internal
+ */
+static char *dmi_entity_string_trim(dmi_context_t *context, const char *ptr);
 
 dmi_entity_t *dmi_entity_decode(dmi_context_t *context, const void *data)
 {
@@ -143,8 +149,10 @@ const void *dmi_entity_info(const dmi_entity_t *entity, dmi_type_t type)
     return entity->info;
 }
 
-const char *dmi_entity_string(const dmi_entity_t *entity, dmi_string_t num)
+const char *dmi_entity_string_ex(const dmi_entity_t *entity, dmi_string_t num, bool raw)
 {
+    dmi_string_entry_t *entry;
+
     if (entity == nullptr)
         return nullptr;
 
@@ -154,7 +162,12 @@ const char *dmi_entity_string(const dmi_entity_t *entity, dmi_string_t num)
         return nullptr;
     }
 
-    return num > 0 ? entity->strings[num - 1] : nullptr;
+    entry = &entity->strings[num - 1];
+
+    if (entry->raw == nullptr)
+        return nullptr;
+
+    return raw ? entry->raw : entry->pretty;
 }
 
 void dmi_entity_destroy(dmi_entity_t *entity)
@@ -169,7 +182,12 @@ void dmi_entity_destroy(dmi_entity_t *entity)
             dmi_free(entity->info);
     }
 
-    dmi_free(entity->strings);
+    if (entity->strings) {
+        for (size_t i = 0; i < entity->string_count; i++)
+            dmi_free(entity->strings[i].pretty);
+        dmi_free(entity->strings);
+    }
+
     dmi_free(entity);
 }
 
@@ -213,21 +231,32 @@ static bool dmi_entity_decode_strings(dmi_entity_t *entity)
     assert(entity != nullptr);
     assert(entity->data != nullptr);
 
-    const char *data  = dmi_cast(data, entity->data);
-    const char *start = data + entity->body_length;
-    const char *ptr   = start;
-    size_t      index = 0;
+    bool success = false;
+    dmi_string_entry_t *strings = nullptr;
 
     // Allocate strings index
-    entity->strings = dmi_alloc_array(entity->context, sizeof(const char *), entity->string_count + 1);
-    if (entity->strings == nullptr)
+    strings = dmi_alloc_array(entity->context, sizeof(dmi_string_entry_t), entity->string_count + 1);
+    if (strings == nullptr)
         return false;
 
     // Fetch string pointers
     if (entity->string_count > 0) {
+        const char *data  = dmi_cast(data, entity->data);
+        const char *start = data + entity->body_length;
+        const char *ptr   = start;
+        size_t      index = 0;
+
         while (true) {
+            dmi_string_entry_t *entry = &strings[index++];
+
             if (*ptr != 0) {
-                entity->strings[index++] = ptr;
+                entry->raw    = ptr;
+                entry->pretty = dmi_entity_string_trim(entity->context, ptr);
+
+                if (!entry->pretty) {
+                    dmi_error_raise(entity->context, DMI_ERROR_OUT_OF_MEMORY);
+                    break;
+                }
 
                 while (*ptr != 0) {
                     ptr++;
@@ -237,14 +266,52 @@ static bool dmi_entity_decode_strings(dmi_entity_t *entity)
             ptr++;
 
             if (*ptr == 0) {
-                ptr++;
+                success = true;
                 break;
             }
         }
+    } else {
+        success = true;
     }
 
-    // Terminate strings index
-    entity->strings[index] = nullptr;
+    if (!success) {
+        for (size_t i = 0; i < entity->string_count; i++)
+            dmi_free(strings[i].pretty);
+        dmi_free(strings);
+
+        return false;
+    }
+
+    entity->strings = strings;
 
     return true;
+}
+
+static char *dmi_entity_string_trim(dmi_context_t *context, const char *ptr)
+{
+    assert(ptr != nullptr);
+
+    size_t length;
+    char  *str = nullptr;
+
+    // Trim leading whitespaces
+    ptr += strspn(ptr, "\t\n\v\f\r ");
+
+    // Trim trailing whitespaces
+    length = strlen(ptr);
+    while (length > 0) {
+        if (strchr("\t\n\v\f\r ", ptr[length - 1]) == nullptr)
+            break;
+        length--;
+    }
+
+    // Allocate string
+    str = dmi_alloc(context, length + 1);
+    if (str == nullptr)
+        return nullptr;
+
+    // Copy string value
+    memcpy(str, ptr, length);
+
+    return str;
 }

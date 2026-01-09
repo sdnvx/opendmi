@@ -13,10 +13,11 @@
 #include <opendmi/attribute.h>
 #include <opendmi/utils/version.h>
 
-typedef struct dmi_entity      dmi_entity_t;
-typedef struct dmi_entity_spec dmi_entity_spec_t;
-typedef struct dmi_entity_ops  dmi_entity_ops_t;
-typedef struct dmi_header      dmi_header_t;
+typedef struct dmi_entity       dmi_entity_t;
+typedef struct dmi_entity_spec  dmi_entity_spec_t;
+typedef struct dmi_entity_ops   dmi_entity_ops_t;
+typedef struct dmi_header       dmi_header_t;
+typedef struct dmi_string_entry dmi_string_entry_t;
 
 typedef bool (*dmi_entity_validate_fn_t)(dmi_entity_t *entity);
 typedef void *(*dmi_entity_decode_fn_t)(dmi_entity_t *entity, dmi_version_t *plevel);
@@ -144,6 +145,22 @@ dmi_packed_struct(dmi_header)
 };
 
 /**
+ * @brief String entry.
+ */
+struct dmi_string_entry
+{
+    /**
+     * @brief Raw value.
+     */
+    const char *raw;
+
+    /**
+     * @brief Pretty value.
+     */
+    char *pretty;
+};
+
+/**
  * @brief Entity descriptor.
  */
 struct dmi_entity
@@ -192,7 +209,7 @@ struct dmi_entity
     /**
      * @brief String data.
      */
-    const char **strings;
+    dmi_string_entry_t *strings;
 
     /**
      * @brief Number of strings in the SMBIOS structure.
@@ -256,8 +273,9 @@ const void *dmi_entity_info(const dmi_entity_t *entity, dmi_type_t type);
  *
  * @param[in] entity Entity descriptor.
  * @param[in] num    String number.
+ * @param[in] raw    Raw value flag.
  */
-const char *dmi_entity_string(const dmi_entity_t *entity, dmi_string_t num);
+const char *dmi_entity_string_ex(const dmi_entity_t *entity, dmi_string_t num, bool raw);
 
 /**
  * @brief Destroy entity descriptor.
@@ -267,5 +285,10 @@ const char *dmi_entity_string(const dmi_entity_t *entity, dmi_string_t num);
 void dmi_entity_destroy(dmi_entity_t *entity);
 
 __END_DECLS
+
+static inline const char *dmi_entity_string(const dmi_entity_t *entity, dmi_string_t num)
+{
+    return dmi_entity_string_ex(entity, num, false);
+}
 
 #endif // !OPENDMI_ENTITY_H

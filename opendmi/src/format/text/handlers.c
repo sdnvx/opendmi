@@ -275,7 +275,7 @@ bool dmi_text_entity_strings(dmi_text_session_t *session, const dmi_entity_t *en
     dmi_tprintf(session, COLOR_NONE, "\tStrings:\n");
 
     for (dmi_string_t i = 1; i <= entity->string_count; i++) {
-        const char *str = dmi_entity_string(entity, i);
+        const char *str = dmi_entity_string_ex(entity, i, true);
 
         dmi_text_hex_data(session, str, strlen(str) + 1);
         dmi_tprintf(session, COLOR_NONE, "\t\t\"%s\"\n", str);

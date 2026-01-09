@@ -472,7 +472,7 @@ bool dmi_xml_entity_strings(dmi_xml_session_t *session, const dmi_entity_t *enti
 
             if (xmlTextWriterWriteString(
                         session->writer,
-                        dmi_xml_string(dmi_entity_string(entity, i))) < 0)
+                        dmi_xml_string(dmi_entity_string_ex(entity, i, true))) < 0)
                 break;
 
             if (xmlTextWriterFullEndElement(session->writer) < 0)
