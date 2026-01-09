@@ -362,7 +362,8 @@ bool dmi_close(dmi_context_t *context)
             context->backend->close(context);
     }
 
-    memset(context, 0, sizeof(*context));
+    context->session  = nullptr;
+    context->registry = nullptr;
 
     return true;
 }
@@ -374,6 +375,7 @@ void dmi_destroy(dmi_context_t *context)
 
     // Close and free context
     dmi_close(context);
+    dmi_error_clear(context);
 
     dmi_free(context->type_map);
     dmi_free(context);
