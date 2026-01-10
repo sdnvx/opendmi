@@ -79,7 +79,7 @@ int main(void)
         },
         .counter = DMI_MEMBER_NULL,
         .type    = DMI_ATTRIBUTE_TYPE_UUID,
-        .params  = { 0 }
+        .params  = {}
     };
 
     for (size_t i = 0; i < countof(test_data); i++) {

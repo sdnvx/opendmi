@@ -255,7 +255,7 @@ bool dmi_dump_save(dmi_context_t *context, const char *path, bool overwrite)
 
     success = false;
     do {
-        dmi_byte_t entry[DMI_ENTRY_MAX_SIZE] = { 0 };
+        dmi_byte_t entry[DMI_ENTRY_MAX_SIZE] = {};
         memcpy(entry, context->entry_data, context->entry_size);
 
     write_entry:

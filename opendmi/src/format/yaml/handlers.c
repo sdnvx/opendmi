@@ -71,7 +71,7 @@ bool dmi_yaml_dump_start(dmi_yaml_session_t *session)
     assert(session != nullptr);
 
     bool success = false;
-    yaml_event_t event = { 0 };
+    yaml_event_t event = {};
 
     do {
         if (not yaml_document_start_event_initialize(&event, nullptr, nullptr, nullptr, true))
@@ -423,7 +423,7 @@ bool dmi_yaml_dump_end(dmi_yaml_session_t *session)
     assert(session != nullptr);
 
     bool success = false;
-    yaml_event_t event = { 0 };
+    yaml_event_t event = {};
 
     do {
         if (not dmi_yaml_mapping_end(session))

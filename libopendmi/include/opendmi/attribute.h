@@ -142,7 +142,7 @@ struct dmi_attribute
         .value   = DMI_MEMBER_NULL,         \
         .counter = DMI_MEMBER_NULL,         \
         .type    = DMI_ATTRIBUTE_TYPE_NONE, \
-        .params  = { 0 }                    \
+        .params  = {}                       \
     }
 
 __BEGIN_DECLS

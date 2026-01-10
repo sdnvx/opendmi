@@ -22,7 +22,7 @@
 bool dmi_pager_start(dmi_context_t *context)
 {
     bool success = false;
-    wordexp_t we = { 0 };
+    wordexp_t we = {};
     int rv;
 	int fds[2];
 	pid_t pid;

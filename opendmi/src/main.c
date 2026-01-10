@@ -89,7 +89,7 @@ dmi_config_t config =
     .input_path    = nullptr,
     .output_path   = nullptr,
     .output_format = &dmi_text_format,
-    .filter        = { 0 }
+    .filter        = {}
 };
 
 static bool tty = false;

@@ -19,7 +19,7 @@ bool dmi_yaml_scalar(dmi_yaml_session_t *session, const char *value, yaml_scalar
     assert(session != nullptr);
 
     bool success = false;
-    yaml_event_t event = { 0 };
+    yaml_event_t event = {};
 
     do {
         if (not yaml_scalar_event_initialize(
@@ -39,7 +39,7 @@ bool dmi_yaml_sequence_start(dmi_yaml_session_t *session, yaml_sequence_style_t 
     assert(session != nullptr);
 
     bool success = false;
-    yaml_event_t event = { 0 };
+    yaml_event_t event = {};
 
     do {
         if (not yaml_sequence_start_event_initialize(&event, nullptr, nullptr, true, style))
@@ -58,7 +58,7 @@ bool dmi_yaml_sequence_end(dmi_yaml_session_t *session)
     assert(session != nullptr);
 
     bool success = false;
-    yaml_event_t event = { 0 };
+    yaml_event_t event = {};
 
     do {
         if (not yaml_sequence_end_event_initialize(&event))
@@ -77,7 +77,7 @@ bool dmi_yaml_mapping_start(dmi_yaml_session_t *session, yaml_mapping_style_t st
     assert(session != nullptr);
 
     bool success = false;
-    yaml_event_t event = { 0 };
+    yaml_event_t event = {};
 
     do {
         if (not yaml_mapping_start_event_initialize(&event, nullptr, nullptr, true, style))
@@ -96,7 +96,7 @@ bool dmi_yaml_mapping_end(dmi_yaml_session_t *session)
     assert(session != nullptr);
 
     bool success = false;
-    yaml_event_t event = { 0 };
+    yaml_event_t event = {};
 
     do {
         if (not yaml_mapping_end_event_initialize(&event))
