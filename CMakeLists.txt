@@ -7,7 +7,7 @@
 cmake_minimum_required(VERSION 3.25)
 
 project(opendmi
-        VERSION 0.1.3
+        VERSION 0.1.4
         DESCRIPTION "Cross-platform DMI/SMBIOS framework"
         HOMEPAGE_URL https://github.com/sdnvx/opendmi
         LANGUAGES C CXX)
