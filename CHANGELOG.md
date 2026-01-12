@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+- Fixed memory controller module size decoding
 - Fixed hardware security settings decoding
 - Fixed power supply structure minimum length
 - Fixed cooling device structure minimum length
