@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 - Fixed hardware security settings decoding
+- Fixed current probe structure minimum length
+- Fixed temperature probe structure mimimum length
+- Fixed voltage probe structure minimum length
 - Fixed baseboard structure minumum length
 
 ## [0.1.3] - January 11, 2026
