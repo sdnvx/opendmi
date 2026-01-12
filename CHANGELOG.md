@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 - Fixed hardware security settings decoding
+- Fixed cooling device structure minimum length
 - Fixed current probe structure minimum length
 - Fixed temperature probe structure mimimum length
 - Fixed voltage probe structure minimum length
