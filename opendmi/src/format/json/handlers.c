@@ -9,6 +9,7 @@
 #include <opendmi/context.h>
 #include <opendmi/error.h>
 #include <opendmi/utils.h>
+#include <opendmi/utils/base64.h>
 
 #include <opendmi/format/json/handlers.h>
 #include <opendmi/format/json/helpers.h>
@@ -343,12 +344,20 @@ bool dmi_json_entity_attrs_end(dmi_json_session_t *session, const dmi_entity_t *
 
 bool dmi_json_entity_data(dmi_json_session_t *session, const dmi_entity_t *entity)
 {
-    dmi_unused(session);
-    dmi_unused(entity);
+    bool result;
+    char *data;
 
-    // TODO: Implement data output
+    data = dmi_base64_encode(entity->data, entity->body_length, nullptr);
+    if (data == nullptr)
+        return false;
 
-    return true;
+    result =
+        dmi_json_label(session, "data") and
+        dmi_json_scalar(session, data);
+
+    dmi_free(data);
+
+    return result;
 }
 
 bool dmi_json_entity_strings(dmi_json_session_t *session, const dmi_entity_t *entity)
