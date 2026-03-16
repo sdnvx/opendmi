@@ -14,6 +14,8 @@
 #include <opendmi/format/yaml/handlers.h>
 #include <opendmi/format/yaml/helpers.h>
 
+#define YAML_BINARY_TAG "tag:yaml.org,2002:binary"
+
 void *dmi_yaml_initialize(dmi_context_t *context, FILE *stream)
 {
     assert(context != nullptr);
@@ -41,7 +43,9 @@ void *dmi_yaml_initialize(dmi_context_t *context, FILE *stream)
         initialized = true;
 
         yaml_emitter_set_output_file(session->emitter, stream);
+        yaml_emitter_set_encoding(session->emitter, YAML_UTF8_ENCODING);
         yaml_emitter_set_unicode(session->emitter, true);
+        yaml_emitter_set_canonical(session->emitter, false);
         yaml_emitter_set_indent(session->emitter, 2);
 
         if (not yaml_emitter_open(session->emitter)) {
@@ -67,12 +71,11 @@ void *dmi_yaml_initialize(dmi_context_t *context, FILE *stream)
 
 bool dmi_yaml_dump_start(dmi_yaml_session_t *session)
 {
-    bool result = false;
     yaml_event_t event = {};
 
     assert(session != nullptr);
 
-    result =
+    bool result =
         yaml_document_start_event_initialize(&event, nullptr, nullptr, nullptr, true) and
         yaml_emitter_emit(session->emitter, &event) and
         dmi_yaml_mapping_start(session, YAML_BLOCK_MAPPING_STYLE);
@@ -85,7 +88,6 @@ bool dmi_yaml_dump_start(dmi_yaml_session_t *session)
 
 bool dmi_yaml_entry(dmi_yaml_session_t *session)
 {
-    bool result;
     char *smbios_version;
 
     assert(session != nullptr);
@@ -94,11 +96,11 @@ bool dmi_yaml_entry(dmi_yaml_session_t *session)
     if (smbios_version == nullptr)
         return false;
 
-    result =
+    bool result =
         dmi_yaml_label(session, "entry") and
         dmi_yaml_mapping_start(session, YAML_BLOCK_MAPPING_STYLE) and
         dmi_yaml_label(session, "smbios-version") and
-        dmi_yaml_scalar(session, smbios_version, YAML_SINGLE_QUOTED_SCALAR_STYLE) and
+        dmi_yaml_scalar(session, smbios_version, YAML_STR_TAG, YAML_SINGLE_QUOTED_SCALAR_STYLE) and
         dmi_yaml_mapping_end(session);
 
     dmi_free(smbios_version);
@@ -108,20 +110,15 @@ bool dmi_yaml_entry(dmi_yaml_session_t *session)
 
 bool dmi_yaml_table_start(dmi_yaml_session_t *session)
 {
-    bool result;
-
     assert(session != nullptr);
 
-    result =
+    return
         dmi_yaml_label(session, "table") and
         dmi_yaml_sequence_start(session, YAML_BLOCK_SEQUENCE_STYLE);
-
-    return result;
 }
 
 bool dmi_yaml_entity_start(dmi_yaml_session_t *session, const dmi_entity_t *entity)
 {
-    bool result;
     char entity_handle[8];
     char entity_type[8];
     char *entity_level;
@@ -141,18 +138,18 @@ bool dmi_yaml_entity_start(dmi_yaml_session_t *session, const dmi_entity_t *enti
 
     entity_description = dmi_type_name(session->context, entity->type);
 
-    result =
+    bool result =
         dmi_yaml_mapping_start(session, YAML_BLOCK_MAPPING_STYLE) and
         dmi_yaml_label(session, "handle") and
-        dmi_yaml_scalar(session, entity_handle, YAML_PLAIN_SCALAR_STYLE) and
+        dmi_yaml_scalar(session, entity_handle, YAML_INT_TAG, YAML_PLAIN_SCALAR_STYLE) and
         dmi_yaml_label(session, "type") and
-        dmi_yaml_scalar(session, entity_type, YAML_PLAIN_SCALAR_STYLE) and
+        dmi_yaml_scalar(session, entity_type, YAML_INT_TAG, YAML_PLAIN_SCALAR_STYLE) and
         dmi_yaml_label(session, "length") and
-        dmi_yaml_scalar(session, entity_length, YAML_PLAIN_SCALAR_STYLE) and
+        dmi_yaml_scalar(session, entity_length, YAML_INT_TAG, YAML_PLAIN_SCALAR_STYLE) and
         dmi_yaml_label(session, "level") and
-        dmi_yaml_scalar(session, entity_level, YAML_SINGLE_QUOTED_SCALAR_STYLE) and
+        dmi_yaml_scalar(session, entity_level, YAML_STR_TAG, YAML_SINGLE_QUOTED_SCALAR_STYLE) and
         dmi_yaml_label(session, "description") and
-        dmi_yaml_scalar(session, entity_description, YAML_PLAIN_SCALAR_STYLE);
+        dmi_yaml_scalar(session, entity_description, YAML_STR_TAG, YAML_PLAIN_SCALAR_STYLE);
 
     dmi_free(entity_level);
 
@@ -161,18 +158,14 @@ bool dmi_yaml_entity_start(dmi_yaml_session_t *session, const dmi_entity_t *enti
 
 bool dmi_yaml_entity_attrs_start(dmi_yaml_session_t *session, const dmi_entity_t *entity)
 {
-    bool result;
-
     assert(session != nullptr);
     assert(entity != nullptr);
 
     dmi_unused(entity);
 
-    result =
+    return
         dmi_yaml_label(session, "attributes") and
         dmi_yaml_mapping_start(session, YAML_BLOCK_MAPPING_STYLE);
-
-    return result;
 }
 
 bool dmi_yaml_entity_attr(
@@ -242,10 +235,7 @@ bool dmi_yaml_entity_attr_array(
             return false;
     }
 
-    if (not dmi_yaml_sequence_end(session))
-        return false;
-
-    return true;
+    return dmi_yaml_sequence_end(session);
 }
 
 bool dmi_yaml_entity_attr_struct(
@@ -273,10 +263,7 @@ bool dmi_yaml_entity_attr_struct(
             return false;
     }
 
-    if (not dmi_yaml_mapping_end(session))
-        return false;
-
-    return true;
+    return dmi_yaml_mapping_end(session);
 }
 
 bool dmi_yaml_entity_attr_value(
@@ -293,29 +280,33 @@ bool dmi_yaml_entity_attr_value(
 
     // Write empty tag if the value is unspecified
     if (dmi_attribute_is_unspecified(attr, value))
-        return dmi_yaml_scalar(session, "null", YAML_PLAIN_SCALAR_STYLE);
+        return dmi_yaml_scalar(session, "null", YAML_NULL_TAG, YAML_PLAIN_SCALAR_STYLE);
 
     // Handle unknown values
     if (dmi_attribute_is_unknown(attr, value))
-        return dmi_yaml_scalar(session, "unknown", YAML_PLAIN_SCALAR_STYLE);
+        return dmi_yaml_scalar(session, "unknown", YAML_STR_TAG, YAML_PLAIN_SCALAR_STYLE);
 
     // Handle value sets
     if (attr->type == DMI_ATTRIBUTE_TYPE_SET)
         return dmi_yaml_entity_attr_set(session, attr, value);
 
     do {
+        const char *tag;
         yaml_scalar_style_t style;
 
         text = dmi_attribute_format(attr, value, false);
         if (text == nullptr)
             break;
 
-        if (attr->type == DMI_ATTRIBUTE_TYPE_STRING)
+        if (attr->type == DMI_ATTRIBUTE_TYPE_STRING) {
+            tag = YAML_STR_TAG;
             style = YAML_SINGLE_QUOTED_SCALAR_STYLE;
-        else
+        } else {
+            tag = nullptr;
             style = YAML_PLAIN_SCALAR_STYLE;
+        }
 
-        if (not dmi_yaml_scalar(session, text, style))
+        if (not dmi_yaml_scalar(session, text, tag, style))
             break;
 
         success = true;
@@ -348,16 +339,13 @@ bool dmi_yaml_entity_attr_set(
         bool flag = mask & (1 << i);
         bool result =
             dmi_yaml_label(session, name) and
-            dmi_yaml_scalar(session, flag ? "true" : "false", YAML_PLAIN_SCALAR_STYLE);
+            dmi_yaml_scalar(session, flag ? "true" : "false", YAML_BOOL_TAG, YAML_PLAIN_SCALAR_STYLE);
 
         if (not result)
             return false;
     }
 
-    if (not dmi_yaml_mapping_end(session))
-        return false;
-
-    return true;
+    return dmi_yaml_mapping_end(session);
 }
 
 bool dmi_yaml_entity_attrs_end(dmi_yaml_session_t *session, const dmi_entity_t *entity)
@@ -380,7 +368,7 @@ bool dmi_yaml_entity_data(dmi_yaml_session_t *session, const dmi_entity_t *entit
 
     result =
         dmi_yaml_label(session, "data") and
-        dmi_yaml_scalar(session, data, YAML_SINGLE_QUOTED_SCALAR_STYLE);
+        dmi_yaml_scalar(session, data, YAML_BINARY_TAG, YAML_LITERAL_SCALAR_STYLE);
 
     dmi_free(data);
 
@@ -402,14 +390,12 @@ bool dmi_yaml_entity_strings(dmi_yaml_session_t *session, const dmi_entity_t *en
 
     for (dmi_string_t i = 1; i <= entity->string_count; i++) {
         const char *str = dmi_entity_string_ex(entity, i, true);
-        if (not dmi_yaml_scalar(session, str, YAML_SINGLE_QUOTED_SCALAR_STYLE))
+
+        if (not dmi_yaml_scalar(session, str, YAML_STR_TAG, YAML_DOUBLE_QUOTED_SCALAR_STYLE))
             return false;
     }
 
-    if (not dmi_yaml_sequence_end(session))
-        return false;
-
-    return true;
+    return dmi_yaml_sequence_end(session);
 }
 
 bool dmi_yaml_entity_end(dmi_yaml_session_t *session, const dmi_entity_t *entity)

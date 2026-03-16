@@ -16,6 +16,8 @@ files:
     product: ThinkCentre M70s 11DB
   thinkcentre-m700-10hy.bin:
     product: ThinkCentre M700 10HY
+  thinkcentre-m720q-10t8.bin:
+    product: ThinkCentre M720q 10T8
   thinkcentre-m720s-10st.bin:
     product: ThinkCentre M720s 10ST
   thinkpad-t14-g2a-20xk.bin:

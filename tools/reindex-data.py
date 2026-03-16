@@ -82,7 +82,10 @@ def get_type_map(data: dict) -> dict:
 def read_file_data(file_path: str) -> dict:
     try:
         process = subprocess.Popen(
-            [f"{build_dir}/bin/opendmi", "--file", file_path, "export", "--format=yaml"],
+            [
+                f"{build_dir}/bin/opendmi", "--file", file_path,
+                "export", "--all", "--format=yaml"
+            ],
             stdout = subprocess.PIPE,
             stderr = subprocess.PIPE
         )
@@ -195,7 +198,7 @@ def process_vendor(vendor_dir: str):
     logging.info("")
 
 def main(args: list[str]):
-    global num_updated, num_orphans, num_skipped
+    global num_updated, num_orphans, num_skipped, num_errors
 
     logging.basicConfig(level=logging.DEBUG, handlers=[])
 

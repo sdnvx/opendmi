@@ -13,8 +13,15 @@
 
 __BEGIN_DECLS
 
+bool dmi_yaml_emit(dmi_yaml_session_t *session, yaml_event_t *event);
+
 bool dmi_yaml_label(dmi_yaml_session_t *session, const char *value);
-bool dmi_yaml_scalar(dmi_yaml_session_t *session, const char *value, yaml_scalar_style_t style);
+
+bool dmi_yaml_scalar(
+        dmi_yaml_session_t  *session,
+        const char          *value,
+        const char          *tag,
+        yaml_scalar_style_t  style);
 
 bool dmi_yaml_sequence_start(dmi_yaml_session_t *session, yaml_sequence_style_t style);
 bool dmi_yaml_sequence_end(dmi_yaml_session_t *session);

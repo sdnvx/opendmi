@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Add YAML emitter error handling
+- Add type tags output in YAML export
 - Store entry point specification in context
 - Add context address size detection
 - Add binary data output in JSON export
@@ -16,9 +18,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add raw strings output in JSON export
 - Add raw strings output in YAML export
 - Add Base64 encoding/decoding functions to utils
+- Add Lenovo ThinkCentre M720q 10T8 data
+
+### Changed
+
+- Use literal style for binary data in YAML export
 
 ### Fixed
 
+- Fix `opendmi` invocation in reindex script
+- Fix error counting in reindex script
 - Fix build without YAML/JSON/XML libraries
 - Fix CHANGELOG format
 
