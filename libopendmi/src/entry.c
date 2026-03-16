@@ -130,6 +130,10 @@ static bool dmi_entry_decode_legacy(dmi_context_t *context,
         context->smbios_version = dmi_version(minor, major, 0);
     }
 
+    // Set address size
+    if (context->address_size == 0)
+        context->address_size = sizeof(uint32_t);
+
     // Decode table area parameters
     context->entity_count        = dmi_decode(entry->entity_count);
     context->table_area_addr     = dmi_decode(entry->table_area_addr);
@@ -177,6 +181,9 @@ static bool dmi_entry_decode_v21(dmi_context_t *context,
                                           dmi_decode(entry->version_minor),
                                           dmi_decode(entry->revision));
 
+    // Set address size
+    context->address_size = sizeof(uint32_t);
+
     // Decode structure parameters
     context->entity_max_size = entry->entity_max_size;
 
@@ -218,6 +225,10 @@ static bool dmi_entry_decode_v30(dmi_context_t *context,
     context->smbios_version = dmi_version(dmi_decode(entry->version_major),
                                           dmi_decode(entry->version_minor),
                                           dmi_decode(entry->revision));
+
+
+    // Set address size
+    context->address_size = sizeof(uint64_t);
 
     // Decode table parameters
     context->table_area_addr     = dmi_decode(entry->table_area_addr);

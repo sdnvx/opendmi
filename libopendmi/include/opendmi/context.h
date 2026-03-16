@@ -39,6 +39,12 @@ struct dmi_context
     dmi_version_t smbios_version;
 
     /**
+     * @brief Platform address size in bytes, 4 for 32-bit platforms, 8 for
+     * 64-bit platforms. Zero means unspecified.
+     */
+    size_t address_size;
+
+    /**
      * @brief Address of SMBIOS entry point.
      */
     uint64_t entry_address;

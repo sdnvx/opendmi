@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Add context address size detection
 - Add binary data output in JSON export
 - Add binary data output in YAML export
 - Add raw strings output in JSON export
