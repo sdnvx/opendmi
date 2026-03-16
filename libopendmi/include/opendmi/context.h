@@ -18,6 +18,11 @@
 #include <opendmi/registry.h>
 #include <opendmi/utils/version.h>
 
+#ifndef DMI_ENTRY_SPEC_T
+#   define DMI_ENTRY_SPEC_T
+    typedef struct dmi_entry_spec dmi_entry_spec_t;
+#endif // !DMI_ENTRY_SPEC_T
+
 /**
  * @brief Context flags.
  */
@@ -58,6 +63,11 @@ struct dmi_context
      * @brief SMBIOS entry point revision.
      */
     dmi_version_t entry_version;
+
+    /**
+     * @brief Entry point specification.
+     */
+    const dmi_entry_spec_t *entry_spec;
 
     /**
      * @brief Pointer to SMBIOS entry point data.

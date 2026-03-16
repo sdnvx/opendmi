@@ -26,7 +26,11 @@
  */
 #define DMI_ANCHOR_V30 "_SM3_"
 
-typedef struct dmi_entry_spec   dmi_entry_spec_t;
+#ifndef DMI_ENTRY_SPEC_T
+#   define DMI_ENTRY_SPEC_T
+    typedef struct dmi_entry_spec dmi_entry_spec_t;
+#endif // !DMI_ENTRY_SPEC_T
+
 typedef struct dmi_entry_legacy dmi_entry_legacy_t;
 typedef struct dmi_entry_v21    dmi_entry_v21_t;
 typedef struct dmi_entry_v30    dmi_entry_v30_t;

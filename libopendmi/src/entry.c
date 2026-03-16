@@ -101,6 +101,8 @@ bool dmi_entry_decode(dmi_context_t *context, const void *data, size_t length)
         return false;
     }
 
+    context->entry_spec = spec;
+
     return spec->handler(context, data, length);
 }
 
