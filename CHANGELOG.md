@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Add binary data output in YAML export
 - Add raw strings output in JSON export
 - Add raw strings output in YAML export
 - Add Base64 encoding/decoding functions to utils

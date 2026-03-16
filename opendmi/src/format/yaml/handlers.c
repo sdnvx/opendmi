@@ -9,6 +9,7 @@
 #include <opendmi/context.h>
 #include <opendmi/error.h>
 #include <opendmi/utils.h>
+#include <opendmi/utils/base64.h>
 
 #include <opendmi/format/yaml/handlers.h>
 #include <opendmi/format/yaml/helpers.h>
@@ -370,12 +371,20 @@ bool dmi_yaml_entity_attrs_end(dmi_yaml_session_t *session, const dmi_entity_t *
 
 bool dmi_yaml_entity_data(dmi_yaml_session_t *session, const dmi_entity_t *entity)
 {
-    dmi_unused(session);
-    dmi_unused(entity);
+    bool result;
+    char *data;
 
-    // TODO: Implement data output
+    data = dmi_base64_encode(entity->data, entity->body_length, nullptr);
+    if (data == nullptr)
+        return false;
 
-    return true;
+    result =
+        dmi_yaml_label(session, "data") and
+        dmi_yaml_scalar(session, data, YAML_SINGLE_QUOTED_SCALAR_STYLE);
+
+    dmi_free(data);
+
+    return result;
 }
 
 bool dmi_yaml_entity_strings(dmi_yaml_session_t *session, const dmi_entity_t *entity)
