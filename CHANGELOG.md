@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- Added raw strings output in JSON export
 - Added raw strings output in YAML export
 
 ## [0.2.0] - March 16, 2026

@@ -353,10 +353,25 @@ bool dmi_json_entity_data(dmi_json_session_t *session, const dmi_entity_t *entit
 
 bool dmi_json_entity_strings(dmi_json_session_t *session, const dmi_entity_t *entity)
 {
-    dmi_unused(session);
-    dmi_unused(entity);
+    bool result;
 
-    // TODO: Implement strings output
+    if (entity->string_count == 0)
+        return true;
+
+    result =
+        dmi_json_label(session, "strings") and
+        dmi_json_sequence_start(session);
+    if (not result)
+        return false;
+
+    for (dmi_string_t i = 1; i <= entity->string_count; i++) {
+        const char *str = dmi_entity_string_ex(entity, i, true);
+        if (not dmi_json_scalar(session, str))
+            return false;
+    }
+
+    if (not dmi_json_sequence_end(session))
+        return false;
 
     return true;
 }

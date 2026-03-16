@@ -382,9 +382,6 @@ bool dmi_yaml_entity_strings(dmi_yaml_session_t *session, const dmi_entity_t *en
 {
     bool result;
 
-    dmi_unused(session);
-    dmi_unused(entity);
-
     if (entity->string_count == 0)
         return true;
 
