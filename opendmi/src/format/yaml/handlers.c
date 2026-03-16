@@ -380,10 +380,28 @@ bool dmi_yaml_entity_data(dmi_yaml_session_t *session, const dmi_entity_t *entit
 
 bool dmi_yaml_entity_strings(dmi_yaml_session_t *session, const dmi_entity_t *entity)
 {
+    bool result;
+
     dmi_unused(session);
     dmi_unused(entity);
 
-    // TODO: Implement strings output
+    if (entity->string_count == 0)
+        return true;
+
+    result =
+        dmi_yaml_label(session, "strings") and
+        dmi_yaml_sequence_start(session, YAML_BLOCK_SEQUENCE_STYLE);
+    if (not result)
+        return false;
+
+    for (dmi_string_t i = 1; i <= entity->string_count; i++) {
+        const char *str = dmi_entity_string_ex(entity, i, true);
+        if (not dmi_yaml_scalar(session, str, YAML_SINGLE_QUOTED_SCALAR_STYLE))
+            return false;
+    }
+
+    if (not dmi_yaml_sequence_end(session))
+        return false;
 
     return true;
 }

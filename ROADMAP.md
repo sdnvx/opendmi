@@ -1,19 +1,5 @@
 # OpenDMI: Roadmap
 
-## Release 0.1 (2025-12-31)
-
-* Basic implementation of `libopendmi`.
-* Basic implementation of `opendmi` command line tool.
-* XML and YAML output support.
-
-## Release 0.2 (2026-03-16)
-
-* FreeBSD backend.
-* Decoders for well-known OEM-specific structures.
-* Autoloading of OEM extensions.
-* Fully-featured command line interface.
-* JSON output support.
-
 ## Release 0.3 (2026-06-30)
 
 * ICU4C support.
