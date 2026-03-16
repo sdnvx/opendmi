@@ -80,6 +80,7 @@ struct dmi_format
 };
 
 extern const dmi_format_t *dmi_formats[];
+extern const dmi_format_t *dmi_format_default;
 
 __BEGIN_DECLS
 

@@ -17,17 +17,27 @@
 const dmi_format_t *dmi_formats[] =
 {
     &dmi_text_format,
-#   ifdef ENABLE_XML
+#   if defined(ENABLE_XML)
         &dmi_xml_format,
 #   endif // ENABLE_XML
-#   ifdef ENABLE_YAML
+#   if defined(ENABLE_YAML)
         &dmi_yaml_format,
 #   endif
-#   ifdef ENABLE_JSON
+#   if defined(ENABLE_JSON)
         &dmi_json_format,
 #   endif // ENABLE_JSON
     nullptr
 };
+
+#if defined(ENABLE_YAML)
+    const dmi_format_t *dmi_format_default = &dmi_yaml_format;
+#elif defined(ENABLE_JSON)
+    const dmi_format_t *dmi_format_default = &dmi_json_format;
+#elif defined(ENABLE_XML)
+    const dmi_format_t *dmi_format_default = &dmi_xml_format;
+#else
+    const dmi_format_t *dmi_format_default = &dmi_text_format;
+#endif
 
 const dmi_format_t *dmi_format_get(const char *code)
 {

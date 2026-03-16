@@ -11,7 +11,6 @@
 
 #include <opendmi/context.h>
 #include <opendmi/format.h>
-#include <opendmi/format/yaml.h>
 #include <opendmi/utils/tty.h>
 
 #include <opendmi/command/common.h>
@@ -33,7 +32,7 @@ static int dmi_export_main(dmi_context_t *context, int argc, char *argv[]);
 static dmi_export_config_t dmi_export_config =
 {
     .output_path   = nullptr,
-    .output_format = &dmi_yaml_format,
+    .output_format = nullptr,
     .export_dump   = false,
     .export_pretty = false,
     .force         = false
@@ -143,6 +142,9 @@ static int dmi_export_main(dmi_context_t *context, int argc, char *argv[])
     assert(context != nullptr);
     dmi_unused(argc);
     dmi_unused(argv);
+
+    if (dmi_export_config.output_format == nullptr)
+        dmi_export_config.output_format = dmi_format_default;
 
     if (dmi_export_config.output_path != nullptr) {
         if (dmi_export_config.force)
