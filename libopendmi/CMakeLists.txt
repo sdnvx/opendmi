@@ -110,6 +110,7 @@ target_sources(opendmi-object
         src/utils.c
         src/vendor.c
 
+        src/utils/base64.c
         src/utils/codec.c
         src/utils/datetime.c
         src/utils/endian.c
