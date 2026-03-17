@@ -45,11 +45,15 @@ bool dmi_yaml_scalar(
     char *escaped = nullptr;
 
     do {
+        bool plain_implicit = true;
+        if (style == YAML_LITERAL_SCALAR_STYLE)
+            plain_implicit = false;
+
         bool result = yaml_scalar_event_initialize(&event, nullptr,
                                                    (yaml_char_t *)tag,
                                                    (yaml_char_t *)value,
                                                    strlen(value),
-                                                   true, false, style);
+                                                   plain_implicit, false, style);
 
         if (not result) {
             dmi_error_raise_ex(session->context, DMI_ERROR_INTERNAL,

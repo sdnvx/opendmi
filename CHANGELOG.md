@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.2.1] - March 17, 2026
 
+### Fixed
+
+- Fix missing tag for binary data in YAML export
+
+## [0.2.1] - March 17, 2026
+
 ### Added
 
 - Add YAML emitter error handling
