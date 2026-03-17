@@ -15,6 +15,8 @@
 #include <opendmi/types.h>
 #include <opendmi/attribute.h>
 
+#define YAML_BINARY_TAG "tag:yaml.org,2002:binary"
+
 typedef struct dmi_yaml_session
 {
     /**

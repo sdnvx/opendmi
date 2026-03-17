@@ -14,8 +14,6 @@
 #include <opendmi/format/yaml/handlers.h>
 #include <opendmi/format/yaml/helpers.h>
 
-#define YAML_BINARY_TAG "tag:yaml.org,2002:binary"
-
 void *dmi_yaml_initialize(dmi_context_t *context, FILE *stream)
 {
     assert(context != nullptr);
