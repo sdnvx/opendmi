@@ -45,16 +45,16 @@ a| `41` | Onboard devices extended information | 4  a| `0x2900`, `0x2901`, `0x29
 a| `127` | End of table | 1  a| `0xFEFF`
 a| `131` | OEM-specific | 1  a| `0x8300`
 a| `136` | OEM-specific | 1  a| `0x8800`
-a| `177` | Dell BIOS flags | 1  a| `0xB100`
+a| `177` | OEM-specific | 1  a| `0xB100`
 a| `178` | OEM-specific | 1  a| `0xB200`
 a| `179` | OEM-specific | 1  a| `0xB300`
 a| `203` | OEM-specific | 1  a| `0xCB00`
 a| `205` | OEM-specific | 6  a| `0xCD00`, `0xCD01`, `0xCD02`, `0xCD03`, `0xCD04`, `0xCD05`
 a| `206` | OEM-specific | 1  a| `0xCE00`
-a| `208` | Dell revisions and IDs | 1  a| `0xD000`
+a| `208` | OEM-specific | 1  a| `0xD000`
 a| `216` | OEM-specific | 1  a| `0xD800`
 a| `217` | OEM-specific | 1  a| `0xD900`
-a| `218` | Dell calling interface | 14  a| `0xDA00`, `0xDA01`, `0xDA02`, `0xDA03`, `0xDA04`, `0xDA05`, `0xDA06`, `0xDA07`, `0xDA08`, `0xDA09`, `0xDA0A`, `0xDA0B`, `0xDA0C`, `0xDA0D`
+a| `218` | OEM-specific | 14  a| `0xDA00`, `0xDA01`, `0xDA02`, `0xDA03`, `0xDA04`, `0xDA05`, `0xDA06`, `0xDA07`, `0xDA08`, `0xDA09`, `0xDA0A`, `0xDA0B`, `0xDA0C`, `0xDA0D`
 a| `220` | OEM-specific | 6  a| `0xDC00`, `0xDC01`, `0xDC02`, `0xDC03`, `0xDC04`, `0xDC05`
 a| `221` | OEM-specific | 2  a| `0xDD00`, `0xDD01`
 a| `222` | OEM-specific | 1  a| `0xDE00`
@@ -98,12 +98,12 @@ a| `32` | System boot information | 1  a| `0x2000`
 a| `38` | IPMI device information | 1  a| `0x2600`
 a| `126` | Inactive | 26  a| `0x7E00`, `0x1301`, `0x1402`, `0x1403`, `0x1404`, `0x1405`, `0x1406`, `0x1407`, `0x1408`, `0x1409`, `0x140A`, `0x140B`, `0x140C`, `0x140D`, `0x1420`, `0x1421`, `0x1424`, `0x1425`, `0x1428`, `0x1429`, `0x1430`, `0x1431`, `0x1434`, `0x1435`, `0x1438`, `0x1439`
 a| `127` | End of table | 1  a| `0x7F00`
-a| `208` | Dell revisions and IDs | 1  a| `0xD000`
-a| `209` | Dell parallel port | 1  a| `0xD100`
-a| `210` | Dell serial port | 1  a| `0xD200`
-a| `212` | Dell indexed IO | 4  a| `0xD400`, `0xD401`, `0xD402`, `0xD403`
+a| `208` | OEM-specific | 1  a| `0xD000`
+a| `209` | OEM-specific | 1  a| `0xD100`
+a| `210` | OEM-specific | 1  a| `0xD200`
+a| `212` | OEM-specific | 4  a| `0xD400`, `0xD401`, `0xD402`, `0xD403`
 a| `216` | OEM-specific | 1  a| `0xD800`
-a| `218` | Dell calling interface | 1  a| `0xDA00`
+a| `218` | OEM-specific | 1  a| `0xDA00`
 a| `222` | OEM-specific | 1  a| `0xDE00`
 |===
 == Precision 490 (precision-490.bin)
@@ -149,11 +149,11 @@ a| `32` | System boot information | 1  a| `0x2000`
 a| `126` | Inactive | 13  a| `0x0907`, `0x0908`, `0x1402`, `0x1403`, `0x1404`, `0x1405`, `0x1406`, `0x1407`, `0x1A01`, `0x1A03`, `0x1B13`, `0x1B14`, `0x1C01`
 a| `127` | End of table | 1  a| `0x7F00`
 a| `136` | OEM-specific | 1  a| `0x8800`
-a| `208` | Dell revisions and IDs | 1  a| `0xD000`
-a| `209` | Dell parallel port | 1  a| `0xD100`
-a| `210` | Dell serial port | 2  a| `0xD200`, `0xD201`
-a| `212` | Dell indexed IO | 4  a| `0xD400`, `0xD401`, `0xD402`, `0xD403`
-a| `218` | Dell calling interface | 4  a| `0xDA00`, `0xDA01`, `0xDA02`, `0xDA03`
+a| `208` | OEM-specific | 1  a| `0xD000`
+a| `209` | OEM-specific | 1  a| `0xD100`
+a| `210` | OEM-specific | 2  a| `0xD200`, `0xD201`
+a| `212` | OEM-specific | 4  a| `0xD400`, `0xD401`, `0xD402`, `0xD403`
+a| `218` | OEM-specific | 4  a| `0xDA00`, `0xDA01`, `0xDA02`, `0xDA03`
 a| `220` | OEM-specific | 7  a| `0xDC00`, `0xDC01`, `0xDC02`, `0xDC03`, `0xDC04`, `0xDC11`, `0xDC12`
 a| `221` | OEM-specific | 5  a| `0xDD00`, `0xDD01`, `0xDD02`, `0xDD03`, `0xDD04`
 a| `222` | OEM-specific | 1  a| `0xDE00`

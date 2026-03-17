@@ -2,6 +2,58 @@
 :toc:
 :toclevels: 1
 
+== B50-70 20384 (b50-70-20384.bin)
+
+[horizontal]
+File path:: `lenovo/b50-70-20384.bin`
+Product name:: 20384
+Product version:: Lenovo B50-70
+Product family:: IDEAPAD
+Firmware vendor:: LENOVO
+Firmware version:: 9DCN22WW(V2.03)
+Release date:: 2014-08-21
+SMBIOS version:: 2.7
+
+=== Contents
+
+[cols="1,3,1,2"]
+|===
+| Type | Description | Count | Handles
+
+a| `0` | Platform firmware information | 1  a| `0x0000`
+a| `1` | System information | 1  a| `0x0001`
+a| `2` | Baseboard or module information | 1  a| `0x0002`
+a| `3` | System enclosure or chassis | 1  a| `0x0003`
+a| `4` | Processor information | 1  a| `0x0004`
+a| `5` | Memory controller information | 1  a| `0x0005`
+a| `6` | Memory module information | 4  a| `0x0006`, `0x0007`, `0x0008`, `0x0009`
+a| `7` | Cache information | 4  a| `0x000A`, `0x000B`, `0x000C`, `0x000D`
+a| `8` | Port connector information | 16  a| `0x000E`, `0x000F`, `0x0010`, `0x0011`, `0x0012`, `0x0013`, `0x0014`, `0x0015`, `0x0016`, `0x0017`, `0x0018`, `0x0019`, `0x001A`, `0x001B`, `0x001C`, `0x001D`
+a| `9` | System slots | 8  a| `0x001E`, `0x001F`, `0x0020`, `0x0021`, `0x0022`, `0x0023`, `0x0024`, `0x0025`
+a| `11` | OEM strings | 1  a| `0x0026`
+a| `12` | System configuration options | 1  a| `0x0027`
+a| `13` | Firmware language information | 1  a| `0x0028`
+a| `15` | System event log | 1  a| `0x0029`
+a| `16` | Physical memory array | 1  a| `0x002A`
+a| `17` | Memory device | 4  a| `0x002B`, `0x002C`, `0x002D`, `0x002E`
+a| `18` | 32-bit memory error information | 3  a| `0x002F`, `0x0030`, `0x0031`
+a| `19` | Memory array mapped address | 1  a| `0x0032`
+a| `20` | Memory device mapped address | 2  a| `0x0033`, `0x0034`
+a| `21` | Built-in pointing device | 1  a| `0x0035`
+a| `22` | Portable battery | 1  a| `0x0036`
+a| `24` | Hardware security | 1  a| `0x0037`
+a| `26` | Voltage probe | 1  a| `0x0038`
+a| `27` | Cooling device | 1  a| `0x0039`
+a| `32` | System boot information | 1  a| `0x003A`
+a| `39` | System power supply | 1  a| `0x003B`
+a| `40` | Additional information | 1  a| `0x003C`
+a| `41` | Onboard devices extended information | 1  a| `0x003D`
+a| `127` | End of table | 1  a| `0x0043`
+a| `128` | OEM-specific | 1  a| `0x003E`
+a| `133` | OEM-specific | 1  a| `0x003F`
+a| `136` | OEM-specific | 1  a| `0x0040`
+a| `221` | OEM-specific | 2  a| `0x0041`, `0x0042`
+|===
 == B590 (b590.bin)
 
 [horizontal]
@@ -155,6 +207,49 @@ a| `200` | OEM-specific | 1  a| `0x0044`
 a| `219` | OEM-specific | 1  a| `0x0045`
 a| `221` | OEM-specific | 6  a| `0x0046`, `0x0047`, `0x0048`, `0x0049`, `0x004A`, `0x004B`
 a| `248` | OEM-specific | 1  a| `0x004C`
+|===
+== IdeaPad Z565 20066 (ideapad-z565-20066.bin)
+
+[horizontal]
+File path:: `lenovo/ideapad-z565-20066.bin`
+Product name:: 20066
+Product version:: IdeaPad Z565
+Product family:: Type1Family
+Firmware vendor:: LENOVO
+Firmware version:: 36CN23WW(V2.09)
+Release date:: 2010-12-01
+SMBIOS version:: 2.6
+
+=== Contents
+
+[cols="1,3,1,2"]
+|===
+| Type | Description | Count | Handles
+
+a| `0` | Platform firmware information | 1  a| `0x0000`
+a| `1` | System information | 1  a| `0x0001`
+a| `2` | Baseboard or module information | 1  a| `0x0002`
+a| `3` | System enclosure or chassis | 1  a| `0x0003`
+a| `4` | Processor information | 1  a| `0x0020`
+a| `5` | Memory controller information | 1  a| `0x002E`
+a| `6` | Memory module information | 2  a| `0x0026`, `0x002A`
+a| `7` | Cache information | 2  a| `0x0021`, `0x0022`
+a| `8` | Port connector information | 16  a| `0x000E`, `0x000F`, `0x0010`, `0x0011`, `0x0012`, `0x0013`, `0x0014`, `0x0015`, `0x0016`, `0x0017`, `0x0018`, `0x0019`, `0x001A`, `0x001B`, `0x001C`, `0x001D`
+a| `9` | System slots | 5  a| `0x0004`, `0x0005`, `0x0006`, `0x0007`, `0x0008`
+a| `11` | OEM strings | 1  a| `0x0009`
+a| `12` | System configuration options | 1  a| `0x000A`
+a| `16` | Physical memory array | 1  a| `0x0023`
+a| `17` | Memory device | 2  a| `0x0024`, `0x0028`
+a| `18` | 32-bit memory error information | 3  a| `0x0025`, `0x0029`, `0x002C`
+a| `19` | Memory array mapped address | 1  a| `0x002D`
+a| `20` | Memory device mapped address | 2  a| `0x0027`, `0x002B`
+a| `21` | Built-in pointing device | 1  a| `0x000B`
+a| `32` | System boot information | 1  a| `0x000C`
+a| `40` | Additional information | 1  a| `0x001E`
+a| `41` | Onboard devices extended information | 1  a| `0x001F`
+a| `127` | End of table | 1  a| `0x0030`
+a| `129` | OEM-specific | 1  a| `0x000D`
+a| `133` | OEM-specific | 1  a| `0x002F`
 |===
 == ThinkBook 15 G2 ITL 20VE (thinkbook-15-g2-itl-20ve.bin)
 
@@ -316,6 +411,62 @@ a| `130` | OEM-specific | 1  a| `0x0054`
 a| `131` | OEM-specific | 1  a| `0x0055`
 a| `133` | OEM-specific | 1  a| `0x0047`
 a| `221` | OEM-specific | 6  a| `0x004A`, `0x004B`, `0x004C`, `0x004D`, `0x004E`, `0x004F`
+|===
+== ThinkCentre M720q 10T8 (thinkcentre-m720q-10t8.bin)
+
+[horizontal]
+File path:: `lenovo/thinkcentre-m720q-10t8.bin`
+Product name:: 10T8SMC200
+Product version:: ThinkCentre M720q
+Product family:: ThinkCentre M720q
+Firmware vendor:: LENOVO
+Firmware version:: M1UKT78A
+Release date:: 2025-12-04
+SMBIOS version:: 3.2.1
+
+=== Contents
+
+[cols="1,3,1,2"]
+|===
+| Type | Description | Count | Handles
+
+a| `0` | Platform firmware information | 1  a| `0x0000`
+a| `1` | System information | 1  a| `0x0001`
+a| `2` | Baseboard or module information | 1  a| `0x0002`
+a| `3` | System enclosure or chassis | 1  a| `0x0003`
+a| `4` | Processor information | 1  a| `0x0048`
+a| `7` | Cache information | 3  a| `0x0045`, `0x0046`, `0x0047`
+a| `8` | Port connector information | 24  a| `0x0004`, `0x0005`, `0x0006`, `0x0007`, `0x0008`, `0x0009`, `0x000A`, `0x000B`, `0x000C`, `0x000D`, `0x000E`, `0x000F`, `0x0010`, `0x0011`, `0x0012`, `0x0013`, `0x0014`, `0x0015`, `0x0016`, `0x0017`, `0x0018`, `0x0019`, `0x001A`, `0x001B`
+a| `9` | System slots | 5  a| `0x001C`, `0x001D`, `0x001E`, `0x001F`, `0x0020`
+a| `10` | Onboard devices information | 1  a| `0x0021`
+a| `11` | OEM strings | 1  a| `0x0022`
+a| `12` | System configuration options | 1  a| `0x0023`
+a| `13` | Firmware language information | 1  a| `0x0062`
+a| `14` | Group associations | 2  a| `0x0061`, `0x0063`
+a| `15` | System event log | 1  a| `0x003F`
+a| `16` | Physical memory array | 1  a| `0x003B`
+a| `17` | Memory device | 2  a| `0x003C`, `0x003D`
+a| `19` | Memory array mapped address | 1  a| `0x003E`
+a| `20` | Memory device mapped address | 2  a| `0x004E`, `0x004F`
+a| `24` | Hardware security | 1  a| `0x0024`
+a| `26` | Voltage probe | 2  a| `0x0027`, `0x0036`
+a| `27` | Cooling device | 3  a| `0x002D`, `0x0030`, `0x0038`
+a| `28` | Temperature probe | 2  a| `0x002A`, `0x0037`
+a| `29` | Electrical current probe | 2  a| `0x0033`, `0x0039`
+a| `32` | System boot information | 1  a| `0x0025`
+a| `34` | Management device | 1  a| `0x0026`
+a| `35` | Management device component | 5  a| `0x0029`, `0x002C`, `0x002F`, `0x0032`, `0x0035`
+a| `36` | Management device threshold data | 5  a| `0x0028`, `0x002B`, `0x002E`, `0x0031`, `0x0034`
+a| `39` | System power supply | 1  a| `0x003A`
+a| `41` | Onboard devices extended information | 12  a| `0x0052`, `0x0053`, `0x0054`, `0x0055`, `0x0056`, `0x0057`, `0x0058`, `0x0059`, `0x005A`, `0x005B`, `0x005C`, `0x005D`
+a| `43` | TPM device | 1  a| `0x0049`
+a| `127` | End of table | 1  a| `0x0065`
+a| `130` | OEM-specific | 1  a| `0x0050`
+a| `131` | OEM-specific | 2  a| `0x0051`, `0x005F`
+a| `133` | OEM-specific | 1  a| `0x004A`
+a| `136` | OEM-specific | 1  a| `0x0060`
+a| `219` | OEM-specific | 1  a| `0x0064`
+a| `221` | OEM-specific | 6  a| `0x0040`, `0x0041`, `0x0042`, `0x0043`, `0x0044`, `0x005E`
 |===
 == ThinkCentre M720s 10ST (thinkcentre-m720s-10st.bin)
 
@@ -527,6 +678,55 @@ a| `136` | OEM-specific | 1  a| `0x0042`
 a| `137` | OEM-specific | 1  a| `0x0043`
 a| `138` | OEM-specific | 1  a| `0x0044`
 a| `139` | OEM-specific | 1  a| `0x0045`
+|===
+== ThinkPad X220 4290LE6 (thinkpad-x220-4290le6.bin)
+
+[horizontal]
+File path:: `lenovo/thinkpad-x220-4290le6.bin`
+Product name:: 4290LE6
+Product version:: ThinkPad X220
+Product family:: ThinkPad X220
+Firmware vendor:: LENOVO
+Firmware version:: 8DET76WW (1.46 )
+Release date:: 2018-06-21
+SMBIOS version:: 2.6
+
+=== Contents
+
+[cols="1,3,1,2"]
+|===
+| Type | Description | Count | Handles
+
+a| `0` | Platform firmware information | 1  a| `0x000D`
+a| `1` | System information | 1  a| `0x000E`
+a| `2` | Baseboard or module information | 1  a| `0x000F`
+a| `3` | System enclosure or chassis | 1  a| `0x0010`
+a| `4` | Processor information | 1  a| `0x0001`
+a| `7` | Cache information | 3  a| `0x0002`, `0x0003`, `0x0004`
+a| `8` | Port connector information | 8  a| `0x0011`, `0x0012`, `0x0015`, `0x0018`, `0x001A`, `0x001B`, `0x001C`, `0x001D`
+a| `9` | System slots | 2  a| `0x0026`, `0x0027`
+a| `10` | Onboard devices information | 1  a| `0x0029`
+a| `12` | System configuration options | 1  a| `0x002A`
+a| `13` | Firmware language information | 1  a| `0x002B`
+a| `15` | System event log | 1  a| `0x0036`
+a| `16` | Physical memory array | 1  a| `0x0005`
+a| `17` | Memory device | 2  a| `0x0006`, `0x0007`
+a| `18` | 32-bit memory error information | 1  a| `0x002E`
+a| `19` | Memory array mapped address | 1  a| `0x0008`
+a| `21` | Built-in pointing device | 2  a| `0x002F`, `0x0030`
+a| `22` | Portable battery | 1  a| `0x002C`
+a| `24` | Hardware security | 1  a| `0x003C`
+a| `126` | Inactive | 15  a| `0x0013`, `0x0014`, `0x0016`, `0x0017`, `0x0019`, `0x001E`, `0x001F`, `0x0020`, `0x0021`, `0x0022`, `0x0023`, `0x0024`, `0x0025`, `0x0028`, `0x002D`
+a| `127` | End of table | 1  a| `0xFEFF`
+a| `129` | OEM-specific | 1  a| `0x0009`
+a| `130` | OEM-specific | 1  a| `0x000A`
+a| `131` | OEM-specific | 2  a| `0x000B`, `0x0031`
+a| `132` | OEM-specific | 1  a| `0x003D`
+a| `133` | OEM-specific | 1  a| `0x0035`
+a| `134` | OEM-specific | 2  a| `0x0000`, `0x000C`
+a| `135` | OEM-specific | 3  a| `0x0033`, `0x0034`, `0x003E`
+a| `136` | OEM-specific | 1  a| `0x0032`
+a| `140` | OEM-specific | 5  a| `0x0037`, `0x0038`, `0x0039`, `0x003A`, `0x003B`
 |===
 == ThinkPad X280 20KF (thinkpad-x280-20kf.bin)
 

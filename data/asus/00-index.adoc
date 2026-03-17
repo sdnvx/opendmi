@@ -209,7 +209,7 @@ a| `131` | OEM-specific | 1  a| `0x004B`
 a| `133` | OEM-specific | 1  a| `0x0059`
 a| `136` | OEM-specific | 2  a| `0x005A`, `0x005D`
 a| `219` | OEM-specific | 1  a| `0x005C`
-a| `221` | AMI type 221 | 6  a| `0x0040`, `0x0041`, `0x0042`, `0x0043`, `0x0044`, `0x0058`
+a| `221` | OEM-specific | 6  a| `0x0040`, `0x0041`, `0x0042`, `0x0043`, `0x0044`, `0x0058`
 |===
 == RS100-X7 (rs100-x7.bin)
 
@@ -303,7 +303,7 @@ a| `42` | Management controller host interface | 1  a| `0x002A`
 a| `44` | Processor additional information | 1  a| `0x0028`
 a| `127` | End of table | 1  a| `0x005A`
 a| `136` | OEM-specific | 2  a| `0x0057`, `0x0058`
-a| `221` | AMI type 221 | 5  a| `0x0045`, `0x0046`, `0x0047`, `0x0048`, `0x004F`
+a| `221` | OEM-specific | 5  a| `0x0045`, `0x0046`, `0x0047`, `0x0048`, `0x004F`
 |===
 == RS300-E8-RS4 (rs300-e8-rs4.bin)
 
@@ -619,5 +619,5 @@ a| `127` | End of table | 1  a| `0x006E`
 a| `131` | OEM-specific | 1  a| `0x0057`
 a| `136` | OEM-specific | 1  a| `0x0069`
 a| `219` | OEM-specific | 1  a| `0x006C`
-a| `221` | AMI type 221 | 7  a| `0x004C`, `0x004D`, `0x004E`, `0x004F`, `0x0050`, `0x0051`, `0x0068`
+a| `221` | OEM-specific | 7  a| `0x004C`, `0x004D`, `0x004E`, `0x004F`, `0x0050`, `0x0051`, `0x0068`
 |===

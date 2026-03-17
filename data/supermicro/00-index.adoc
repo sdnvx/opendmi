@@ -41,7 +41,7 @@ a| `40` | Additional information | 4  a| `0x0038`, `0x0039`, `0x003A`, `0x003B`
 a| `41` | Onboard devices extended information | 3  a| `0x0024`, `0x0025`, `0x0026`
 a| `127` | End of table | 1  a| `0x003D`
 a| `136` | OEM-specific | 1  a| `0x003C`
-a| `221` | AMI type 221 | 3  a| `0x0035`, `0x0036`, `0x0037`
+a| `221` | OEM-specific | 3  a| `0x0035`, `0x0036`, `0x0037`
 |===
 == SYS-5019-M (sys-5019s-m.bin)
 
@@ -82,7 +82,7 @@ a| `40` | Additional information | 8  a| `0x003C`, `0x003D`, `0x003E`, `0x003F`,
 a| `41` | Onboard devices extended information | 3  a| `0x0023`, `0x0024`, `0x0025`
 a| `127` | End of table | 1  a| `0x0045`
 a| `136` | OEM-specific | 1  a| `0x0044`
-a| `221` | AMI type 221 | 3  a| `0x0039`, `0x003A`, `0x003B`
+a| `221` | OEM-specific | 3  a| `0x0039`, `0x003A`, `0x003B`
 |===
 == X10DDW-I (x10ddw-i.bin)
 
@@ -219,5 +219,5 @@ a| `40` | Additional information | 4  a| `0x003B`, `0x003C`, `0x003D`, `0x003E`
 a| `41` | Onboard devices extended information | 3  a| `0x0024`, `0x0025`, `0x0026`
 a| `127` | End of table | 1  a| `0x0040`
 a| `136` | OEM-specific | 1  a| `0x003F`
-a| `221` | AMI type 221 | 3  a| `0x0038`, `0x0039`, `0x003A`
+a| `221` | OEM-specific | 3  a| `0x0038`, `0x0039`, `0x003A`
 |===

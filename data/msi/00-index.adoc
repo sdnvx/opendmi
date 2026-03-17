@@ -51,7 +51,7 @@ a| `127` | End of table | 1  a| `0x005E`
 a| `131` | OEM-specific | 1  a| `0x0049`
 a| `136` | OEM-specific | 1  a| `0x005A`
 a| `219` | OEM-specific | 1  a| `0x005D`
-a| `221` | AMI type 221 | 6  a| `0x0040`, `0x0041`, `0x0042`, `0x0043`, `0x0044`, `0x0059`
+a| `221` | OEM-specific | 6  a| `0x0040`, `0x0041`, `0x0042`, `0x0043`, `0x0044`, `0x0059`
 |===
 == MS-7210 945GM2-FI (ms-7210.bin)
 

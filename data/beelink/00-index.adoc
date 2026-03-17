@@ -54,7 +54,7 @@ a| `131` | OEM-specific | 1  a| `0x003D`
 a| `133` | OEM-specific | 1  a| `0x0075`
 a| `136` | OEM-specific | 2  a| `0x0076`, `0x0079`
 a| `219` | OEM-specific | 1  a| `0x0078`
-a| `221` | AMI type 221 | 6  a| `0x002E`, `0x002F`, `0x0030`, `0x0031`, `0x0032`, `0x0049`
+a| `221` | OEM-specific | 6  a| `0x002E`, `0x002F`, `0x0030`, `0x0031`, `0x0032`, `0x0049`
 |===
 == SER (ser.bin)
 

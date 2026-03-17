@@ -40,7 +40,7 @@ a| `127` | End of table | 1  a| `0xFEFF`
 a| `131` | OEM-specific | 1  a| `0x0025`
 a| `136` | OEM-specific | 1  a| `0x0026`
 a| `219` | OEM-specific | 1  a| `0x0027`
-a| `221` | AMI type 221 | 6  a| `0x0028`, `0x0029`, `0x002A`, `0x002B`, `0x002C`, `0x002D`
+a| `221` | OEM-specific | 6  a| `0x0028`, `0x0029`, `0x002A`, `0x002B`, `0x002C`, `0x002D`
 |===
 == MateBook D 14 2023 MDF-X (matebook-d14-2023-mdf-x.bin)
 
@@ -80,7 +80,7 @@ a| `127` | End of table | 1  a| `0xFEFF`
 a| `131` | OEM-specific | 1  a| `0x0025`
 a| `136` | OEM-specific | 1  a| `0x0026`
 a| `219` | OEM-specific | 1  a| `0x0027`
-a| `221` | AMI type 221 | 6  a| `0x0028`, `0x0029`, `0x002A`, `0x002B`, `0x002C`, `0x002D`
+a| `221` | OEM-specific | 6  a| `0x0028`, `0x0029`, `0x002A`, `0x002B`, `0x002C`, `0x002D`
 |===
 == MateBook D 14 2024 MDG-X (matebook-d14-2024-mdg-x.bin)
 
@@ -120,5 +120,5 @@ a| `127` | End of table | 1  a| `0xFEFF`
 a| `131` | OEM-specific | 1  a| `0x0025`
 a| `136` | OEM-specific | 1  a| `0x0026`
 a| `219` | OEM-specific | 1  a| `0x0027`
-a| `221` | AMI type 221 | 6  a| `0x0028`, `0x0029`, `0x002A`, `0x002B`, `0x002C`, `0x002D`
+a| `221` | OEM-specific | 6  a| `0x0028`, `0x0029`, `0x002A`, `0x002B`, `0x002C`, `0x002D`
 |===

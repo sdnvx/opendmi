@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Updated outdated SMBIOS data indices
 - Fix handling of incorrect UTF-8 sequences in YAML export
 - Fix missing tag for binary data in YAML export
 
