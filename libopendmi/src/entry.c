@@ -55,22 +55,25 @@ static const dmi_entry_spec_t dmi_entry_specs[] =
     {
         .name       = "SMBIOS 3.0+ (64-bit)",
         .anchor     = DMI_ANCHOR_V30,
+        .version    = DMI_VERSION(3, 0, 0),
         .min_length = sizeof(dmi_entry_v30_t),
         .handler    = dmi_entry_decode_v30
     },
     {
         .name       = "SMBIOS 2.1+ (32-bit)",
         .anchor     = DMI_ANCHOR_V21,
+        .version    = DMI_VERSION(2, 1, 0),
         .min_length = sizeof(dmi_entry_v21_t),
         .handler    = dmi_entry_decode_v21
     },
     {
         .name       = "Legacy (32-bit)",
         .anchor     = DMI_ANCHOR_LEGACY,
+        .version    = DMI_VERSION(2, 0, 0),
         .min_length = sizeof(dmi_entry_legacy_t),
         .handler    = dmi_entry_decode_legacy
     },
-    DMI_ENTRY_SPEC_NULL
+    {}
 };
 
 bool dmi_entry_decode(dmi_context_t *context, const void *data, size_t length)

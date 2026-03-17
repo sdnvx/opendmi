@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Add YAML emitter error handling
 - Add type tags output in YAML export
+- Add version number to entry point specification
 - Store entry point specification in context
 - Add context address size detection
 - Add binary data output in JSON export

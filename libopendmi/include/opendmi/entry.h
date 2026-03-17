@@ -56,6 +56,11 @@ struct dmi_entry_spec
     const char *anchor;
 
     /**
+     * @brief Entry point version number.
+     */
+    dmi_version_t version;
+
+    /**
      * @brief Minimum length of entry point structure.
      */
     const size_t min_length;
@@ -65,11 +70,6 @@ struct dmi_entry_spec
      */
     bool (*handler)(dmi_context_t *context, const void *data, const size_t length);
 };
-
-/**
- * @brief DMI entry specifications list terminator.
- */
-#define DMI_ENTRY_SPEC_NULL { nullptr, nullptr, 0, nullptr }
 
 /**
  * @brief The 32-bit SMBIOS legacy Entry Point Structure (EPS).
