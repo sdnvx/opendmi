@@ -98,5 +98,5 @@ static int dmi_entry_main(dmi_context_t *context, int argc, char *argv[])
     dmi_free(smbios_version);
     dmi_free(entry_version);
 
-    return EXIT_FAILURE;
+    return EXIT_SUCCESS;
 }

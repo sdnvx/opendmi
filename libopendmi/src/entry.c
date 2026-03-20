@@ -69,12 +69,13 @@ static const dmi_entry_spec_t dmi_entry_specs[] =
                 .flags = DMI_ATTRIBUTE_FLAG_HEX
             }),
             DMI_ATTRIBUTE(dmi_context_t, table_area_max_size, SIZE, {
-                .code = "table-area-max-size",
-                .name = "Maximum size of table area"
+                .code  = "table-area-max-size",
+                .name  = "Maximum size of table area"
             }),
             DMI_ATTRIBUTE(dmi_context_t, table_area_addr, ADDRESS, {
-                .code = "table-area-addr",
-                .name = "Table area address"
+                .code  = "table-area-addr",
+                .name  = "Table area address",
+                .flags = DMI_ATTRIBUTE_FLAG_HEX
             }),
             {}
         }
@@ -87,8 +88,8 @@ static const dmi_entry_spec_t dmi_entry_specs[] =
         .handler    = dmi_entry_decode_v21,
         .attributes = (const dmi_attribute_t[]){
             DMI_ATTRIBUTE(dmi_context_t, entry_size, SIZE, {
-                .code = "length",
-                .name = "Entry point length"
+                .code  = "length",
+                .name  = "Entry point length"
             }),
             DMI_ATTRIBUTE(dmi_context_t, entry_revision, INTEGER, {
                 .code  = "revision",
@@ -96,20 +97,21 @@ static const dmi_entry_spec_t dmi_entry_specs[] =
                 .flags = DMI_ATTRIBUTE_FLAG_HEX
             }),
             DMI_ATTRIBUTE(dmi_context_t, table_area_size, SIZE, {
-                .code = "table-area-size",
-                .name = "Table area size"
+                .code  = "table-area-size",
+                .name  = "Table area size"
             }),
             DMI_ATTRIBUTE(dmi_context_t, table_area_addr, ADDRESS, {
-                .code = "table-area-addr",
-                .name = "Table area address"
+                .code  = "table-area-addr",
+                .name  = "Table area address",
+                .flags = DMI_ATTRIBUTE_FLAG_HEX
             }),
             DMI_ATTRIBUTE(dmi_context_t, entity_max_size, SIZE, {
-                .code = "entity-max-size",
-                .name = "Maximum entity size"
+                .code  = "entity-max-size",
+                .name  = "Maximum entity size"
             }),
             DMI_ATTRIBUTE(dmi_context_t, entity_count, INTEGER, {
-                .code = "entity-count",
-                .name = "Entity count"
+                .code  = "entity-count",
+                .name  = "Entity count"
             }),
             {}
         }
@@ -122,20 +124,21 @@ static const dmi_entry_spec_t dmi_entry_specs[] =
         .handler    = dmi_entry_decode_legacy,
         .attributes = (const dmi_attribute_t[]){
             DMI_ATTRIBUTE(dmi_context_t, entry_size, SIZE, {
-                .code = "length",
-                .name = "Entry point length"
+                .code  = "length",
+                .name  = "Entry point length"
             }),
             DMI_ATTRIBUTE(dmi_context_t, table_area_size, SIZE, {
-                .code = "table-area-size",
-                .name = "Table area size"
+                .code  = "table-area-size",
+                .name  = "Table area size"
             }),
             DMI_ATTRIBUTE(dmi_context_t, table_area_addr, ADDRESS, {
-                .code = "table-area-addr",
-                .name = "Table area address"
+                .code  = "table-area-addr",
+                .name  = "Table area address",
+                .flags = DMI_ATTRIBUTE_FLAG_HEX
             }),
             DMI_ATTRIBUTE(dmi_context_t, entity_count, INTEGER, {
-                .code = "entity-count",
-                .name = "Entity count"
+                .code  = "entity-count",
+                .name  = "Entity count"
             }),
             {}
         }
