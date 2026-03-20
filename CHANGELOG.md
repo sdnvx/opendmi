@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.2.1] - March 17, 2026
 
+### Added
+
+- Add `entry` command implementation
+
 ### Fixed
 
 - Updated outdated SMBIOS data indices

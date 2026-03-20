@@ -13,6 +13,12 @@
 
 __BEGIN_DECLS
 
+void dmi_text_printf(
+        dmi_text_session_t *session,
+        dmi_tty_color_t color,
+        const char *format,
+        ...);
+
 void dmi_text_hex_data(dmi_text_session_t *session, const void *data, size_t length);
 
 __END_DECLS

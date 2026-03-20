@@ -16,6 +16,7 @@
  */
 typedef enum dmi_tty_color
 {
+    DMI_TTY_COLOR_NONE    = -1,
     DMI_TTY_COLOR_BLACK   = 0,
     DMI_TTY_COLOR_MAROON  = 1,
     DMI_TTY_COLOR_GREEN   = 2,

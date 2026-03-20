@@ -4,9 +4,50 @@
 //
 // SPDX-License-Identifier: BSD-3-Clause
 //
+#include "../../config.h"
+
+#include <stdio.h>
+#include <stdarg.h>
 #include <assert.h>
 
+#ifdef ENABLE_CURSES
+#   if __has_include(<ncurses/ncurses.h>)
+#       include <ncurses/ncurses.h>
+#   elif __has_include(<ncurses/curses.h>)
+#       include <ncurses/curses.h>
+#   elif __has_include(<ncurses.h>)
+#       include <ncurses.h>
+#   elif __has_include(<curses.h>)
+#       include <curses.h>
+#   endif
+#   include <term.h>
+#endif // ENABLE_CURSES
+
+#include <opendmi/utils/tty.h>
 #include <opendmi/format/text/helpers.h>
+
+void dmi_text_printf(
+        dmi_text_session_t *session,
+        dmi_tty_color_t color,
+        const char *format,
+        ...)
+{
+    va_list args;
+
+#ifdef ENABLE_CURSES
+    if (session->is_tty and (color != DMI_TTY_COLOR_NONE))
+        tputs(tparm(tigetstr("setaf"), color), 1, putchar);
+#endif // ENABLE_CURSES
+
+    va_start(args, format);
+    vfprintf(session->stream, format, args);
+    va_end(args);
+
+#ifdef ENABLE_CURSES
+    if (session->is_tty and (color != DMI_TTY_COLOR_NONE))
+        tputs(tparm(tigetstr("sgr0")), 1, putchar);
+#endif // ENABLE_CURSES
+}
 
 void dmi_text_hex_data(dmi_text_session_t *session, const void *data, size_t length)
 {

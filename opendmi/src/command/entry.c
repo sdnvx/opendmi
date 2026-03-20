@@ -5,9 +5,18 @@
 // SPDX-License-Identifier: BSD-3-Clause
 //
 #include <stdlib.h>
+#include <inttypes.h>
+#include <stdio.h>
+#include <assert.h>
 
+#include <opendmi/entry.h>
 #include <opendmi/context.h>
+#include <opendmi/utils.h>
+#include <opendmi/utils/tty.h>
+
 #include <opendmi/command/entry.h>
+#include <opendmi/format/text/handlers.h>
+#include <opendmi/format/text/helpers.h>
 
 static void dmi_entry_usage(void);
 static int dmi_entry_main(dmi_context_t *context, int argc, char *argv[]);
@@ -44,11 +53,50 @@ static void dmi_entry_usage(void)
 
 static int dmi_entry_main(dmi_context_t *context, int argc, char *argv[])
 {
-    dmi_unused(context);
+    assert(context != nullptr);
     dmi_unused(argc);
     dmi_unused(argv);
 
-    dmi_command_message_ex(&dmi_entry_command, "Not implemented yet");
+    const dmi_entry_spec_t *spec = context->entry_spec;
+    dmi_text_session_t *session = nullptr;
+    char *smbios_version = nullptr;
+    char *entry_version = nullptr;
+
+    do {
+        session = dmi_text_initialize(context, stdout);
+        if (session == nullptr)
+            break;
+
+        smbios_version = dmi_version_format(context->smbios_version);
+        if (smbios_version == nullptr) {
+            dmi_error_raise(context, DMI_ERROR_OUT_OF_MEMORY);
+            break;
+        }
+
+        entry_version = dmi_version_format(context->entry_version);
+        if (entry_version == nullptr) {
+            dmi_error_raise(context, DMI_ERROR_OUT_OF_MEMORY);
+            break;
+        }
+
+        dmi_tty_header("%s", spec->name);
+
+        dmi_text_printf(session, DMI_TTY_COLOR_NONE, "Anchor: %s\n", spec->anchor);
+        dmi_text_printf(session, DMI_TTY_COLOR_NONE, "SMBIOS version: %s\n", smbios_version);
+        dmi_text_printf(session, DMI_TTY_COLOR_NONE, "Address size: %zu bits\n", context->address_size << 3);
+        dmi_text_printf(session, DMI_TTY_COLOR_NONE, "\n");
+
+        for (const dmi_attribute_t *attr = spec->attributes; attr->params.name; attr++) {
+            const dmi_data_t *value = dmi_member_ptr(context, attr->value, dmi_data_t);
+
+            dmi_text_printf(session, DMI_TTY_COLOR_NONE, "%s: ", attr->params.name);
+            dmi_text_entity_attr_value(session, attr, value, nullptr);
+        }
+    } while (false);
+
+    dmi_text_finalize(session);
+    dmi_free(smbios_version);
+    dmi_free(entry_version);
 
     return EXIT_FAILURE;
 }

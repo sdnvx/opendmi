@@ -65,6 +65,11 @@ struct dmi_context
     dmi_version_t entry_version;
 
     /**
+     * @brief SMBIOS entry point revision.
+     */
+    unsigned entry_revision;
+
+    /**
      * @brief Entry point specification.
      */
     const dmi_entry_spec_t *entry_spec;

@@ -57,21 +57,88 @@ static const dmi_entry_spec_t dmi_entry_specs[] =
         .anchor     = DMI_ANCHOR_V30,
         .version    = DMI_VERSION(3, 0, 0),
         .min_length = sizeof(dmi_entry_v30_t),
-        .handler    = dmi_entry_decode_v30
+        .handler    = dmi_entry_decode_v30,
+        .attributes = (const dmi_attribute_t[]){
+            DMI_ATTRIBUTE(dmi_context_t, entry_size, SIZE, {
+                .code  = "length",
+                .name  = "Entry point length"
+            }),
+            DMI_ATTRIBUTE(dmi_context_t, entry_revision, INTEGER, {
+                .code  = "revision",
+                .name  = "Entry point revision",
+                .flags = DMI_ATTRIBUTE_FLAG_HEX
+            }),
+            DMI_ATTRIBUTE(dmi_context_t, table_area_max_size, SIZE, {
+                .code = "table-area-max-size",
+                .name = "Maximum size of table area"
+            }),
+            DMI_ATTRIBUTE(dmi_context_t, table_area_addr, ADDRESS, {
+                .code = "table-area-addr",
+                .name = "Table area address"
+            }),
+            {}
+        }
     },
     {
         .name       = "SMBIOS 2.1+ (32-bit)",
         .anchor     = DMI_ANCHOR_V21,
         .version    = DMI_VERSION(2, 1, 0),
         .min_length = sizeof(dmi_entry_v21_t),
-        .handler    = dmi_entry_decode_v21
+        .handler    = dmi_entry_decode_v21,
+        .attributes = (const dmi_attribute_t[]){
+            DMI_ATTRIBUTE(dmi_context_t, entry_size, SIZE, {
+                .code = "length",
+                .name = "Entry point length"
+            }),
+            DMI_ATTRIBUTE(dmi_context_t, entry_revision, INTEGER, {
+                .code  = "revision",
+                .name  = "Entry point revision",
+                .flags = DMI_ATTRIBUTE_FLAG_HEX
+            }),
+            DMI_ATTRIBUTE(dmi_context_t, table_area_size, SIZE, {
+                .code = "table-area-size",
+                .name = "Table area size"
+            }),
+            DMI_ATTRIBUTE(dmi_context_t, table_area_addr, ADDRESS, {
+                .code = "table-area-addr",
+                .name = "Table area address"
+            }),
+            DMI_ATTRIBUTE(dmi_context_t, entity_max_size, SIZE, {
+                .code = "entity-max-size",
+                .name = "Maximum entity size"
+            }),
+            DMI_ATTRIBUTE(dmi_context_t, entity_count, INTEGER, {
+                .code = "entity-count",
+                .name = "Entity count"
+            }),
+            {}
+        }
     },
     {
         .name       = "Legacy (32-bit)",
         .anchor     = DMI_ANCHOR_LEGACY,
         .version    = DMI_VERSION(2, 0, 0),
         .min_length = sizeof(dmi_entry_legacy_t),
-        .handler    = dmi_entry_decode_legacy
+        .handler    = dmi_entry_decode_legacy,
+        .attributes = (const dmi_attribute_t[]){
+            DMI_ATTRIBUTE(dmi_context_t, entry_size, SIZE, {
+                .code = "length",
+                .name = "Entry point length"
+            }),
+            DMI_ATTRIBUTE(dmi_context_t, table_area_size, SIZE, {
+                .code = "table-area-size",
+                .name = "Table area size"
+            }),
+            DMI_ATTRIBUTE(dmi_context_t, table_area_addr, ADDRESS, {
+                .code = "table-area-addr",
+                .name = "Table area address"
+            }),
+            DMI_ATTRIBUTE(dmi_context_t, entity_count, INTEGER, {
+                .code = "entity-count",
+                .name = "Entity count"
+            }),
+            {}
+        }
     },
     {}
 };
@@ -227,6 +294,7 @@ static bool dmi_entry_decode_v30(dmi_context_t *context,
     }
 
     // Decode SMBIOS version
+    context->entry_revision = dmi_decode(entry->revision);
     context->smbios_version = dmi_version(dmi_decode(entry->version_major),
                                           dmi_decode(entry->version_minor),
                                           dmi_decode(entry->revision));

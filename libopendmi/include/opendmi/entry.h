@@ -10,6 +10,7 @@
 #pragma once
 
 #include <opendmi/context.h>
+#include <opendmi/attribute.h>
 
 /**
  * @brief SMBIOS 2.0 or earlier (32-bit) entry point anchor string.
@@ -69,6 +70,11 @@ struct dmi_entry_spec
      * @brief Entry point decoding function.
      */
     bool (*handler)(dmi_context_t *context, const void *data, const size_t length);
+
+    /**
+     * @brief Entry point attributes.
+     */
+    const dmi_attribute_t *attributes;
 };
 
 /**
