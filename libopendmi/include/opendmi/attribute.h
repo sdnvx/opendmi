@@ -17,7 +17,8 @@ typedef struct dmi_attribute_params dmi_attribute_params_t;
 typedef struct dmi_attribute_ops    dmi_attribute_ops_t;
 
 typedef char *dmi_attribute_format_fn(
-        const dmi_attribute_t *attr,
+        dmi_context_t         *context,
+        const dmi_attribute_t *attribute,
         const void            *value,
         bool                   pretty);
 
@@ -153,7 +154,11 @@ bool dmi_attribute_is_unknown(const dmi_attribute_t *attr, const void *value);
 intmax_t dmi_attribute_get_int(const dmi_attribute_t *attr, const void *value);
 uintmax_t dmi_attribute_get_uint(const dmi_attribute_t *attr, const void *value);
 
-char *dmi_attribute_format(const dmi_attribute_t *attr, const void *value, bool pretty);
+char *dmi_attribute_format(
+        dmi_context_t         *context,
+        const dmi_attribute_t *attribute,
+        const void            *value,
+        bool                  pretty);
 
 __END_DECLS
 

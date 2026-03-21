@@ -8,9 +8,13 @@
 #include <stdbool.h>
 #include <cmocka.h>
 
+#include <opendmi/context.h>
 #include <opendmi/attribute.h>
 #include <opendmi/utils/uuid.h>
 #include <opendmi/utils/version.h>
+
+static int test_attribute_setup(void **pstate);
+static int test_attribute_teardown(void **pstate);
 
 static void test_attribute_format_address(void **pstate);
 static void test_attribute_format_bool(void **pstate);
@@ -25,6 +29,8 @@ static void test_attribute_format_string(void **pstate);
 static void test_attribute_format_uuid(void **pstate);
 static void test_attribute_format_version(void **pstate);
 static int free_attribute_value(void **pstate);
+
+static dmi_context_t *context = nullptr;
 
 int main(void)
 {
@@ -43,7 +49,26 @@ int main(void)
         cmocka_unit_test_teardown(test_attribute_format_version, free_attribute_value)
     };
 
-    return cmocka_run_group_tests(tests, nullptr, nullptr);
+    return cmocka_run_group_tests(tests, test_attribute_setup, test_attribute_teardown);
+}
+
+static int test_attribute_setup(void **pstate)
+{
+    dmi_unused(pstate);
+
+    context = dmi_create(0);
+    if (context == nullptr)
+        return -1;
+
+    return 0;
+}
+
+static int test_attribute_teardown(void **pstate)
+{
+    dmi_unused(pstate);
+
+    dmi_destroy(context);
+    return 0;
 }
 
 static void test_attribute_format_address(void **pstate)
@@ -89,7 +114,7 @@ static void test_attribute_format_bool(void **pstate)
         const char *expected = test_data[i].expected;
         char       *result   = nullptr;
 
-        result = dmi_attribute_format(&attr, value, pretty);
+        result = dmi_attribute_format(context, &attr, value, pretty);
         *pstate = result;
 
         assert_non_null(result);
@@ -146,7 +171,7 @@ static void test_attribute_format_bool_ex(void **pstate)
         const char *expected = test_data[i].expected;
         char       *result   = nullptr;
 
-        result = dmi_attribute_format(&attr, value, pretty);
+        result = dmi_attribute_format(context, &attr, value, pretty);
         *pstate = result;
 
         assert_non_null(result);
@@ -206,7 +231,7 @@ static void test_attribute_format_handle(void **pstate)
         const char *expected = test_data[i].expected;
         char       *result   = nullptr;
 
-        result = dmi_attribute_format(&attr, value, pretty);
+        result = dmi_attribute_format(context, &attr, value, pretty);
         *pstate = result;
 
         assert_non_null(result);
@@ -319,7 +344,7 @@ static void test_attribute_format_uuid(void **pstate)
         const char *expected = test_data[i].expected;
         char       *result   = nullptr;
 
-        result = dmi_attribute_format(&attr, value, pretty);
+        result = dmi_attribute_format(context, &attr, value, pretty);
         *pstate = result;
 
         assert_non_null(result);
@@ -373,7 +398,7 @@ static void test_attribute_format_version(void **pstate)
             }
         };
 
-        result = dmi_attribute_format(&attr, value, pretty);
+        result = dmi_attribute_format(context, &attr, value, pretty);
         *pstate = result;
 
         assert_non_null(result);

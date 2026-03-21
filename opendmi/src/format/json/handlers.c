@@ -284,7 +284,7 @@ bool dmi_json_entity_attr_value(
         return dmi_json_entity_attr_set(session, attr, value);
 
     do {
-        text = dmi_attribute_format(attr, value, false);
+        text = dmi_attribute_format(session->context, attr, value, false);
         if (text == nullptr)
             break;
 

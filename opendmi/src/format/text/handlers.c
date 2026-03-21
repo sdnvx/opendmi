@@ -191,7 +191,7 @@ void dmi_text_entity_attr_value(
         return;
     }
 
-    text = dmi_attribute_format(attr, value, true);
+    text = dmi_attribute_format(session->context, attr, value, true);
     if (text == nullptr) {
         dmi_text_printf(session, DMI_TTY_COLOR_RED, "<error>\n");
         return;

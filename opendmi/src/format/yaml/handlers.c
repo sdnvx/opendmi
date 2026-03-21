@@ -292,7 +292,7 @@ bool dmi_yaml_entity_attr_value(
         const char *tag;
         yaml_scalar_style_t style;
 
-        text = dmi_attribute_format(attr, value, false);
+        text = dmi_attribute_format(session->context, attr, value, false);
         if (text == nullptr)
             break;
 
