@@ -12,70 +12,95 @@ title: OpenDMI YAML schema
 
 type: object
 properties:
-  entry:
-    type: object
-    properties:
-      smbios-version:
-        type: string
-        description: SMBIOS version number
-      table-area-address:
-        type: integer
-        minimum: 0
-      table-area-size:
-        type: integer
-        minimum: 0
-      required:
-      - smbios-version
-
-  entities:
-    type: array
-    items:
-      type: object
-      properties:
-        handle:
-          type: integer
-          minimum: 0
-          maximum: 65535
-        type:
-        length:
-          type: integer
-          minimum: 0
-        data:
-        strings:
-          type: array
-          items:
-            type: object
-            properties:
-              index:
+    entry:
+        type: object
+        properties:
+            smbios-version:
+                ref: "#/$definitions/versionNumber"
+                description: SMBIOS version number
+            table-area-address:
                 type: integer
                 minimum: 0
-                maximum: 255
-              value:
-                type: string
-        attributes:
-          type: object
-      required:
-      - handle
-      - type
-      - length
+            table-area-size:
+                type: integer
+                minimum: 0
+        required:
+          - smbios-version
 
-  types:
-    type: array
-    items:
-      type: object
-      properties:
-        id:
-          type: integer
-          minimum: 0
-          maximum: 255
-        code:
-          type: string
-        name:
-          type: string
-      required:
-      - id
-      - code
-      - name
+    entities:
+        type: array
+        items:
+            type: object
+            properties:
+                handle:
+                    ref: "#/$definitions/entityHandle"
+                type:
+                    ref: "#/$definitions/entityType"
+                length:
+                    ref: "#/$definitions/entityLength"
+                level:
+                    ref: "#/$definitions/versionNumber"
+                description:
+                    type: string
+                data:
+                    type: string
+                    tag: binary
+                strings:
+                    type: array
+                    items:
+                        type: object
+                        properties:
+                            index:
+                                type: integer
+                                minimum: 0
+                                maximum: 255
+                            value:
+                                type: string
+                attributes:
+                    type: object
+            required:
+              - handle
+              - type
+              - length
+
+    types:
+        type: array
+        items:
+            type: object
+            properties:
+                id:
+                    type: integer
+                    minimum: 0
+                    maximum: 255
+                code:
+                    type: string
+                name:
+                    type: string
+            required:
+              - id
+              - code
+              - name
 
 required:
 - entry
+
+$definitions:
+    entityHandle:
+        descripton: Entity handle value
+        type: integer
+        minimum: 0x0000
+        maximum: 0xFFFE
+    entityType:
+        description: Entity type value
+        type: integer
+        minimum: 0
+        maximum: 255
+    entityLength:
+        description: Entity length value
+        type: integer
+        minimum: 0
+        maximum: 255
+    versionNumber:
+        description: Version number
+        type: string
+        pattern: ^[0-9]+\.[0-9]+(\.[0-9]+)?$

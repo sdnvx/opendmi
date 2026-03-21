@@ -9,11 +9,18 @@ import getopt
 import subprocess
 import sys
 import yaml
-from yaml.loader import SafeLoader
 
-base_dir = os.path.dirname(os.path.realpath(__file__))
-opendmi_dir = os.path.join(base_dir, "build/opendmi")
-data_dir = os.path.join(base_dir, "data")
+from yaml.loader import SafeLoader
+from jsonschema import validate
+
+tools_dir  = os.path.dirname(os.path.realpath(__file__))
+base_dir   = os.path.abspath(os.path.join(tools_dir, '..'))
+
+build_dir  = os.path.join(base_dir, "build/opendmi")
+schema_dir = os.path.join(base_dir, "opendmi/share/opendmi")
+data_dir   = os.path.join(base_dir, "data")
+
+schema = None
 
 def data_files():
     for root, _, files in os.walk(data_dir):
@@ -26,14 +33,18 @@ def data_files():
 
             yield file_path, file_base + ".yaml"
 
-def load_spec(spec_path: str):
-    with open(spec_path) as spec_file:
-        return yaml.load(spec_file, Loader=SafeLoader)
+def load_yaml(path: str):
+    try:
+        with open(path) as file:
+            return yaml.load(file, Loader=SafeLoader)
+    except FileNotFoundError:
+        print(f"ERROR: File not found: ${path}")
+        return None
 
 def load_dump(dump_path: str):
     try:
         process = subprocess.Popen(
-            [f"{opendmi_dir}/bin/opendmi", "--from-dump", dump_path, "--format=yaml"],
+            [f"{build_dir}/bin/opendmi", "--file", dump_path, "export", "--all", "--format=yaml"],
             stdout = subprocess.PIPE,
             stderr = subprocess.PIPE
         )
@@ -46,7 +57,9 @@ def load_dump(dump_path: str):
 
 def generate_spec(dump_path: str, spec_path: str):
     print(f"Generating spec: {dump_path}")
-    pass
+
+    data = load_dump(dump_path)
+    validate(data, schema)
 
 def check_spec(dump_path: str, spec_path: str):
     if not os.path.isfile(spec_path):
@@ -54,13 +67,15 @@ def check_spec(dump_path: str, spec_path: str):
         return
 
     print(f"Checking spec: {dump_path}")
-    spec = load_spec(spec_path)
+    spec = load_yaml(spec_path)
     data = load_dump(dump_path)
 
 def show_usage():
     pass
 
-def main(argv):
+def main(argv) -> int:
+    global schema
+
     mode = "test"
 
     try:
@@ -68,7 +83,7 @@ def main(argv):
     except getopt.GetoptError as e:
         print(str(e))
         print('Use -h or --help for help')
-        sys.exit(1)
+        sys.exit(os.EX_USAGE)
 
     for opt, arg in opts:
         if opt in ("-h", "--help"):
@@ -77,11 +92,23 @@ def main(argv):
         elif opt in ("-b", "--baseline"):
             mode = "generate"
 
+    yaml.SafeLoader.yaml_implicit_resolvers = {
+        k: [r for r in v if r[0] != 'tag:yaml.org,2002:timestamp'] for
+            k, v in yaml.SafeLoader.yaml_implicit_resolvers.items()
+    }
+
+    print("Loading schema...")
+    schema = load_yaml(os.path.join(schema_dir, "opendmi.yml"))
+    if schema == None:
+        return os.EX_OSFILE
+
     for dump_path, spec_path in data_files():
         if mode == "generate":
             generate_spec(dump_path, spec_path)
         else:
             check_spec(dump_path, spec_path)
+
+    return os.EX_OK
 
 if __name__ == "__main__":
 	main(sys.argv[1:])
