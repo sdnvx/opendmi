@@ -177,6 +177,13 @@ bool dmi_attribute_is_unknown(const dmi_attribute_t *attr, const void *value)
     return false;
 }
 
+bool dmi_attribute_get_bool(const dmi_attribute_t *attr, const void *value)
+{
+    dmi_unused(attr);
+
+    return *(bool *)value ? true : false;
+}
+
 intmax_t dmi_attribute_get_int(const dmi_attribute_t *attr, const void *value)
 {
     assert(attr != nullptr);

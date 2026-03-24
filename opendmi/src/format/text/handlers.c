@@ -187,7 +187,7 @@ void dmi_text_entity_attr_value(
         return;
     }
     if (dmi_attribute_is_unknown(attr, value)) {
-        dmi_text_printf(session, DMI_TTY_COLOR_MAROON, "<unknown>\n");
+        dmi_text_printf(session, DMI_TTY_COLOR_OLIVE, "<unknown>\n");
         return;
     }
 
@@ -197,10 +197,19 @@ void dmi_text_entity_attr_value(
         return;
     }
 
+    // Adjust color of boolean values
+    dmi_tty_color_t color = DMI_TTY_COLOR_NONE;
+    if (attr->type == DMI_ATTRIBUTE_TYPE_BOOL) {
+        if (dmi_attribute_get_bool(attr, value))
+            color = DMI_TTY_COLOR_LIME;
+        else
+            color = DMI_TTY_COLOR_RED;
+    }
+
     if (attr->params.unit)
-        dmi_text_printf(session, DMI_TTY_COLOR_NONE, "%s %s", text, attr->params.unit);
+        dmi_text_printf(session, color, "%s %s", text, attr->params.unit);
     else
-        dmi_text_printf(session, DMI_TTY_COLOR_NONE, "%s", text);
+        dmi_text_printf(session, color, "%s", text);
 
     if (descr != nullptr)
         dmi_text_printf(session, DMI_TTY_COLOR_NONE, " - %s", descr);
@@ -230,9 +239,10 @@ void dmi_text_entity_attr_set(
             continue;
 
         bool flag = mask & (1 << i);
+        dmi_tty_color_t color = flag ? DMI_TTY_COLOR_LIME : DMI_TTY_COLOR_RED;
 
-        dmi_text_printf(session, DMI_TTY_COLOR_NONE, "\t\t%s: %s\n",
-                        name, flag ? "yes" : "no");
+        dmi_text_printf(session, DMI_TTY_COLOR_NONE, "\t\t%s: ", name);
+        dmi_text_printf(session, color, "%s\n", flag ? "yes" : "no");
     }
 }
 

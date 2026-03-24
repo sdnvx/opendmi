@@ -151,6 +151,7 @@ __BEGIN_DECLS
 bool dmi_attribute_is_unspecified(const dmi_attribute_t *attr, const void *value);
 bool dmi_attribute_is_unknown(const dmi_attribute_t *attr, const void *value);
 
+bool dmi_attribute_get_bool(const dmi_attribute_t *attr, const void *value);
 intmax_t dmi_attribute_get_int(const dmi_attribute_t *attr, const void *value);
 uintmax_t dmi_attribute_get_uint(const dmi_attribute_t *attr, const void *value);
 
