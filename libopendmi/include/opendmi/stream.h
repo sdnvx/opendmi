@@ -58,6 +58,15 @@ __END_DECLS
             rv;                                                               \
         })
 
+#define dmi_stream_decode_uuid(__stream, __pvalue)                              \
+        ({                                                                      \
+            dmi_byte_t __value[16];                                             \
+            bool rv = dmi_stream_read_data(__stream, __value, sizeof(__value)); \
+            if (rv)                                                             \
+                *(__pvalue) = dmi_uuid_decode(__value);                         \
+            rv;                                                                 \
+        })
+
 #define dmi_stream_read_at(__stream, __offset, __pvalue) \
         dmi_stream_read_data_at(__stream, __pvalue, __offset, sizeof(*(__pvalue)))
 
@@ -83,6 +92,15 @@ __END_DECLS
             if (rv)                                                           \
                 *(__pvalue) = dmi_entity_string((__stream)->entity, __value); \
             rv;                                                               \
+        })
+
+#define dmi_stream_decode_uuid_at(__stream, __offset, __pvalue)                              \
+        ({                                                                                   \
+            dmi_byte_t __value[16];                                                          \
+            bool rv = dmi_stream_read_data_at(__stream, __value, __offset, sizeof(__value)); \
+            if (rv)                                                                          \
+                *(__pvalue) = dmi_uuid_decode(__value);                                      \
+            rv;                                                                              \
         })
 
 #endif // !OPENDMI_STREAM_H

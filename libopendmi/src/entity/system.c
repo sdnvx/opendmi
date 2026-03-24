@@ -5,6 +5,7 @@
 // SPDX-License-Identifier: BSD-3-Clause
 //
 #include <opendmi/context.h>
+#include <opendmi/stream.h>
 #include <opendmi/utils.h>
 #include <opendmi/utils/name.h>
 
@@ -118,42 +119,42 @@ const char *dmi_system_wakeup_type_name(dmi_system_wakeup_type_t value)
 static bool dmi_system_decode(dmi_entity_t *entity)
 {
     dmi_system_t *info;
-    const dmi_system_data_t *data;
-
-    data = dmi_entity_data(entity, DMI_TYPE_SYSTEM);
-    if (data == nullptr)
-        return false;
 
     info = dmi_entity_info(entity, DMI_TYPE_SYSTEM);
     if (info == nullptr)
         return false;
 
-    info->vendor        = dmi_entity_string(entity, data->vendor);
-    info->product       = dmi_entity_string(entity, data->product);
-    info->version       = dmi_entity_string(entity, data->version);
-    info->serial_number = dmi_entity_string(entity, data->serial_number);
+    dmi_stream_t *stream = &entity->stream;
+
+    bool status =
+        dmi_stream_decode_str(stream, &info->vendor) and
+        dmi_stream_decode_str(stream, &info->product) and
+        dmi_stream_decode_str(stream, &info->version) and
+        dmi_stream_decode_str(stream, &info->serial_number);
+    if (not status)
+        return false;
+
+    if (dmi_stream_is_done(stream))
+        return true;
 
     //
     // SMBIOS 2.1 features
     //
+    entity->level = dmi_version(2, 1, 0);
 
-    if (entity->body_length > 0x08u) {
-        entity->level = dmi_version(2, 1, 0);
-        info->uuid = dmi_uuid_decode(data->uuid);
-    }
-    if (entity->body_length > 0x18u)
-        info->wakeup_type = data->wakeup_type;
+    dmi_stream_decode_uuid(stream, &info->uuid) and
+    dmi_stream_decode(stream, dmi_byte_t, &info->wakeup_type);
+
+    if (dmi_stream_is_done(stream))
+        return true;
 
     //
     // SMBIOS 2.4 features
     //
+    entity->level = dmi_version(2, 4, 0);
 
-    if (entity->body_length > 0x19u) {
-        entity->level = dmi_version(2, 4, 0);
-        info->sku_number = dmi_entity_string(entity, data->sku_number);
-    }
-    if (entity->body_length > 0x1Au)
-        info->family = dmi_entity_string(entity, data->family);
+    dmi_stream_decode_str(stream, &info->sku_number) and
+    dmi_stream_decode_str(stream, &info->family);
 
     return true;
 }

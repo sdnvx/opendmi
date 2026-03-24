@@ -12,8 +12,7 @@
 #include <opendmi/entity.h>
 #include <opendmi/utils/uuid.h>
 
-typedef struct dmi_system_data dmi_system_data_t;
-typedef struct dmi_system      dmi_system_t;
+typedef struct dmi_system dmi_system_t;
 
 typedef enum dmi_system_wakeup_type
 {
@@ -30,81 +29,6 @@ typedef enum dmi_system_wakeup_type
 
 /**
  * @brief System information structure (type 1).
- */
-dmi_packed_struct(dmi_system_data)
-{
-    /**
-     * @brief SMBIOS structure header.
-     */
-    dmi_header_t header;
-
-    /**
-     * @brief Manufacturer name.
-     * @since SMBIOS 2.0
-     */
-    dmi_string_t vendor;
-
-    /**
-     * @brief Product name.
-     * @since SMBIOS 2.0
-     */
-    dmi_string_t product;
-
-    /**
-     * @brief Product version.
-     * @since SMBIOS 2.0
-     */
-    dmi_string_t version;
-
-    /**
-     * @brief Serial number.
-     * @since SMBIOS 2.0
-     */
-    dmi_string_t serial_number;
-
-    /**
-     * @brief UUID number.
-     * @since SMBIOS 2.1
-     */
-    dmi_byte_t uuid[16];
-
-    /**
-     * @brief Identifies the event that caused the system to power up.
-     * @since SMBIOS 2.1
-     */
-    dmi_byte_t wakeup_type;
-
-    /**
-     * @brief SKU number.
-     *
-     * This text string identifies a particular computer configuration for
-     * sale. It is sometimes also called a product ID or purchase order number.
-     * This number is frequently found in existing fields, but there is no
-     * standard format. Typically for a given system board from a given OEM,
-     * there are tens of unique processor, memory, hard drive, and optical
-     * drive configurations.
-     *
-     * @since SMBIOS 2.4
-     */
-    dmi_string_t sku_number;
-
-    /**
-     * @brief Family name.
-     *
-     * This text string identifies the family to which a particular computer
-     * belongs. A family refers to a set of computers that are similar but not
-     * identical from a hardware or software point of view. Typically, a family
-     * is composed of different computer models, which have different
-     * configurations and pricing points. Computers in the same family often
-     * have similar branding and cosmetic features.
-     *
-     * @since SMBIOS 2.4
-     */
-    dmi_string_t family;
-};
-
-/**
- * @brief System information.
  */
 struct dmi_system
 {
