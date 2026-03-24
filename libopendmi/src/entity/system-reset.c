@@ -5,6 +5,7 @@
 // SPDX-License-Identifier: BSD-3-Clause
 //
 #include <opendmi/context.h>
+#include <opendmi/stream.h>
 #include <opendmi/value.h>
 #include <opendmi/utils.h>
 #include <opendmi/utils/name.h>
@@ -47,8 +48,8 @@ const dmi_entity_spec_t dmi_system_reset_spec =
     .minimum_length  = 0x0D,
     .decoded_length  = sizeof(dmi_system_reset_t),
     .attributes      = (dmi_attribute_t[]){
-        DMI_ATTRIBUTE(dmi_system_reset_t, status, BOOL, {
-            .code    = "status",
+        DMI_ATTRIBUTE(dmi_system_reset_t, is_enabled, BOOL, {
+            .code    = "is-enabled",
             .name    = "Reset enabled"
         }),
         DMI_ATTRIBUTE(dmi_system_reset_t, boot_on_watchdog, ENUM, {
@@ -61,8 +62,8 @@ const dmi_entity_spec_t dmi_system_reset_spec =
             .name    = "Boot option on reset limit",
             .values  = &dmi_boot_option_names
         }),
-        DMI_ATTRIBUTE(dmi_system_reset_t, watchdog_present, BOOL, {
-            .code    = "watchdog-present",
+        DMI_ATTRIBUTE(dmi_system_reset_t, has_watchdog, BOOL, {
+            .code    = "has-watchdog",
             .name    = "Watchdog present"
         }),
         DMI_ATTRIBUTE(dmi_system_reset_t, reset_count, INTEGER, {
@@ -102,29 +103,28 @@ const char *dmi_boot_option_name(dmi_boot_option_t value)
 static bool dmi_system_reset_decode(dmi_entity_t *entity)
 {
     dmi_system_reset_t *info;
-    const dmi_system_reset_data_t *data;
-
-    data = dmi_entity_data(entity, DMI_TYPE_SYSTEM_RESET);
-    if (data == nullptr)
-        return false;
 
     info = dmi_entity_info(entity, DMI_TYPE_SYSTEM_RESET);
     if (info == nullptr)
         return false;
 
-    dmi_system_reset_caps_t caps = {
-        .__value = dmi_decode(data->capabilities)
-    };
+    dmi_stream_t *stream = &entity->stream;
 
-    info->status           = caps.status;
-    info->boot_on_watchdog = caps.boot_on_watchdog;
-    info->boot_on_limit    = caps.boot_on_limit;
-    info->watchdog_present = caps.watchdog_present;
+    dmi_system_reset_caps_t capabilities;
 
-    info->reset_count    = dmi_decode(data->reset_count);
-    info->reset_limit    = dmi_decode(data->reset_limit);
-    info->timer_interval = dmi_decode(data->timer_inverval);
-    info->timeout        = dmi_decode(data->timeout);
+    bool status =
+        dmi_stream_decode(stream, dmi_byte_t, &capabilities.__value) and
+        dmi_stream_decode(stream, dmi_word_t, &info->reset_count) and
+        dmi_stream_decode(stream, dmi_word_t, &info->reset_limit) and
+        dmi_stream_decode(stream, dmi_word_t, &info->timer_interval) and
+        dmi_stream_decode(stream, dmi_word_t, &info->timeout);
+    if (not status)
+        return false;
+
+    info->is_enabled       = capabilities.is_enabled;
+    info->boot_on_watchdog = capabilities.boot_on_watchdog;
+    info->boot_on_limit    = capabilities.boot_on_limit;
+    info->has_watchdog     = capabilities.has_watchdog;
 
     return true;
 }

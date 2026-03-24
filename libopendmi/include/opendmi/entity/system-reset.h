@@ -11,6 +11,9 @@
 
 #include <opendmi/entity.h>
 
+typedef struct dmi_system_reset dmi_system_reset_t;
+typedef union dmi_system_reset_caps dmi_system_reset_caps_t;
+
 /**
  * @brief System boot options.
  */
@@ -38,7 +41,7 @@ dmi_packed_union(dmi_system_reset_caps)
          * @brief Status. Identifies whether (`true`) or not (`false`) the
          * system reset is enabled by the user.
          */
-        bool status : 1;
+        bool is_enabled : 1;
 
         /**
          * @brief Boot option. Indicates one of the following actions to be
@@ -55,7 +58,7 @@ dmi_packed_union(dmi_system_reset_caps)
         /**
          * @brief System contains a watchdog timer: either `true` or `false`.
          */
-        bool watchdog_present : 1;
+        bool has_watchdog : 1;
 
         /**
          * @brief Reserved for future assignment by this specification, set to
@@ -65,59 +68,16 @@ dmi_packed_union(dmi_system_reset_caps)
     };
 };
 
-typedef union dmi_system_reset_caps dmi_system_reset_caps_t;
-
 /**
- * @brief System reset structure (type 23).
+ * @brief System reset information (type 23).
  */
-dmi_packed_struct(dmi_system_reset_data)
-{
-    /**
-     * @brief SMBIOS structure header.
-     */
-    dmi_header_t header;
-
-    /**
-     * @brief Identifies the system-reset capabilities for the system.
-     */
-    dmi_byte_t capabilities;
-
-    /**
-     * @brief Number of automatic system resets since the last intentional
-     * reset. A value of `0xFFFF` indicates unknown.
-     */
-    dmi_word_t reset_count;
-
-    /**
-     * @brief Number of consecutive times the system reset is attempted. A value
-     * of `0xFFFF` indicates unknown.
-     */
-    dmi_word_t reset_limit;
-
-    /**
-     * @brief Number of minutes to use for the watchdog timer. If the timer is
-     * not reset within this interval, the system reset timeout begins. A value
-     * of `0xFFFF` indicates unknown.
-     */
-    dmi_word_t timer_inverval;
-
-    /**
-     * @brief Number of minutes before the reboot is initiated. It is used
-     * after a system power cycle, system reset (local or remote), and automatic
-     * system reset. A value of `0xFFFF` indicates unknown.
-     */
-    dmi_word_t timeout;
-};
-
-typedef struct dmi_system_reset_data dmi_system_reset_data_t;
-
 struct dmi_system_reset
 {
     /**
      * @brief Status. Identifies whether (`true`) or not (`false`) the
      * system reset is enabled by the user.
      */
-    bool status;
+    bool is_enabled;
 
     /**
      * @brief Boot option. Indicates one of the following actions to be
@@ -134,7 +94,7 @@ struct dmi_system_reset
     /**
      * @brief System contains a watchdog timer: either `true` or `false`.
      */
-    bool watchdog_present;
+    bool has_watchdog;
 
     /**
      * @brief Number of automatic system resets since the last intentional
@@ -162,8 +122,6 @@ struct dmi_system_reset
      */
     unsigned short timeout;
 };
-
-typedef struct dmi_system_reset dmi_system_reset_t;
 
 /**
  * @brief System reset entity specification.
