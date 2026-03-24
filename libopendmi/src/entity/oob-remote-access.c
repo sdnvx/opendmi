@@ -5,6 +5,7 @@
 // SPDX-License-Identifier: BSD-3-Clause
 //
 #include <opendmi/context.h>
+#include <opendmi/stream.h>
 #include <opendmi/utils.h>
 #include <opendmi/utils/name.h>
 #include <opendmi/utils/codec.h>
@@ -59,18 +60,14 @@ const dmi_entity_spec_t dmi_oob_remote_access_spec =
 static bool dmi_oob_remote_access_decode(dmi_entity_t *entity)
 {
     dmi_oob_remote_access_t *info;
-    const dmi_oob_remote_access_data_t *data;
-
-    data = dmi_entity_data(entity, DMI_TYPE_OOB_REMOTE_ACCESS);
-    if (data == nullptr)
-        return false;
 
     info = dmi_entity_info(entity, DMI_TYPE_OOB_REMOTE_ACCESS);
     if (info == nullptr)
         return false;
 
-    info->vendor              = dmi_entity_string(entity, data->vendor);
-    info->connections.__value = dmi_decode(data->connections);
+    dmi_stream_t *stream = &entity->stream;
 
-    return true;
+    return
+        dmi_stream_decode_str(stream, &info->vendor) and
+        dmi_stream_decode(stream, dmi_byte_t, &info->connections.__value);
 }

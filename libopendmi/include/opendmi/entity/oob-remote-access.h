@@ -11,9 +11,8 @@
 
 #include <opendmi/entity.h>
 
-typedef struct dmi_oob_remote_access      dmi_oob_remote_access_t;
-typedef struct dmi_oob_remote_access_data dmi_oob_remote_access_data_t;
-typedef union  dmi_oob_connections        dmi_oob_connections_t;
+typedef struct dmi_oob_remote_access dmi_oob_remote_access_t;
+typedef union  dmi_oob_connections   dmi_oob_connections_t;
 
 /**
  * @brief Out-of-band remote access connections.
@@ -60,28 +59,6 @@ dmi_packed_union(dmi_oob_connections)
  * failures, or boot failures.
  *
  * @since SMBIOS 2.2
- */
-dmi_packed_struct(dmi_oob_remote_access_data)
-{
-    /**
-     * @brief SMBIOS structure header.
-     */
-    dmi_header_t header;
-
-    /**
-     * @brief Number of the string that contains the manufacturer of the
-     * out-of-band access facility.
-     */
-    dmi_string_t vendor;
-
-    /**
-     * @brief Current remote-access connections.
-     */
-    dmi_byte_t connections;
-};
-
-/**
- * @brief Out-of-band remote access.
  */
 struct dmi_oob_remote_access
 {
