@@ -5,13 +5,12 @@
 // SPDX-License-Identifier: BSD-3-Clause
 //
 #include <opendmi/context.h>
+#include <opendmi/stream.h>
 #include <opendmi/utils.h>
 #include <opendmi/utils/name.h>
 #include <opendmi/utils/codec.h>
 
 #include <opendmi/entity/probe.h>
-
-static short dmi_probe_value(dmi_word_t value);
 
 const dmi_name_set_t dmi_probe_location_names =
 {
@@ -97,41 +96,36 @@ const char *dmi_probe_location_name(dmi_probe_location_t value)
 bool dmi_probe_decode(dmi_entity_t *entity)
 {
     dmi_probe_t *info = nullptr;
-    dmi_probe_data_t *data = dmi_cast(data, entity->data);
 
     info = dmi_cast(info, entity->info);
     if (info == nullptr)
         return false;
 
-    info->description = dmi_entity_string(entity, data->description);
+    dmi_stream_t *stream = &entity->stream;
 
-    dmi_probe_details_t details = {
-        .__value = dmi_decode(data->details)
-    };
+    dmi_probe_details_t details;
 
-    info->location      = details.location;
-    info->status        = details.status;
-    info->maximum_value = dmi_probe_value(data->maximum_value);
-    info->minimum_value = dmi_probe_value(data->minimum_value);
-    info->resolution    = dmi_probe_value(data->resolution);
-    info->tolerance     = dmi_probe_value(data->tolerance);
-    info->accuracy      = dmi_probe_value(data->accuracy);
-    info->oem_defined   = dmi_decode(data->oem_defined);
+    bool status =
+        dmi_stream_decode_str(stream, &info->description) and
+        dmi_stream_decode(stream, dmi_byte_t, &details.__value) and
+        dmi_stream_decode(stream, dmi_word_t, &info->maximum_value) and
+        dmi_stream_decode(stream, dmi_word_t, &info->minimum_value) and
+        dmi_stream_decode(stream, dmi_word_t, &info->resolution) and
+        dmi_stream_decode(stream, dmi_word_t, &info->tolerance) and
+        dmi_stream_decode(stream, dmi_word_t, &info->accuracy) and
+        dmi_stream_decode(stream, dmi_dword_t, &info->oem_defined);
+    if (not status)
+        return false;
 
-    if (entity->body_length > 0x14)
-        info->nominal_value = dmi_probe_value(data->nominal_value);
-    else
+    info->location = details.location;
+    info->status   = details.status;
+
+    if (not dmi_stream_is_done(stream)) {
+        if (not dmi_stream_decode(stream, dmi_word_t, &info->nominal_value))
+            return false;
+    } else {
         info->nominal_value = SHRT_MIN;
+    }
 
     return true;
-}
-
-static short dmi_probe_value(dmi_word_t value)
-{
-    value = dmi_decode(value);
-
-    if (value == DMI_PROBE_VALUE_UNKNOWN)
-        return SHRT_MIN;
-
-    return (int16_t)value;
 }

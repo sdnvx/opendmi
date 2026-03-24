@@ -12,8 +12,8 @@
 #include <opendmi/entity.h>
 #include <opendmi/entity/common.h>
 
-typedef struct dmi_probe      dmi_probe_t;
-typedef struct dmi_probe_data dmi_probe_data_t;
+typedef struct dmi_probe dmi_probe_t;
+typedef union dmi_probe_details dmi_probe_details_t;
 
 #define DMI_PROBE_VALUE_UNKNOWN ((dmi_word_t)0x8000U)
 
@@ -49,7 +49,7 @@ dmi_packed_union(dmi_probe_details)
     /**
      * @brief Raw value.
      */
-    dmi_type_t __value;
+    dmi_byte_t __value;
 
     dmi_packed_struct() {
         /**
@@ -62,72 +62,6 @@ dmi_packed_union(dmi_probe_details)
          */
         dmi_byte_t status : 3;
     };
-};
-
-typedef union dmi_probe_details dmi_probe_details_t;
-
-/**
- * @brief Probe structure.
- */
-dmi_packed_struct(dmi_probe_data)
-{
-    /**
-     * @brief SMBIOS structure header.
-     */
-    dmi_header_t header;
-
-    /**
-     * @brief Number of the string that contains additional descriptive
-     * information about the probe or its location.
-     */
-    dmi_string_t description;
-
-    /**
-     * @brief Location and status details.
-     */
-    dmi_byte_t details;
-
-    /**
-     * @brief Maximum value readable by this probe. If the value is unknown,
-     * the field is set to `0x8000`.
-     */
-    dmi_word_t maximum_value;
-
-    /**
-     * @brief Minimum value readable by this probe. If the value is unknown,
-     * the field is set to `0x8000`.
-     */
-    dmi_word_t minimum_value;
-
-    /**
-     * @brief Resolution for the probe's reading. If the value is unknown,
-     * the field is set to `0x8000`.
-     */
-    dmi_word_t resolution;
-
-    /**
-     * @brief Tolerance for reading from this probe. If the value is unknown,
-     * the field is set to `0x8000`.
-     */
-    dmi_word_t tolerance;
-
-    /**
-     * @brief Accuracy for reading from this probe. If the value is unknown,
-     * the field is set to `0x8000`.
-     */
-    dmi_word_t accuracy;
-
-    /**
-     * @brief OEM- or firmware vendor-specific information.
-     */
-    dmi_dword_t oem_defined;
-
-    /**
-     * @brief Nominal value for the probe’s reading. If the value is unknown,
-     * the field is set to `0x8000`. This field is present in the structure
-     * only if the structure’s Length is larger than `0x14`.
-     */
-    dmi_word_t nominal_value;
 };
 
 struct dmi_probe

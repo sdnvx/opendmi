@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Migrate temperature/voltage/current probe decoders to stream API
 - Migrate TPM device characteristics decoder to stream API
 
 ### Fixed
