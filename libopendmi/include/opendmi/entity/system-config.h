@@ -11,27 +11,10 @@
 
 #include <opendmi/entity.h>
 
-typedef struct dmi_system_config_opts      dmi_system_config_opts_t;
-typedef struct dmi_system_config_opts_data dmi_system_config_opts_data_t;
+typedef struct dmi_system_config_opts dmi_system_config_opts_t;
 
 /**
  * @brief System configuration options structure (type 12).
- */
-dmi_packed_struct(dmi_system_config_opts_data)
-{
-    /**
-     * @brief SMBIOS structure header.
-     */
-    dmi_header_t header;
-
-    /**
-     * @brief Number of strings.
-     */
-    dmi_byte_t count;
-};
-
-/**
- * @brief System configuration options.
  */
 struct dmi_system_config_opts
 {

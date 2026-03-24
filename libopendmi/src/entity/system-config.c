@@ -5,6 +5,7 @@
 // SPDX-License-Identifier: BSD-3-Clause
 //
 #include <opendmi/context.h>
+#include <opendmi/stream.h>
 #include <opendmi/utils.h>
 #include <opendmi/utils/codec.h>
 
@@ -37,24 +38,22 @@ const dmi_entity_spec_t dmi_system_config_opts_spec =
 static bool dmi_system_config_opts_decode(dmi_entity_t *entity)
 {
     dmi_system_config_opts_t *info;
-    const dmi_system_config_opts_data_t *data;
-
-    data = dmi_entity_data(entity, DMI_TYPE_SYSTEM_CONFIG_OPTIONS);
-    if (data == nullptr)
-        return false;
 
     info = dmi_entity_info(entity, DMI_TYPE_SYSTEM_CONFIG_OPTIONS);
     if (info == nullptr)
         return false;
 
-    info->option_count = dmi_decode(data->count);
+    dmi_stream_t *stream = &entity->stream;
+
+    if (not dmi_stream_decode(stream, dmi_byte_t, &info->option_count))
+        return false;
 
     info->options = dmi_alloc_array(entity->context, sizeof(const char *), info->option_count);
     if (info->options == nullptr)
         return false;
 
     for (size_t i = 0; i < info->option_count; i++) {
-        info->options[i] = dmi_entity_string(entity, (dmi_string_t)(i + 1));
+        info->options[i] = dmi_entity_string(entity, i + 1);
     }
 
     return true;
