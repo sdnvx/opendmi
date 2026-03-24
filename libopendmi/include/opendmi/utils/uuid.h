@@ -63,12 +63,34 @@ dmi_packed_union(dmi_uuid)
 __BEGIN_DECLS
 
 /**
- * @brief Decode UUID from SMBIOS format into RFC 4122 format.
+ * @brief Decodes a UUID from SMBIOS byte order into RFC 4122 representation.
+ *
+ * SMBIOS stores the first three UUID fields (`time_low`, `time_mid`,
+ * and `time_hi_and_version`) in little-endian byte order. RFC 4122 requires
+ * all multi-byte fields to be in big-endian (network) byte order. This
+ * function copies the raw SMBIOS value and byte-swaps those three fields so
+ * that the returned `dmi_uuid_t` conforms to RFC 4122. The
+ * `clock_seq_hi_and_reserved`, `clock_seq_low`, and `node` fields are stored
+ * identically in both formats and are not modified.
+ *
+ * @param[in] value  Raw 16-byte UUID as stored in an SMBIOS structure.
+ *
+ * @return A `dmi_uuid_t` with fields in RFC 4122 (big-endian) byte order.
  */
 dmi_uuid_t dmi_uuid_decode(const dmi_byte_t value[16]);
 
 /**
- * @brief Encode UUID from RFC 4122 format into SMBIOS format.
+ * @brief Encodes a UUID from RFC 4122 representation into SMBIOS byte order.
+ *
+ * Performs the inverse of `dmi_uuid_decode()`: byte-swaps the `time_low`,
+ * `time_mid`, and `time_hi_and_version` fields from big-endian (RFC 4122) back
+ * to little-endian (SMBIOS) byte order, then writes the resulting 16 bytes
+ * into @p out. The `clock_seq_hi_and_reserved`, `clock_seq_low`, and `node`
+ * fields are copied without modification.
+ *
+ * @param[in]  value  UUID in RFC 4122 (big-endian) byte order.
+ * @param[out] out    Buffer of exactly 16 bytes that receives the UUID in
+ *                    SMBIOS (little-endian) byte order.
  */
 void dmi_uuid_encode(dmi_uuid_t value, uint8_t out[16]);
 
