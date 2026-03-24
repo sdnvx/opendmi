@@ -104,3 +104,7 @@ See [CONTRIBUTING](CONTRIBUTING.md) for more details.
 ## Licensing
 
 OpenDMI is licensed under BSD 3-clause license. See `LICENSE` for details.
+
+## Links
+
+[![Hypercommit](https://img.shields.io/badge/Hypercommit-DB2475)](https://hypercommit.com/opendmi)
