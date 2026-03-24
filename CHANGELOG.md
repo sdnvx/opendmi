@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Add YAML schema validation on regression tests
 
+### Changed
+
+- Migrate TPM device characteristics decoder to stream API
+
 ### Fixed
 
 - Fix address attributes display format #66

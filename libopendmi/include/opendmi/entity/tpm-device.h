@@ -13,71 +13,9 @@
 
 typedef struct dmi_tpm_device          dmi_tpm_device_t;
 typedef union  dmi_tpm_device_features dmi_tpm_device_features_t;
-typedef struct dmi_tpm_device_data     dmi_tpm_device_data_t;
 
 /**
- * @brief TPM device structure (type 43).
- */
-dmi_packed_struct(dmi_tpm_device_data)
-{
-    /**
-     * @brief SMBIOS structure header.
-     */
-    dmi_header_t header;
-
-    /**
-     * @brief Specified as four ASCII characters, as defined by TCG Vendor ID
-     * (see CAP_VID in TCG Vendor ID Registry).
-     */
-    dmi_byte_t vendor_id[4];
-
-    /**
-     * @brief Major TPM version supported by the TPM device. For example, the
-     * value is `0x01` for TPM v1.2 and is `0x02` for TPM v2.0.
-     */
-    dmi_byte_t spec_version_major;
-
-    /**
-     * @brief Minor TPM version supported by the TPM device. For example, the
-     * value is `0x02` for TPM v1.2 and is `0x00` for TPM v2.0.
-     */
-    dmi_byte_t spec_version_minor;
-
-    /**
-     * @brief For major specification version 0x01, this field contains the
-     * TPM_VERSION structure defined in the TPM Main Specification, Part 2,
-     * Section 5.3. For major specification version 0x02, this field contains
-     * the most significant 32 bits of a TPM vendor-specific value for firmware
-     * version (see TPM_PT_FIRMWARE_VERSION_1 in TPM Structures specification).
-     */
-    dmi_dword_t firmware_version_1;
-
-    /**
-     * @brief For major specification version 0x01h, this field contains 0x00.
-     * For major specification version 0x02, this field contains the least
-     * significant 32 bits of a TPM vendor-specific value for firmware
-     * version (see TPM_PT_FIRMWARE_VERSION_2 in TPM Structures specification).
-     */
-    dmi_dword_t firmware_version_2;
-
-    /**
-     * @brief String number of descriptive information of the TPM device.
-     */
-    dmi_string_t description;
-
-    /**
-     * @brief TPM device characteristics information.
-     */
-    dmi_qword_t features;
-
-    /**
-     * @brief OEM- or firmware vendor-specific information.
-     */
-    dmi_dword_t oem_defined;
-};
-
-/**
- * @brief TPM device characteristics.
+ * @brief TPM device characteristics structure (type 43).
  */
 dmi_packed_union(dmi_tpm_device_features)
 {

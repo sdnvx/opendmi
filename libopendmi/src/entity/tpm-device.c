@@ -5,6 +5,7 @@
 // SPDX-License-Identifier: BSD-3-Clause
 //
 #include <opendmi/context.h>
+#include <opendmi/stream.h>
 #include <opendmi/utils.h>
 #include <opendmi/utils/name.h>
 #include <opendmi/utils/codec.h>
@@ -84,43 +85,43 @@ const dmi_entity_spec_t dmi_tpm_device_spec =
 static bool dmi_tpm_device_decode(dmi_entity_t *entity)
 {
     dmi_tpm_device_t *info;
-    const dmi_tpm_device_data_t *data;
-
-    data = dmi_entity_data(entity, DMI_TYPE_TPM_DEVICE);
-    if (data == nullptr)
-        return false;
 
     info = dmi_entity_info(entity, DMI_TYPE_TPM_DEVICE);
     if (info == nullptr)
         return false;
 
-    // Copy vendor identifier
-    for (size_t i = 0; i < sizeof(data->vendor_id); i++)
-        info->vendor_id[i] = data->vendor_id[i];
+    dmi_stream_t *stream = &entity->stream;
+
+    uint8_t spec_version_major;
+    uint8_t spec_version_minor;
+    uint32_t firmware_version_1;
+    uint32_t firmware_version_2;
+
+    bool status =
+        dmi_stream_read_data(&entity->stream, info->vendor_id, sizeof(info->vendor_id) - 1) and
+        dmi_stream_decode(stream, dmi_byte_t, &spec_version_major) and
+        dmi_stream_decode(stream, dmi_byte_t, &spec_version_minor) and
+        dmi_stream_decode(stream, dmi_dword_t, &firmware_version_1) and
+        dmi_stream_decode(stream, dmi_dword_t, &firmware_version_2) and
+        dmi_stream_decode_str(stream, &info->description) and
+        dmi_stream_decode(stream, dmi_qword_t, &info->features.__value) and
+        dmi_stream_decode(stream, dmi_dword_t, &info->oem_defined);
+    if (not status)
+        return false;
+
+    // Terminate vendor identifier
     info->vendor_id[sizeof(info->vendor_id) - 1] = 0;
 
     // Decode specification version
-    info->spec_version = dmi_version(dmi_decode(data->spec_version_major),
-                                     dmi_decode(data->spec_version_minor), 0);
+    info->spec_version = dmi_version(spec_version_major, spec_version_minor, 0);
 
     // Decode firmware version
     if (dmi_version_major(info->spec_version) > 1) {
-        info->firmware_version = ((uint64_t)dmi_decode(data->firmware_version_1) << 32) |
-                                 ((uint64_t)dmi_decode(data->firmware_version_2));
+        info->firmware_version = ((uint64_t)firmware_version_1 << 32) |
+                                 (uint64_t)firmware_version_2;
     } else {
-        info->firmware_version = dmi_decode(data->firmware_version_1);
+        info->firmware_version = firmware_version_1;
     }
-
-    // Decode description
-    info->description = dmi_entity_string(entity, data->description);
-
-    // Decode characteristics
-    dmi_tpm_device_features_t features = {
-        .__value = dmi_decode(data->features)
-    };
-
-    info->features    = features;
-    info->oem_defined = dmi_decode(data->oem_defined);
 
     return true;
 }
