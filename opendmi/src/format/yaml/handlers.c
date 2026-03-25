@@ -302,7 +302,7 @@ bool dmi_yaml_entity_attr_value(
 
         if (attr->type == DMI_ATTRIBUTE_TYPE_STRING) {
             tag = YAML_STR_TAG;
-            style = YAML_SINGLE_QUOTED_SCALAR_STYLE;
+            style = YAML_DOUBLE_QUOTED_SCALAR_STYLE;
         } else {
             tag = nullptr;
             style = YAML_PLAIN_SCALAR_STYLE;
