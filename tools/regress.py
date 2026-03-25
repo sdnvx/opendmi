@@ -52,14 +52,21 @@ def load_dump(dump_path: str):
 
         return yaml.load(stdout, Loader=SafeLoader)
     except subprocess.CalledProcessError as e:
-        print("FAILED:")
+        print("Unable to read SMBIOS dump:")
         print(e.stderr)
 
 def generate_spec(dump_path: str, spec_path: str):
-    print(f"Generating spec: {dump_path}")
+    print(f"Generating: {dump_path} -> {spec_path}")
 
     data = load_dump(dump_path)
     validate(data, schema)
+
+    try:
+        with open(spec_path, "w+") as file:
+            yaml.dump(data, file, sort_keys=False)
+    except OSError as e:
+        print("Unable to write specification:")
+        print(e.stderr)
 
 def check_spec(dump_path: str, spec_path: str):
     if not os.path.isfile(spec_path):

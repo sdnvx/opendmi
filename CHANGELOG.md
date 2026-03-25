@@ -24,6 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Fix unknown entity level output in YAML export
 - Fix address attributes display format #66
 - Fix `entry` command exit code
 - Fix table area address display format
