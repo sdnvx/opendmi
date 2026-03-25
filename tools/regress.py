@@ -56,7 +56,7 @@ def load_dump(dump_path: str):
         print(e.stderr)
 
 def generate_spec(dump_path: str, spec_path: str):
-    print(f"Generating: {dump_path} -> {spec_path}")
+    print(f"Generating: {dump_path.removeprefix(base_dir)} -> {spec_path.removeprefix(base_dir)}")
 
     data = load_dump(dump_path)
     validate(data, schema)
@@ -73,7 +73,7 @@ def check_spec(dump_path: str, spec_path: str):
         print(f"Skipping: {dump_path} (no spec)")
         return
 
-    print(f"Checking spec: {dump_path}")
+    print(f"Checking: {dump_path.removeprefix(base_dir)} <- {spec_path.removeprefix(base_dir)}")
     spec = load_yaml(spec_path)
     data = load_dump(dump_path)
 
