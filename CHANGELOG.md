@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Add memory channel device linking #73
 - Add colorization of boolean values
 - Add YAML schema validation on regression tests
 

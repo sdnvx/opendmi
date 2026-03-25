@@ -602,6 +602,12 @@ struct dmi_memory_device
      * @brief The RCD Revision Number found in the SPD of this memory device.
      */
     uint16_t rcd_revision;
+
+    /**
+     * @brief Reference to the structure that identifies the memory channel
+     * to which this device is connected.
+     */
+    dmi_entity_t *channel;
 };
 
 /**

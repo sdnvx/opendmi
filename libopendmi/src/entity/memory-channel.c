@@ -10,6 +10,7 @@
 #include <opendmi/utils/codec.h>
 
 #include <opendmi/entity/memory-channel.h>
+#include <opendmi/entity/memory-device.h>
 
 static bool dmi_memory_channel_decode(dmi_entity_t *entity);
 static bool dmi_memory_channel_link(dmi_entity_t *entity);
@@ -139,7 +140,10 @@ static bool dmi_memory_channel_link(dmi_entity_t *entity)
         if (device == nullptr)
             continue;
 
+        dmi_memory_device_t *device_info = dmi_cast(device_info, device->info);
+
         info->devices[i].device = device;
+        device_info->channel    = entity;
     }
 
     return true;
