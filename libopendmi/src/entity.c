@@ -41,6 +41,15 @@ dmi_entity_t *dmi_entity_create(dmi_context_t *context, const void *data)
         return nullptr;
     }
 
+    size_t offset = (size_t) ((const dmi_data_t*) data - context->table_data);
+    size_t remain_length = context->table_area_size - offset;
+    if (remain_length < sizeof(dmi_header_t)) {
+        dmi_error_raise_ex(context, DMI_ERROR_INVALID_ENTITY_LENGTH,
+                           "Offset 0x%04zX: Not enough data for header (%zu bytes remaining)",
+                           offset, remain_length);
+        return nullptr;
+    }
+
     dmi_header_t *header = dmi_cast(header, data);
     dmi_type_t    type   = dmi_decode(header->type);
     size_t        length = dmi_decode(header->length);
@@ -58,6 +67,11 @@ dmi_entity_t *dmi_entity_create(dmi_context_t *context, const void *data)
         dmi_error_raise_ex(context, DMI_ERROR_INVALID_ENTITY_LENGTH,
                            "0x%04hx (%s): %zu bytes",
                            handle, dmi_type_name(context, type), length);
+        return nullptr;
+    } else if (remain_length < length) {
+        dmi_error_raise_ex(context, DMI_ERROR_INVALID_ENTITY_LENGTH,
+                           "0x%04hx (%s): Not enough data for body (%zu bytes remaining)",
+                           handle, dmi_type_name(context, type), remain_length);
         return nullptr;
     }
 
