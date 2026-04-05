@@ -45,8 +45,8 @@ void dmi_tty_init(void)
 #ifdef ENABLE_CURSES
     // Initialize terminal
     if (isatty(STDOUT_FILENO)) {
-        if (setupterm(nullptr, STDOUT_FILENO, nullptr) == 0)
-            dmi_tty = has_colors() and (start_color() != 0);
+        if (setupterm(nullptr, STDOUT_FILENO, nullptr) != ERR)
+            dmi_tty = has_colors() and (start_color() != ERR);
     }
 #endif // ENABLE_CURSES
 }
