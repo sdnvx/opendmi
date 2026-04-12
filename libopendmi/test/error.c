@@ -9,8 +9,10 @@
 #include <cmocka.h>
 
 #include <opendmi/context.h>
-#include <opendmi/error.h>
+#include <opendmi/log.h>
 #include <opendmi/test/logger.h>
+
+#include <opendmi/error.h>
 
 static int test_error_setup(void **pstate);
 static int test_error_teardown(void **pstate);
@@ -34,6 +36,8 @@ static void test_error_get_last_empty(void **pstate);
 static void test_error_get_last(void **pstate);
 static void test_error_clear_null_context(void **pstate);
 static void test_error_clear(void **pstate);
+
+static dmi_log_t test_logger = { DMI_LOG_DEBUG, dmi_test_log_handler };
 
 int main(void)
 {
@@ -70,8 +74,7 @@ static int test_error_setup(void **pstate)
     if (context == nullptr)
         return -1;
 
-    dmi_set_logger(context, dmi_test_log_handler);
-    dmi_set_log_level(context, DMI_LOG_DEBUG);
+    dmi_set_logger(context, &test_logger);
 
     *pstate = dmi_cast(*pstate, context);
 

@@ -299,7 +299,7 @@ bool dmi_add_extension(dmi_context_t *context, const dmi_module_t *module)
         return false;
     }
 
-    dmi_log_info(context, "Enabling extension: %s", module->name);
+    dmi_log_info(context->logger, "Enabling extension: %s", module->name);
 
     if (module->entities) {
         const dmi_entity_spec_t **pspec;
@@ -331,7 +331,7 @@ bool dmi_dump_load(dmi_context_t *context, const char *path)
         return false;
     }
 
-    dmi_log_info(context, "Loading DMI dump: %s...", path);
+    dmi_log_info(context->logger, "Loading DMI dump: %s...", path);
 
     return dmi_open_ex(context, &dmi_dump_backend, path);
 }
@@ -442,22 +442,12 @@ const char *dmi_type_name(dmi_context_t *context, dmi_type_t type)
     return name;
 }
 
-bool dmi_set_logger(dmi_context_t *context, dmi_log_handler_t logger)
+bool dmi_set_logger(dmi_context_t *context, dmi_log_t *logger)
 {
     if (context == nullptr)
         return false;
 
     context->logger = logger;
-
-    return true;
-}
-
-bool dmi_set_log_level(dmi_context_t *context, dmi_log_level_t level)
-{
-    if (context == nullptr)
-        return false;
-
-    context->log_level = level;
 
     return true;
 }
@@ -511,8 +501,8 @@ static bool dmi_open_ex(
         return false;
     }
 
-    dmi_log_info(context, "Opening DMI context...");
-    dmi_log_info(context, "Using backend: %s", backend->name);
+    dmi_log_info(context->logger, "Opening DMI context...");
+    dmi_log_info(context->logger, "Using backend: %s", backend->name);
 
     // Initialize context
     bool success = false;
@@ -526,7 +516,7 @@ static bool dmi_open_ex(
         }
 
         // Read entry point
-        dmi_log_info(context, "Reading DMI entry point...");
+        dmi_log_info(context->logger, "Reading DMI entry point...");
         context->entry_data = context->backend->read_entry(context, &context->entry_size);
 
         #ifndef _WIN32 // Windows backend does not provide entry point data, skip that
@@ -534,21 +524,21 @@ static bool dmi_open_ex(
             break;
 
         // Decode entry point
-        dmi_log_info(context, "Decoding DMI entry point...");
+        dmi_log_info(context->logger, "Decoding DMI entry point...");
         if (not dmi_entry_decode(context, context->entry_data, context->entry_size))
             break;
         #endif
 
         // Fixup SMBIOS version number
         dmi_version_fixup(context);
-        dmi_log_info(context, "SMBIOS %u.%u.%u present",
+        dmi_log_info(context->logger, "SMBIOS %u.%u.%u present",
                      dmi_version_major(context->smbios_version),
                      dmi_version_minor(context->smbios_version),
                      dmi_version_revision(context->smbios_version));
 
         // Read and decode SMBIOS structures
         // TODO: Use separate variable for size
-        dmi_log_info(context, "Reading DMI structures...");
+        dmi_log_info(context->logger, "Reading DMI structures...");
         context->table_data = context->backend->read_table(context, &context->table_area_size);
         if (context->table_data == nullptr)
             break;
@@ -591,12 +581,12 @@ static bool dmi_setup_extensions(dmi_context_t *context)
     const dmi_firmware_t *firmware;
     const dmi_vendor_spec_t *vendor;
 
-    dmi_log_debug(context, "Detecting SMBIOS vendor...");
+    dmi_log_debug(context->logger, "Detecting SMBIOS vendor...");
 
     entity = dmi_registry_get(context->registry, DMI_HANDLE_INVALID, DMI_TYPE(FIRMWARE), true);
     if (entity == nullptr) {
         if ((context->flags & DMI_CONTEXT_FLAG_STRICT) == 0) {
-            dmi_log_notice(context, dmi_error_message(DMI_ERROR_MISSING_FIRMWARE_INFO));
+            dmi_log_notice(context->logger, dmi_error_message(DMI_ERROR_MISSING_FIRMWARE_INFO));
             return true;
         }
 
@@ -614,7 +604,8 @@ static bool dmi_setup_extensions(dmi_context_t *context)
     if (vendor != nullptr)
         context->vendor = vendor->id;
 
-    dmi_log_info(context, "SMBIOS vendor: %s (%s)", dmi_vendor_name(context->vendor), firmware->vendor);
+    dmi_log_info(context->logger, "SMBIOS vendor: %s (%s)",
+                 dmi_vendor_name(context->vendor), firmware->vendor);
 
     //
     // TODO: Implement fully-feature module probing

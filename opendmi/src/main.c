@@ -42,7 +42,7 @@ static bool dmi_log_init(dmi_context_t *context);
 static void dmi_log_close(void);
 
 static void dmi_log_handler(
-        dmi_context_t   *context,
+        dmi_log_t       *target,
         dmi_log_level_t  level,
         const char      *format,
         va_list          args);
@@ -59,8 +59,9 @@ static void dmi_log_file_handler(
 static off_t dmi_log_file_lock(void);
 static void dmi_log_file_unlock(off_t start);
 
-FILE *log_file = nullptr;
-bool  log_lock = true;
+static FILE     *log_file   = nullptr;
+static bool      log_lock   = true;
+static dmi_log_t log_target = { DMI_LOG_WARNING, dmi_log_handler };
 
 int main(int argc, char *argv[])
 {
@@ -148,8 +149,8 @@ static bool dmi_log_init(dmi_context_t *context)
     if (not dmi_global_config.log_enable)
         return true;
 
-    dmi_set_logger(context, dmi_log_handler);
-    dmi_set_log_level(context, dmi_global_config.log_level);
+    dmi_log_set_level(&log_target, dmi_global_config.log_level);
+    dmi_set_logger(context, &log_target);
 
     if (dmi_global_config.log_path != nullptr) {
         log_file = fopen(dmi_global_config.log_path, "a");
@@ -171,12 +172,12 @@ static void dmi_log_close(void)
 }
 
 static void dmi_log_handler(
-        dmi_context_t   *context,
+        dmi_log_t       *target,
         dmi_log_level_t  level,
         const char      *format,
         va_list          args)
 {
-    dmi_unused(context);
+    dmi_unused(target);
     assert(level >= 0);
     assert(format != nullptr);
 

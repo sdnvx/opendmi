@@ -354,7 +354,8 @@ static bool dmi_firmware_decode(dmi_entity_t *entity)
     if (release_date != nullptr) {
         info->release_date = dmi_date_parse(release_date);
         if (info->release_date == DMI_DATE_NONE)
-            dmi_log_warning(entity->context, "Invalid firmware release date format: '%s'", release_date);
+            dmi_log_warning(entity->context->logger,
+                            "Invalid firmware release date format: '%s'", release_date);
     } else {
         info->release_date = DMI_DATE_NONE;
     }

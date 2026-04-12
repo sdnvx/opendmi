@@ -171,8 +171,10 @@ static bool dmi_battery_decode(dmi_entity_t *entity)
     const char *manufacture_date = dmi_entity_string(entity, data->manufacture_date);
     if (manufacture_date != nullptr) {
         info->manufacture_date = dmi_date_parse(manufacture_date);
-        if (info->manufacture_date == DMI_DATE_NONE)
-            dmi_log_warning(entity->context, "Invalid battery manufacture date format: '%s'", manufacture_date);
+        if (info->manufacture_date == DMI_DATE_NONE) {
+            dmi_log_warning(entity->context->logger,
+                            "Invalid battery manufacture date format: '%s'", manufacture_date);
+        }
     }
 
     info->serial_number    = dmi_entity_string(entity, data->serial_number);

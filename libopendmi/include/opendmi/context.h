@@ -110,9 +110,9 @@ struct dmi_context
     size_t entity_max_size;
 
     /**
-     * @brief Logger callback.
+     * @brief Context logger.
      */
-    dmi_log_handler_t logger;
+    dmi_log_t *logger;
 
     /**
      * @brief Logging level.
@@ -247,17 +247,7 @@ const char *dmi_type_name(dmi_context_t *context, dmi_type_t type);
  *
  * @return The function returns `true` on success and `false` otherwise.
  */
-bool dmi_set_logger(dmi_context_t *context, dmi_log_handler_t logger);
-
-/**
- * @brief Set logging level.
- *
- * @param[in] context DMI context handle.
- * @param[in] level Logging level.
- *
- * @return The function returns `true` on success and `false` otherwise.
- */
-bool dmi_set_log_level(dmi_context_t *context, dmi_log_level_t level);
+bool dmi_set_logger(dmi_context_t *context, dmi_log_t *logger);
 
 /**
  * @brief Close DMI context.

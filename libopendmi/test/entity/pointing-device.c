@@ -9,8 +9,10 @@
 #include <cmocka.h>
 
 #include <opendmi/context.h>
-#include <opendmi/entity/pointing-device.h>
+#include <opendmi/log.h>
 #include <opendmi/test/logger.h>
+
+#include <opendmi/entity/pointing-device.h>
 
 typedef struct test_state test_state_t;
 typedef struct test_pointing_device test_pointing_device_t;
@@ -60,6 +62,8 @@ static void test_pointing_device_decode_interface(void **pstate);
 static void test_pointing_device_decode_button_count(void **pstate);
 
 static dmi_header_t test_pointing_device_header(ssize_t extra_length);
+
+static dmi_log_t test_logger = { DMI_LOG_DEBUG, &dmi_test_log_handler };
 
 int main(void)
 {
@@ -130,8 +134,7 @@ static int test_pointing_device_initialize(void **pstate)
         return -1;
     }
 
-    dmi_set_logger(state->context, dmi_test_log_handler);
-    dmi_set_log_level(state->context, DMI_LOG_DEBUG);
+    dmi_set_logger(state->context, &test_logger);
 
     *pstate = state;
     return 0;

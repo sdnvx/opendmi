@@ -14,7 +14,7 @@
 __BEGIN_DECLS
 
 void dmi_test_log_handler(
-        dmi_context_t   *context,
+        dmi_log_t       *target,
         dmi_log_level_t  level,
         const char      *format,
         va_list          args);

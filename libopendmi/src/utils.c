@@ -36,10 +36,8 @@ void *dmi_alloc(dmi_context_t *context, size_t size)
     void *ptr;
 
     ptr = calloc(1, size);
-    if ((ptr == nullptr) and (context != nullptr)) {
-        dmi_log_error(context, dmi_error_message(DMI_ERROR_OUT_OF_MEMORY));
+    if ((ptr == nullptr) and (context != nullptr))
         dmi_error_raise(context, DMI_ERROR_OUT_OF_MEMORY);
-    }
 
     return ptr;
 }
@@ -130,8 +128,6 @@ dmi_data_t *dmi_file_get(
     do {
         dmi_file_stat_t st;
 
-        dmi_log_debug(context, "Reading %s ...", path);
-
         // Open file
 #if defined(_WIN32)
         if (_sopen_s(&fd, path, _O_RDONLY, _SH_DENYNO, _S_IREAD) != 0)
@@ -163,8 +159,6 @@ dmi_data_t *dmi_file_get(
             dmi_error_raise_ex(context, DMI_ERROR_FILE_READ, "%s: %s", path, strerror(errno));
             break;
         }
-
-        dmi_log_debug(context, "Read %zu bytes", length);
 
         success = true;
     } while (false);
@@ -233,9 +227,6 @@ dmi_data_t *dmi_memory_get(dmi_context_t *context, const char *path, size_t base
         data = dmi_alloc(context, length);
         if (data == nullptr)
             break;
-
-        dmi_log_debug(context, "Mapping request: offset=0x%zx length=%zu", base, length);
-        dmi_log_debug(context, "Mapping actual: offset=0x%zx length=%zu", base - offset, length + offset);
 
         ptr = mmap(nullptr, offset + length, PROT_READ, MAP_SHARED, fd, base - offset);
         if (ptr == MAP_FAILED) {

@@ -51,7 +51,8 @@ dmi_entity_t *dmi_entity_create(
     size_t        length = dmi_decode(header->length);
     dmi_handle_t  handle = dmi_decode(header->handle);
 
-    dmi_log_debug(context, "%p: Handle 0x%04x, length %zu, type %d (%s)",
+    dmi_log_debug(context->logger,
+                  "%p: Handle 0x%04x, length %zu, type %d (%s)",
                   data, handle, length, (int)header->type,
                   dmi_type_name(context, type));
 

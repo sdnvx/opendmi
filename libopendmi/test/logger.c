@@ -10,12 +10,12 @@
 #include <opendmi/test/logger.h>
 
 void dmi_test_log_handler(
-        dmi_context_t   *context,
+        dmi_log_t       *target,
         dmi_log_level_t  level,
         const char      *format,
         va_list          args)
 {
-    dmi_unused(context);
+    dmi_unused(target);
     assert(level >= 0);
     assert(format != nullptr);
 

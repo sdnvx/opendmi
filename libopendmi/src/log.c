@@ -5,7 +5,6 @@
 // SPDX-License-Identifier: BSD-3-Clause
 //
 #include <opendmi/log.h>
-#include <opendmi/context.h>
 #include <opendmi/utils.h>
 #include <opendmi/utils/name.h>
 
@@ -22,19 +21,32 @@ static const dmi_name_set_t dmi_log_level_names =
     }
 };
 
-void dmi_log(dmi_context_t *context, dmi_log_level_t level, const char *fmt, ...)
+
+bool dmi_log_set_level(dmi_log_t *target, dmi_log_level_t level)
+{
+    if (target == nullptr)
+        return false;
+
+    target->level = level;
+
+    return true;
+}
+
+bool dmi_log_message(dmi_log_t *target, dmi_log_level_t level, const char *format, ...)
 {
     va_list args;
 
-    if ((context == nullptr) or (context->logger == nullptr))
-        return;
+    if ((target == nullptr) or (target->handler == nullptr))
+        return false;
 
-    if (level > context->log_level)
-        return;
+    if (level > target->level)
+        return false;
 
     va_start(args, fmt);
-    context->logger(context, level, fmt, args);
+    target->handler(target, level, format, args);
     va_end(args);
+
+    return true;
 }
 
 const char *dmi_log_level_name(dmi_log_level_t value)

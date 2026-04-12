@@ -12,6 +12,8 @@
 #include <stdarg.h>
 #include <opendmi/types.h>
 
+typedef struct dmi_log dmi_log_t;
+
 /**
  * @brief Logging levels.
  */
@@ -26,21 +28,42 @@ typedef enum dmi_log_level
     __DMI_LOG_LEVEL_COUNT
 } dmi_log_level_t;
 
-typedef void (*dmi_log_handler_t)(dmi_context_t *context, dmi_log_level_t level, const char *fmt, va_list args);
+typedef void dmi_log_handler_fn(
+        dmi_log_t       *target,
+        dmi_log_level_t  level,
+        const char      *format,
+        va_list          args);
+
+struct dmi_log
+{
+    dmi_log_level_t level;
+    dmi_log_handler_fn *handler;
+};
 
 __BEGIN_DECLS
 
-void dmi_log(dmi_context_t *context, dmi_log_level_t level, const char *fmt, ...);
+bool dmi_log_set_level(dmi_log_t *target, dmi_log_level_t level);
+
+bool dmi_log_message(
+        dmi_log_t       *target,
+        dmi_log_level_t  level,
+        const char      *format,
+        ...);
 
 const char *dmi_log_level_name(dmi_log_level_t value);
 dmi_log_level_t dmi_log_level_find(const char *code);
 
 __END_DECLS
 
-#define dmi_log_error(context, fmt, ...)   dmi_log(context, DMI_LOG_ERROR, fmt, ##__VA_ARGS__)
-#define dmi_log_warning(context, fmt, ...) dmi_log(context, DMI_LOG_WARNING, fmt, ##__VA_ARGS__)
-#define dmi_log_notice(context, fmt, ...)  dmi_log(context, DMI_LOG_NOTICE, fmt, ##__VA_ARGS__)
-#define dmi_log_info(context, fmt, ...)    dmi_log(context, DMI_LOG_INFO, fmt, ##__VA_ARGS__)
-#define dmi_log_debug(context, fmt, ...)   dmi_log(context, DMI_LOG_DEBUG, fmt, ##__VA_ARGS__)
+#define dmi_log_error(target, format, ...) \
+        dmi_log_message(target, DMI_LOG_ERROR, format, ##__VA_ARGS__)
+#define dmi_log_warning(target, format, ...) \
+        dmi_log_message(target, DMI_LOG_WARNING, format, ##__VA_ARGS__)
+#define dmi_log_notice(target, format, ...) \
+        dmi_log_message(target, DMI_LOG_NOTICE, format, ##__VA_ARGS__)
+#define dmi_log_info(target, format, ...) \
+        dmi_log_message(target, DMI_LOG_INFO, format, ##__VA_ARGS__)
+#define dmi_log_debug(target, format, ...) \
+        dmi_log_message(target, DMI_LOG_DEBUG, format, ##__VA_ARGS__)
 
 #endif // !OPENDMI_LOG_H
