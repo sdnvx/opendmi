@@ -275,6 +275,10 @@ OpenDMI is licensed under BSD 3-clause license. See [LICENSE](LICENSE.md) for de
 uses parts of some third-party libraries that are distributed under their own
 terms (see [LICENSE-3RD-PARTY](LICENSE-3RD-PARTY.md)).
 
+## SAST Tools
+
+[PVS-Studio](https://pvs-studio.com/pvs-studio/?utm_source=website&utm_medium=github&utm_campaign=open_source) - static analyzer for C, C++, C#, and Java code.
+
 ## Links
 
 [![Hypercommit](https://img.shields.io/badge/Hypercommit-DB2475)](https://hypercommit.com/opendmi)
