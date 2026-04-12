@@ -21,6 +21,7 @@ __BEGIN_DECLS
  * reversed. Used as fallback for dmi_bswap16() inline when no compiler builtin
  * is available.
  */
+[[gnu::const]]
 uint16_t __dmi_bswap16_compat(uint16_t value);
 
 /**
@@ -29,6 +30,7 @@ uint16_t __dmi_bswap16_compat(uint16_t value);
  * reversed. Used as fallback for dmi_bswap32() inline when no compiler builtin
  * is available.
  */
+[[gnu::const]]
 uint32_t __dmi_bswap32_compat(uint32_t value);
 
 /**
@@ -37,23 +39,46 @@ uint32_t __dmi_bswap32_compat(uint32_t value);
  * reversed. Used as fallback for dmi_bswap64() inline when no compiler builtin
  * is available.
  */
+[[gnu::const]]
 uint64_t __dmi_bswap64_compat(uint64_t value);
 
 __END_DECLS
 
-#if defined(_MSC_VER)
-    static inline uint16_t dmi_bswap16(uint16_t value) { return _byteswap_ushort(value); }
-    static inline uint32_t dmi_bswap32(uint32_t value) { return _byteswap_ulong(value);  }
-    static inline uint64_t dmi_bswap64(uint64_t value) { return _byteswap_uint64(value); }
+[[gnu::const]]
+static inline uint16_t dmi_bswap16(uint16_t value)
+{
+#   if defined(_MSC_VER)
+        return _byteswap_ushort(value);
 #   elif defined(__GNUC__) || defined(__clang__)
-    static inline uint16_t dmi_bswap16(uint16_t value) { return __builtin_bswap16(value); }
-    static inline uint32_t dmi_bswap32(uint32_t value) { return __builtin_bswap32(value); }
-    static inline uint64_t dmi_bswap64(uint64_t value) { return __builtin_bswap64(value); }
+        return __builtin_bswap16(value);
 #   else
-    static inline uint16_t dmi_bswap16(uint16_t value) { return __dmi_bswap16_compat(value); }
-    static inline uint32_t dmi_bswap32(uint16_t value) { return __dmi_bswap32_compat(value); }
-    static inline uint64_t dmi_bswap64(uint16_t value) { return __dmi_bswap64_compat(value); }
+        return __dmi_bswap16_compat(value);
 #   endif
+}
+
+[[gnu::const]]
+static inline uint32_t dmi_bswap32(uint32_t value)
+{
+#   if defined(_MSC_VER)
+        return _byteswap_ulong(value);
+#   elif defined(__GNUC__) || defined(__clang__)
+        return __builtin_bswap32(value);
+#   else
+        return __dmi_bswap32_compat(value);
+#   endif
+}
+
+[[gnu::const]]
+static inline uint64_t dmi_bswap64(uint64_t value)
+{
+#   if defined(_MSC_VER)
+        return _byteswap_uint64(value);
+#   elif defined(__GNUC__) || defined(__clang__)
+        return __builtin_bswap64(value);
+#   else
+        return __dmi_bswap64_compat(value);
+#   endif
+}
 
 #define dmi_bswap(value) (_Generic((value),               \
                                    uint64_t: dmi_bswap64, \
@@ -62,24 +87,70 @@ __END_DECLS
                                    uint8_t:  dmi_bswap8   \
                                   )(value))
 
+/**
+ * @fn uint16_t dmi_hton16(uint16_t value)
+ * @brief Convert unsigned 16-bit value from host to network byte order.
+ */
+[[gnu::const]]
 #if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
     static inline uint16_t dmi_hton16(uint16_t value) { return dmi_bswap16(value); }
-    static inline uint32_t dmi_hton32(uint32_t value) { return dmi_bswap32(value); }
-    static inline uint64_t dmi_hton64(uint64_t value) { return dmi_bswap64(value); }
-
-    static inline uint16_t dmi_ntoh16(uint16_t value) { return dmi_bswap16(value); }
-    static inline uint32_t dmi_ntoh32(uint32_t value) { return dmi_bswap32(value); }
-    static inline uint64_t dmi_ntoh64(uint64_t value) { return dmi_bswap64(value); }
 #elif __BYTE_ORDER__ == __ORDER_BIG_ENDIAN
     static inline uint16_t dmi_hton16(uint16_t value) { return value; }
-    static inline uint32_t dmi_hton32(uint32_t value) { return value; }
-    static inline uint64_t dmi_hton64(uint64_t value) { return value; }
+#endif
 
+/**
+ * @fn uint32_t dmi_hton32(uint32_t value)
+ * @brief Convert unsigned 32-bit value from host to network byte order.
+ */
+[[gnu::const]]
+#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+    static inline uint32_t dmi_hton32(uint32_t value) { return dmi_bswap32(value); }
+#elif __BYTE_ORDER__ == __ORDER_BIG_ENDIAN
+    static inline uint32_t dmi_hton32(uint32_t value) { return value; }
+#endif
+
+/**
+ * @fn uint64_t dmi_hton64(uint64_t value)
+ * @brief Convert unsigned 64-bit value from host to network byte order.
+ */
+[[gnu::const]]
+#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+    static inline uint64_t dmi_hton64(uint64_t value) { return dmi_bswap64(value); }
+#elif __BYTE_ORDER__ == __ORDER_BIG_ENDIAN
+    static inline uint64_t dmi_hton64(uint64_t value) { return value; }
+#endif
+
+/**
+ * @fn uint16_t dmi_ntoh16(uint16_t value)
+ * @brief Convert unsigned 16-bit value from network to host byte order.
+ */
+[[gnu::const]]
+#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+    static inline uint16_t dmi_ntoh16(uint16_t value) { return dmi_bswap16(value); }
+#elif __BYTE_ORDER__ == __ORDER_BIG_ENDIAN
     static inline uint16_t dmi_ntoh16(uint16_t value) { return value; }
+#endif
+
+/**
+ * @fn uint32_t dmi_ntoh32(uint32_t value)
+ * @brief Convert unsigned 32-bit value from network to host byte order.
+ */
+[[gnu::const]]
+#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+    static inline uint32_t dmi_ntoh32(uint32_t value) { return dmi_bswap32(value); }
+#elif __BYTE_ORDER__ == __ORDER_BIG_ENDIAN
     static inline uint32_t dmi_ntoh32(uint32_t value) { return value; }
+#endif
+
+/**
+ * @fn uint64_t dmi_ntoh64(uint64_t value)
+ * @brief Convert unsigned 64-bit value from network to host byte order.
+ */
+[[gnu::const]]
+#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+    static inline uint64_t dmi_ntoh64(uint64_t value) { return dmi_bswap64(value); }
+#elif __BYTE_ORDER__ == __ORDER_BIG_ENDIAN
     static inline uint64_t dmi_ntoh64(uint64_t value) { return value; }
-#else
-#   error "Unsupported endianness"
 #endif
 
 #define dmi_hton(value) (_Generic((value),              \

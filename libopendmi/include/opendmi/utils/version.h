@@ -50,6 +50,7 @@ static inline dmi_version_t dmi_version(unsigned int major,
  * @param[in] version Version number.
  * @return Major version number.
  */
+[[gnu::const]]
 static inline unsigned int dmi_version_major(dmi_version_t version)
 {
     return (version & 0xFF0000U) >> 16;
@@ -61,6 +62,7 @@ static inline unsigned int dmi_version_major(dmi_version_t version)
  * @param[in] version Version number.
  * @return Minor version number.
  */
+[[gnu::const]]
 static inline unsigned int dmi_version_minor(dmi_version_t version)
 {
     return (version & 0x00FF00U) >> 8;
@@ -72,6 +74,7 @@ static inline unsigned int dmi_version_minor(dmi_version_t version)
  * @param[in] version Version number.
  * @return Revision version number.
  */
+[[gnu::const]]
 static inline unsigned int dmi_version_revision(dmi_version_t version)
 {
     return version & 0x0000FFU;
