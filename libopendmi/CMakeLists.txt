@@ -22,6 +22,8 @@ if ("${CMAKE_BUILD_TYPE}" STREQUAL "Coverage")
 endif()
 
 add_library(opendmi-object OBJECT)
+add_library(opendmi-static STATIC)
+add_library(opendmi-shared SHARED)
 
 if(ICU_FOUND)
     set(LIBOPENDMI_RESOURCE_ROOT ${CMAKE_CURRENT_SOURCE_DIR}/locale)
@@ -65,10 +67,12 @@ if(ICU_FOUND)
         DEPENDS ${LIBOPENDMI_BUNDLES_DEPS}
     )
 
+    set(LIBOPENDMI_BUNDLE_DATA ${LIBOPENDMI_BUNDLE_ROOT}/resources_dat.o)
     add_custom_command(
-        OUTPUT ${LIBOPENDMI_BUNDLE_ROOT}/dmi_resources_dat.o
+        OUTPUT ${LIBOPENDMI_BUNDLE_DATA}
         COMMAND ${ICU_PKGDATA_EXECUTABLE}
-            --name dmi-resources
+            --name resources
+            --entrypoint dmi_resources
             --libname opendmi-resources
             --mode static
             --destdir ${LIBOPENDMI_BUNDLE_ROOT}
@@ -78,13 +82,14 @@ if(ICU_FOUND)
     )
 
     add_custom_target(opendmi-resources
-        DEPENDS ${LIBOPENDMI_BUNDLE_ROOT}/dmi_resources_dat.o
+        DEPENDS ${LIBOPENDMI_BUNDLE_DATA}
     )
 
     add_dependencies(opendmi-object opendmi-resources)
 
     target_include_directories(opendmi-object PRIVATE ${ICU_INCLUDE_DIRS})
-    target_sources(opendmi-object PRIVATE ${LIBOPENDMI_BUNDLE_ROOT}/dmi_resources_dat.o)
+    target_sources(opendmi-static PUBLIC ${LIBOPENDMI_BUNDLE_DATA})
+    target_sources(opendmi-shared PUBLIC ${LIBOPENDMI_BUNDLE_DATA})
 
     list(APPEND LIBOPENDMI_LIBRARIES ICU::uc)
 endif()
@@ -404,13 +409,13 @@ if(ENABLE_COVERAGE)
     target_compile_options(opendmi-object PUBLIC ${COVERAGE_OPTIONS})
 endif()
 
-add_library(opendmi-static STATIC $<TARGET_OBJECTS:opendmi-object>)
 target_include_directories(opendmi-static INTERFACE include)
+target_sources(opendmi-static PRIVATE $<TARGET_OBJECTS:opendmi-object>)
 target_link_libraries(opendmi-static PUBLIC ${LIBOPENDMI_LIBRARIES})
 set_target_properties(opendmi-static PROPERTIES OUTPUT_NAME opendmi)
 
-add_library(opendmi-shared SHARED $<TARGET_OBJECTS:opendmi-object>)
 target_include_directories(opendmi-shared INTERFACE include)
+target_sources(opendmi-shared PRIVATE $<TARGET_OBJECTS:opendmi-object>)
 target_link_libraries(opendmi-shared PUBLIC ${LIBOPENDMI_LIBRARIES})
 if(ENABLE_COVERAGE)
     target_link_options(opendmi-shared PUBLIC ${COVERAGE_OPTIONS})

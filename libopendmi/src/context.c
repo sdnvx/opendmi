@@ -17,6 +17,7 @@
 #include <stdio.h>
 
 #ifdef ENABLE_ICU
+#   include <unicode/uclean.h>
 #   include <unicode/udata.h>
 #   include <unicode/ures.h>
 #endif // ENABLE_ICU
@@ -202,7 +203,7 @@ static const dmi_entity_spec_t *dmi_entity_specs[] =
 };
 
 #ifdef ENABLE_ICU
-//extern void *dmi_resources_dat;
+    extern const char dmi_resources_dat[];
 #endif
 
 dmi_context_t *dmi_create(unsigned int flags)
@@ -236,21 +237,27 @@ dmi_context_t *dmi_create(unsigned int flags)
         }
 
 #       ifdef ENABLE_ICU
-//            UErrorCode status;
+            UErrorCode status = U_ZERO_ERROR;
+
+            u_init(&status);
+            if (U_FAILURE(status)) {
+                fprintf(stderr, "Unable to initialize ICU: %s\n", u_errorName(status));
+                break;
+            }
 
             // Register resources package
-//            udata_setAppData("dmi", dmi_resources_dat, &status);
-//            if (not U_SUCCESS(status)) {
-//                fprintf(stderr, "Unable register resources package: %s", u_errorName(status));
-//                break;
-//            }
+            udata_setAppData("opendmi", dmi_resources_dat, &status);
+            if (U_FAILURE(status)) {
+                fprintf(stderr, "Unable register resources package: %s\n", u_errorName(status));
+                break;
+            }
 
             // Load i18n resources
-//            context->resources = ures_open("dmi", "root", &status);
-//            if (not U_SUCCESS(status)) {
-//                fprintf(stderr, "Unable to open resource bundle: %s", u_errorName(status));
-//                break;
-//            }
+            context->resources = ures_open("opendmi", nullptr, &status);
+            if (U_FAILURE(status)) {
+                fprintf(stderr, "Unable to open resource bundle: %s\n", u_errorName(status));
+                break;
+            }
 #       endif
 
         success = true;
