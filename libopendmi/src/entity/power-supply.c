@@ -191,12 +191,12 @@ const dmi_entity_spec_t dmi_power_supply_spec =
 
 const char *dmi_power_supply_type_name(dmi_power_supply_type_t value)
 {
-    return dmi_name_lookup(&dmi_power_supply_type_names, value);
+    return dmi_name_lookup(&dmi_power_supply_type_names, (int)value);
 }
 
 const char *dmi_range_switching_type_name(dmi_range_switching_type_t value)
 {
-    return dmi_name_lookup(&dmi_range_switching_type_names, value);
+    return dmi_name_lookup(&dmi_range_switching_type_names, (int)value);
 }
 
 static bool dmi_power_supply_decode(dmi_entity_t *entity)

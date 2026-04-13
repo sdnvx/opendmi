@@ -275,7 +275,7 @@ bool dmi_xml_entity_attr_array(
 
     // TODO: Support counters of different types
     size_t count = dmi_member_value(info, attr->counter, size_t);
-    const dmi_data_t *ptr = *(const dmi_data_t **)value;
+    const dmi_data_t *ptr = dmi_deref(dmi_data_t *, value);
 
     for (size_t i = 0; i < count; i++, ptr += attr->value.size) {
         if (xmlTextWriterStartElement(session->writer, dmi_xml_string("item")) < 0)

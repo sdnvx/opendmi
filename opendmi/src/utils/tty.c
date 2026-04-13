@@ -84,8 +84,8 @@ void dmi_tty_attr_off(int attrs)
         dmi_tty_exit_attr_mode();
 
         dmi_tty_attr_on(dmi_tty_attrs);
-        dmi_tty_set_bg_color(dmi_tty_bg_color);
-        dmi_tty_set_fg_color(dmi_tty_fg_color);
+        dmi_tty_set_bg_color((dmi_tty_color_t)dmi_tty_bg_color);
+        dmi_tty_set_fg_color((dmi_tty_color_t)dmi_tty_fg_color);
 #   endif
 }
 
@@ -94,7 +94,7 @@ void dmi_tty_set_fg_color(dmi_tty_color_t color)
     if (not dmi_tty)
         return;
 
-    dmi_tty_fg_color = color;
+    dmi_tty_fg_color = (int)color;
 
 #   ifdef ENABLE_CURSES
         tputs(tparm(tigetstr("setaf"), color), 1, putchar);
@@ -106,7 +106,7 @@ void dmi_tty_set_bg_color(dmi_tty_color_t color)
     if (not dmi_tty)
         return;
 
-    dmi_tty_bg_color = color;
+    dmi_tty_bg_color = (int)color;
 
 #   ifdef ENABLE_CURSES
         tputs(tparm(tigetstr("setab"), color), 1, putchar);
@@ -124,7 +124,7 @@ void dmi_tty_cprintf(int color, const char *format, ...)
 
 void dmi_tty_vcprintf(int color, const char *format, va_list args)
 {
-    dmi_tty_set_fg_color(color);
+    dmi_tty_set_fg_color((dmi_tty_color_t)color);
     vprintf(format, args);
     dmi_tty_exit_attr_mode();
 }

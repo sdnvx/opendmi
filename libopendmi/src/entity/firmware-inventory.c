@@ -214,17 +214,17 @@ const dmi_entity_spec_t dmi_firmware_inventory_spec =
 
 const char *dmi_version_format_name(dmi_version_format_t value)
 {
-    return dmi_name_lookup(&dmi_version_format_names, value);
+    return dmi_name_lookup(&dmi_version_format_names, (int)value);
 }
 
 const char *dmi_firmware_ident_format_name(dmi_firmware_ident_format_t value)
 {
-    return dmi_name_lookup(&dmi_firmware_ident_format_names, value);
+    return dmi_name_lookup(&dmi_firmware_ident_format_names, (int)value);
 }
 
 const char *dmi_firmware_inventory_state_name(dmi_firmware_inventory_state_t value)
 {
-    return dmi_name_lookup(&dmi_firmware_inventory_state_names, value);
+    return dmi_name_lookup(&dmi_firmware_inventory_state_names, (int)value);
 }
 
 static bool dmi_firmware_inventory_decode(dmi_entity_t *entity)

@@ -141,8 +141,8 @@ static int dmi_modules_main(dmi_context_t *context, int argc, char *argv[])
 
 static int dmi_modules_comparator(const void *lhs, const void *rhs)
 {
-    const dmi_module_t *lhs_module = *(const dmi_module_t **)lhs;
-    const dmi_module_t *rhs_module = *(const dmi_module_t **)rhs;
+    const dmi_module_t *lhs_module = dmi_deref(dmi_module_t *, lhs);
+    const dmi_module_t *rhs_module = dmi_deref(dmi_module_t *, rhs);
 
     return strcmp(lhs_module->code, rhs_module->code);
 }

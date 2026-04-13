@@ -111,12 +111,12 @@ const dmi_entity_spec_t dmi_intel_rsd_memory_device_spec =
 
 const char *dmi_intel_rsd_memory_type_name(dmi_intel_rsd_memory_type_t value)
 {
-    return dmi_name_lookup(&dmi_intel_rsd_memory_type_names, value);
+    return dmi_name_lookup(&dmi_intel_rsd_memory_type_names, (int)value);
 }
 
 const char *dmi_intel_rsd_memory_media_name(dmi_intel_rsd_memory_media_t value)
 {
-    return dmi_name_lookup(&dmi_intel_rsd_memory_media_names, value);
+    return dmi_name_lookup(&dmi_intel_rsd_memory_media_names, (int)value);
 }
 
 static bool dmi_intel_rsd_memory_device_decode(dmi_entity_t *entity)

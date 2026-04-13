@@ -262,7 +262,7 @@ static bool dmi_entry_decode_v21(dmi_context_t *context,
     // Decode structure parameters
     context->entity_max_size = entry->entity_max_size;
 
-    return dmi_entry_decode_legacy(context, (void *)&entry->ieps, sizeof(entry->ieps));
+    return dmi_entry_decode_legacy(context, (const void *)&entry->ieps, sizeof(entry->ieps));
 }
 
 static bool dmi_entry_decode_v30(dmi_context_t *context,

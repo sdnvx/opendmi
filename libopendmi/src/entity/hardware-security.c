@@ -83,7 +83,7 @@ const dmi_entity_spec_t dmi_hardware_security_spec =
 
 const char *dmi_hardware_security_status_name(dmi_hardware_security_status_t value)
 {
-    return dmi_name_lookup(&dmi_hardware_security_status_names, value);
+    return dmi_name_lookup(&dmi_hardware_security_status_names, (int)value);
 }
 
 static bool dmi_hardware_security_decode(dmi_entity_t *entity)

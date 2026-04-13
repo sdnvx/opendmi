@@ -154,10 +154,10 @@ bool dmi_attribute_is_unspecified(const dmi_attribute_t *attr, const void *value
         if (memcmp(value, attr->params.unspec, attr->value.size) == 0)
             return true;
     } else if (attr->type == DMI_ATTRIBUTE_TYPE_STRING) {
-        if (*(const char **)value == nullptr)
+        if (dmi_deref(char *, value) == nullptr)
             return true;
     } else if (attr->type == DMI_ATTRIBUTE_TYPE_HANDLE) {
-        if (*(dmi_handle_t *)value == DMI_HANDLE_INVALID)
+        if (dmi_deref(dmi_handle_t, value) == DMI_HANDLE_INVALID)
             return true;
     }
 
@@ -181,7 +181,7 @@ bool dmi_attribute_get_bool(const dmi_attribute_t *attr, const void *value)
 {
     dmi_unused(attr);
 
-    return *(bool *)value ? true : false;
+    return dmi_deref(bool, value) ? true : false;
 }
 
 intmax_t dmi_attribute_get_int(const dmi_attribute_t *attr, const void *value)
@@ -192,13 +192,13 @@ intmax_t dmi_attribute_get_int(const dmi_attribute_t *attr, const void *value)
     intmax_t rv;
 
     if (attr->value.size == sizeof(int8_t))
-        rv = *(int8_t *)value;
+        rv = dmi_deref(int8_t, value);
     else if (attr->value.size == sizeof(int16_t))
-        rv = *(int16_t *)value;
+        rv = dmi_deref(int16_t, value);
     else if (attr->value.size == sizeof(int32_t))
-        rv = *(int32_t *)value;
+        rv = dmi_deref(int32_t, value);
     else if (attr->value.size == sizeof(int64_t))
-        rv = *(int64_t *)value;
+        rv = dmi_deref(int64_t, value);
     else
         rv = INTMAX_MAX;
 
@@ -213,13 +213,13 @@ uintmax_t dmi_attribute_get_uint(const dmi_attribute_t *attr, const void *value)
     uintmax_t rv;
 
     if (attr->value.size == sizeof(uint8_t))
-        rv = *(uint8_t *)value;
+        rv = dmi_deref(uint8_t, value);
     else if (attr->value.size == sizeof(uint16_t))
-        rv = *(uint16_t *)value;
+        rv = dmi_deref(uint16_t, value);
     else if (attr->value.size == sizeof(uint32_t))
-        rv = *(uint32_t *)value;
+        rv = dmi_deref(uint32_t, value);
     else if (attr->value.size == sizeof(uint64_t))
-        rv = *(uint64_t *)value;
+        rv = dmi_deref(uint64_t, value);
     else
         rv = UINTMAX_MAX;
 
@@ -263,7 +263,7 @@ static char *dmi_attribute_format_handle(
 
     char *str = nullptr;
 
-    if (dmi_asprintf(&str, "0x%04" PRIX16, *(dmi_handle_t *)value) < 0) {
+    if (dmi_asprintf(&str, "0x%04" PRIX16, dmi_deref(dmi_handle_t, value)) < 0) {
         dmi_error_raise(context, DMI_ERROR_OUT_OF_MEMORY);
         return nullptr;
     }
@@ -308,7 +308,7 @@ static char *dmi_attribute_format_bool(
     assert(attribute != nullptr);
     assert(value != nullptr);
 
-    bool flag =  *(bool *)value ? true : false;
+    bool flag =  dmi_deref(bool, value) ? true : false;
     const char *str = nullptr;
 
     if (attribute->params.values) {
@@ -357,38 +357,38 @@ static char *dmi_attribute_format_integer(
     switch (attribute->value.size) {
     case sizeof(int8_t):
         if (is_signed)
-            rv = dmi_asprintf(&str, "%" PRId8, *(int8_t *)value);
+            rv = dmi_asprintf(&str, "%" PRId8, dmi_deref(int8_t, value));
         else if (is_hex)
-            rv = dmi_asprintf(&str, "0x%" PRIX8, *(uint8_t *)value);
+            rv = dmi_asprintf(&str, "0x%" PRIX8, dmi_deref(uint8_t, value));
         else
-            rv = dmi_asprintf(&str, "%" PRIu8, *(uint8_t *)value);
+            rv = dmi_asprintf(&str, "%" PRIu8, dmi_deref(uint8_t, value));
         break;
 
     case sizeof(int16_t):
         if (is_signed)
-            rv = dmi_asprintf(&str, "%" PRId16, *(int16_t *)value);
+            rv = dmi_asprintf(&str, "%" PRId16, dmi_deref(int16_t, value));
         else if (is_hex)
-            rv = dmi_asprintf(&str, "0x%" PRIX16, *(uint16_t *)value);
+            rv = dmi_asprintf(&str, "0x%" PRIX16, dmi_deref(uint16_t, value));
         else
-            rv = dmi_asprintf(&str, "%" PRIu16, *(uint16_t *)value);
+            rv = dmi_asprintf(&str, "%" PRIu16, dmi_deref(uint16_t, value));
         break;
 
     case sizeof(int32_t):
         if (is_signed)
-            rv = dmi_asprintf(&str, "%" PRId32, *(int32_t *)value);
+            rv = dmi_asprintf(&str, "%" PRId32, dmi_deref(int32_t, value));
         else if (is_hex)
-            rv = dmi_asprintf(&str, "0x%" PRIX32, *(uint32_t *)value);
+            rv = dmi_asprintf(&str, "0x%" PRIX32, dmi_deref(uint32_t, value));
         else
-            rv = dmi_asprintf(&str, "%" PRIu32, *(uint32_t *)value);
+            rv = dmi_asprintf(&str, "%" PRIu32, dmi_deref(uint32_t, value));
         break;
 
     case sizeof(int64_t):
         if (is_signed)
-            rv = dmi_asprintf(&str, "%" PRId64, *(int64_t *)value);
+            rv = dmi_asprintf(&str, "%" PRId64, dmi_deref(int64_t, value));
         else if (is_hex)
-            rv = dmi_asprintf(&str, "0x%" PRIX64, *(uint64_t *)value);
+            rv = dmi_asprintf(&str, "0x%" PRIX64, dmi_deref(uint64_t, value));
         else
-            rv = dmi_asprintf(&str, "%" PRIu64, *(uint64_t *)value);
+            rv = dmi_asprintf(&str, "%" PRIu64, dmi_deref(uint64_t, value));
         break;
 
     default:
@@ -461,14 +461,14 @@ static char *dmi_attribute_format_size(
     assert(context != nullptr);
     assert(attribute != nullptr);
     assert(value != nullptr);
-    
+
     int rv;
     char *str = nullptr;
     uintmax_t size = dmi_attribute_get_uint(attribute, value);
-    
+
     if (pretty) {
         unsigned int i;
-        
+
         static const char *units[] = {
             "bytes", "KiB", "MiB", "GiB", "TiB", "PiB", nullptr
         };
@@ -540,16 +540,16 @@ static char *dmi_attribute_format_enum(
     }
 
     if (pretty)
-        name = dmi_name_lookup(attribute->params.values, *(int *)value);
+        name = dmi_name_lookup(attribute->params.values, dmi_deref(int, value));
     else
-        name = dmi_code_lookup(attribute->params.values, *(int *)value);
+        name = dmi_code_lookup(attribute->params.values, dmi_deref(int, value));
 
     if (name != nullptr)
         str = strdup(name);
     else if (pretty)
-        dmi_asprintf(&str, "<invalid> (0x%x)", *(int *)value);
+        dmi_asprintf(&str, "<invalid> (0x%x)", dmi_deref(int, value));
     else
-        dmi_asprintf(&str, "0x%x", *(int *)value);
+        dmi_asprintf(&str, "0x%x", dmi_deref(int, value));
 
     if (str == nullptr) {
         dmi_error_raise(context, DMI_ERROR_OUT_OF_MEMORY);
@@ -601,7 +601,7 @@ static char *dmi_attribute_format_version(
     int rv = 0;
     char *str = nullptr;
 
-    dmi_version_t version = *(dmi_version_t *)value;
+    dmi_version_t version = dmi_deref(dmi_version_t, value);
 
     unsigned major    = dmi_version_major(version);
     unsigned minor    = dmi_version_minor(version);
@@ -637,7 +637,7 @@ static char *dmi_attribute_format_date(
     dmi_unused(attribute);
     dmi_unused(pretty);
 
-    char *str = dmi_date_format(*(dmi_date_t *)value);
+    char *str = dmi_date_format(dmi_deref(dmi_date_t, value));
 
     if (str == nullptr) {
         dmi_error_raise(context, DMI_ERROR_OUT_OF_MEMORY);
@@ -663,7 +663,7 @@ static char *dmi_attribute_format_uuid(
     int rv = 0;
     char *str = nullptr;
 
-    dmi_uuid_t *uuid = (dmi_uuid_t *)value;
+    const dmi_uuid_t *uuid = dmi_cast(uuid, value);
 
     rv = dmi_asprintf(&str, "%08X-%04X-%04X-%02X%02X-%02X%02X%02X%02X%02X%02X",
                       dmi_ntoh(uuid->time_low),

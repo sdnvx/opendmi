@@ -149,7 +149,7 @@ const dmi_entity_spec_t dmi_battery_spec =
 
 const char *dmi_battery_chemistry_name(dmi_battery_chemistry_t value)
 {
-    return dmi_name_lookup(&dmi_battery_chemistry_names, value);
+    return dmi_name_lookup(&dmi_battery_chemistry_names, (int)value);
 }
 
 static bool dmi_battery_decode(dmi_entity_t *entity)

@@ -154,12 +154,12 @@ const dmi_entity_spec_t dmi_mgmt_device_spec =
 
 const char *dmi_mgmt_device_type_name(dmi_mgmt_device_type_t value)
 {
-    return dmi_name_lookup(&dmi_mgmt_device_type_names, value);
+    return dmi_name_lookup(&dmi_mgmt_device_type_names, (int)value);
 }
 
 const char *dmi_mgmt_device_addr_type_name(dmi_mgmt_device_addr_type_t value)
 {
-    return dmi_name_lookup(&dmi_mgmt_device_addr_type_names, value);
+    return dmi_name_lookup(&dmi_mgmt_device_addr_type_names, (int)value);
 }
 
 static bool dmi_mgmt_device_decode(dmi_entity_t *entity)

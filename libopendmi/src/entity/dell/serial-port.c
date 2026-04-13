@@ -76,7 +76,7 @@ static const dmi_name_set_t dmi_dell_serial_port_connector_type_names =
     }
 };
 
-static const dmi_name_set_t dmi_dell_serial_port_caps_names = 
+static const dmi_name_set_t dmi_dell_serial_port_caps_names =
 {
     .code  = "dell-serial-port-capabilities",
     .names = (const dmi_name_t[]){
@@ -169,12 +169,12 @@ const dmi_entity_spec_t dmi_dell_serial_port_spec =
 
 const char *dmi_dell_serial_port_connector_type_name(dmi_dell_serial_port_connector_type_t value)
 {
-    return dmi_name_lookup(&dmi_dell_serial_port_connector_type_names, value);
+    return dmi_name_lookup(&dmi_dell_serial_port_connector_type_names, (int)value);
 }
 
 const char *dmi_dell_serial_port_caps_name(dmi_dell_serial_port_caps_t value)
 {
-    return dmi_name_lookup(&dmi_dell_serial_port_caps_names, value);
+    return dmi_name_lookup(&dmi_dell_serial_port_caps_names, (int)value);
 }
 
 static bool dmi_dell_serial_port_decode(dmi_entity_t *entity)

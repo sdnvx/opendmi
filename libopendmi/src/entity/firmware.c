@@ -371,8 +371,7 @@ static bool dmi_firmware_decode(dmi_entity_t *entity)
 
         info->features_ex = (typeof(info->features_ex)){
             .__value = {
-                extra > 0 ? data->features_ex[0] : 0,
-                extra > 1 ? data->features_ex[1] : 0
+                data->features_ex[0], extra > 1 ? data->features_ex[1] : 0
             }
         };
     }

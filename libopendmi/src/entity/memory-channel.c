@@ -95,7 +95,7 @@ const dmi_entity_spec_t dmi_memory_channel_spec =
 
 const char *dmi_memory_channel_type_name(dmi_memory_channel_type_t value)
 {
-    return dmi_name_lookup(&dmi_memory_channel_type_names, value);
+    return dmi_name_lookup(&dmi_memory_channel_type_names, (int)value);
 }
 
 static bool dmi_memory_channel_decode(dmi_entity_t *entity)

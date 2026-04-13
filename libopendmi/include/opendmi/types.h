@@ -30,7 +30,7 @@
  * @brief Byte type for raw data and pointer arithmetics.
  */
 typedef uint8_t dmi_data_t;
-#define dmi_data(x) ((dmi_data_t *)(x))
+#define dmi_data(x) ((const dmi_data_t *)(x))
 
 /**
  * @brief SMBIOS BYTE type.

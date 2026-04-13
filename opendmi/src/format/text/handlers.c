@@ -126,7 +126,7 @@ void dmi_text_entity_attr_array(
 
     // TODO: Support counters of different sizes
     size_t count = dmi_member_value(info, attr->counter, size_t);
-    const dmi_data_t *ptr = *(const dmi_data_t **)value;
+    const dmi_data_t *ptr = dmi_deref(dmi_data_t *, value);
 
     dmi_text_printf(session, DMI_TTY_COLOR_NONE, "%zu items\n", count);
 
@@ -139,7 +139,7 @@ void dmi_text_entity_attr_array(
             const char *descr = nullptr;
 
             if (attr->type == DMI_ATTRIBUTE_TYPE_HANDLE) {
-                dmi_handle_t  handle = *(dmi_handle_t *)ptr;
+                dmi_handle_t handle = dmi_deref(dmi_handle_t, ptr);
                 const dmi_entity_t *entity = dmi_registry_get(session->context->registry, handle, DMI_TYPE_INVALID, true);
 
                 descr = dmi_entity_name(entity);

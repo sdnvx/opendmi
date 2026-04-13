@@ -183,22 +183,22 @@ const dmi_entity_spec_t dmi_ipmi_device_spec =
 
 const char *dmi_ipmi_interface_name(dmi_ipmi_interface_t value)
 {
-    return dmi_name_lookup(&dmi_ipmi_interface_names, value);
+    return dmi_name_lookup(&dmi_ipmi_interface_names, (int)value);
 }
 
 const char *dmi_ipmi_addr_type_name(dmi_ipmi_addr_type_t value)
 {
-    return dmi_name_lookup(&dmi_ipmi_addr_type_names, value);
+    return dmi_name_lookup(&dmi_ipmi_addr_type_names, (int)value);
 }
 
 const char *dmi_ipmi_intr_trigger_name(dmi_ipmi_intr_trigger_t value)
 {
-    return dmi_name_lookup(&dmi_ipmi_intr_trigger_names, value);
+    return dmi_name_lookup(&dmi_ipmi_intr_trigger_names, (int)value);
 }
 
 const char *dmi_ipmi_intr_polarity_name(dmi_ipmi_intr_polarity_t value)
 {
-    return dmi_name_lookup(&dmi_ipmi_intr_polarity_names, value);
+    return dmi_name_lookup(&dmi_ipmi_intr_polarity_names, (int)value);
 }
 
 static bool dmi_ipmi_device_decode(dmi_entity_t *entity)

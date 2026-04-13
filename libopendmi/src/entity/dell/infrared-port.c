@@ -95,7 +95,7 @@ const dmi_entity_spec_t dmi_dell_infrared_port_spec =
 
 const char *dmi_dell_infrared_proto_name(dmi_dell_infrared_proto_t value)
 {
-    return dmi_name_lookup(&dmi_dell_infrared_proto_names, value);
+    return dmi_name_lookup(&dmi_dell_infrared_proto_names, (int)value);
 }
 
 static bool dmi_dell_infrared_port_decode(dmi_entity_t *entity)

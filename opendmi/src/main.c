@@ -249,7 +249,7 @@ static void dmi_log_file_handler(
 
     pos = dmi_log_file_lock();
 
-    fprintf(log_file, "[%04u-%02u-%02u %02u:%02u:%02u] %s: ",
+    fprintf(log_file, "[%04d-%02d-%02d %02d:%02d:%02d] %s: ",
             now_tm.tm_year + 1900, now_tm.tm_mon + 1, now_tm.tm_mday,
             now_tm.tm_hour, now_tm.tm_min, now_tm.tm_sec,
             dmi_log_level_name(level));

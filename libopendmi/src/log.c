@@ -42,7 +42,7 @@ bool dmi_log_message(dmi_log_t *target, dmi_log_level_t level, const char *forma
     if (level > target->level)
         return false;
 
-    va_start(args, fmt);
+    va_start(args, format);
     target->handler(target, level, format, args);
     va_end(args);
 
@@ -53,7 +53,7 @@ const char *dmi_log_level_name(dmi_log_level_t value)
 {
     const char *name;
 
-    name = dmi_name_lookup(&dmi_log_level_names, value);
+    name = dmi_name_lookup(&dmi_log_level_names, (int)value);
     if (name == nullptr)
         return "UNKNOWN";
 

@@ -90,7 +90,7 @@ const dmi_name_set_t dmi_probe_location_names =
 
 const char *dmi_probe_location_name(dmi_probe_location_t value)
 {
-    return dmi_name_lookup(&dmi_probe_location_names, value);
+    return dmi_name_lookup(&dmi_probe_location_names, (int)value);
 }
 
 bool dmi_probe_decode(dmi_entity_t *entity)

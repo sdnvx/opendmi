@@ -220,7 +220,7 @@ bool dmi_yaml_entity_attr_array(
 
     // TODO: Support other types of counters
     size_t count = dmi_member_value(info, attr->counter, size_t);
-    const dmi_data_t *ptr = *(const dmi_data_t **)value;
+    const dmi_data_t *ptr = dmi_deref(dmi_data_t *, value);
 
     if (not dmi_yaml_sequence_start(session, YAML_BLOCK_SEQUENCE_STYLE))
         return false;

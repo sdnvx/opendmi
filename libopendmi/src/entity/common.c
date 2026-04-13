@@ -105,12 +105,12 @@ const dmi_attribute_t dmi_pci_addr_attrs[] =
 
 const char *dmi_status_name(dmi_status_t value)
 {
-    return dmi_name_lookup(&dmi_status_names, value);
+    return dmi_name_lookup(&dmi_status_names, (int)value);
 }
 
 const char *dmi_error_correct_type_name(dmi_error_correct_type_t value)
 {
-    return dmi_name_lookup(&dmi_error_correct_type_names, value);
+    return dmi_name_lookup(&dmi_error_correct_type_names, (int)value);
 }
 
 bool dmi_pci_addr_decode(dmi_stream_t *stream, dmi_pci_addr_t *addr)
@@ -122,8 +122,8 @@ bool dmi_pci_addr_decode(dmi_stream_t *stream, dmi_pci_addr_t *addr)
     uint8_t bus_number, device_and_func_number;
 
     bool status =
-        dmi_stream_decode(stream, dmi_word_t, &segment_group) &&
-        dmi_stream_decode(stream, dmi_byte_t, &bus_number) &&
+        dmi_stream_decode(stream, dmi_word_t, &segment_group) and
+        dmi_stream_decode(stream, dmi_byte_t, &bus_number) and
         dmi_stream_decode(stream, dmi_byte_t, &device_and_func_number);
 
     if (not status)

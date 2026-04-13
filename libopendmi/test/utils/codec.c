@@ -158,7 +158,7 @@ static void test_encode_word(void **pstate)
 
     for (size_t i = 0; i < countof(test_data_16); i++) {
         uint16_t   value  = test_data_16[i].decoded;
-        dmi_word_t result = *(dmi_word_t *)test_data_16[i].encoded;
+        dmi_word_t result = dmi_deref(dmi_word_t, test_data_16[i].encoded);
 
         assert_uint_equal(dmi_encode_word(value), result);
         assert_uint_equal(dmi_encode(value), result);
@@ -171,7 +171,7 @@ static void test_encode_dword(void **pstate)
 
     for (size_t i = 0; i < countof(test_data_32); i++) {
         uint32_t    value  = test_data_32[i].decoded;
-        dmi_dword_t result = *(dmi_dword_t *)test_data_32[i].encoded;
+        dmi_dword_t result = dmi_deref(dmi_dword_t, test_data_32[i].encoded);
 
         assert_uint_equal(dmi_encode_dword(value), result);
         assert_uint_equal(dmi_encode(value), result);
@@ -184,7 +184,7 @@ static void test_encode_qword(void **pstate)
 
     for (size_t i = 0; i < countof(test_data_64); i++) {
         uint64_t    value  = test_data_64[i].decoded;
-        dmi_qword_t result = *(dmi_qword_t *)test_data_64[i].encoded;
+        dmi_qword_t result = dmi_deref(dmi_qword_t, test_data_64[i].encoded);
 
         assert_uint_equal(dmi_encode_qword(value), result);
         assert_uint_equal(dmi_encode(value), result);
@@ -209,7 +209,7 @@ static void test_decode_word(void **pstate)
     dmi_unused(pstate);
 
     for (size_t i = 0; i < countof(test_data_16); i++) {
-        dmi_word_t value  = *(dmi_word_t *)test_data_16[i].encoded;
+        dmi_word_t value  = dmi_deref(dmi_word_t, test_data_16[i].encoded);
         uint16_t   result = test_data_16[i].decoded;
 
         assert_uint_equal(dmi_decode_word(value), result);
@@ -222,7 +222,7 @@ static void test_decode_dword(void **pstate)
     dmi_unused(pstate);
 
     for (size_t i = 0; i < countof(test_data_32); i++) {
-        dmi_dword_t value  = *(dmi_dword_t *)test_data_32[i].encoded;
+        dmi_dword_t value  = dmi_deref(dmi_dword_t, test_data_32[i].encoded);
         uint32_t    result = test_data_32[i].decoded;
 
         assert_uint_equal(dmi_decode_dword(value), result);
@@ -235,7 +235,7 @@ static void test_decode_qword(void **pstate)
     dmi_unused(pstate);
 
     for (size_t i = 0; i < countof(test_data_64); i++) {
-        dmi_qword_t value  = *(dmi_qword_t *)test_data_64[i].encoded;
+        dmi_qword_t value  = dmi_deref(dmi_qword_t, test_data_64[i].encoded);
         uint64_t    result = test_data_64[i].decoded;
 
         assert_uint_equal(dmi_decode_qword(value), result);
@@ -248,28 +248,29 @@ static void test_decode_bcd(void **pstate)
     dmi_unused(pstate);
 
     for (size_t i = 0; i < countof(test_data_bcd); i++) {
-        const uint8_t *value  = test_data_bcd[i].encoded;
-        uint8_t        length = test_data_bcd[i].length;
-        uintmax_t      result = test_data_bcd[i].decoded;
+        const uint8_t *value    = test_data_bcd[i].encoded;
+        size_t         length   = test_data_bcd[i].length;
+        uintmax_t      expected = test_data_bcd[i].decoded;
+        uintmax_t      result;
 
-        assert_uint_equal(__dmi_decode_bcd(value, length), result);
+        result = __dmi_decode_bcd(value, length);
+        assert_uint_equal(result, expected);
 
-        switch (length) {
-        case sizeof(uint8_t):
-            assert_uint_equal(dmi_decode_bcd(*(uint8_t *)value), result);
-            break;
+        uint64_t mask = (1uL << length * CHAR_BIT) - 1;
 
-        case sizeof(uint16_t):
-            assert_uint_equal(dmi_decode_bcd(*(uint16_t *)value), result);
-            break;
-
-        case sizeof(uint32_t):
-            assert_uint_equal(dmi_decode_bcd(*(uint32_t *)value), result);
-            break;
-
-        case sizeof(uint64_t):
-            assert_uint_equal(dmi_decode_bcd(*(uint64_t *)value), result);
-            break;
+        if (length > sizeof(uint32_t)) {
+            assert_true(false);
+        } else if (length > sizeof(uint16_t)) {
+            uint32_t value32 = dmi_deref(uint32_t, value) & mask;
+            result = dmi_decode_bcd(value32);
+        } else if (length > sizeof(uint8_t)) {
+            uint16_t value16 = dmi_deref(uint16_t, value) & mask;
+            result = dmi_decode_bcd(value16);
+        } else {
+            uint8_t value8 = dmi_deref(uint8_t, value) & mask;
+            result = dmi_decode_bcd(value8);
         }
+
+        assert_uint_equal(result, expected);
     }
 }

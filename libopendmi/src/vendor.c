@@ -141,7 +141,7 @@ static const dmi_vendor_spec_t dmi_vendor_specs[] =
 
 const char *dmi_vendor_name(dmi_vendor_t vendor)
 {
-    return dmi_name_lookup(&dmi_vendor_names, vendor);
+    return dmi_name_lookup(&dmi_vendor_names, (int)vendor);
 }
 
 const dmi_vendor_spec_t *dmi_vendor_detect(const char *name)

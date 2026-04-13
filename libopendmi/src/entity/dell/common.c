@@ -57,10 +57,10 @@ const dmi_name_set_t dmi_dell_port_security_names =
 
 const char *dmi_dell_enable_state_name(dmi_dell_enable_state_t value)
 {
-    return dmi_name_lookup(&dmi_dell_enable_state_names, value);
+    return dmi_name_lookup(&dmi_dell_enable_state_names, (int)value);
 }
 
 const char *dmi_dell_port_security_name(dmi_dell_port_security_t value)
 {
-    return dmi_name_lookup(&dmi_dell_port_security_names, value);
+    return dmi_name_lookup(&dmi_dell_port_security_names, (int)value);
 }

@@ -47,7 +47,7 @@ dmi_entity_t *dmi_entity_create(
     }
 
     dmi_header_t *header = dmi_cast(header, data);
-    dmi_type_t    type   = dmi_decode(header->type);
+    dmi_type_t    type   = dmi_cast(type, dmi_decode(header->type));
     size_t        length = dmi_decode(header->length);
     dmi_handle_t  handle = dmi_decode(header->handle);
 

@@ -37,11 +37,10 @@ int dmi_file_stat(int fd, dmi_file_stat_t *st)
     assert(fd >= 0);
     assert(st != nullptr);
 
-    do {
-        rv = fstat(fd, st);
-        if ((rv < 0) and (errno == EINTR))
-            continue;
-    } while (false);
+retry:
+    rv = fstat(fd, st);
+    if ((rv < 0) and (errno == EINTR))
+        goto retry;
 
     return rv;
 }
@@ -59,11 +58,10 @@ off_t dmi_file_seek(int fd, off_t offset, int whence)
 
     assert(fd >= 0);
 
-    do {
-        rv = lseek(fd, offset, whence);
-        if ((rv < 0) and (errno == EINTR))
-            continue;
-    } while (false);
+retry:
+    rv = lseek(fd, offset, whence);
+    if ((rv < 0) and (errno == EINTR))
+        goto retry;
 
     return rv;
 }
@@ -72,13 +70,13 @@ bool dmi_file_lock(int fd, off_t size)
 {
     assert(fd >= 0);
 
-    do {
-        if (lockf(fd, F_LOCK, size) < 0) {
-            if (errno == EINTR)
-                continue;
-            return false;
-        }
-    } while (false);
+retry:
+    if (lockf(fd, F_LOCK, size) < 0) {
+        if (errno == EINTR)
+            goto retry;
+
+        return false;
+    }
 
     return true;
 }
@@ -87,13 +85,13 @@ bool dmi_file_unlock(int fd, off_t size)
 {
     assert(fd >= 0);
 
-    do {
-        if (lockf(fd, F_ULOCK, size) < 0) {
-            if (errno == EINTR)
-                continue;
-            return false;
-        }
-    } while (false);
+retry:
+    if (lockf(fd, F_ULOCK, size) < 0) {
+        if (errno == EINTR)
+            goto retry;
+
+        return false;
+    }
 
     return true;
 }

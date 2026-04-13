@@ -1912,17 +1912,17 @@ const dmi_entity_spec_t dmi_processor_spec =
 
 const char *dmi_processor_type_name(dmi_processor_type_t value)
 {
-    return dmi_name_lookup(&dmi_processor_type_names, value);
+    return dmi_name_lookup(&dmi_processor_type_names, (int)value);
 }
 
 const char *dmi_processor_family_name(dmi_processor_family_t value)
 {
-    return dmi_name_lookup(&dmi_processor_family_names, value);
+    return dmi_name_lookup(&dmi_processor_family_names, (int)value);
 }
 
 const char *dmi_processor_upgrade_name(dmi_processor_upgrade_t value)
 {
-    return dmi_name_lookup(&dmi_processor_upgrade_names, value);
+    return dmi_name_lookup(&dmi_processor_upgrade_names, (int)value);
 }
 
 static bool dmi_processor_decode(dmi_entity_t *entity)

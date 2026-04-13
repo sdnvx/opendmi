@@ -50,7 +50,7 @@ bool dmi_pager_start(dmi_context_t *context)
     int fds[2];
 
     const char *pager = getenv("PAGER");
-    if (pager == nullptr || pager[0] == '\0')
+    if ((pager == nullptr) or (*pager == 0))
         return true;
 
     rv = wordexp(pager, &we, WRDE_NOCMD);

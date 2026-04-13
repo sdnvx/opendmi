@@ -195,7 +195,7 @@ const dmi_entity_spec_t dmi_baseboard_spec =
 
 const char *dmi_baseboard_type_name(dmi_baseboard_type_t value)
 {
-    return dmi_name_lookup(&dmi_baseboard_type_names, value);
+    return dmi_name_lookup(&dmi_baseboard_type_names, (int)value);
 }
 
 static bool dmi_baseboard_decode(dmi_entity_t *entity)

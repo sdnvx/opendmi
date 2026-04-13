@@ -122,7 +122,7 @@ const dmi_entity_spec_t dmi_system_spec =
 
 const char *dmi_system_wakeup_type_name(dmi_system_wakeup_type_t value)
 {
-    return dmi_name_lookup(&dmi_system_wakeup_type_names, value);
+    return dmi_name_lookup(&dmi_system_wakeup_type_names, (int)value);
 }
 
 static bool dmi_system_decode(dmi_entity_t *entity)

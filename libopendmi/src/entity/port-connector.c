@@ -467,12 +467,12 @@ const dmi_entity_spec_t dmi_port_connector_spec =
 
 const char *dmi_connector_type_name(dmi_connector_type_t value)
 {
-    return dmi_name_lookup(&dmi_connector_type_names, value);
+    return dmi_name_lookup(&dmi_connector_type_names, (int)value);
 }
 
 const char *dmi_port_type_name(dmi_port_type_t value)
 {
-    return dmi_name_lookup(&dmi_port_type_names, value);
+    return dmi_name_lookup(&dmi_port_type_names, (int)value);
 }
 
 static bool dmi_port_connector_decode(dmi_entity_t *entity)

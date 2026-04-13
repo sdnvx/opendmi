@@ -49,7 +49,7 @@ char *dmi_base64_encode(
         return nullptr;
 
     for (size_t i = 0, j = 0; i < data_length;) {
-        uint32_t octet_a = i < data_length ? data[i++] : 0;
+        uint32_t octet_a = data[i++];
         uint32_t octet_b = i < data_length ? data[i++] : 0;
         uint32_t octet_c = i < data_length ? data[i++] : 0;
 

@@ -109,7 +109,7 @@ const dmi_entity_spec_t dmi_system_reset_spec =
 
 const char *dmi_boot_option_name(dmi_boot_option_t value)
 {
-    return dmi_name_lookup(&dmi_boot_option_names, value);
+    return dmi_name_lookup(&dmi_boot_option_names, (int)value);
 }
 
 static bool dmi_system_reset_decode(dmi_entity_t *entity)

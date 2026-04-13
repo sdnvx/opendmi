@@ -392,12 +392,12 @@ const dmi_entity_spec_t dmi_chassis_spec =
 
 const char *dmi_chassis_type_name(dmi_chassis_type_t value)
 {
-    return dmi_name_lookup(&dmi_chassis_type_names, value);
+    return dmi_name_lookup(&dmi_chassis_type_names, (int)value);
 }
 
 const char *dmi_chassis_security_status_name(dmi_chassis_security_status_t value)
 {
-    return dmi_name_lookup(&dmi_chassis_security_status_names, value);
+    return dmi_name_lookup(&dmi_chassis_security_status_names, (int)value);
 }
 
 static bool dmi_chassis_decode(dmi_entity_t *entity)

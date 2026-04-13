@@ -239,12 +239,12 @@ const dmi_entity_spec_t dmi_memory_controller_spec =
 
 const char *dmi_error_detect_method_name(dmi_error_detect_method_t value)
 {
-    return dmi_name_lookup(&dmi_error_detect_method_names, value);
+    return dmi_name_lookup(&dmi_error_detect_method_names, (int)value);
 }
 
 const char *dmi_memory_interleave_name(dmi_memory_interleave_t value)
 {
-    return dmi_name_lookup(&dmi_memory_interleave_names, value);
+    return dmi_name_lookup(&dmi_memory_interleave_names, (int)value);
 }
 
 static bool dmi_memory_controller_decode(dmi_entity_t *entity)

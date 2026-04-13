@@ -58,7 +58,7 @@ const dmi_entity_spec_t dmi_intel_rsd_tpm_spec =
 
 const char *dmi_intel_rsd_tpm_status_name(dmi_intel_rsd_tpm_status_t value)
 {
-    return dmi_name_lookup(&dmi_intel_rsd_tpm_status_names, value);
+    return dmi_name_lookup(&dmi_intel_rsd_tpm_status_names, (int)value);
 }
 
 static bool dmi_intel_rsd_tpm_decode(dmi_entity_t *entity)

@@ -195,7 +195,7 @@ static bool dmi_mgmt_controller_decode(dmi_entity_t *entity)
         return false;
 
     const off_t offset = sizeof(*data) + dmi_decode(data->if_data_length);
-    extra = dmi_cast(extra, (uint8_t *)data + offset);
+    extra = dmi_cast(extra, (const uint8_t *)data + offset);
 
     info->if_type        = dmi_decode(data->if_type);
     info->if_data_length = dmi_decode(data->if_data_length);
@@ -220,7 +220,7 @@ static bool dmi_mgmt_controller_decode(dmi_entity_t *entity)
     for (size_t i = 0; i < info->proto_records_count; i++) {
         dmi_mgmt_proto_record_data_t *rec_data = dmi_cast(rec_data, cursor);
 
-        dmi_mgmt_if_type_t type   = dmi_decode(rec_data->type);
+        dmi_mgmt_if_type_t type   = dmi_cast(type, dmi_decode(rec_data->type));
         size_t             length = dmi_decode(rec_data->length);
 
         dmi_mgmt_proto_record_t *rec = dmi_alloc(entity->context, sizeof(*rec) + length);

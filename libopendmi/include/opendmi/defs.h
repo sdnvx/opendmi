@@ -47,8 +47,9 @@
 #define countof(x) (sizeof(x) / sizeof((x)[0]))
 #endif // !countof
 
-// Type-cast macro
+// Type-cast macros
 #define dmi_cast(dst, expr) ((__typeof__(dst))(expr))
+#define dmi_deref(type, expr) (*(const type *)(expr))
 
 // Value pointer macro
 #define dmi_value_ptr(x) &(typeof(x)){ (x) }
@@ -104,7 +105,7 @@ typedef struct dmi_member_ref
 #define dmi_member_is_present(__member) ((__member).size != 0)
 
 #define dmi_member_ptr(__object, __member, __type) \
-        ((__type *)(dmi_data(__object) + __member.offset))
+        ((const __type *)(dmi_data(__object) + __member.offset))
 #define dmi_member_value(__object, __member, __type) \
         (*dmi_member_ptr(__object, __member, __type))
 

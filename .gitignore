@@ -1,6 +1,7 @@
 build
 .vscode
 .cache
+.PVS-Studio
 Makefile
 CMakeFiles
 CMakeCache.txt

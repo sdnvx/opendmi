@@ -203,17 +203,17 @@ const dmi_entity_spec_t dmi_intel_rsd_storage_device_spec =
 
 const char *dmi_intel_rsd_storage_connector_name(dmi_intel_rsd_storage_connector_t value)
 {
-    return dmi_name_lookup(&dmi_intel_rsd_storage_connector_names, value);
+    return dmi_name_lookup(&dmi_intel_rsd_storage_connector_names, (int)value);
 }
 
 const char *dmi_intel_rsd_storage_proto_name(dmi_intel_rsd_storage_proto_t value)
 {
-    return dmi_name_lookup(&dmi_intel_rsd_storage_proto_names, value);
+    return dmi_name_lookup(&dmi_intel_rsd_storage_proto_names, (int)value);
 }
 
 const char *dmi_intel_rsd_storage_device_type_name(dmi_intel_rsd_storage_device_type_t value)
 {
-    return dmi_name_lookup(&dmi_intel_rsd_storage_device_type_names, value);
+    return dmi_name_lookup(&dmi_intel_rsd_storage_device_type_names, (int)value);
 }
 
 static bool dmi_intel_rsd_storage_device_decode(dmi_entity_t *entity)

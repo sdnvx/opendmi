@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Fix issues found by PVS-Studio
 - Fix linking of ICU4C artifacts #79
 
 ## [0.3.0] - April 11, 2026

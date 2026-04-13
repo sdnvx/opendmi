@@ -170,11 +170,11 @@ dmi_type_t dmi_parse_type(dmi_context_t *context, const char *str)
     value = strtol(str, &ep, 10);
 
     if (*ep != 0) {
-        value = dmi_type_find(context, str);
+        dmi_type_t type = dmi_type_find(context, str);
         if (value == DMI_TYPE_INVALID)
             dmi_command_message("Unknown type code: %s\n", str);
 
-        return value;
+        return type;
     }
 
     if (((errno == ERANGE) and ((value == LONG_MIN) or (value == LONG_MAX))) or

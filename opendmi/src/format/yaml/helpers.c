@@ -94,8 +94,8 @@ bool dmi_yaml_scalar(
             plain_implicit = false;
 
         bool result = yaml_scalar_event_initialize(&event, nullptr,
-                                                   (yaml_char_t *)tag,
-                                                   (yaml_char_t *)value,
+                                                   (const yaml_char_t *)tag,
+                                                   (const yaml_char_t *)value,
                                                    length,
                                                    plain_implicit, false, style);
 
@@ -125,7 +125,7 @@ bool dmi_yaml_sequence_start(dmi_yaml_session_t *session, yaml_sequence_style_t 
 
     do {
         bool result = yaml_sequence_start_event_initialize(&event, nullptr,
-                                                           (yaml_char_t *)YAML_SEQ_TAG,
+                                                           (const yaml_char_t *)YAML_SEQ_TAG,
                                                            true, style);
 
         if (not result) {
@@ -170,7 +170,7 @@ bool dmi_yaml_mapping_start(dmi_yaml_session_t *session, yaml_mapping_style_t st
     yaml_event_t event = {};
 
     do {
-        if (not yaml_mapping_start_event_initialize(&event, nullptr, (yaml_char_t *)YAML_MAP_TAG, true, style))
+        if (not yaml_mapping_start_event_initialize(&event, nullptr, (const yaml_char_t *)YAML_MAP_TAG, true, style))
             break;
         if (not dmi_yaml_emit(session, &event))
             break;
