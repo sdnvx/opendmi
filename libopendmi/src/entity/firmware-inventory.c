@@ -230,38 +230,40 @@ const char *dmi_firmware_inventory_state_name(dmi_firmware_inventory_state_t val
 static bool dmi_firmware_inventory_decode(dmi_entity_t *entity)
 {
     dmi_firmware_inventory_t *info;
-    const dmi_firmware_inventory_data_t *data;
-
-    data = dmi_entity_data(entity, DMI_TYPE(FIRMWARE_INVENTORY));
-    if (data == nullptr)
-        return false;
 
     info = dmi_entity_info(entity, DMI_TYPE(FIRMWARE_INVENTORY));
     if (info == nullptr)
         return false;
 
-    info->name             = dmi_entity_string(entity, data->name);
-    info->version          = dmi_entity_string(entity, data->version);
-    info->version_format   = dmi_decode(data->version_format);
-    info->ident            = dmi_entity_string(entity, data->ident);
-    info->ident_format     = dmi_decode(data->ident_format);
-    info->release_date     = dmi_entity_string(entity, data->release_date);
-    info->vendor           = dmi_entity_string(entity, data->vendor);
-    info->lowest_version   = dmi_entity_string(entity, data->lowest_version);
-    info->image_size       = dmi_decode(data->image_size);
-    info->features.__value = dmi_decode(data->features);
-    info->state            = dmi_decode(data->state);
+    dmi_stream_t *stream = &entity->stream;
 
-    if (entity->body_length > 0x17) {
-        info->component_count  = dmi_decode(data->component_count);
+    bool status =
+        dmi_stream_decode_str(stream, &info->name) and
+        dmi_stream_decode_str(stream, &info->version) and
+        dmi_stream_decode(stream, dmi_byte_t, &info->version_format) and
+        dmi_stream_decode_str(stream, &info->ident) and
+        dmi_stream_decode(stream, dmi_byte_t, &info->ident_format) and
+        dmi_stream_decode_str(stream, &info->release_date) and
+        dmi_stream_decode_str(stream, &info->vendor) and
+        dmi_stream_decode_str(stream, &info->lowest_version) and
+        dmi_stream_decode(stream, dmi_qword_t, &info->image_size) and
+        dmi_stream_decode(stream, dmi_word_t, &info->features.__value) and
+        dmi_stream_decode(stream, dmi_byte_t, &info->state);
 
-        info->component_handles = dmi_alloc_array(entity->context, sizeof(dmi_handle_t), info->component_count);
-        if (info->component_handles == nullptr)
+    if (not status)
+        return false;
+    if (dmi_stream_is_done(stream))
+        return true;
+
+    if (not dmi_stream_decode(stream, dmi_byte_t, &info->component_count))
+        return false;
+    info->component_handles = dmi_alloc_array(entity->context, sizeof(dmi_handle_t), info->component_count);
+    if (info->component_handles == nullptr)
+        return false;
+
+    for (size_t i = 0; i < info->component_count; i++) {
+        if (not dmi_stream_decode(stream, dmi_word_t, &info->component_handles[i]))
             return false;
-
-        for (size_t i = 0; i < info->component_count; i++) {
-            info->component_handles[i] = dmi_decode(data->component_handles[i]);
-        }
     }
 
     return true;
