@@ -1,0 +1,1094 @@
+entry:
+  smbios-version: 2.4
+table:
+- handle: 0
+  type: 0
+  length: 60
+  level: 2.4
+  description: Platform firmware information
+  attributes:
+    vendor: LENOVO
+    version: 7LET56WW (1.26 )
+    bios-segment: 57344
+    release-date: '2007-10-18'
+    rom-size: 4194304
+    features:
+      unknown: false
+      unsupported: false
+      isa-support: false
+      mca-support: false
+      eisa-support: false
+      pci-support: true
+      pcmcia-support: true
+      pnp-support: true
+      apm-support: false
+      upgradeable-flash: true
+      shadowing-allowed: true
+      vesa-support: false
+      escd-support: true
+      boot-cd: true
+      boot-selectable: true
+      socketed-rom: true
+      boot-pcmcia-support: false
+      edd-support: true
+      floppy-nec-support: false
+      floppy-toshiba-support: false
+      floppy-525-360k-support: false
+      floppy-525-1m2-support: false
+      floppy-35-720k-support: false
+      floppy-35-2m88-support: false
+      print-screen-support: false
+      keyboard-support: false
+      serial-support: false
+      printer-support: false
+      video-cga-mono-support: false
+      nec-pc-98: true
+    features-ex:
+      acpi-support: true
+      usb-legacy-support: true
+      agp-support: false
+      boot-i2o: false
+      boot-ls120: false
+      boot-atapi-zip: false
+      boot-ieee1394: false
+      smart-battery: false
+      bios-boot-spec: true
+      boot-network-fn-key: false
+      content-distribution: true
+      uefi-spec: false
+      virtual-machine: false
+      mfg-mode-support: false
+      mfg-mode-enabled: false
+    platform-version: 1.38
+    controller-version: 1.6
+- handle: 1
+  type: 1
+  length: 65
+  level: 2.4
+  description: System information
+  attributes:
+    vendor: LENOVO
+    product: 64606XG
+    version: ThinkPad T61p
+    serial-number: L3C7558
+    uuid: 81282BD0-C749-CB11-AF0D-F6E4FB596C58
+    wakeup-type: power-switch
+    sku-number: null
+    family: ThinkPad T61p
+- handle: 2
+  type: 2
+  length: 50
+  level: 2.0
+  description: Baseboard or module information
+  attributes:
+    vendor: LENOVO
+    product: 64606XG
+    version: Not Available
+    serial-number: VF19X79H1H5
+    asset-tag: null
+    features:
+      is-hosting-board: false
+      require-daughter-board: false
+      is-removable: false
+      is-replaceable: false
+      is-hot-swappable: false
+    location: null
+    chassis-handle: null
+    type: null
+    contained-objects: []
+- handle: 3
+  type: 3
+  length: 70
+  level: 2.1
+  description: System enclosure or chassis
+  attributes:
+    vendor: LENOVO
+    type: notebook
+    is-lock-present: false
+    version: Not Available
+    serial-number: Not Available
+    asset-tag: No Asset Information
+    bootup-state: unknown
+    power-supply-state: unknown
+    thermal-state: unknown
+    security-status: unknown
+- handle: 4
+  type: 126
+  length: 63
+  level: null
+  description: Inactive
+  data: !!binary |
+    fg0EAAEMAgMEAgICAg==
+  strings:
+  - LENOVO
+  - Not Available
+  - Not Available
+  - Not Available
+- handle: 5
+  type: 126
+  length: 63
+  level: null
+  description: Inactive
+  data: !!binary |
+    fg0FAAEVAgMEAgICAg==
+  strings:
+  - LENOVO
+  - Not Available
+  - Not Available
+  - Not Available
+- handle: 6
+  type: 4
+  length: 102
+  level: 2.3
+  description: Processor information
+  attributes:
+    socket-designation: None
+    type: central
+    family: other
+    vendor: GenuineIntel
+    voltage: 142
+    external-clock: 200
+    maximum-speed: 2200
+    current-speed: 2200
+    upgrade: none
+    l1-cache-handle: 10
+    l2-cache-handle: 12
+    l3-cache-handle: null
+    serial-number: null
+    asset-tag: null
+    part-number: null
+    socket-type: null
+- handle: 7
+  type: 5
+  length: 22
+  level: 2.1
+  description: Memory controller information
+  attributes:
+    error-detection: none
+    error-correction:
+      other: false
+      unknown: true
+      none: false
+      single-bit: false
+      double-bit: false
+      scrubbing: false
+    supported-interleave: 1-way
+    current-interleave: 1-way
+    maximum-module-size: 4294967296
+    maximum-memory-size: 8589934592
+    supported-speeds:
+      other: true
+      unknown: false
+      70ns: false
+      60ns: false
+      50ns: false
+    supported-types:
+      other: false
+      unknown: false
+      standard: false
+      fpm: false
+      edo: false
+      parity: false
+      ecc: false
+      simm: false
+      dimm: true
+      burst-edo: false
+      sdram: true
+    required-voltages:
+      5v: false
+      3v3: false
+      2v9: true
+    slot-count: 2
+    module-handles:
+    - 8
+    - 9
+- handle: 8
+  type: 6
+  length: 25
+  level: 2.0
+  description: Memory module information
+  attributes:
+    socket: DIMM Slot 1
+    bank-connections: 1
+    current-speed: 155
+    current-type:
+      other: true
+      unknown: false
+      standard: true
+      fpm: false
+      edo: false
+      parity: false
+      ecc: false
+      simm: false
+      dimm: false
+      burst-edo: true
+      sdram: false
+    installed-size: 10485760
+    enabled-size: 0
+    disabled: false
+    bank-count: 1
+    error-status:
+      uncorrectable: false
+      correctable: false
+      event-log: true
+- handle: 9
+  type: 6
+  length: 25
+  level: 2.0
+  description: Memory module information
+  attributes:
+    socket: DIMM Slot 2
+    bank-connections: 131075
+    current-speed: 155
+    current-type:
+      other: true
+      unknown: false
+      standard: true
+      fpm: false
+      edo: false
+      parity: false
+      ecc: false
+      simm: false
+      dimm: false
+      burst-edo: true
+      sdram: false
+    installed-size: 10485760
+    enabled-size: 0
+    disabled: false
+    bank-count: 1
+    error-status:
+      uncorrectable: false
+      correctable: false
+      event-log: true
+- handle: 10
+  type: 7
+  length: 38
+  level: 2.1
+  description: Cache information
+  attributes:
+    socket-designator: Internal L1 Cache
+    level: 1
+    socketed: true
+    location: internal
+    enabled: true
+    mode: write-back
+    maximum-size: 65536
+    installed-size: 65536
+    supported-sram:
+      other: false
+      unknown: false
+      non-burst: false
+      burst: false
+      pipeline-burst: false
+      synchronous: true
+      asynchronous: false
+    current-sram:
+      other: false
+      unknown: false
+      non-burst: false
+      burst: false
+      pipeline-burst: false
+      synchronous: true
+      asynchronous: false
+    speed: 0
+    error-correction: single-bit
+    type: instruction
+    associativity: 8-way
+- handle: 11
+  type: 7
+  length: 38
+  level: 2.1
+  description: Cache information
+  attributes:
+    socket-designator: Internal L1 Cache
+    level: 1
+    socketed: true
+    location: internal
+    enabled: true
+    mode: write-back
+    maximum-size: 65536
+    installed-size: 65536
+    supported-sram:
+      other: false
+      unknown: false
+      non-burst: false
+      burst: false
+      pipeline-burst: false
+      synchronous: true
+      asynchronous: false
+    current-sram:
+      other: false
+      unknown: false
+      non-burst: false
+      burst: false
+      pipeline-burst: false
+      synchronous: true
+      asynchronous: false
+    speed: 0
+    error-correction: single-bit
+    type: data
+    associativity: 8-way
+- handle: 12
+  type: 7
+  length: 38
+  level: 2.1
+  description: Cache information
+  attributes:
+    socket-designator: Internal L2 Cache
+    level: 2
+    socketed: true
+    location: internal
+    enabled: true
+    mode: write-back
+    maximum-size: 2097152
+    installed-size: 4194304
+    supported-sram:
+      other: false
+      unknown: false
+      non-burst: false
+      burst: true
+      pipeline-burst: false
+      synchronous: false
+      asynchronous: false
+    current-sram:
+      other: false
+      unknown: false
+      non-burst: false
+      burst: true
+      pipeline-burst: false
+      synchronous: false
+      asynchronous: false
+    speed: 0
+    error-correction: single-bit
+    type: unified
+    associativity: 8-way
+- handle: 13
+  type: 8
+  length: 41
+  level: 2.0
+  description: Port connector information
+  attributes:
+    internal-designator: Not Available
+    internal-connector: none
+    external-designator: External Monitor
+    external-connector: db-15-f
+    port-type: video
+- handle: 14
+  type: 8
+  length: 40
+  level: 2.0
+  description: Port connector information
+  attributes:
+    internal-designator: Not Available
+    internal-connector: none
+    external-designator: Microphone Jack
+    external-connector: mini-jack
+    port-type: audio
+- handle: 15
+  type: 8
+  length: 39
+  level: 2.0
+  description: Port connector information
+  attributes:
+    internal-designator: Not Available
+    internal-connector: none
+    external-designator: Headphone Jack
+    external-connector: mini-jack
+    port-type: audio
+- handle: 16
+  type: 126
+  length: 31
+  level: null
+  description: Inactive
+  data: !!binary |
+    fgkQAAEAAv8d
+  strings:
+  - Not Available
+  - S/PDIF
+- handle: 17
+  type: 126
+  length: 38
+  level: null
+  description: Inactive
+  data: !!binary |
+    fgkRAAEAAv8c
+  strings:
+  - Not Available
+  - Digital Video
+- handle: 18
+  type: 8
+  length: 30
+  level: 2.0
+  description: Port connector information
+  attributes:
+    internal-designator: Not Available
+    internal-connector: none
+    external-designator: Modem
+    external-connector: rj-11
+    port-type: modem
+- handle: 19
+  type: 8
+  length: 33
+  level: 2.0
+  description: Port connector information
+  attributes:
+    internal-designator: Not Available
+    internal-connector: none
+    external-designator: Ethernet
+    external-connector: rj-45
+    port-type: network
+- handle: 20
+  type: 8
+  length: 30
+  level: 2.0
+  description: Port connector information
+  attributes:
+    internal-designator: Not Available
+    internal-connector: none
+    external-designator: USB 1
+    external-connector: access-bus
+    port-type: usb
+- handle: 21
+  type: 8
+  length: 30
+  level: 2.0
+  description: Port connector information
+  attributes:
+    internal-designator: Not Available
+    internal-connector: none
+    external-designator: USB 2
+    external-connector: access-bus
+    port-type: usb
+- handle: 22
+  type: 8
+  length: 30
+  level: 2.0
+  description: Port connector information
+  attributes:
+    internal-designator: Not Available
+    internal-connector: none
+    external-designator: USB 3
+    external-connector: access-bus
+    port-type: usb
+- handle: 23
+  type: 126
+  length: 30
+  level: null
+  description: Inactive
+  data: !!binary |
+    fgkXAAEAAhIQ
+  strings:
+  - Not Available
+  - USB 4
+- handle: 24
+  type: 126
+  length: 30
+  level: null
+  description: Inactive
+  data: !!binary |
+    fgkYAAEAAhIQ
+  strings:
+  - Not Available
+  - USB 5
+- handle: 25
+  type: 126
+  length: 30
+  level: null
+  description: Inactive
+  data: !!binary |
+    fgkZAAEAAhIQ
+  strings:
+  - Not Available
+  - USB 6
+- handle: 26
+  type: 126
+  length: 30
+  level: null
+  description: Inactive
+  data: !!binary |
+    fgkaAAEAAhIQ
+  strings:
+  - Not Available
+  - USB 7
+- handle: 27
+  type: 126
+  length: 30
+  level: null
+  description: Inactive
+  data: !!binary |
+    fgkbAAEAAhIQ
+  strings:
+  - Not Available
+  - USB 8
+- handle: 28
+  type: 126
+  length: 31
+  level: null
+  description: Inactive
+  data: !!binary |
+    fgkcAAEAAggJ
+  strings:
+  - Not Available
+  - Serial
+- handle: 29
+  type: 126
+  length: 33
+  level: null
+  description: Inactive
+  data: !!binary |
+    fgkdAAEAAgUF
+  strings:
+  - Not Available
+  - Parallel
+- handle: 30
+  type: 126
+  length: 34
+  level: null
+  description: Inactive
+  data: !!binary |
+    fgkeAAEAAg8O
+  strings:
+  - Not Available
+  - PS/2 Port
+- handle: 31
+  type: 8
+  length: 33
+  level: 2.0
+  description: Port connector information
+  attributes:
+    internal-designator: Not Available
+    internal-connector: none
+    external-designator: IEEE1394
+    external-connector: ieee-1394
+    port-type: firewire
+- handle: 32
+  type: 9
+  length: 33
+  level: 2.1
+  description: System slots
+  attributes:
+    designator: ExpressCard Slot 1
+    type: pci-e
+    bus-width: 1x
+    usage: available
+    length: other
+    ident: 0
+    features:
+      unknown: false
+      has-5v0-support: false
+      has-3v3-support: false
+      has-shared-opening: false
+      has-pccard-16-support: false
+      has-cardbus-support: false
+      has-zoom-video-support: false
+      has-modem-ring-resume-support: false
+    features-ex:
+      has-pme-support: false
+      has-hotplug-support: true
+      has-smbus-support: false
+      has-bifurcation-support: false
+      has-async-removal-support: false
+      is-cxl-10-capable: false
+      is-cxl-20-capable: false
+      is-cxl-30-capable: false
+    base-address:
+      segment-group: 0
+      bus-number: 0
+      device-number: 0
+      function-number: 0
+    peer-groups: []
+    information: null
+    physical-width: null
+    pitch: null
+    height: null
+- handle: 33
+  type: 9
+  length: 29
+  level: 2.1
+  description: System slots
+  attributes:
+    designator: CardBus Slot 1
+    type: pcmcia
+    bus-width: 32-bit
+    usage: available
+    length: other
+    ident: 1
+    features:
+      unknown: false
+      has-5v0-support: true
+      has-3v3-support: true
+      has-shared-opening: false
+      has-pccard-16-support: true
+      has-cardbus-support: true
+      has-zoom-video-support: true
+      has-modem-ring-resume-support: true
+    features-ex:
+      has-pme-support: true
+      has-hotplug-support: true
+      has-smbus-support: false
+      has-bifurcation-support: false
+      has-async-removal-support: false
+      is-cxl-10-capable: false
+      is-cxl-20-capable: false
+      is-cxl-30-capable: false
+    base-address:
+      segment-group: 0
+      bus-number: 0
+      device-number: 0
+      function-number: 0
+    peer-groups: []
+    information: null
+    physical-width: null
+    pitch: null
+    height: null
+- handle: 34
+  type: 126
+  length: 33
+  level: null
+  description: Inactive
+  data: !!binary |
+    fg0iAAGlCAMBAgAAAA==
+  strings:
+  - PCI Express Slot 1
+- handle: 35
+  type: 126
+  length: 33
+  level: null
+  description: Inactive
+  data: !!binary |
+    fg0jAAGlCAMBAwAAAg==
+  strings:
+  - ExpressCard Slot 2
+- handle: 36
+  type: 9
+  length: 32
+  level: 2.1
+  description: System slots
+  attributes:
+    designator: Media Card Slot 1
+    type: other
+    bus-width: other
+    usage: available
+    length: other
+    ident: 4
+    features:
+      unknown: false
+      has-5v0-support: false
+      has-3v3-support: false
+      has-shared-opening: false
+      has-pccard-16-support: false
+      has-cardbus-support: false
+      has-zoom-video-support: false
+      has-modem-ring-resume-support: false
+    features-ex:
+      has-pme-support: false
+      has-hotplug-support: true
+      has-smbus-support: false
+      has-bifurcation-support: false
+      has-async-removal-support: false
+      is-cxl-10-capable: false
+      is-cxl-20-capable: false
+      is-cxl-30-capable: false
+    base-address:
+      segment-group: 0
+      bus-number: 0
+      device-number: 0
+      function-number: 0
+    peer-groups: []
+    information: null
+    physical-width: null
+    pitch: null
+    height: null
+- handle: 37
+  type: 126
+  length: 31
+  level: null
+  description: Inactive
+  data: !!binary |
+    fg0lAAEBAQMBBAAAAg==
+  strings:
+  - SmartCard Slot 1
+- handle: 38
+  type: 126
+  length: 32
+  level: null
+  description: Inactive
+  data: !!binary |
+    fg0mAAEBAQMBBAAAAg==
+  strings:
+  - Media Card Slot 2
+- handle: 39
+  type: 10
+  length: 38
+  level: 2.0
+  description: Onboard devices information
+  attributes:
+    instance-count: 1
+    instances:
+    - type: other
+      is-enabled: true
+      description: IBM Embedded Security hardware
+- handle: 40
+  type: 11
+  length: 61
+  level: 2.0
+  description: OEM strings
+  attributes:
+    string-count: 1
+    strings:
+    - IBM ThinkPad Embedded Controller -[7KHT22WW-1.06    ]-
+- handle: 41
+  type: 13
+  length: 28
+  level: 2.0
+  description: Firmware language information
+  attributes:
+    language-count: 1
+    languages:
+    - enUS
+    is-abbreviated: true
+    current-language: enUS
+- handle: 42
+  type: 15
+  length: 27
+  level: 2.1
+  description: System event log
+  attributes:
+    access-method: data-functions
+    status:
+      log-area-valid: true
+      log-area-full: false
+- handle: 43
+  type: 16
+  length: 17
+  level: 2.1
+  description: Physical memory array
+  attributes:
+    location: motherboard
+    use: system
+    error-correction: none
+    maximum-capacity: 4294967296
+    error-handle: 65534
+    device-count: 2
+- handle: 44
+  type: 17
+  length: 44
+  level: 2.3
+  description: Memory device
+  attributes:
+    array-handle: 43
+    error-info-handle: 65281
+    total-width: 64
+    data-width: 64
+    size: 1073741824
+    form-factor: sodimm
+    device-set: 0
+    device-locator: DIMM 1
+    bank-locator: Bank 0/1
+    memory-type: ddr2
+    memory-type-details:
+      reserved: false
+      other: false
+      unknown: false
+      fast-paged: false
+      static-column: false
+      pseudo-static: false
+      rambus: false
+      synchronous: true
+      cmos: false
+      edo: false
+      window-dram: false
+      cache-dram: false
+      non-volatile: false
+      registered: false
+      unbuffered: false
+      lrdimm: false
+    maximum-speed: 667
+    vendor: null
+    serial-number: null
+    asset-tag: null
+    part-number: null
+- handle: 45
+  type: 17
+  length: 44
+  level: 2.3
+  description: Memory device
+  attributes:
+    array-handle: 43
+    error-info-handle: 65281
+    total-width: 64
+    data-width: 64
+    size: 1073741824
+    form-factor: sodimm
+    device-set: 0
+    device-locator: DIMM 2
+    bank-locator: Bank 2/3
+    memory-type: ddr2
+    memory-type-details:
+      reserved: false
+      other: false
+      unknown: false
+      fast-paged: false
+      static-column: false
+      pseudo-static: false
+      rambus: false
+      synchronous: true
+      cmos: false
+      edo: false
+      window-dram: false
+      cache-dram: false
+      non-volatile: false
+      registered: false
+      unbuffered: false
+      lrdimm: false
+    maximum-speed: 667
+    vendor: null
+    serial-number: null
+    asset-tag: null
+    part-number: null
+- handle: 46
+  type: 18
+  length: 25
+  level: 2.1
+  description: 32-bit memory error information
+  attributes:
+    type: ok
+    granularity: unknown
+    operation: unknown
+    vendor-syndrome: 0
+    array-addr: 2147483648
+    device-addr: 2147483648
+    resolution: 2147483648
+- handle: 47
+  type: 19
+  length: 17
+  level: 2.1
+  description: Memory array mapped address
+  attributes:
+    start-addr: 0
+    end-addr: 2147482624
+    range-size: 2147482624
+    array-handle: 43
+    partition-width: 2
+- handle: 48
+  type: 20
+  length: 21
+  level: 2.1
+  description: Memory device mapped address
+  attributes:
+    start-addr: 0
+    end-addr: 1073740800
+    range-size: 1073740800
+    device-handle: 44
+    array-addr-handle: 47
+    partition-pos: 1
+    interleave-pos: 0
+    interleave-depth: 0
+- handle: 49
+  type: 20
+  length: 21
+  level: 2.1
+  description: Memory device mapped address
+  attributes:
+    start-addr: 1073741824
+    end-addr: 2147482624
+    range-size: 1073740800
+    device-handle: 45
+    array-addr-handle: 47
+    partition-pos: 1
+    interleave-pos: 0
+    interleave-depth: 0
+- handle: 50
+  type: 21
+  length: 9
+  level: 2.1
+  description: Built-in pointing device
+  attributes:
+    type: track-point
+    interface: ps2
+    button-count: 3
+- handle: 51
+  type: 21
+  length: 9
+  level: 2.1
+  description: Built-in pointing device
+  attributes:
+    type: touch-pad
+    interface: ps2
+    button-count: 0
+- handle: 52
+  type: 22
+  length: 61
+  level: 2.2
+  description: Portable battery
+  attributes:
+    location: Rear
+    vendor: Panasonic
+    manufacture-date: '2007-08-21'
+    serial-number: null
+    name: 92P1139
+    chemistry: unknown
+    capacity: 56.16
+    voltage: 10.8
+    sbds-version: 3.01
+    maximum-error: unknown
+    sbds-serial-number: 5964
+    sbds-chemistry: LION
+    oem-defined: 0
+- handle: 53
+  type: 126
+  length: 31
+  level: null
+  description: Inactive
+  data: !!binary |
+    fho1AAEAAAACAgAAAAAA/wAAAAAAAQAAAAA=
+  strings:
+  - Bay
+- handle: 54
+  type: 24
+  length: 7
+  level: 2.2
+  description: Hardware security
+  attributes:
+    front-panel-reset: unknown
+    admin-password: disabled
+    keyboard-password: disabled
+    poweron-password: disabled
+- handle: 55
+  type: 32
+  length: 13
+  level: null
+  description: System boot information
+  attributes:
+    status: no-errors-detected
+- handle: 56
+  type: 131
+  length: 54
+  level: null
+  description: OEM-specific
+  data: !!binary |
+    gxE4AAECA///HwAAAAAAAgA=
+  strings:
+  - BOOTINF 20h
+  - BOOTDEV 21h
+  - KEYPTRS 23h
+- handle: 57
+  type: 131
+  length: 38
+  level: null
+  description: OEM-specific
+  data: !!binary |
+    gxY5AAEAAAAAAAAAAAAAAAAAAAAAAQ==
+  strings:
+  - TVT-Enablement
+- handle: 58
+  type: 132
+  length: 9
+  level: null
+  description: OEM-specific
+  data: !!binary |
+    hAc6AALaNg==
+- handle: 59
+  type: 133
+  length: 21
+  level: null
+  description: OEM-specific
+  data: !!binary |
+    hQU7AAE=
+  strings:
+  - KHOIHGIUCCHHII
+- handle: 60
+  type: 134
+  length: 15
+  level: null
+  description: OEM-specific
+  data: !!binary |
+    hg08AAUQByAAAAAAAA==
+- handle: 61
+  type: 134
+  length: 42
+  level: null
+  description: OEM-specific
+  data: !!binary |
+    hhA9AABBVE1MAQEAAAMBAg==
+  strings:
+  - TPM INFO
+  - System Reserved
+- handle: 62
+  type: 135
+  length: 15
+  level: null
+  description: OEM-specific
+  data: !!binary |
+    hw0+AFRQBwABAAAAAA==
+- handle: 63
+  type: 135
+  length: 20
+  level: null
+  description: OEM-specific
+  data: !!binary |
+    hxI/AFRQBwEBrgMAAAAAAAAA
+- handle: 64
+  type: 135
+  length: 37
+  level: null
+  description: OEM-specific
+  data: !!binary |
+    hyNAAFRQBwJCQVkgSS9PIAEAAgAACgBIHB4cAgAOAPAB9gM=
+- handle: 65
+  type: 135
+  length: 28
+  level: null
+  description: OEM-specific
+  data: !!binary |
+    hxpBAFRQBwQBBAEBAgACAQIAAwECAAQBAgA=
+- handle: 66
+  type: 136
+  length: 8
+  level: null
+  description: OEM-specific
+  data: !!binary |
+    iAZCAFpa
+- handle: 67
+  type: 137
+  length: 30
+  level: null
+  description: OEM-specific
+  data: !!binary |
+    iRxDAAwCAAEBAAABUFdNUyBJbmZvcm1hdGlvbg==
+- handle: 68
+  type: 138
+  length: 42
+  level: null
+  description: OEM-specific
+  data: !!binary |
+    iihEABQBAgFAAgFAAgFAAgFAAUBCSU9TIFBhc3N3b3JkIEZvcm1hdA==
+- handle: 69
+  type: 139
+  length: 39
+  level: null
+  description: OEM-specific
+  data: !!binary |
+    iyVFABEBCgAAAAAAAAAAAABQV01TIEtleSBJbmZvcm1hdGlvbg==
+- handle: 70
+  type: 129
+  length: 33
+  level: null
+  description: OEM-specific
+  data: !!binary |
+    gQhGAAEBAgA=
+  strings:
+  - Intel_ASF
+  - Intel_ASF_001
+- handle: 71
+  type: 130
+  length: 22
+  level: null
+  description: OEM-specific
+  data: !!binary |
+    ghRHACRBTVQBAAAAAKUAAAAAAAA=
+- handle: 72
+  type: 127
+  length: 6
+  level: null
+  description: End of table

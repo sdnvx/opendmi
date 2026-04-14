@@ -1,0 +1,1177 @@
+entry:
+  smbios-version: 3.1.1
+table:
+- handle: 0
+  type: 0
+  length: 68
+  level: 3.1
+  description: Platform firmware information
+  attributes:
+    vendor: American Megatrends Inc.
+    version: 5407
+    bios-segment: 61440
+    release-date: '2019-12-31'
+    rom-size: 16777216
+    features:
+      unknown: false
+      unsupported: false
+      isa-support: false
+      mca-support: false
+      eisa-support: false
+      pci-support: true
+      pcmcia-support: false
+      pnp-support: false
+      apm-support: true
+      upgradeable-flash: true
+      shadowing-allowed: true
+      vesa-support: false
+      escd-support: false
+      boot-cd: true
+      boot-selectable: true
+      socketed-rom: true
+      boot-pcmcia-support: false
+      edd-support: true
+      floppy-nec-support: false
+      floppy-toshiba-support: false
+      floppy-525-360k-support: false
+      floppy-525-1m2-support: true
+      floppy-35-720k-support: true
+      floppy-35-2m88-support: true
+      print-screen-support: true
+      keyboard-support: true
+      serial-support: true
+      printer-support: true
+      video-cga-mono-support: false
+      nec-pc-98: true
+    features-ex:
+      acpi-support: true
+      usb-legacy-support: true
+      agp-support: false
+      boot-i2o: false
+      boot-ls120: false
+      boot-atapi-zip: false
+      boot-ieee1394: false
+      smart-battery: false
+      bios-boot-spec: true
+      boot-network-fn-key: false
+      content-distribution: true
+      uefi-spec: true
+      virtual-machine: false
+      mfg-mode-support: false
+      mfg-mode-enabled: false
+    platform-version: 5.13
+    controller-version: null
+- handle: 1
+  type: 1
+  length: 131
+  level: 2.4
+  description: System information
+  attributes:
+    vendor: System manufacturer
+    product: System Product Name
+    version: System Version
+    serial-number: System Serial Number
+    uuid: A602185C-77CF-4CAD-C8DC-2CFDA1E3E153
+    wakeup-type: power-switch
+    sku-number: SKU
+    family: To be filled by O.E.M.
+- handle: 2
+  type: 2
+  length: 109
+  level: 2.0
+  description: Baseboard or module information
+  attributes:
+    vendor: ASUSTeK COMPUTER INC.
+    product: PRIME B350-PLUS
+    version: Rev X.0x
+    serial-number: 180221229401956
+    asset-tag: Default string
+    features:
+      is-hosting-board: true
+      require-daughter-board: false
+      is-removable: false
+      is-replaceable: true
+      is-hot-swappable: false
+    location: Default string
+    chassis-handle: 3
+    type: motherboard
+    contained-objects: []
+- handle: 3
+  type: 3
+  length: 98
+  level: 2.7
+  description: System enclosure or chassis
+  attributes:
+    vendor: Default string
+    type: desktop
+    is-lock-present: false
+    version: Default string
+    serial-number: Default string
+    asset-tag: Default string
+    bootup-state: ok
+    power-supply-state: ok
+    thermal-state: ok
+    security-status: none
+    oem-defined: 0
+    height: null
+    power-cord-count: 1
+    element-count: 0
+    element-size: 3
+    elements: []
+    sku-number: Default string
+- handle: 4
+  type: 8
+  length: 50
+  level: 2.0
+  description: Port connector information
+  attributes:
+    internal-designator: PS/2 Keyboard/Mouse
+    internal-connector: none
+    external-designator: PS/2 Keyboard/Mouse
+    external-connector: ps-2
+    port-type: keyboard
+- handle: 5
+  type: 8
+  length: 22
+  level: 2.0
+  description: Port connector information
+  attributes:
+    internal-designator: USB12
+    internal-connector: none
+    external-designator: USB12
+    external-connector: access-bus
+    port-type: usb
+- handle: 6
+  type: 8
+  length: 23
+  level: 2.0
+  description: Port connector information
+  attributes:
+    internal-designator: VGA
+    internal-connector: none
+    external-designator: VGA port
+    external-connector: none
+    port-type: other
+- handle: 7
+  type: 8
+  length: 23
+  level: 2.0
+  description: Port connector information
+  attributes:
+    internal-designator: DVI
+    internal-connector: none
+    external-designator: DVI port
+    external-connector: other
+    port-type: other
+- handle: 8
+  type: 8
+  length: 25
+  level: 2.0
+  description: Port connector information
+  attributes:
+    internal-designator: HDMI
+    internal-connector: none
+    external-designator: HDMI port
+    external-connector: other
+    port-type: other
+- handle: 9
+  type: 8
+  length: 26
+  level: 2.0
+  description: Port connector information
+  attributes:
+    internal-designator: USB3_34
+    internal-connector: none
+    external-designator: USB3_34
+    external-connector: access-bus
+    port-type: usb
+- handle: 10
+  type: 8
+  length: 30
+  level: 2.0
+  description: Port connector information
+  attributes:
+    internal-designator: USB3.1_12
+    internal-connector: none
+    external-designator: USB3.1_12
+    external-connector: access-bus
+    port-type: usb
+- handle: 11
+  type: 8
+  length: 26
+  level: 2.0
+  description: Port connector information
+  attributes:
+    internal-designator: USB3_56
+    internal-connector: none
+    external-designator: USB3_56
+    external-connector: access-bus
+    port-type: usb
+- handle: 12
+  type: 8
+  length: 18
+  level: 2.0
+  description: Port connector information
+  attributes:
+    internal-designator: LAN
+    internal-connector: none
+    external-designator: LAN
+    external-connector: rj-45
+    port-type: network
+- handle: 13
+  type: 8
+  length: 22
+  level: 2.0
+  description: Port connector information
+  attributes:
+    internal-designator: AUDIO
+    internal-connector: none
+    external-designator: AUDIO
+    external-connector: other
+    port-type: audio
+- handle: 14
+  type: 8
+  length: 19
+  level: 2.0
+  description: Port connector information
+  attributes:
+    internal-designator: SATA6G_1
+    internal-connector: sas-sata
+    external-designator: null
+    external-connector: none
+    port-type: sata
+- handle: 15
+  type: 8
+  length: 19
+  level: 2.0
+  description: Port connector information
+  attributes:
+    internal-designator: SATA6G_2
+    internal-connector: sas-sata
+    external-designator: null
+    external-connector: none
+    port-type: sata
+- handle: 16
+  type: 8
+  length: 19
+  level: 2.0
+  description: Port connector information
+  attributes:
+    internal-designator: SATA6G_3
+    internal-connector: sas-sata
+    external-designator: null
+    external-connector: none
+    port-type: sata
+- handle: 17
+  type: 8
+  length: 19
+  level: 2.0
+  description: Port connector information
+  attributes:
+    internal-designator: SATA6G_4
+    internal-connector: sas-sata
+    external-designator: null
+    external-connector: none
+    port-type: sata
+- handle: 18
+  type: 8
+  length: 19
+  level: 2.0
+  description: Port connector information
+  attributes:
+    internal-designator: SATA6G_5
+    internal-connector: sas-sata
+    external-designator: null
+    external-connector: none
+    port-type: sata
+- handle: 19
+  type: 8
+  length: 19
+  level: 2.0
+  description: Port connector information
+  attributes:
+    internal-designator: SATA6G_6
+    internal-connector: sas-sata
+    external-designator: null
+    external-connector: none
+    port-type: sata
+- handle: 20
+  type: 8
+  length: 14
+  level: 2.0
+  description: Port connector information
+  attributes:
+    internal-designator: M.2
+    internal-connector: sas-sata
+    external-designator: null
+    external-connector: none
+    port-type: sata
+- handle: 21
+  type: 8
+  length: 17
+  level: 2.0
+  description: Port connector information
+  attributes:
+    internal-designator: USB_34
+    internal-connector: access-bus
+    external-designator: null
+    external-connector: none
+    port-type: usb
+- handle: 22
+  type: 8
+  length: 17
+  level: 2.0
+  description: Port connector information
+  attributes:
+    internal-designator: USB_56
+    internal-connector: access-bus
+    external-designator: null
+    external-connector: none
+    port-type: usb
+- handle: 23
+  type: 8
+  length: 18
+  level: 2.0
+  description: Port connector information
+  attributes:
+    internal-designator: USB3_12
+    internal-connector: access-bus
+    external-designator: null
+    external-connector: none
+    port-type: usb
+- handle: 24
+  type: 8
+  length: 18
+  level: 2.0
+  description: Port connector information
+  attributes:
+    internal-designator: CPU_FAN
+    internal-connector: other
+    external-designator: null
+    external-connector: none
+    port-type: other
+- handle: 25
+  type: 8
+  length: 19
+  level: 2.0
+  description: Port connector information
+  attributes:
+    internal-designator: CHA_FAN1
+    internal-connector: other
+    external-designator: null
+    external-connector: none
+    port-type: other
+- handle: 26
+  type: 8
+  length: 19
+  level: 2.0
+  description: Port connector information
+  attributes:
+    internal-designator: CHA_FAN2
+    internal-connector: other
+    external-designator: null
+    external-connector: none
+    port-type: other
+- handle: 27
+  type: 8
+  length: 14
+  level: 2.0
+  description: Port connector information
+  attributes:
+    internal-designator: COM
+    internal-connector: db-9-m
+    external-designator: null
+    external-connector: none
+    port-type: serial-16550a
+- handle: 28
+  type: 8
+  length: 15
+  level: 2.0
+  description: Port connector information
+  attributes:
+    internal-designator: AAFP
+    internal-connector: mini-jack
+    external-designator: null
+    external-connector: none
+    port-type: audio
+- handle: 29
+  type: 8
+  length: 16
+  level: 2.0
+  description: Port connector information
+  attributes:
+    internal-designator: PANEL
+    internal-connector: other
+    external-designator: null
+    external-connector: none
+    port-type: other
+- handle: 30
+  type: 8
+  length: 20
+  level: 2.0
+  description: Port connector information
+  attributes:
+    internal-designator: SPDIF_OUT
+    internal-connector: other
+    external-designator: null
+    external-connector: none
+    port-type: other
+- handle: 31
+  type: 10
+  length: 33
+  level: 2.0
+  description: Onboard devices information
+  attributes:
+    instance-count: 1
+    instances:
+    - type: video
+      is-enabled: true
+      description: To Be Filled By O.E.M.
+- handle: 32
+  type: 11
+  length: 115
+  level: 2.0
+  description: OEM strings
+  attributes:
+    string-count: 8
+    strings:
+    - Default string
+    - Default string
+    - SPRITE
+    - Default string
+    - FFFFFFFFFFFFF
+    - FFFFFFFFFFFFF
+    - FFFFFFFFFFFFF
+    - Default string
+- handle: 33
+  type: 12
+  length: 130
+  level: 2.0
+  description: System configuration options
+  attributes:
+    options:
+    - SMI:00B29C05
+    - 'DSN:                               .'
+    - 'DSN:                               .'
+    - 'DSN:                               .'
+- handle: 34
+  type: 32
+  length: 22
+  level: null
+  description: System boot information
+  attributes:
+    status: no-errors-detected
+- handle: 35
+  type: 34
+  length: 24
+  level: 2.3
+  description: Management device
+  attributes:
+    description: ITE IT8655E
+    type: other
+    address: 661
+    address-type: port
+- handle: 36
+  type: 41
+  length: 25
+  level: 2.6
+  description: Onboard devices extended information
+  attributes:
+    designator: Onboard IGD
+    type: video
+    is-enabled: true
+    instance: 1
+    address:
+      segment-group: 0
+      bus-number: 0
+      device-number: 2
+      function-number: 0
+- handle: 37
+  type: 18
+  length: 25
+  level: 2.1
+  description: 32-bit memory error information
+  attributes:
+    type: ok
+    granularity: unknown
+    operation: unknown
+    vendor-syndrome: 0
+    array-addr: 2147483648
+    device-addr: 2147483648
+    resolution: 2147483648
+- handle: 38
+  type: 16
+  length: 25
+  level: 2.7
+  description: Physical memory array
+  attributes:
+    location: motherboard
+    use: system
+    error-correction: none
+    maximum-capacity: 137438953472
+    error-handle: 37
+    device-count: 4
+- handle: 39
+  type: 19
+  length: 33
+  level: 2.7
+  description: Memory array mapped address
+  attributes:
+    start-addr: 0
+    end-addr: 34359737344
+    range-size: 34359737344
+    array-handle: 38
+    partition-width: 2
+- handle: 40
+  type: 7
+  length: 31
+  level: 2.1
+  description: Cache information
+  attributes:
+    socket-designator: L1 - Cache
+    level: 1
+    socketed: false
+    location: internal
+    enabled: true
+    mode: write-back
+    maximum-size: 589824
+    installed-size: 589824
+    supported-sram:
+      other: false
+      unknown: false
+      non-burst: false
+      burst: false
+      pipeline-burst: true
+      synchronous: false
+      asynchronous: false
+    current-sram:
+      other: false
+      unknown: false
+      non-burst: false
+      burst: false
+      pipeline-burst: true
+      synchronous: false
+      asynchronous: false
+    speed: 1
+    error-correction: multi-bit
+    type: unified
+    associativity: 8-way
+- handle: 41
+  type: 7
+  length: 31
+  level: 2.1
+  description: Cache information
+  attributes:
+    socket-designator: L2 - Cache
+    level: 2
+    socketed: false
+    location: internal
+    enabled: true
+    mode: write-back
+    maximum-size: 3145728
+    installed-size: 3145728
+    supported-sram:
+      other: false
+      unknown: false
+      non-burst: false
+      burst: false
+      pipeline-burst: true
+      synchronous: false
+      asynchronous: false
+    current-sram:
+      other: false
+      unknown: false
+      non-burst: false
+      burst: false
+      pipeline-burst: true
+      synchronous: false
+      asynchronous: false
+    speed: 1
+    error-correction: multi-bit
+    type: unified
+    associativity: 8-way
+- handle: 42
+  type: 7
+  length: 31
+  level: 2.1
+  description: Cache information
+  attributes:
+    socket-designator: L3 - Cache
+    level: 3
+    socketed: false
+    location: internal
+    enabled: true
+    mode: write-back
+    maximum-size: 16777216
+    installed-size: 16777216
+    supported-sram:
+      other: false
+      unknown: false
+      non-burst: false
+      burst: false
+      pipeline-burst: true
+      synchronous: false
+      asynchronous: false
+    current-sram:
+      other: false
+      unknown: false
+      non-burst: false
+      burst: false
+      pipeline-burst: true
+      synchronous: false
+      asynchronous: false
+    speed: 1
+    error-correction: multi-bit
+    type: unified
+    associativity: 16-way
+- handle: 43
+  type: 4
+  length: 154
+  level: 3.0
+  description: Processor information
+  attributes:
+    socket-designation: AM4
+    type: central
+    family: amd-zen
+    vendor: Advanced Micro Devices, Inc.
+    voltage: 140
+    external-clock: 100
+    maximum-speed: 4250
+    current-speed: 3600
+    upgrade: socket-am4
+    l1-cache-handle: 40
+    l2-cache-handle: 41
+    l3-cache-handle: 42
+    serial-number: Unknown
+    asset-tag: Unknown
+    part-number: Unknown
+    features:
+      unknown: false
+      capable-64bit: true
+      multicore: true
+      hardware_thread: true
+      execute-protection: true
+      enhanced-virtualization: true
+      power-perf-control: true
+      capable-128bit: false
+      arm64-soc-id: false
+    core-count: 6
+    core-enabled: 6
+    thread-count: 12
+    socket-type: null
+- handle: 44
+  type: 18
+  length: 25
+  level: 2.1
+  description: 32-bit memory error information
+  attributes:
+    type: ok
+    granularity: unknown
+    operation: unknown
+    vendor-syndrome: 0
+    array-addr: 2147483648
+    device-addr: 2147483648
+    resolution: 2147483648
+- handle: 45
+  type: 17
+  length: 80
+  level: 2.8
+  description: Memory device
+  attributes:
+    array-handle: 38
+    error-info-handle: 44
+    total-width: unknown
+    data-width: unknown
+    size: 0
+    form-factor: unknown
+    device-set: 0
+    device-locator: DIMM_A1
+    bank-locator: BANK 0
+    memory-type: unknown
+    memory-type-details:
+      reserved: false
+      other: false
+      unknown: true
+      fast-paged: false
+      static-column: false
+      pseudo-static: false
+      rambus: false
+      synchronous: false
+      cmos: false
+      edo: false
+      window-dram: false
+      cache-dram: false
+      non-volatile: false
+      registered: false
+      unbuffered: false
+      lrdimm: false
+    maximum-speed: unknown
+    vendor: Unknown
+    serial-number: Unknown
+    asset-tag: null
+    part-number: Unknown
+    rank: unknown
+    configured-speed: unknown
+    minimum-voltage: unknown
+    maximum-voltage: unknown
+    configured-voltage: unknown
+- handle: 46
+  type: 18
+  length: 25
+  level: 2.1
+  description: 32-bit memory error information
+  attributes:
+    type: ok
+    granularity: unknown
+    operation: unknown
+    vendor-syndrome: 0
+    array-addr: 2147483648
+    device-addr: 2147483648
+    resolution: 2147483648
+- handle: 47
+  type: 17
+  length: 93
+  level: 2.8
+  description: Memory device
+  attributes:
+    array-handle: 38
+    error-info-handle: 46
+    total-width: 64
+    data-width: 64
+    size: 17179869184
+    form-factor: dimm
+    device-set: 0
+    device-locator: DIMM_A2
+    bank-locator: BANK 1
+    memory-type: ddr4
+    memory-type-details:
+      reserved: false
+      other: false
+      unknown: false
+      fast-paged: false
+      static-column: false
+      pseudo-static: false
+      rambus: false
+      synchronous: true
+      cmos: false
+      edo: false
+      window-dram: false
+      cache-dram: false
+      non-volatile: false
+      registered: false
+      unbuffered: true
+      lrdimm: false
+    maximum-speed: 2666
+    vendor: CRUCIAL
+    serial-number: E20E8540
+    asset-tag: null
+    part-number: BLS16G4D26BFSC.16FD
+    rank: 2
+    configured-speed: 2666
+    minimum-voltage: 1.2
+    maximum-voltage: 1.2
+    configured-voltage: 1.2
+- handle: 48
+  type: 20
+  length: 37
+  level: 2.7
+  description: Memory device mapped address
+  attributes:
+    start-addr: 0
+    end-addr: 34359737344
+    range-size: 34359737344
+    device-handle: 47
+    array-addr-handle: 39
+    partition-pos: unknown
+    interleave-pos: unknown
+    interleave-depth: unknown
+- handle: 49
+  type: 18
+  length: 25
+  level: 2.1
+  description: 32-bit memory error information
+  attributes:
+    type: ok
+    granularity: unknown
+    operation: unknown
+    vendor-syndrome: 0
+    array-addr: 2147483648
+    device-addr: 2147483648
+    resolution: 2147483648
+- handle: 50
+  type: 17
+  length: 80
+  level: 2.8
+  description: Memory device
+  attributes:
+    array-handle: 38
+    error-info-handle: 49
+    total-width: unknown
+    data-width: unknown
+    size: 0
+    form-factor: unknown
+    device-set: 0
+    device-locator: DIMM_B1
+    bank-locator: BANK 2
+    memory-type: unknown
+    memory-type-details:
+      reserved: false
+      other: false
+      unknown: true
+      fast-paged: false
+      static-column: false
+      pseudo-static: false
+      rambus: false
+      synchronous: false
+      cmos: false
+      edo: false
+      window-dram: false
+      cache-dram: false
+      non-volatile: false
+      registered: false
+      unbuffered: false
+      lrdimm: false
+    maximum-speed: unknown
+    vendor: Unknown
+    serial-number: Unknown
+    asset-tag: null
+    part-number: Unknown
+    rank: unknown
+    configured-speed: unknown
+    minimum-voltage: unknown
+    maximum-voltage: unknown
+    configured-voltage: unknown
+- handle: 51
+  type: 18
+  length: 25
+  level: 2.1
+  description: 32-bit memory error information
+  attributes:
+    type: ok
+    granularity: unknown
+    operation: unknown
+    vendor-syndrome: 0
+    array-addr: 2147483648
+    device-addr: 2147483648
+    resolution: 2147483648
+- handle: 52
+  type: 17
+  length: 93
+  level: 2.8
+  description: Memory device
+  attributes:
+    array-handle: 38
+    error-info-handle: 51
+    total-width: 64
+    data-width: 64
+    size: 17179869184
+    form-factor: dimm
+    device-set: 0
+    device-locator: DIMM_B2
+    bank-locator: BANK 3
+    memory-type: ddr4
+    memory-type-details:
+      reserved: false
+      other: false
+      unknown: false
+      fast-paged: false
+      static-column: false
+      pseudo-static: false
+      rambus: false
+      synchronous: true
+      cmos: false
+      edo: false
+      window-dram: false
+      cache-dram: false
+      non-volatile: false
+      registered: false
+      unbuffered: true
+      lrdimm: false
+    maximum-speed: 2666
+    vendor: CRUCIAL
+    serial-number: E20A6B76
+    asset-tag: null
+    part-number: BLS16G4D26BFSC.16FD
+    rank: 2
+    configured-speed: 2666
+    minimum-voltage: 1.2
+    maximum-voltage: 1.2
+    configured-voltage: 1.2
+- handle: 53
+  type: 20
+  length: 37
+  level: 2.7
+  description: Memory device mapped address
+  attributes:
+    start-addr: 0
+    end-addr: 34359737344
+    range-size: 34359737344
+    device-handle: 52
+    array-addr-handle: 39
+    partition-pos: unknown
+    interleave-pos: unknown
+    interleave-depth: unknown
+- handle: 54
+  type: 13
+  length: 145
+  level: 2.0
+  description: Firmware language information
+  attributes:
+    language-count: 9
+    languages:
+    - en|US|iso8859-1
+    - fr|FR|iso8859-1
+    - zh|TW|unicode
+    - ja|JP|unicode
+    - de|DE|iso8859-1
+    - es|ES|iso8859-1
+    - ru|RU|iso8859-5
+    - ko|KR|unicode
+    - null
+    is-abbreviated: false
+    current-language: ru|RU|iso8859-5
+- handle: 55
+  type: 9
+  length: 28
+  level: 2.6
+  description: System slots
+  attributes:
+    designator: PCIEX16_1
+    type: pci-e
+    bus-width: 16x
+    usage: in-use
+    length: long
+    ident: 0
+    features:
+      unknown: false
+      has-5v0-support: false
+      has-3v3-support: true
+      has-shared-opening: true
+      has-pccard-16-support: false
+      has-cardbus-support: false
+      has-zoom-video-support: false
+      has-modem-ring-resume-support: false
+    features-ex:
+      has-pme-support: true
+      has-hotplug-support: false
+      has-smbus-support: false
+      has-bifurcation-support: false
+      has-async-removal-support: false
+      is-cxl-10-capable: false
+      is-cxl-20-capable: false
+      is-cxl-30-capable: false
+    base-address:
+      segment-group: 0
+      bus-number: 0
+      device-number: 3
+      function-number: 1
+    peer-groups: []
+    information: null
+    physical-width: null
+    pitch: null
+    height: null
+- handle: 56
+  type: 9
+  length: 28
+  level: 2.6
+  description: System slots
+  attributes:
+    designator: PCIEX16_2
+    type: pci-e
+    bus-width: 4x
+    usage: available
+    length: long
+    ident: 1
+    features:
+      unknown: false
+      has-5v0-support: false
+      has-3v3-support: true
+      has-shared-opening: true
+      has-pccard-16-support: false
+      has-cardbus-support: false
+      has-zoom-video-support: false
+      has-modem-ring-resume-support: false
+    features-ex:
+      has-pme-support: true
+      has-hotplug-support: false
+      has-smbus-support: false
+      has-bifurcation-support: false
+      has-async-removal-support: false
+      is-cxl-10-capable: false
+      is-cxl-20-capable: false
+      is-cxl-30-capable: false
+    base-address:
+      segment-group: 0
+      bus-number: 0
+      device-number: 31
+      function-number: 7
+    peer-groups: []
+    information: null
+    physical-width: null
+    pitch: null
+    height: null
+- handle: 57
+  type: 9
+  length: 27
+  level: 2.6
+  description: System slots
+  attributes:
+    designator: PCIEX1_1
+    type: pci-e
+    bus-width: 1x
+    usage: available
+    length: short
+    ident: 2
+    features:
+      unknown: false
+      has-5v0-support: false
+      has-3v3-support: true
+      has-shared-opening: true
+      has-pccard-16-support: false
+      has-cardbus-support: false
+      has-zoom-video-support: false
+      has-modem-ring-resume-support: false
+    features-ex:
+      has-pme-support: true
+      has-hotplug-support: false
+      has-smbus-support: false
+      has-bifurcation-support: false
+      has-async-removal-support: false
+      is-cxl-10-capable: false
+      is-cxl-20-capable: false
+      is-cxl-30-capable: false
+    base-address:
+      segment-group: 0
+      bus-number: 0
+      device-number: 31
+      function-number: 7
+    peer-groups: []
+    information: null
+    physical-width: null
+    pitch: null
+    height: null
+- handle: 58
+  type: 9
+  length: 27
+  level: 2.6
+  description: System slots
+  attributes:
+    designator: PCIEX1_2
+    type: pci-e
+    bus-width: 1x
+    usage: available
+    length: short
+    ident: 3
+    features:
+      unknown: false
+      has-5v0-support: false
+      has-3v3-support: true
+      has-shared-opening: true
+      has-pccard-16-support: false
+      has-cardbus-support: false
+      has-zoom-video-support: false
+      has-modem-ring-resume-support: false
+    features-ex:
+      has-pme-support: true
+      has-hotplug-support: false
+      has-smbus-support: false
+      has-bifurcation-support: false
+      has-async-removal-support: false
+      is-cxl-10-capable: false
+      is-cxl-20-capable: false
+      is-cxl-30-capable: false
+    base-address:
+      segment-group: 0
+      bus-number: 0
+      device-number: 31
+      function-number: 7
+    peer-groups: []
+    information: null
+    physical-width: null
+    pitch: null
+    height: null
+- handle: 59
+  type: 9
+  length: 23
+  level: 2.6
+  description: System slots
+  attributes:
+    designator: PCI1
+    type: pci
+    bus-width: 32-bit
+    usage: available
+    length: short
+    ident: 4
+    features:
+      unknown: false
+      has-5v0-support: false
+      has-3v3-support: true
+      has-shared-opening: true
+      has-pccard-16-support: false
+      has-cardbus-support: false
+      has-zoom-video-support: false
+      has-modem-ring-resume-support: false
+    features-ex:
+      has-pme-support: true
+      has-hotplug-support: false
+      has-smbus-support: false
+      has-bifurcation-support: false
+      has-async-removal-support: false
+      is-cxl-10-capable: false
+      is-cxl-20-capable: false
+      is-cxl-30-capable: false
+    base-address:
+      segment-group: 0
+      bus-number: 0
+      device-number: 31
+      function-number: 7
+    peer-groups: []
+    information: null
+    physical-width: null
+    pitch: null
+    height: null
+- handle: 60
+  type: 9
+  length: 23
+  level: 2.6
+  description: System slots
+  attributes:
+    designator: PCI2
+    type: pci
+    bus-width: 32-bit
+    usage: available
+    length: short
+    ident: 5
+    features:
+      unknown: false
+      has-5v0-support: false
+      has-3v3-support: true
+      has-shared-opening: true
+      has-pccard-16-support: false
+      has-cardbus-support: false
+      has-zoom-video-support: false
+      has-modem-ring-resume-support: false
+    features-ex:
+      has-pme-support: true
+      has-hotplug-support: false
+      has-smbus-support: false
+      has-bifurcation-support: false
+      has-async-removal-support: false
+      is-cxl-10-capable: false
+      is-cxl-20-capable: false
+      is-cxl-30-capable: false
+    base-address:
+      segment-group: 0
+      bus-number: 0
+      device-number: 31
+      function-number: 7
+    peer-groups: []
+    information: null
+    physical-width: null
+    pitch: null
+    height: null
+- handle: 61
+  type: 127
+  length: 6
+  level: null
+  description: End of table

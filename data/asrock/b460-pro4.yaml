@@ -1,0 +1,1108 @@
+entry:
+  smbios-version: 3.2.1
+table:
+- handle: 0
+  type: 0
+  length: 69
+  level: 3.1
+  description: Platform firmware information
+  attributes:
+    vendor: American Megatrends Inc.
+    version: P1.60
+    bios-segment: 61440
+    release-date: '2020-09-03'
+    rom-size: 16777216
+    features:
+      unknown: false
+      unsupported: false
+      isa-support: false
+      mca-support: false
+      eisa-support: false
+      pci-support: true
+      pcmcia-support: false
+      pnp-support: false
+      apm-support: false
+      upgradeable-flash: true
+      shadowing-allowed: true
+      vesa-support: false
+      escd-support: false
+      boot-cd: true
+      boot-selectable: true
+      socketed-rom: true
+      boot-pcmcia-support: false
+      edd-support: true
+      floppy-nec-support: false
+      floppy-toshiba-support: false
+      floppy-525-360k-support: false
+      floppy-525-1m2-support: true
+      floppy-35-720k-support: true
+      floppy-35-2m88-support: true
+      print-screen-support: true
+      keyboard-support: true
+      serial-support: true
+      printer-support: true
+      video-cga-mono-support: false
+      nec-pc-98: true
+    features-ex:
+      acpi-support: true
+      usb-legacy-support: true
+      agp-support: false
+      boot-i2o: false
+      boot-ls120: false
+      boot-atapi-zip: false
+      boot-ieee1394: false
+      smart-battery: false
+      bios-boot-spec: true
+      boot-network-fn-key: false
+      content-distribution: true
+      uefi-spec: true
+      virtual-machine: false
+      mfg-mode-support: false
+      mfg-mode-enabled: false
+    platform-version: 5.17
+    controller-version: null
+- handle: 1
+  type: 1
+  length: 166
+  level: 2.4
+  description: System information
+  attributes:
+    vendor: To Be Filled By O.E.M.
+    product: To Be Filled By O.E.M.
+    version: To Be Filled By O.E.M.
+    serial-number: To Be Filled By O.E.M.
+    uuid: 6459A1A8-77B5-0000-0000-000000000000
+    wakeup-type: power-switch
+    sku-number: To Be Filled By O.E.M.
+    family: To Be Filled By O.E.M.
+- handle: 2
+  type: 2
+  length: 118
+  level: 2.0
+  description: Baseboard or module information
+  attributes:
+    vendor: ASRock
+    product: B460 Pro4
+    version: null
+    serial-number: M80-DB020000819
+    asset-tag: null
+    features:
+      is-hosting-board: true
+      require-daughter-board: false
+      is-removable: false
+      is-replaceable: true
+      is-hot-swappable: false
+    location: null
+    chassis-handle: 3
+    type: motherboard
+    contained-objects: []
+- handle: 3
+  type: 3
+  length: 138
+  level: 2.7
+  description: System enclosure or chassis
+  attributes:
+    vendor: To Be Filled By O.E.M.
+    type: desktop
+    is-lock-present: false
+    version: To Be Filled By O.E.M.
+    serial-number: To Be Filled By O.E.M.
+    asset-tag: To Be Filled By O.E.M.
+    bootup-state: ok
+    power-supply-state: ok
+    thermal-state: ok
+    security-status: none
+    oem-defined: 0
+    height: null
+    power-cord-count: 1
+    element-count: 0
+    element-size: 3
+    elements: []
+    sku-number: To Be Filled By O.E.M.
+- handle: 4
+  type: 9
+  length: 24
+  level: 2.6
+  description: System slots
+  attributes:
+    designator: Slot1
+    type: pci-e
+    bus-width: 16x
+    usage: in-use
+    length: long
+    ident: 17
+    features:
+      unknown: false
+      has-5v0-support: false
+      has-3v3-support: true
+      has-shared-opening: true
+      has-pccard-16-support: false
+      has-cardbus-support: false
+      has-zoom-video-support: false
+      has-modem-ring-resume-support: false
+    features-ex:
+      has-pme-support: true
+      has-hotplug-support: false
+      has-smbus-support: false
+      has-bifurcation-support: false
+      has-async-removal-support: false
+      is-cxl-10-capable: false
+      is-cxl-20-capable: false
+      is-cxl-30-capable: false
+    base-address:
+      segment-group: 0
+      bus-number: 1
+      device-number: 0
+      function-number: 0
+    peer-groups: []
+    information: null
+    physical-width: null
+    pitch: null
+    height: null
+- handle: 5
+  type: 9
+  length: 24
+  level: 2.6
+  description: System slots
+  attributes:
+    designator: Slot2
+    type: pci-e
+    bus-width: 1x
+    usage: available
+    length: short
+    ident: 18
+    features:
+      unknown: false
+      has-5v0-support: false
+      has-3v3-support: true
+      has-shared-opening: true
+      has-pccard-16-support: false
+      has-cardbus-support: false
+      has-zoom-video-support: false
+      has-modem-ring-resume-support: false
+    features-ex:
+      has-pme-support: true
+      has-hotplug-support: false
+      has-smbus-support: false
+      has-bifurcation-support: false
+      has-async-removal-support: false
+      is-cxl-10-capable: false
+      is-cxl-20-capable: false
+      is-cxl-30-capable: false
+    base-address:
+      segment-group: 0
+      bus-number: 1
+      device-number: 0
+      function-number: 2
+    peer-groups: []
+    information: null
+    physical-width: null
+    pitch: null
+    height: null
+- handle: 6
+  type: 9
+  length: 24
+  level: 2.6
+  description: System slots
+  attributes:
+    designator: Slot3
+    type: pci-e
+    bus-width: 4x
+    usage: in-use
+    length: long
+    ident: 19
+    features:
+      unknown: false
+      has-5v0-support: false
+      has-3v3-support: true
+      has-shared-opening: true
+      has-pccard-16-support: false
+      has-cardbus-support: false
+      has-zoom-video-support: false
+      has-modem-ring-resume-support: false
+    features-ex:
+      has-pme-support: true
+      has-hotplug-support: false
+      has-smbus-support: false
+      has-bifurcation-support: false
+      has-async-removal-support: false
+      is-cxl-10-capable: false
+      is-cxl-20-capable: false
+      is-cxl-30-capable: false
+    base-address:
+      segment-group: 0
+      bus-number: 2
+      device-number: 0
+      function-number: 0
+    peer-groups: []
+    information: null
+    physical-width: null
+    pitch: null
+    height: null
+- handle: 7
+  type: 9
+  length: 24
+  level: 2.6
+  description: System slots
+  attributes:
+    designator: Slot4
+    type: pci-e
+    bus-width: 1x
+    usage: available
+    length: short
+    ident: 20
+    features:
+      unknown: false
+      has-5v0-support: false
+      has-3v3-support: true
+      has-shared-opening: true
+      has-pccard-16-support: false
+      has-cardbus-support: false
+      has-zoom-video-support: false
+      has-modem-ring-resume-support: false
+    features-ex:
+      has-pme-support: true
+      has-hotplug-support: false
+      has-smbus-support: false
+      has-bifurcation-support: false
+      has-async-removal-support: false
+      is-cxl-10-capable: false
+      is-cxl-20-capable: false
+      is-cxl-30-capable: false
+    base-address:
+      segment-group: 0
+      bus-number: 1
+      device-number: 0
+      function-number: 3
+    peer-groups: []
+    information: null
+    physical-width: null
+    pitch: null
+    height: null
+- handle: 8
+  type: 9
+  length: 23
+  level: 2.6
+  description: System slots
+  attributes:
+    designator: M2_1
+    type: pci-e
+    bus-width: 4x
+    usage: available
+    length: short
+    ident: 33
+    features:
+      unknown: false
+      has-5v0-support: false
+      has-3v3-support: true
+      has-shared-opening: true
+      has-pccard-16-support: false
+      has-cardbus-support: false
+      has-zoom-video-support: false
+      has-modem-ring-resume-support: false
+    features-ex:
+      has-pme-support: true
+      has-hotplug-support: false
+      has-smbus-support: false
+      has-bifurcation-support: false
+      has-async-removal-support: false
+      is-cxl-10-capable: false
+      is-cxl-20-capable: false
+      is-cxl-30-capable: false
+    base-address:
+      segment-group: 0
+      bus-number: 1
+      device-number: 0
+      function-number: 0
+    peer-groups: []
+    information: null
+    physical-width: null
+    pitch: null
+    height: null
+- handle: 9
+  type: 9
+  length: 23
+  level: 2.6
+  description: System slots
+  attributes:
+    designator: M2_2
+    type: pci-e
+    bus-width: 4x
+    usage: in-use
+    length: short
+    ident: 34
+    features:
+      unknown: false
+      has-5v0-support: false
+      has-3v3-support: true
+      has-shared-opening: true
+      has-pccard-16-support: false
+      has-cardbus-support: false
+      has-zoom-video-support: false
+      has-modem-ring-resume-support: false
+    features-ex:
+      has-pme-support: true
+      has-hotplug-support: false
+      has-smbus-support: false
+      has-bifurcation-support: false
+      has-async-removal-support: false
+      is-cxl-10-capable: false
+      is-cxl-20-capable: false
+      is-cxl-30-capable: false
+    base-address:
+      segment-group: 0
+      bus-number: 3
+      device-number: 0
+      function-number: 0
+    peer-groups: []
+    information: null
+    physical-width: null
+    pitch: null
+    height: null
+- handle: 10
+  type: 9
+  length: 26
+  level: 2.6
+  description: System slots
+  attributes:
+    designator: M2_Wifi
+    type: pci-e
+    bus-width: 1x
+    usage: available
+    length: short
+    ident: 49
+    features:
+      unknown: false
+      has-5v0-support: false
+      has-3v3-support: true
+      has-shared-opening: true
+      has-pccard-16-support: false
+      has-cardbus-support: false
+      has-zoom-video-support: false
+      has-modem-ring-resume-support: false
+    features-ex:
+      has-pme-support: true
+      has-hotplug-support: false
+      has-smbus-support: false
+      has-bifurcation-support: false
+      has-async-removal-support: false
+      is-cxl-10-capable: false
+      is-cxl-20-capable: false
+      is-cxl-30-capable: false
+    base-address:
+      segment-group: 0
+      bus-number: 22
+      device-number: 0
+      function-number: 2
+    peer-groups: []
+    information: null
+    physical-width: null
+    pitch: null
+    height: null
+- handle: 11
+  type: 11
+  length: 29
+  level: 2.0
+  description: OEM strings
+  attributes:
+    string-count: 1
+    strings:
+    - To Be Filled By O.E.M.
+- handle: 12
+  type: 32
+  length: 22
+  level: null
+  description: System boot information
+  attributes:
+    status: no-errors-detected
+- handle: 13
+  type: 16
+  length: 25
+  level: 2.7
+  description: Physical memory array
+  attributes:
+    location: motherboard
+    use: system
+    error-correction: none
+    maximum-capacity: 68719476736
+    error-handle: 65534
+    device-count: 4
+- handle: 14
+  type: 17
+  length: 153
+  level: 3.2
+  description: Memory device
+  attributes:
+    array-handle: 13
+    error-info-handle: 65534
+    total-width: 64
+    data-width: 64
+    size: 8589934592
+    form-factor: dimm
+    device-set: 0
+    device-locator: ChannelA-DIMM0
+    bank-locator: BANK 0
+    memory-type: ddr4
+    memory-type-details:
+      reserved: false
+      other: false
+      unknown: false
+      fast-paged: false
+      static-column: false
+      pseudo-static: false
+      rambus: false
+      synchronous: true
+      cmos: false
+      edo: false
+      window-dram: false
+      cache-dram: false
+      non-volatile: false
+      registered: false
+      unbuffered: false
+      lrdimm: false
+    maximum-speed: 2133
+    vendor: 029E
+    serial-number: 0
+    asset-tag: 9876543210
+    part-number: CMK16GX4M2A2666C16
+    rank: 1
+    configured-speed: 2133
+    minimum-voltage: 1.2
+    maximum-voltage: 1.2
+    configured-voltage: 1.2
+    memory-technology: dram
+    memory-mode-caps: 8
+    firmware-version: null
+    module-vendor-id: 40450
+    module-product-id: unknown
+    controller-vendor-id: unknown
+    controller-product-id: unknown
+    non-volatile-size: 0
+    volatile-size: 8589934592
+    cache-size: 0
+    logical-size: 0
+- handle: 15
+  type: 17
+  length: 118
+  level: 3.2
+  description: Memory device
+  attributes:
+    array-handle: 13
+    error-info-handle: 65534
+    total-width: 0
+    data-width: 0
+    size: 0
+    form-factor: dimm
+    device-set: 0
+    device-locator: ChannelA-DIMM1
+    bank-locator: BANK 1
+    memory-type: unknown
+    memory-type-details:
+      reserved: false
+      other: false
+      unknown: false
+      fast-paged: false
+      static-column: false
+      pseudo-static: false
+      rambus: false
+      synchronous: false
+      cmos: false
+      edo: false
+      window-dram: false
+      cache-dram: false
+      non-volatile: false
+      registered: false
+      unbuffered: false
+      lrdimm: false
+    maximum-speed: unknown
+    vendor: null
+    serial-number: null
+    asset-tag: null
+    part-number: null
+    rank: unknown
+    configured-speed: unknown
+    minimum-voltage: unknown
+    maximum-voltage: unknown
+    configured-voltage: unknown
+    memory-technology: null
+    memory-mode-caps: 8
+    firmware-version: null
+    module-vendor-id: unknown
+    module-product-id: unknown
+    controller-vendor-id: unknown
+    controller-product-id: unknown
+    non-volatile-size: 0
+    volatile-size: 0
+    cache-size: 0
+    logical-size: 0
+- handle: 16
+  type: 17
+  length: 153
+  level: 3.2
+  description: Memory device
+  attributes:
+    array-handle: 13
+    error-info-handle: 65534
+    total-width: 64
+    data-width: 64
+    size: 8589934592
+    form-factor: dimm
+    device-set: 0
+    device-locator: ChannelB-DIMM0
+    bank-locator: BANK 2
+    memory-type: ddr4
+    memory-type-details:
+      reserved: false
+      other: false
+      unknown: false
+      fast-paged: false
+      static-column: false
+      pseudo-static: false
+      rambus: false
+      synchronous: true
+      cmos: false
+      edo: false
+      window-dram: false
+      cache-dram: false
+      non-volatile: false
+      registered: false
+      unbuffered: false
+      lrdimm: false
+    maximum-speed: 2133
+    vendor: 029E
+    serial-number: 0
+    asset-tag: 9876543210
+    part-number: CMK16GX4M2A2666C16
+    rank: 1
+    configured-speed: 2133
+    minimum-voltage: 1.2
+    maximum-voltage: 1.2
+    configured-voltage: 1.2
+    memory-technology: dram
+    memory-mode-caps: 8
+    firmware-version: null
+    module-vendor-id: 40450
+    module-product-id: unknown
+    controller-vendor-id: unknown
+    controller-product-id: unknown
+    non-volatile-size: 0
+    volatile-size: 8589934592
+    cache-size: 0
+    logical-size: 0
+- handle: 17
+  type: 17
+  length: 118
+  level: 3.2
+  description: Memory device
+  attributes:
+    array-handle: 13
+    error-info-handle: 65534
+    total-width: 0
+    data-width: 0
+    size: 0
+    form-factor: dimm
+    device-set: 0
+    device-locator: ChannelB-DIMM1
+    bank-locator: BANK 3
+    memory-type: unknown
+    memory-type-details:
+      reserved: false
+      other: false
+      unknown: false
+      fast-paged: false
+      static-column: false
+      pseudo-static: false
+      rambus: false
+      synchronous: false
+      cmos: false
+      edo: false
+      window-dram: false
+      cache-dram: false
+      non-volatile: false
+      registered: false
+      unbuffered: false
+      lrdimm: false
+    maximum-speed: unknown
+    vendor: null
+    serial-number: null
+    asset-tag: null
+    part-number: null
+    rank: unknown
+    configured-speed: unknown
+    minimum-voltage: unknown
+    maximum-voltage: unknown
+    configured-voltage: unknown
+    memory-technology: null
+    memory-mode-caps: 8
+    firmware-version: null
+    module-vendor-id: unknown
+    module-product-id: unknown
+    controller-vendor-id: unknown
+    controller-product-id: unknown
+    non-volatile-size: 0
+    volatile-size: 0
+    cache-size: 0
+    logical-size: 0
+- handle: 18
+  type: 19
+  length: 33
+  level: 2.7
+  description: Memory array mapped address
+  attributes:
+    start-addr: 0
+    end-addr: 17179868160
+    range-size: 17179868160
+    array-handle: 13
+    partition-width: 2
+- handle: 19
+  type: 20
+  length: 37
+  level: 2.7
+  description: Memory device mapped address
+  attributes:
+    start-addr: 0
+    end-addr: 8589933568
+    range-size: 8589933568
+    device-handle: 14
+    array-addr-handle: 18
+    partition-pos: 1
+    interleave-pos: 1
+    interleave-depth: 2
+- handle: 20
+  type: 20
+  length: 37
+  level: 2.7
+  description: Memory device mapped address
+  attributes:
+    start-addr: 8589934592
+    end-addr: 17179868160
+    range-size: 8589933568
+    device-handle: 16
+    array-addr-handle: 18
+    partition-pos: 1
+    interleave-pos: 2
+    interleave-depth: 2
+- handle: 21
+  type: 221
+  length: 78
+  level: null
+  description: OEM-specific
+  data: !!binary |
+    3RoVAAMBAAkAMVAAAgAAAADMAAMAAQ0AAAA=
+  strings:
+  - Reference Code - CPU
+  - uCode Version
+  - TXT ACM version
+- handle: 22
+  type: 221
+  length: 93
+  level: null
+  description: OEM-specific
+  data: !!binary |
+    3RoWAAMBAAkAMVAAAgAKAAABAAMEDgUMVwQ=
+  strings:
+  - Reference Code - ME
+  - MEBx version
+  - ME Firmware Version
+  - Consumer SKU
+- handle: 23
+  type: 221
+  length: 187
+  level: null
+  description: OEM-specific
+  data: !!binary |
+    3S8XAAYBAAkAMVAAAgP//////wQA////AAAFAP///wAABgD//////wcACwAAAAA=
+  strings:
+  - "Re\x0Ference Code - CML PCH"
+  - PCH-CRID Status
+  - Disabled
+  - PCH-CRID Original Value
+  - PCH-CRID New Value
+  - OPROM - RST - RAID
+  - CMLV PCH H Ax Hsio Version
+- handle: 24
+  type: 221
+  length: 208
+  level: null
+  description: OEM-specific
+  data: !!binary |
+    3TYYAAcBAAkAMVAAAgAAAABDAAMACQAxUAAEBf//////BgAAAAADAAcAAAAAAwAIAP//////
+  strings:
+  - Reference Code - SA - System Agent
+  - Reference Code - MRC
+  - SA - PCIe Version
+  - SA-CRID Status
+  - Disabled
+  - SA-CRID Original Value
+  - SA-CRID New Value
+  - OPROM - VBIOS
+- handle: 25
+  type: 221
+  length: 32
+  level: null
+  description: OEM-specific
+  data: !!binary |
+    3QwZAAEBAAQAAAAA
+  strings:
+  - FSP Binary Version
+- handle: 26
+  type: 7
+  length: 37
+  level: 3.1
+  description: Cache information
+  attributes:
+    socket-designator: L1 Cache
+    level: 1
+    socketed: false
+    location: internal
+    enabled: true
+    mode: write-back
+    maximum-size: 393216
+    installed-size: 393216
+    supported-sram:
+      other: false
+      unknown: false
+      non-burst: false
+      burst: false
+      pipeline-burst: false
+      synchronous: true
+      asynchronous: false
+    current-sram:
+      other: false
+      unknown: false
+      non-burst: false
+      burst: false
+      pipeline-burst: false
+      synchronous: true
+      asynchronous: false
+    speed: 0
+    error-correction: parity
+    type: unified
+    associativity: 8-way
+- handle: 27
+  type: 7
+  length: 37
+  level: 3.1
+  description: Cache information
+  attributes:
+    socket-designator: L2 Cache
+    level: 2
+    socketed: false
+    location: internal
+    enabled: true
+    mode: write-back
+    maximum-size: 1572864
+    installed-size: 1572864
+    supported-sram:
+      other: false
+      unknown: false
+      non-burst: false
+      burst: false
+      pipeline-burst: false
+      synchronous: true
+      asynchronous: false
+    current-sram:
+      other: false
+      unknown: false
+      non-burst: false
+      burst: false
+      pipeline-burst: false
+      synchronous: true
+      asynchronous: false
+    speed: 0
+    error-correction: single-bit
+    type: unified
+    associativity: 4-way
+- handle: 28
+  type: 7
+  length: 37
+  level: 3.1
+  description: Cache information
+  attributes:
+    socket-designator: L3 Cache
+    level: 3
+    socketed: false
+    location: internal
+    enabled: true
+    mode: write-back
+    maximum-size: 12582912
+    installed-size: 12582912
+    supported-sram:
+      other: false
+      unknown: false
+      non-burst: false
+      burst: false
+      pipeline-burst: false
+      synchronous: true
+      asynchronous: false
+    current-sram:
+      other: false
+      unknown: false
+      non-burst: false
+      burst: false
+      pipeline-burst: false
+      synchronous: true
+      asynchronous: false
+    speed: 0
+    error-correction: multi-bit
+    type: unified
+    associativity: 16-way
+- handle: 29
+  type: 4
+  length: 190
+  level: 3.0
+  description: Processor information
+  attributes:
+    socket-designation: CPUSocket
+    type: central
+    family: intel-core-i5
+    vendor: Intel(R) Corporation
+    voltage: 137
+    external-clock: 100
+    maximum-speed: 8300
+    current-speed: 3300
+    upgrade: other
+    l1-cache-handle: 26
+    l2-cache-handle: 27
+    l3-cache-handle: 28
+    serial-number: To Be Filled By O.E.M.
+    asset-tag: To Be Filled By O.E.M.
+    part-number: To Be Filled By O.E.M.
+    features:
+      unknown: false
+      capable-64bit: true
+      multicore: true
+      hardware_thread: true
+      execute-protection: true
+      enhanced-virtualization: true
+      power-perf-control: true
+      capable-128bit: false
+      arm64-soc-id: false
+    core-count: 6
+    core-enabled: 6
+    thread-count: 12
+    socket-type: null
+- handle: 30
+  type: 130
+  length: 22
+  level: null
+  description: OEM-specific
+  data: !!binary |
+    ghQeACRBTVQAAAAAAKWvAsAAAAA=
+- handle: 31
+  type: 131
+  length: 66
+  level: null
+  description: OEM-specific
+  data: !!binary |
+    g0AfADUAAAAKAAAAAAABAPgAyKMAAAAAAQAAAAUADgBXBAwAAAAAAP4AVQ0AAAAAAAAAACYAAAB2
+    UHJvAAAAAA==
+- handle: 32
+  type: 41
+  length: 28
+  level: 2.6
+  description: Onboard devices extended information
+  attributes:
+    designator: Onboard - Other
+    type: other
+    is-enabled: true
+    instance: 1
+    address:
+      segment-group: 0
+      bus-number: 0
+      device-number: 0
+      function-number: 0
+- handle: 33
+  type: 41
+  length: 28
+  level: 2.6
+  description: Onboard devices extended information
+  attributes:
+    designator: Onboard - Other
+    type: other
+    is-enabled: true
+    instance: 2
+    address:
+      segment-group: 0
+      bus-number: 0
+      device-number: 20
+      function-number: 0
+- handle: 34
+  type: 41
+  length: 28
+  level: 2.6
+  description: Onboard devices extended information
+  attributes:
+    designator: Onboard - Other
+    type: other
+    is-enabled: true
+    instance: 3
+    address:
+      segment-group: 0
+      bus-number: 0
+      device-number: 20
+      function-number: 2
+- handle: 35
+  type: 41
+  length: 28
+  level: 2.6
+  description: Onboard devices extended information
+  attributes:
+    designator: Onboard - Other
+    type: other
+    is-enabled: true
+    instance: 4
+    address:
+      segment-group: 0
+      bus-number: 0
+      device-number: 22
+      function-number: 0
+- handle: 36
+  type: 41
+  length: 27
+  level: 2.6
+  description: Onboard devices extended information
+  attributes:
+    designator: Onboard - SATA
+    type: sata-controller
+    is-enabled: true
+    instance: 1
+    address:
+      segment-group: 0
+      bus-number: 0
+      device-number: 23
+      function-number: 0
+- handle: 37
+  type: 41
+  length: 28
+  level: 2.6
+  description: Onboard devices extended information
+  attributes:
+    designator: Onboard - Other
+    type: other
+    is-enabled: true
+    instance: 5
+    address:
+      segment-group: 0
+      bus-number: 0
+      device-number: 31
+      function-number: 0
+- handle: 38
+  type: 41
+  length: 28
+  level: 2.6
+  description: Onboard devices extended information
+  attributes:
+    designator: Onboard - Other
+    type: other
+    is-enabled: true
+    instance: 6
+    address:
+      segment-group: 0
+      bus-number: 0
+      device-number: 31
+      function-number: 2
+- handle: 39
+  type: 41
+  length: 28
+  level: 2.6
+  description: Onboard devices extended information
+  attributes:
+    designator: Onboard - Sound
+    type: sound
+    is-enabled: true
+    instance: 1
+    address:
+      segment-group: 0
+      bus-number: 0
+      device-number: 31
+      function-number: 3
+- handle: 40
+  type: 41
+  length: 28
+  level: 2.6
+  description: Onboard devices extended information
+  attributes:
+    designator: Onboard - Other
+    type: other
+    is-enabled: true
+    instance: 7
+    address:
+      segment-group: 0
+      bus-number: 0
+      device-number: 31
+      function-number: 4
+- handle: 41
+  type: 41
+  length: 31
+  level: 2.6
+  description: Onboard devices extended information
+  attributes:
+    designator: Onboard - Ethernet
+    type: ethernet
+    is-enabled: true
+    instance: 1
+    address:
+      segment-group: 0
+      bus-number: 0
+      device-number: 31
+      function-number: 6
+- handle: 42
+  type: 221
+  length: 353
+  level: null
+  description: OEM-specific
+  data: !!binary |
+    3VkqAAwBAAAAAKYAAgD//////wME//////8FBv//////Bwj//////wkAAAAAAAAKAP//////CwD/
+    /wAAAAwA//////8NAP//////DgAABwAAAA8AAAIADwA=
+  strings:
+  - Lan Phy Version
+  - Sensor Firmware Version
+  - Debug Mode Status
+  - Disabled
+  - Performance Mode Status
+  - Disabled
+  - Debug Use USB(Disabled:Serial)
+  - Disabled
+  - ICC Overclocking Version
+  - UNDI Version
+  - EC FW Version
+  - GOP Version
+  - Royal Park Version
+  - Platform Version
+  - Client Silicon Version
+- handle: 43
+  type: 14
+  length: 14
+  level: 2.0
+  description: Group associations
+  attributes:
+    group-name: $MEI
+    items:
+    - type: 219
+      Handle: 0
+- handle: 44
+  type: 219
+  length: 127
+  level: null
+  description: OEM-specific
+  data: !!binary |
+    22osAAEEAUUCAJAGARCGIAAAAABAAAAAAAAAAAAAQAL///////////////////////////////8D
+    AAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAABP///////////////////////////////w==
+  strings:
+  - MEI1
+  - MEI2
+  - MEI3
+  - MEI4
+- handle: 45
+  type: 136
+  length: 8
+  level: null
+  description: OEM-specific
+  data: !!binary |
+    iAYtAAAA
+- handle: 46
+  type: 127
+  length: 6
+  level: null
+  description: End of table

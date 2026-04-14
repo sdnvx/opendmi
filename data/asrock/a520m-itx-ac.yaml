@@ -1,0 +1,733 @@
+entry:
+  smbios-version: 3.3.1
+table:
+- handle: 0
+  type: 0
+  length: 84
+  level: 3.1
+  description: Platform firmware information
+  attributes:
+    vendor: American Megatrends International, LLC.
+    version: P3.40
+    bios-segment: 61440
+    release-date: '2024-01-18'
+    rom-size: 16777216
+    features:
+      unknown: false
+      unsupported: false
+      isa-support: false
+      mca-support: false
+      eisa-support: false
+      pci-support: true
+      pcmcia-support: false
+      pnp-support: false
+      apm-support: false
+      upgradeable-flash: true
+      shadowing-allowed: true
+      vesa-support: false
+      escd-support: false
+      boot-cd: true
+      boot-selectable: true
+      socketed-rom: true
+      boot-pcmcia-support: false
+      edd-support: true
+      floppy-nec-support: true
+      floppy-toshiba-support: true
+      floppy-525-360k-support: true
+      floppy-525-1m2-support: true
+      floppy-35-720k-support: true
+      floppy-35-2m88-support: true
+      print-screen-support: true
+      keyboard-support: true
+      serial-support: true
+      printer-support: true
+      video-cga-mono-support: true
+      nec-pc-98: true
+    features-ex:
+      acpi-support: true
+      usb-legacy-support: true
+      agp-support: false
+      boot-i2o: false
+      boot-ls120: false
+      boot-atapi-zip: false
+      boot-ieee1394: false
+      smart-battery: false
+      bios-boot-spec: true
+      boot-network-fn-key: false
+      content-distribution: true
+      uefi-spec: true
+      virtual-machine: false
+      mfg-mode-support: false
+      mfg-mode-enabled: false
+    platform-version: 5.17
+    controller-version: null
+- handle: 1
+  type: 1
+  length: 156
+  level: 2.4
+  description: System information
+  attributes:
+    vendor: To Be Filled By O.E.M.
+    product: A520M-ITX/ac
+    version: To Be Filled By O.E.M.
+    serial-number: To Be Filled By O.E.M.
+    uuid: 2B006B9C-72C5-0000-0000-000000000000
+    wakeup-type: other
+    sku-number: To Be Filled By O.E.M.
+    family: To Be Filled By O.E.M.
+- handle: 2
+  type: 2
+  length: 121
+  level: 2.0
+  description: Baseboard or module information
+  attributes:
+    vendor: ASRock
+    product: A520M-ITX/ac
+    version: null
+    serial-number: M80-G7009300622
+    asset-tag: null
+    features:
+      is-hosting-board: true
+      require-daughter-board: false
+      is-removable: false
+      is-replaceable: true
+      is-hot-swappable: false
+    location: null
+    chassis-handle: 3
+    type: motherboard
+    contained-objects: []
+- handle: 3
+  type: 3
+  length: 138
+  level: 2.7
+  description: System enclosure or chassis
+  attributes:
+    vendor: To Be Filled By O.E.M.
+    type: desktop
+    is-lock-present: false
+    version: To Be Filled By O.E.M.
+    serial-number: To Be Filled By O.E.M.
+    asset-tag: To Be Filled By O.E.M.
+    bootup-state: ok
+    power-supply-state: ok
+    thermal-state: ok
+    security-status: none
+    oem-defined: 0
+    height: null
+    power-cord-count: 1
+    element-count: 0
+    element-size: 3
+    elements: []
+    sku-number: To Be Filled By O.E.M.
+- handle: 4
+  type: 9
+  length: 23
+  level: 2.6
+  description: System slots
+  attributes:
+    designator: J6B2
+    type: pci-e
+    bus-width: 16x
+    usage: in-use
+    length: long
+    ident: 0
+    features:
+      unknown: false
+      has-5v0-support: false
+      has-3v3-support: true
+      has-shared-opening: true
+      has-pccard-16-support: false
+      has-cardbus-support: false
+      has-zoom-video-support: false
+      has-modem-ring-resume-support: false
+    features-ex:
+      has-pme-support: true
+      has-hotplug-support: false
+      has-smbus-support: false
+      has-bifurcation-support: false
+      has-async-removal-support: false
+      is-cxl-10-capable: false
+      is-cxl-20-capable: false
+      is-cxl-30-capable: false
+    base-address:
+      segment-group: 0
+      bus-number: 0
+      device-number: 1
+      function-number: 0
+    peer-groups: []
+    information: null
+    physical-width: null
+    pitch: null
+    height: null
+- handle: 5
+  type: 9
+  length: 23
+  level: 2.6
+  description: System slots
+  attributes:
+    designator: J6B1
+    type: pci-e
+    bus-width: 1x
+    usage: in-use
+    length: short
+    ident: 1
+    features:
+      unknown: false
+      has-5v0-support: false
+      has-3v3-support: true
+      has-shared-opening: true
+      has-pccard-16-support: false
+      has-cardbus-support: false
+      has-zoom-video-support: false
+      has-modem-ring-resume-support: false
+    features-ex:
+      has-pme-support: true
+      has-hotplug-support: false
+      has-smbus-support: false
+      has-bifurcation-support: false
+      has-async-removal-support: false
+      is-cxl-10-capable: false
+      is-cxl-20-capable: false
+      is-cxl-30-capable: false
+    base-address:
+      segment-group: 0
+      bus-number: 0
+      device-number: 28
+      function-number: 3
+    peer-groups: []
+    information: null
+    physical-width: null
+    pitch: null
+    height: null
+- handle: 6
+  type: 9
+  length: 23
+  level: 2.6
+  description: System slots
+  attributes:
+    designator: J6D1
+    type: pci-e
+    bus-width: 1x
+    usage: in-use
+    length: short
+    ident: 2
+    features:
+      unknown: false
+      has-5v0-support: false
+      has-3v3-support: true
+      has-shared-opening: true
+      has-pccard-16-support: false
+      has-cardbus-support: false
+      has-zoom-video-support: false
+      has-modem-ring-resume-support: false
+    features-ex:
+      has-pme-support: true
+      has-hotplug-support: false
+      has-smbus-support: false
+      has-bifurcation-support: false
+      has-async-removal-support: false
+      is-cxl-10-capable: false
+      is-cxl-20-capable: false
+      is-cxl-30-capable: false
+    base-address:
+      segment-group: 0
+      bus-number: 0
+      device-number: 28
+      function-number: 4
+    peer-groups: []
+    information: null
+    physical-width: null
+    pitch: null
+    height: null
+- handle: 7
+  type: 9
+  length: 23
+  level: 2.6
+  description: System slots
+  attributes:
+    designator: J7B1
+    type: pci-e
+    bus-width: 1x
+    usage: in-use
+    length: short
+    ident: 3
+    features:
+      unknown: false
+      has-5v0-support: false
+      has-3v3-support: true
+      has-shared-opening: true
+      has-pccard-16-support: false
+      has-cardbus-support: false
+      has-zoom-video-support: false
+      has-modem-ring-resume-support: false
+    features-ex:
+      has-pme-support: true
+      has-hotplug-support: false
+      has-smbus-support: false
+      has-bifurcation-support: false
+      has-async-removal-support: false
+      is-cxl-10-capable: false
+      is-cxl-20-capable: false
+      is-cxl-30-capable: false
+    base-address:
+      segment-group: 0
+      bus-number: 0
+      device-number: 28
+      function-number: 5
+    peer-groups: []
+    information: null
+    physical-width: null
+    pitch: null
+    height: null
+- handle: 8
+  type: 9
+  length: 23
+  level: 2.6
+  description: System slots
+  attributes:
+    designator: J8B4
+    type: pci-e
+    bus-width: 1x
+    usage: in-use
+    length: short
+    ident: 4
+    features:
+      unknown: false
+      has-5v0-support: false
+      has-3v3-support: true
+      has-shared-opening: true
+      has-pccard-16-support: false
+      has-cardbus-support: false
+      has-zoom-video-support: false
+      has-modem-ring-resume-support: false
+    features-ex:
+      has-pme-support: true
+      has-hotplug-support: false
+      has-smbus-support: false
+      has-bifurcation-support: false
+      has-async-removal-support: false
+      is-cxl-10-capable: false
+      is-cxl-20-capable: false
+      is-cxl-30-capable: false
+    base-address:
+      segment-group: 0
+      bus-number: 0
+      device-number: 28
+      function-number: 6
+    peer-groups: []
+    information: null
+    physical-width: null
+    pitch: null
+    height: null
+- handle: 9
+  type: 9
+  length: 23
+  level: 2.6
+  description: System slots
+  attributes:
+    designator: J8D1
+    type: pci-e
+    bus-width: 1x
+    usage: in-use
+    length: short
+    ident: 5
+    features:
+      unknown: false
+      has-5v0-support: false
+      has-3v3-support: true
+      has-shared-opening: true
+      has-pccard-16-support: false
+      has-cardbus-support: false
+      has-zoom-video-support: false
+      has-modem-ring-resume-support: false
+    features-ex:
+      has-pme-support: true
+      has-hotplug-support: false
+      has-smbus-support: false
+      has-bifurcation-support: false
+      has-async-removal-support: false
+      is-cxl-10-capable: false
+      is-cxl-20-capable: false
+      is-cxl-30-capable: false
+    base-address:
+      segment-group: 0
+      bus-number: 0
+      device-number: 28
+      function-number: 7
+    peer-groups: []
+    information: null
+    physical-width: null
+    pitch: null
+    height: null
+- handle: 10
+  type: 11
+  length: 29
+  level: 2.0
+  description: OEM strings
+  attributes:
+    string-count: 1
+    strings:
+    - To Be Filled By O.E.M.
+- handle: 11
+  type: 32
+  length: 22
+  level: null
+  description: System boot information
+  attributes:
+    status: no-errors-detected
+- handle: 12
+  type: 40
+  length: 40
+  level: 2.6
+  description: Additional information
+  data: !!binary |
+    KA4MAAEJoQABAQAAAAA=
+  strings:
+  - To Be Filled By O.E.M. 1
+- handle: 13
+  type: 44
+  length: 11
+  level: 2.0
+  description: Processor additional information
+  data: !!binary |
+    LAkNAP//AQEA
+- handle: 14
+  type: 18
+  length: 25
+  level: 2.1
+  description: 32-bit memory error information
+  attributes:
+    type: ok
+    granularity: unknown
+    operation: unknown
+    vendor-syndrome: 0
+    array-addr: 2147483648
+    device-addr: 2147483648
+    resolution: 2147483648
+- handle: 15
+  type: 16
+  length: 25
+  level: 2.7
+  description: Physical memory array
+  attributes:
+    location: motherboard
+    use: system
+    error-correction: none
+    maximum-capacity: 137438953472
+    error-handle: 14
+    device-count: 2
+- handle: 16
+  type: 19
+  length: 33
+  level: 2.7
+  description: Memory array mapped address
+  attributes:
+    start-addr: 0
+    end-addr: 68719475712
+    range-size: 68719475712
+    array-handle: 15
+    partition-width: 2
+- handle: 17
+  type: 7
+  length: 39
+  level: 3.1
+  description: Cache information
+  attributes:
+    socket-designator: L1 - Cache
+    level: 1
+    socketed: false
+    location: internal
+    enabled: true
+    mode: write-back
+    maximum-size: 524288
+    installed-size: 524288
+    supported-sram:
+      other: false
+      unknown: false
+      non-burst: false
+      burst: false
+      pipeline-burst: true
+      synchronous: false
+      asynchronous: false
+    current-sram:
+      other: false
+      unknown: false
+      non-burst: false
+      burst: false
+      pipeline-burst: true
+      synchronous: false
+      asynchronous: false
+    speed: 1
+    error-correction: multi-bit
+    type: unified
+    associativity: 8-way
+- handle: 18
+  type: 7
+  length: 39
+  level: 3.1
+  description: Cache information
+  attributes:
+    socket-designator: L2 - Cache
+    level: 2
+    socketed: false
+    location: internal
+    enabled: true
+    mode: write-back
+    maximum-size: 4194304
+    installed-size: 4194304
+    supported-sram:
+      other: false
+      unknown: false
+      non-burst: false
+      burst: false
+      pipeline-burst: true
+      synchronous: false
+      asynchronous: false
+    current-sram:
+      other: false
+      unknown: false
+      non-burst: false
+      burst: false
+      pipeline-burst: true
+      synchronous: false
+      asynchronous: false
+    speed: 1
+    error-correction: multi-bit
+    type: unified
+    associativity: 8-way
+- handle: 19
+  type: 7
+  length: 39
+  level: 3.1
+  description: Cache information
+  attributes:
+    socket-designator: L3 - Cache
+    level: 3
+    socketed: false
+    location: internal
+    enabled: true
+    mode: write-back
+    maximum-size: 16777216
+    installed-size: 16777216
+    supported-sram:
+      other: false
+      unknown: false
+      non-burst: false
+      burst: false
+      pipeline-burst: true
+      synchronous: false
+      asynchronous: false
+    current-sram:
+      other: false
+      unknown: false
+      non-burst: false
+      burst: false
+      pipeline-burst: true
+      synchronous: false
+      asynchronous: false
+    speed: 1
+    error-correction: multi-bit
+    type: unified
+    associativity: 16-way
+- handle: 20
+  type: 4
+  length: 154
+  level: 3.0
+  description: Processor information
+  attributes:
+    socket-designation: AM4
+    type: central
+    family: amd-zen
+    vendor: Advanced Micro Devices, Inc.
+    voltage: 142
+    external-clock: 100
+    maximum-speed: 4650
+    current-speed: 3800
+    upgrade: socket-am4
+    l1-cache-handle: 17
+    l2-cache-handle: 18
+    l3-cache-handle: 19
+    serial-number: Unknown
+    asset-tag: Unknown
+    part-number: Unknown
+    features:
+      unknown: false
+      capable-64bit: true
+      multicore: true
+      hardware_thread: true
+      execute-protection: true
+      enhanced-virtualization: true
+      power-perf-control: true
+      capable-128bit: false
+      arm64-soc-id: false
+    core-count: 8
+    core-enabled: 8
+    thread-count: 16
+    socket-type: null
+- handle: 21
+  type: 18
+  length: 25
+  level: 2.1
+  description: 32-bit memory error information
+  attributes:
+    type: ok
+    granularity: unknown
+    operation: unknown
+    vendor-syndrome: 0
+    array-addr: 2147483648
+    device-addr: 2147483648
+    resolution: 2147483648
+- handle: 22
+  type: 17
+  length: 154
+  level: 3.3
+  description: Memory device
+  attributes:
+    array-handle: 15
+    error-info-handle: 21
+    total-width: 64
+    data-width: 64
+    size: 34358689792
+    form-factor: dimm
+    device-set: 0
+    device-locator: DIMM 0
+    bank-locator: P0 CHANNEL A
+    memory-type: ddr4
+    memory-type-details:
+      reserved: false
+      other: false
+      unknown: false
+      fast-paged: false
+      static-column: false
+      pseudo-static: false
+      rambus: false
+      synchronous: true
+      cmos: false
+      edo: false
+      window-dram: false
+      cache-dram: false
+      non-volatile: false
+      registered: false
+      unbuffered: true
+      lrdimm: false
+    maximum-speed: 3200
+    vendor: Unknown
+    serial-number: 0915087F
+    asset-tag: null
+    part-number: 3200 C16 Series
+    rank: 2
+    configured-speed: 3200
+    minimum-voltage: 1.2
+    maximum-voltage: 1.2
+    configured-voltage: 1.2
+    memory-technology: dram
+    memory-mode-caps: 8
+    firmware-version: Unknown
+    module-vendor-id: 645
+    module-product-id: unknown
+    controller-vendor-id: unknown
+    controller-product-id: unknown
+    non-volatile-size: 0
+    volatile-size: 34359738368
+    cache-size: 0
+    logical-size: 0
+- handle: 23
+  type: 20
+  length: 37
+  level: 2.7
+  description: Memory device mapped address
+  attributes:
+    start-addr: 0
+    end-addr: 68719475712
+    range-size: 68719475712
+    device-handle: 22
+    array-addr-handle: 16
+    partition-pos: unknown
+    interleave-pos: unknown
+    interleave-depth: unknown
+- handle: 24
+  type: 18
+  length: 25
+  level: 2.1
+  description: 32-bit memory error information
+  attributes:
+    type: ok
+    granularity: unknown
+    operation: unknown
+    vendor-syndrome: 0
+    array-addr: 2147483648
+    device-addr: 2147483648
+    resolution: 2147483648
+- handle: 25
+  type: 17
+  length: 154
+  level: 3.3
+  description: Memory device
+  attributes:
+    array-handle: 15
+    error-info-handle: 24
+    total-width: 64
+    data-width: 64
+    size: 34358689792
+    form-factor: dimm
+    device-set: 0
+    device-locator: DIMM 0
+    bank-locator: P0 CHANNEL B
+    memory-type: ddr4
+    memory-type-details:
+      reserved: false
+      other: false
+      unknown: false
+      fast-paged: false
+      static-column: false
+      pseudo-static: false
+      rambus: false
+      synchronous: true
+      cmos: false
+      edo: false
+      window-dram: false
+      cache-dram: false
+      non-volatile: false
+      registered: false
+      unbuffered: true
+      lrdimm: false
+    maximum-speed: 3200
+    vendor: Unknown
+    serial-number: 09150880
+    asset-tag: null
+    part-number: 3200 C16 Series
+    rank: 2
+    configured-speed: 3200
+    minimum-voltage: 1.2
+    maximum-voltage: 1.2
+    configured-voltage: 1.2
+    memory-technology: dram
+    memory-mode-caps: 8
+    firmware-version: Unknown
+    module-vendor-id: 645
+    module-product-id: unknown
+    controller-vendor-id: unknown
+    controller-product-id: unknown
+    non-volatile-size: 0
+    volatile-size: 34359738368
+    cache-size: 0
+    logical-size: 0
+- handle: 26
+  type: 20
+  length: 37
+  level: 2.7
+  description: Memory device mapped address
+  attributes:
+    start-addr: 0
+    end-addr: 68719475712
+    range-size: 68719475712
+    device-handle: 25
+    array-addr-handle: 16
+    partition-pos: unknown
+    interleave-pos: unknown
+    interleave-depth: unknown
+- handle: 27
+  type: 127
+  length: 6
+  level: null
+  description: End of table

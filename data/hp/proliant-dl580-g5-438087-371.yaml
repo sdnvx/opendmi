@@ -1,0 +1,3269 @@
+entry:
+  smbios-version: 2.5
+table:
+- handle: 0
+  type: 0
+  length: 43
+  level: 2.4
+  description: Platform firmware information
+  attributes:
+    vendor: HP
+    version: P61
+    bios-segment: 61440
+    release-date: '2007-12-07'
+    rom-size: 4194304
+    features:
+      unknown: false
+      unsupported: false
+      isa-support: false
+      mca-support: false
+      eisa-support: false
+      pci-support: true
+      pcmcia-support: false
+      pnp-support: true
+      apm-support: false
+      upgradeable-flash: true
+      shadowing-allowed: true
+      vesa-support: false
+      escd-support: true
+      boot-cd: true
+      boot-selectable: true
+      socketed-rom: false
+      boot-pcmcia-support: false
+      edd-support: true
+      floppy-nec-support: false
+      floppy-toshiba-support: false
+      floppy-525-360k-support: true
+      floppy-525-1m2-support: true
+      floppy-35-720k-support: true
+      floppy-35-2m88-support: false
+      print-screen-support: true
+      keyboard-support: true
+      serial-support: true
+      printer-support: true
+      video-cga-mono-support: true
+      nec-pc-98: false
+    features-ex:
+      acpi-support: true
+      usb-legacy-support: true
+      agp-support: false
+      boot-i2o: false
+      boot-ls120: false
+      boot-atapi-zip: false
+      boot-ieee1394: false
+      smart-battery: false
+      bios-boot-spec: true
+      boot-network-fn-key: true
+      content-distribution: true
+      uefi-spec: false
+      virtual-machine: false
+      mfg-mode-support: false
+      mfg-mode-enabled: false
+    platform-version: null
+    controller-version: null
+- handle: 256
+  type: 1
+  length: 109
+  level: 2.4
+  description: System information
+  attributes:
+    vendor: HP
+    product: ProLiant DL580 G5
+    version: null
+    serial-number: SGH802DTDB
+    uuid: 30383334-3738-4753-4838-303244544442
+    wakeup-type: power-switch
+    sku-number: 438087-371
+    family: ProLiant
+- handle: 768
+  type: 3
+  length: 73
+  level: 2.3
+  description: System enclosure or chassis
+  attributes:
+    vendor: HP
+    type: rack-mount
+    is-lock-present: false
+    version: null
+    serial-number: SGH802DTDB
+    asset-tag: null
+    bootup-state: unknown
+    power-supply-state: unknown
+    thermal-state: unknown
+    security-status: unknown
+    oem-defined: 0
+    height: 4
+    power-cord-count: 4
+    element-count: 0
+    element-size: 0
+    elements: []
+- handle: 1025
+  type: 4
+  length: 54
+  level: 2.5
+  description: Processor information
+  attributes:
+    socket-designation: Proc 1
+    type: central
+    family: intel-xeon-mp
+    vendor: Intel
+    voltage: 140
+    external-clock: 1066
+    maximum-speed: 4800
+    current-speed: 2400
+    upgrade: socket-zif
+    l1-cache-handle: 1809
+    l2-cache-handle: 1825
+    l3-cache-handle: 1841
+    serial-number: null
+    asset-tag: null
+    part-number: null
+    features:
+      unknown: false
+      capable-64bit: true
+      multicore: false
+      hardware_thread: false
+      execute-protection: false
+      enhanced-virtualization: false
+      power-perf-control: false
+      capable-128bit: false
+      arm64-soc-id: false
+    core-count: 4
+    core-enabled: 4
+    thread-count: 4
+    socket-type: null
+- handle: 1026
+  type: 4
+  length: 54
+  level: 2.5
+  description: Processor information
+  attributes:
+    socket-designation: Proc 2
+    type: central
+    family: intel-xeon-mp
+    vendor: Intel
+    voltage: 140
+    external-clock: 1066
+    maximum-speed: 4800
+    current-speed: 2400
+    upgrade: socket-zif
+    l1-cache-handle: 1810
+    l2-cache-handle: 1826
+    l3-cache-handle: 1842
+    serial-number: null
+    asset-tag: null
+    part-number: null
+    features:
+      unknown: false
+      capable-64bit: true
+      multicore: false
+      hardware_thread: false
+      execute-protection: false
+      enhanced-virtualization: false
+      power-perf-control: false
+      capable-128bit: false
+      arm64-soc-id: false
+    core-count: 4
+    core-enabled: 4
+    thread-count: 4
+    socket-type: null
+- handle: 1027
+  type: 4
+  length: 54
+  level: 2.5
+  description: Processor information
+  attributes:
+    socket-designation: Proc 3
+    type: central
+    family: intel-xeon-mp
+    vendor: Intel
+    voltage: 140
+    external-clock: 1066
+    maximum-speed: 4800
+    current-speed: 2400
+    upgrade: socket-zif
+    l1-cache-handle: 1811
+    l2-cache-handle: 1827
+    l3-cache-handle: 1843
+    serial-number: null
+    asset-tag: null
+    part-number: null
+    features:
+      unknown: false
+      capable-64bit: true
+      multicore: false
+      hardware_thread: false
+      execute-protection: false
+      enhanced-virtualization: false
+      power-perf-control: false
+      capable-128bit: false
+      arm64-soc-id: false
+    core-count: 4
+    core-enabled: 4
+    thread-count: 4
+    socket-type: null
+- handle: 1028
+  type: 4
+  length: 54
+  level: 2.5
+  description: Processor information
+  attributes:
+    socket-designation: Proc 4
+    type: central
+    family: intel-xeon-mp
+    vendor: Intel
+    voltage: 140
+    external-clock: 1066
+    maximum-speed: 4800
+    current-speed: 2400
+    upgrade: socket-zif
+    l1-cache-handle: 1812
+    l2-cache-handle: 1828
+    l3-cache-handle: 1844
+    serial-number: null
+    asset-tag: null
+    part-number: null
+    features:
+      unknown: false
+      capable-64bit: true
+      multicore: false
+      hardware_thread: false
+      execute-protection: false
+      enhanced-virtualization: false
+      power-perf-control: false
+      capable-128bit: false
+      arm64-soc-id: false
+    core-count: 4
+    core-enabled: 4
+    thread-count: 4
+    socket-type: null
+- handle: 1809
+  type: 7
+  length: 50
+  level: 2.1
+  description: Cache information
+  attributes:
+    socket-designator: Processor 1 Internal L1 Cache
+    level: 1
+    socketed: false
+    location: internal
+    enabled: true
+    mode: write-back
+    maximum-size: 131072
+    installed-size: 32768
+    supported-sram:
+      other: false
+      unknown: false
+      non-burst: false
+      burst: true
+      pipeline-burst: false
+      synchronous: false
+      asynchronous: false
+    current-sram:
+      other: false
+      unknown: false
+      non-burst: false
+      burst: true
+      pipeline-burst: false
+      synchronous: false
+      asynchronous: false
+    speed: 0
+    error-correction: single-bit
+    type: data
+    associativity: 8-way
+- handle: 1810
+  type: 7
+  length: 50
+  level: 2.1
+  description: Cache information
+  attributes:
+    socket-designator: Processor 2 Internal L1 Cache
+    level: 1
+    socketed: false
+    location: internal
+    enabled: true
+    mode: write-back
+    maximum-size: 131072
+    installed-size: 32768
+    supported-sram:
+      other: false
+      unknown: false
+      non-burst: false
+      burst: true
+      pipeline-burst: false
+      synchronous: false
+      asynchronous: false
+    current-sram:
+      other: false
+      unknown: false
+      non-burst: false
+      burst: true
+      pipeline-burst: false
+      synchronous: false
+      asynchronous: false
+    speed: 0
+    error-correction: single-bit
+    type: data
+    associativity: 8-way
+- handle: 1811
+  type: 7
+  length: 50
+  level: 2.1
+  description: Cache information
+  attributes:
+    socket-designator: Processor 3 Internal L1 Cache
+    level: 1
+    socketed: false
+    location: internal
+    enabled: true
+    mode: write-back
+    maximum-size: 131072
+    installed-size: 32768
+    supported-sram:
+      other: false
+      unknown: false
+      non-burst: false
+      burst: true
+      pipeline-burst: false
+      synchronous: false
+      asynchronous: false
+    current-sram:
+      other: false
+      unknown: false
+      non-burst: false
+      burst: true
+      pipeline-burst: false
+      synchronous: false
+      asynchronous: false
+    speed: 0
+    error-correction: single-bit
+    type: data
+    associativity: 8-way
+- handle: 1812
+  type: 7
+  length: 50
+  level: 2.1
+  description: Cache information
+  attributes:
+    socket-designator: Processor 4 Internal L1 Cache
+    level: 1
+    socketed: false
+    location: internal
+    enabled: true
+    mode: write-back
+    maximum-size: 131072
+    installed-size: 32768
+    supported-sram:
+      other: false
+      unknown: false
+      non-burst: false
+      burst: true
+      pipeline-burst: false
+      synchronous: false
+      asynchronous: false
+    current-sram:
+      other: false
+      unknown: false
+      non-burst: false
+      burst: true
+      pipeline-burst: false
+      synchronous: false
+      asynchronous: false
+    speed: 0
+    error-correction: single-bit
+    type: data
+    associativity: 8-way
+- handle: 1825
+  type: 7
+  length: 50
+  level: 2.1
+  description: Cache information
+  attributes:
+    socket-designator: Processor 1 Internal L2 Cache
+    level: 2
+    socketed: false
+    location: internal
+    enabled: true
+    mode: variable
+    maximum-size: 16777216
+    installed-size: 6291456
+    supported-sram:
+      other: false
+      unknown: false
+      non-burst: false
+      burst: true
+      pipeline-burst: false
+      synchronous: false
+      asynchronous: false
+    current-sram:
+      other: false
+      unknown: false
+      non-burst: false
+      burst: true
+      pipeline-burst: false
+      synchronous: false
+      asynchronous: false
+    speed: 0
+    error-correction: single-bit
+    type: unknown
+    associativity: 8-way
+- handle: 1826
+  type: 7
+  length: 50
+  level: 2.1
+  description: Cache information
+  attributes:
+    socket-designator: Processor 2 Internal L2 Cache
+    level: 2
+    socketed: false
+    location: internal
+    enabled: true
+    mode: variable
+    maximum-size: 16777216
+    installed-size: 6291456
+    supported-sram:
+      other: false
+      unknown: false
+      non-burst: false
+      burst: true
+      pipeline-burst: false
+      synchronous: false
+      asynchronous: false
+    current-sram:
+      other: false
+      unknown: false
+      non-burst: false
+      burst: true
+      pipeline-burst: false
+      synchronous: false
+      asynchronous: false
+    speed: 0
+    error-correction: single-bit
+    type: unknown
+    associativity: 8-way
+- handle: 1827
+  type: 7
+  length: 50
+  level: 2.1
+  description: Cache information
+  attributes:
+    socket-designator: Processor 3 Internal L2 Cache
+    level: 2
+    socketed: false
+    location: internal
+    enabled: true
+    mode: variable
+    maximum-size: 16777216
+    installed-size: 6291456
+    supported-sram:
+      other: false
+      unknown: false
+      non-burst: false
+      burst: true
+      pipeline-burst: false
+      synchronous: false
+      asynchronous: false
+    current-sram:
+      other: false
+      unknown: false
+      non-burst: false
+      burst: true
+      pipeline-burst: false
+      synchronous: false
+      asynchronous: false
+    speed: 0
+    error-correction: single-bit
+    type: unknown
+    associativity: 8-way
+- handle: 1828
+  type: 7
+  length: 50
+  level: 2.1
+  description: Cache information
+  attributes:
+    socket-designator: Processor 4 Internal L2 Cache
+    level: 2
+    socketed: false
+    location: internal
+    enabled: true
+    mode: variable
+    maximum-size: 16777216
+    installed-size: 6291456
+    supported-sram:
+      other: false
+      unknown: false
+      non-burst: false
+      burst: true
+      pipeline-burst: false
+      synchronous: false
+      asynchronous: false
+    current-sram:
+      other: false
+      unknown: false
+      non-burst: false
+      burst: true
+      pipeline-burst: false
+      synchronous: false
+      asynchronous: false
+    speed: 0
+    error-correction: single-bit
+    type: unknown
+    associativity: 8-way
+- handle: 1841
+  type: 7
+  length: 50
+  level: 2.1
+  description: Cache information
+  attributes:
+    socket-designator: Processor 1 Internal L3 Cache
+    level: 3
+    socketed: false
+    location: internal
+    enabled: true
+    mode: write-back
+    maximum-size: 8388608
+    installed-size: 0
+    supported-sram:
+      other: false
+      unknown: false
+      non-burst: false
+      burst: true
+      pipeline-burst: false
+      synchronous: false
+      asynchronous: false
+    current-sram:
+      other: false
+      unknown: false
+      non-burst: false
+      burst: true
+      pipeline-burst: false
+      synchronous: false
+      asynchronous: false
+    speed: 0
+    error-correction: single-bit
+    type: unknown
+    associativity: other
+- handle: 1842
+  type: 7
+  length: 50
+  level: 2.1
+  description: Cache information
+  attributes:
+    socket-designator: Processor 2 Internal L3 Cache
+    level: 3
+    socketed: false
+    location: internal
+    enabled: true
+    mode: write-back
+    maximum-size: 8388608
+    installed-size: 0
+    supported-sram:
+      other: false
+      unknown: false
+      non-burst: false
+      burst: true
+      pipeline-burst: false
+      synchronous: false
+      asynchronous: false
+    current-sram:
+      other: false
+      unknown: false
+      non-burst: false
+      burst: true
+      pipeline-burst: false
+      synchronous: false
+      asynchronous: false
+    speed: 0
+    error-correction: single-bit
+    type: unknown
+    associativity: other
+- handle: 1843
+  type: 7
+  length: 50
+  level: 2.1
+  description: Cache information
+  attributes:
+    socket-designator: Processor 3 Internal L3 Cache
+    level: 3
+    socketed: false
+    location: internal
+    enabled: true
+    mode: write-back
+    maximum-size: 8388608
+    installed-size: 0
+    supported-sram:
+      other: false
+      unknown: false
+      non-burst: false
+      burst: true
+      pipeline-burst: false
+      synchronous: false
+      asynchronous: false
+    current-sram:
+      other: false
+      unknown: false
+      non-burst: false
+      burst: true
+      pipeline-burst: false
+      synchronous: false
+      asynchronous: false
+    speed: 0
+    error-correction: single-bit
+    type: unknown
+    associativity: other
+- handle: 1844
+  type: 7
+  length: 50
+  level: 2.1
+  description: Cache information
+  attributes:
+    socket-designator: Processor 4 Internal L3 Cache
+    level: 3
+    socketed: false
+    location: internal
+    enabled: true
+    mode: write-back
+    maximum-size: 8388608
+    installed-size: 0
+    supported-sram:
+      other: false
+      unknown: false
+      non-burst: false
+      burst: true
+      pipeline-burst: false
+      synchronous: false
+      asynchronous: false
+    current-sram:
+      other: false
+      unknown: false
+      non-burst: false
+      burst: true
+      pipeline-burst: false
+      synchronous: false
+      asynchronous: false
+    speed: 0
+    error-correction: single-bit
+    type: unknown
+    associativity: other
+- handle: 2049
+  type: 8
+  length: 25
+  level: 2.0
+  description: Port connector information
+  attributes:
+    internal-designator: J58
+    internal-connector: access-bus
+    external-designator: USB Port 1
+    external-connector: access-bus
+    port-type: usb
+- handle: 2050
+  type: 8
+  length: 25
+  level: 2.0
+  description: Port connector information
+  attributes:
+    internal-designator: J58
+    internal-connector: access-bus
+    external-designator: USB Port 2
+    external-connector: access-bus
+    port-type: usb
+- handle: 2051
+  type: 8
+  length: 25
+  level: 2.0
+  description: Port connector information
+  attributes:
+    internal-designator: J58
+    internal-connector: access-bus
+    external-designator: USB Port 3
+    external-connector: access-bus
+    port-type: usb
+- handle: 2052
+  type: 8
+  length: 25
+  level: 2.0
+  description: Port connector information
+  attributes:
+    internal-designator: J58
+    internal-connector: access-bus
+    external-designator: USB Port 4
+    external-connector: access-bus
+    port-type: usb
+- handle: 55808
+  type: 218
+  length: 27
+  level: null
+  description: OEM-specific
+  data: !!binary |
+    2g0A2gAAAAAAAAAAAA==
+  strings:
+  - '            '
+- handle: 55808
+  type: 218
+  length: 27
+  level: null
+  description: OEM-specific
+  data: !!binary |
+    2g0A2gAAAAAAAAAAAA==
+  strings:
+  - '            '
+- handle: 55808
+  type: 218
+  length: 27
+  level: null
+  description: OEM-specific
+  data: !!binary |
+    2g0A2gAAAAAAAAAAAA==
+  strings:
+  - '            '
+- handle: 2308
+  type: 9
+  length: 27
+  level: 2.1
+  description: System slots
+  attributes:
+    designator: PCI-E Slot 4
+    type: pci-e
+    bus-width: 8x
+    usage: available
+    length: long
+    ident: 4
+    features:
+      unknown: false
+      has-5v0-support: false
+      has-3v3-support: true
+      has-shared-opening: false
+      has-pccard-16-support: false
+      has-cardbus-support: false
+      has-zoom-video-support: false
+      has-modem-ring-resume-support: false
+    features-ex:
+      has-pme-support: true
+      has-hotplug-support: false
+      has-smbus-support: false
+      has-bifurcation-support: false
+      has-async-removal-support: false
+      is-cxl-10-capable: false
+      is-cxl-20-capable: false
+      is-cxl-30-capable: false
+    base-address:
+      segment-group: 0
+      bus-number: 0
+      device-number: 0
+      function-number: 0
+    peer-groups: []
+    information: null
+    physical-width: null
+    pitch: null
+    height: null
+- handle: 2309
+  type: 9
+  length: 27
+  level: 2.1
+  description: System slots
+  attributes:
+    designator: PCI-E Slot 5
+    type: pci-e
+    bus-width: 8x
+    usage: available
+    length: long
+    ident: 5
+    features:
+      unknown: false
+      has-5v0-support: false
+      has-3v3-support: true
+      has-shared-opening: false
+      has-pccard-16-support: false
+      has-cardbus-support: false
+      has-zoom-video-support: false
+      has-modem-ring-resume-support: false
+    features-ex:
+      has-pme-support: true
+      has-hotplug-support: false
+      has-smbus-support: false
+      has-bifurcation-support: false
+      has-async-removal-support: false
+      is-cxl-10-capable: false
+      is-cxl-20-capable: false
+      is-cxl-30-capable: false
+    base-address:
+      segment-group: 0
+      bus-number: 0
+      device-number: 0
+      function-number: 0
+    peer-groups: []
+    information: null
+    physical-width: null
+    pitch: null
+    height: null
+- handle: 2310
+  type: 9
+  length: 27
+  level: 2.1
+  description: System slots
+  attributes:
+    designator: PCI-E Slot 6
+    type: pci-e
+    bus-width: 8x
+    usage: available
+    length: long
+    ident: 6
+    features:
+      unknown: false
+      has-5v0-support: false
+      has-3v3-support: true
+      has-shared-opening: false
+      has-pccard-16-support: false
+      has-cardbus-support: false
+      has-zoom-video-support: false
+      has-modem-ring-resume-support: false
+    features-ex:
+      has-pme-support: true
+      has-hotplug-support: false
+      has-smbus-support: false
+      has-bifurcation-support: false
+      has-async-removal-support: false
+      is-cxl-10-capable: false
+      is-cxl-20-capable: false
+      is-cxl-30-capable: false
+    base-address:
+      segment-group: 0
+      bus-number: 0
+      device-number: 0
+      function-number: 0
+    peer-groups: []
+    information: null
+    physical-width: null
+    pitch: null
+    height: null
+- handle: 2311
+  type: 9
+  length: 27
+  level: 2.1
+  description: System slots
+  attributes:
+    designator: PCI-E Slot 7
+    type: pci-e
+    bus-width: 8x
+    usage: available
+    length: long
+    ident: 7
+    features:
+      unknown: false
+      has-5v0-support: false
+      has-3v3-support: true
+      has-shared-opening: false
+      has-pccard-16-support: false
+      has-cardbus-support: false
+      has-zoom-video-support: false
+      has-modem-ring-resume-support: false
+    features-ex:
+      has-pme-support: true
+      has-hotplug-support: false
+      has-smbus-support: false
+      has-bifurcation-support: false
+      has-async-removal-support: false
+      is-cxl-10-capable: false
+      is-cxl-20-capable: false
+      is-cxl-30-capable: false
+    base-address:
+      segment-group: 0
+      bus-number: 0
+      device-number: 0
+      function-number: 0
+    peer-groups: []
+    information: null
+    physical-width: null
+    pitch: null
+    height: null
+- handle: 2312
+  type: 9
+  length: 27
+  level: 2.1
+  description: System slots
+  attributes:
+    designator: PCI-E Slot 8
+    type: pci-e
+    bus-width: 4x
+    usage: in-use
+    length: long
+    ident: 8
+    features:
+      unknown: false
+      has-5v0-support: false
+      has-3v3-support: true
+      has-shared-opening: false
+      has-pccard-16-support: false
+      has-cardbus-support: false
+      has-zoom-video-support: false
+      has-modem-ring-resume-support: false
+    features-ex:
+      has-pme-support: true
+      has-hotplug-support: false
+      has-smbus-support: false
+      has-bifurcation-support: false
+      has-async-removal-support: false
+      is-cxl-10-capable: false
+      is-cxl-20-capable: false
+      is-cxl-30-capable: false
+    base-address:
+      segment-group: 0
+      bus-number: 0
+      device-number: 0
+      function-number: 0
+    peer-groups: []
+    information: null
+    physical-width: null
+    pitch: null
+    height: null
+- handle: 2313
+  type: 9
+  length: 27
+  level: 2.1
+  description: System slots
+  attributes:
+    designator: PCI-E Slot 9
+    type: pci-e
+    bus-width: 4x
+    usage: available
+    length: long
+    ident: 9
+    features:
+      unknown: false
+      has-5v0-support: false
+      has-3v3-support: true
+      has-shared-opening: false
+      has-pccard-16-support: false
+      has-cardbus-support: false
+      has-zoom-video-support: false
+      has-modem-ring-resume-support: false
+    features-ex:
+      has-pme-support: true
+      has-hotplug-support: false
+      has-smbus-support: false
+      has-bifurcation-support: false
+      has-async-removal-support: false
+      is-cxl-10-capable: false
+      is-cxl-20-capable: false
+      is-cxl-30-capable: false
+    base-address:
+      segment-group: 0
+      bus-number: 0
+      device-number: 0
+      function-number: 0
+    peer-groups: []
+    information: null
+    physical-width: null
+    pitch: null
+    height: null
+- handle: 2314
+  type: 9
+  length: 28
+  level: 2.1
+  description: System slots
+  attributes:
+    designator: PCI-E Slot 10
+    type: pci-e
+    bus-width: 4x
+    usage: available
+    length: long
+    ident: 10
+    features:
+      unknown: false
+      has-5v0-support: false
+      has-3v3-support: true
+      has-shared-opening: false
+      has-pccard-16-support: false
+      has-cardbus-support: false
+      has-zoom-video-support: false
+      has-modem-ring-resume-support: false
+    features-ex:
+      has-pme-support: true
+      has-hotplug-support: false
+      has-smbus-support: false
+      has-bifurcation-support: false
+      has-async-removal-support: false
+      is-cxl-10-capable: false
+      is-cxl-20-capable: false
+      is-cxl-30-capable: false
+    base-address:
+      segment-group: 0
+      bus-number: 0
+      device-number: 0
+      function-number: 0
+    peer-groups: []
+    information: null
+    physical-width: null
+    pitch: null
+    height: null
+- handle: 2315
+  type: 9
+  length: 28
+  level: 2.1
+  description: System slots
+  attributes:
+    designator: PCI-E Slot 11
+    type: pci-e
+    bus-width: 4x
+    usage: available
+    length: long
+    ident: 11
+    features:
+      unknown: false
+      has-5v0-support: false
+      has-3v3-support: true
+      has-shared-opening: false
+      has-pccard-16-support: false
+      has-cardbus-support: false
+      has-zoom-video-support: false
+      has-modem-ring-resume-support: false
+    features-ex:
+      has-pme-support: true
+      has-hotplug-support: false
+      has-smbus-support: false
+      has-bifurcation-support: false
+      has-async-removal-support: false
+      is-cxl-10-capable: false
+      is-cxl-20-capable: false
+      is-cxl-30-capable: false
+    base-address:
+      segment-group: 0
+      bus-number: 0
+      device-number: 0
+      function-number: 0
+    peer-groups: []
+    information: null
+    physical-width: null
+    pitch: null
+    height: null
+- handle: 2816
+  type: 11
+  length: 35
+  level: 2.0
+  description: OEM strings
+  attributes:
+    string-count: 1
+    strings:
+    - 'Product ID: 438087-371'
+- handle: 4096
+  type: 16
+  length: 17
+  level: 2.1
+  description: Physical memory array
+  attributes:
+    location: motherboard
+    use: system
+    error-correction: single-bit
+    maximum-capacity: 137438953472
+    error-handle: 65534
+    device-count: 16
+- handle: 4097
+  type: 16
+  length: 17
+  level: 2.1
+  description: Physical memory array
+  attributes:
+    location: proprietary
+    use: system
+    error-correction: single-bit
+    maximum-capacity: 34359738368
+    error-handle: 65534
+    device-count: 4
+- handle: 4098
+  type: 16
+  length: 17
+  level: 2.1
+  description: Physical memory array
+  attributes:
+    location: proprietary
+    use: system
+    error-correction: single-bit
+    maximum-capacity: 34359738368
+    error-handle: 65534
+    device-count: 4
+- handle: 4099
+  type: 16
+  length: 17
+  level: 2.1
+  description: Physical memory array
+  attributes:
+    location: proprietary
+    use: system
+    error-correction: single-bit
+    maximum-capacity: 34359738368
+    error-handle: 65534
+    device-count: 4
+- handle: 4100
+  type: 16
+  length: 17
+  level: 2.1
+  description: Physical memory array
+  attributes:
+    location: proprietary
+    use: system
+    error-correction: single-bit
+    maximum-capacity: 34359738368
+    error-handle: 65534
+    device-count: 4
+- handle: 4352
+  type: 17
+  length: 41
+  level: 2.3
+  description: Memory device
+  attributes:
+    array-handle: 4096
+    error-info-handle: 65534
+    total-width: 72
+    data-width: 64
+    size: 4294967296
+    form-factor: fbdimm
+    device-set: 1
+    device-locator: DIMM 1A
+    bank-locator: null
+    memory-type: ddr2-fbdimm
+    memory-type-details:
+      reserved: false
+      other: false
+      unknown: false
+      fast-paged: false
+      static-column: false
+      pseudo-static: false
+      rambus: false
+      synchronous: true
+      cmos: false
+      edo: false
+      window-dram: false
+      cache-dram: false
+      non-volatile: false
+      registered: false
+      unbuffered: false
+      lrdimm: false
+    maximum-speed: 667
+    vendor: null
+    serial-number: null
+    asset-tag: null
+    part-number: null
+- handle: 4353
+  type: 17
+  length: 41
+  level: 2.3
+  description: Memory device
+  attributes:
+    array-handle: 4096
+    error-info-handle: 65534
+    total-width: 72
+    data-width: 64
+    size: 4294967296
+    form-factor: fbdimm
+    device-set: 3
+    device-locator: DIMM 2C
+    bank-locator: null
+    memory-type: ddr2-fbdimm
+    memory-type-details:
+      reserved: false
+      other: false
+      unknown: false
+      fast-paged: false
+      static-column: false
+      pseudo-static: false
+      rambus: false
+      synchronous: true
+      cmos: false
+      edo: false
+      window-dram: false
+      cache-dram: false
+      non-volatile: false
+      registered: false
+      unbuffered: false
+      lrdimm: false
+    maximum-speed: 667
+    vendor: null
+    serial-number: null
+    asset-tag: null
+    part-number: null
+- handle: 4354
+  type: 17
+  length: 41
+  level: 2.3
+  description: Memory device
+  attributes:
+    array-handle: 4096
+    error-info-handle: 65534
+    total-width: 72
+    data-width: 64
+    size: 1073741824
+    form-factor: fbdimm
+    device-set: 5
+    device-locator: DIMM 3E
+    bank-locator: null
+    memory-type: ddr2-fbdimm
+    memory-type-details:
+      reserved: false
+      other: false
+      unknown: false
+      fast-paged: false
+      static-column: false
+      pseudo-static: false
+      rambus: false
+      synchronous: true
+      cmos: false
+      edo: false
+      window-dram: false
+      cache-dram: false
+      non-volatile: false
+      registered: false
+      unbuffered: false
+      lrdimm: false
+    maximum-speed: 667
+    vendor: null
+    serial-number: null
+    asset-tag: null
+    part-number: null
+- handle: 4355
+  type: 17
+  length: 41
+  level: 2.3
+  description: Memory device
+  attributes:
+    array-handle: 4096
+    error-info-handle: 65534
+    total-width: 72
+    data-width: 64
+    size: 0
+    form-factor: fbdimm
+    device-set: 7
+    device-locator: DIMM 4G
+    bank-locator: null
+    memory-type: ddr2-fbdimm
+    memory-type-details:
+      reserved: false
+      other: false
+      unknown: false
+      fast-paged: false
+      static-column: false
+      pseudo-static: false
+      rambus: false
+      synchronous: true
+      cmos: false
+      edo: false
+      window-dram: false
+      cache-dram: false
+      non-volatile: false
+      registered: false
+      unbuffered: false
+      lrdimm: false
+    maximum-speed: unknown
+    vendor: null
+    serial-number: null
+    asset-tag: null
+    part-number: null
+- handle: 4356
+  type: 17
+  length: 41
+  level: 2.3
+  description: Memory device
+  attributes:
+    array-handle: 4097
+    error-info-handle: 65534
+    total-width: 72
+    data-width: 64
+    size: 0
+    form-factor: fbdimm
+    device-set: 9
+    device-locator: Board 1, DIMM 1A
+    bank-locator: null
+    memory-type: ddr2-fbdimm
+    memory-type-details:
+      reserved: false
+      other: false
+      unknown: false
+      fast-paged: false
+      static-column: false
+      pseudo-static: false
+      rambus: false
+      synchronous: true
+      cmos: false
+      edo: false
+      window-dram: false
+      cache-dram: false
+      non-volatile: false
+      registered: false
+      unbuffered: false
+      lrdimm: false
+    maximum-speed: unknown
+    vendor: null
+    serial-number: null
+    asset-tag: null
+    part-number: null
+- handle: 4357
+  type: 17
+  length: 41
+  level: 2.3
+  description: Memory device
+  attributes:
+    array-handle: 4097
+    error-info-handle: 65534
+    total-width: 72
+    data-width: 64
+    size: 0
+    form-factor: fbdimm
+    device-set: 11
+    device-locator: Board 1, DIMM 2B
+    bank-locator: null
+    memory-type: ddr2-fbdimm
+    memory-type-details:
+      reserved: false
+      other: false
+      unknown: false
+      fast-paged: false
+      static-column: false
+      pseudo-static: false
+      rambus: false
+      synchronous: true
+      cmos: false
+      edo: false
+      window-dram: false
+      cache-dram: false
+      non-volatile: false
+      registered: false
+      unbuffered: false
+      lrdimm: false
+    maximum-speed: unknown
+    vendor: null
+    serial-number: null
+    asset-tag: null
+    part-number: null
+- handle: 4358
+  type: 17
+  length: 41
+  level: 2.3
+  description: Memory device
+  attributes:
+    array-handle: 4097
+    error-info-handle: 65534
+    total-width: 72
+    data-width: 64
+    size: 0
+    form-factor: fbdimm
+    device-set: 13
+    device-locator: Board 1, DIMM 3C
+    bank-locator: null
+    memory-type: ddr2-fbdimm
+    memory-type-details:
+      reserved: false
+      other: false
+      unknown: false
+      fast-paged: false
+      static-column: false
+      pseudo-static: false
+      rambus: false
+      synchronous: true
+      cmos: false
+      edo: false
+      window-dram: false
+      cache-dram: false
+      non-volatile: false
+      registered: false
+      unbuffered: false
+      lrdimm: false
+    maximum-speed: unknown
+    vendor: null
+    serial-number: null
+    asset-tag: null
+    part-number: null
+- handle: 4359
+  type: 17
+  length: 41
+  level: 2.3
+  description: Memory device
+  attributes:
+    array-handle: 4097
+    error-info-handle: 65534
+    total-width: 72
+    data-width: 64
+    size: 0
+    form-factor: fbdimm
+    device-set: 15
+    device-locator: Board 1, DIMM 4D
+    bank-locator: null
+    memory-type: ddr2-fbdimm
+    memory-type-details:
+      reserved: false
+      other: false
+      unknown: false
+      fast-paged: false
+      static-column: false
+      pseudo-static: false
+      rambus: false
+      synchronous: true
+      cmos: false
+      edo: false
+      window-dram: false
+      cache-dram: false
+      non-volatile: false
+      registered: false
+      unbuffered: false
+      lrdimm: false
+    maximum-speed: unknown
+    vendor: null
+    serial-number: null
+    asset-tag: null
+    part-number: null
+- handle: 4360
+  type: 17
+  length: 41
+  level: 2.3
+  description: Memory device
+  attributes:
+    array-handle: 4096
+    error-info-handle: 65534
+    total-width: 72
+    data-width: 64
+    size: 4294967296
+    form-factor: fbdimm
+    device-set: 1
+    device-locator: DIMM 5A
+    bank-locator: null
+    memory-type: ddr2-fbdimm
+    memory-type-details:
+      reserved: false
+      other: false
+      unknown: false
+      fast-paged: false
+      static-column: false
+      pseudo-static: false
+      rambus: false
+      synchronous: true
+      cmos: false
+      edo: false
+      window-dram: false
+      cache-dram: false
+      non-volatile: false
+      registered: false
+      unbuffered: false
+      lrdimm: false
+    maximum-speed: 667
+    vendor: null
+    serial-number: null
+    asset-tag: null
+    part-number: null
+- handle: 4361
+  type: 17
+  length: 41
+  level: 2.3
+  description: Memory device
+  attributes:
+    array-handle: 4096
+    error-info-handle: 65534
+    total-width: 72
+    data-width: 64
+    size: 4294967296
+    form-factor: fbdimm
+    device-set: 3
+    device-locator: DIMM 6C
+    bank-locator: null
+    memory-type: ddr2-fbdimm
+    memory-type-details:
+      reserved: false
+      other: false
+      unknown: false
+      fast-paged: false
+      static-column: false
+      pseudo-static: false
+      rambus: false
+      synchronous: true
+      cmos: false
+      edo: false
+      window-dram: false
+      cache-dram: false
+      non-volatile: false
+      registered: false
+      unbuffered: false
+      lrdimm: false
+    maximum-speed: 667
+    vendor: null
+    serial-number: null
+    asset-tag: null
+    part-number: null
+- handle: 4362
+  type: 17
+  length: 41
+  level: 2.3
+  description: Memory device
+  attributes:
+    array-handle: 4096
+    error-info-handle: 65534
+    total-width: 72
+    data-width: 64
+    size: 1073741824
+    form-factor: fbdimm
+    device-set: 5
+    device-locator: DIMM 7E
+    bank-locator: null
+    memory-type: ddr2-fbdimm
+    memory-type-details:
+      reserved: false
+      other: false
+      unknown: false
+      fast-paged: false
+      static-column: false
+      pseudo-static: false
+      rambus: false
+      synchronous: true
+      cmos: false
+      edo: false
+      window-dram: false
+      cache-dram: false
+      non-volatile: false
+      registered: false
+      unbuffered: false
+      lrdimm: false
+    maximum-speed: 667
+    vendor: null
+    serial-number: null
+    asset-tag: null
+    part-number: null
+- handle: 4363
+  type: 17
+  length: 41
+  level: 2.3
+  description: Memory device
+  attributes:
+    array-handle: 4096
+    error-info-handle: 65534
+    total-width: 72
+    data-width: 64
+    size: 0
+    form-factor: fbdimm
+    device-set: 7
+    device-locator: DIMM 8G
+    bank-locator: null
+    memory-type: ddr2-fbdimm
+    memory-type-details:
+      reserved: false
+      other: false
+      unknown: false
+      fast-paged: false
+      static-column: false
+      pseudo-static: false
+      rambus: false
+      synchronous: true
+      cmos: false
+      edo: false
+      window-dram: false
+      cache-dram: false
+      non-volatile: false
+      registered: false
+      unbuffered: false
+      lrdimm: false
+    maximum-speed: unknown
+    vendor: null
+    serial-number: null
+    asset-tag: null
+    part-number: null
+- handle: 4364
+  type: 17
+  length: 41
+  level: 2.3
+  description: Memory device
+  attributes:
+    array-handle: 4098
+    error-info-handle: 65534
+    total-width: 72
+    data-width: 64
+    size: 0
+    form-factor: fbdimm
+    device-set: 9
+    device-locator: Board 2, DIMM 1A
+    bank-locator: null
+    memory-type: ddr2-fbdimm
+    memory-type-details:
+      reserved: false
+      other: false
+      unknown: false
+      fast-paged: false
+      static-column: false
+      pseudo-static: false
+      rambus: false
+      synchronous: true
+      cmos: false
+      edo: false
+      window-dram: false
+      cache-dram: false
+      non-volatile: false
+      registered: false
+      unbuffered: false
+      lrdimm: false
+    maximum-speed: unknown
+    vendor: null
+    serial-number: null
+    asset-tag: null
+    part-number: null
+- handle: 4365
+  type: 17
+  length: 41
+  level: 2.3
+  description: Memory device
+  attributes:
+    array-handle: 4098
+    error-info-handle: 65534
+    total-width: 72
+    data-width: 64
+    size: 0
+    form-factor: fbdimm
+    device-set: 11
+    device-locator: Board 2, DIMM 2B
+    bank-locator: null
+    memory-type: ddr2-fbdimm
+    memory-type-details:
+      reserved: false
+      other: false
+      unknown: false
+      fast-paged: false
+      static-column: false
+      pseudo-static: false
+      rambus: false
+      synchronous: true
+      cmos: false
+      edo: false
+      window-dram: false
+      cache-dram: false
+      non-volatile: false
+      registered: false
+      unbuffered: false
+      lrdimm: false
+    maximum-speed: unknown
+    vendor: null
+    serial-number: null
+    asset-tag: null
+    part-number: null
+- handle: 4366
+  type: 17
+  length: 41
+  level: 2.3
+  description: Memory device
+  attributes:
+    array-handle: 4098
+    error-info-handle: 65534
+    total-width: 72
+    data-width: 64
+    size: 0
+    form-factor: fbdimm
+    device-set: 13
+    device-locator: Board 2, DIMM 3C
+    bank-locator: null
+    memory-type: ddr2-fbdimm
+    memory-type-details:
+      reserved: false
+      other: false
+      unknown: false
+      fast-paged: false
+      static-column: false
+      pseudo-static: false
+      rambus: false
+      synchronous: true
+      cmos: false
+      edo: false
+      window-dram: false
+      cache-dram: false
+      non-volatile: false
+      registered: false
+      unbuffered: false
+      lrdimm: false
+    maximum-speed: unknown
+    vendor: null
+    serial-number: null
+    asset-tag: null
+    part-number: null
+- handle: 4367
+  type: 17
+  length: 41
+  level: 2.3
+  description: Memory device
+  attributes:
+    array-handle: 4098
+    error-info-handle: 65534
+    total-width: 72
+    data-width: 64
+    size: 0
+    form-factor: fbdimm
+    device-set: 15
+    device-locator: Board 2, DIMM 4D
+    bank-locator: null
+    memory-type: ddr2-fbdimm
+    memory-type-details:
+      reserved: false
+      other: false
+      unknown: false
+      fast-paged: false
+      static-column: false
+      pseudo-static: false
+      rambus: false
+      synchronous: true
+      cmos: false
+      edo: false
+      window-dram: false
+      cache-dram: false
+      non-volatile: false
+      registered: false
+      unbuffered: false
+      lrdimm: false
+    maximum-speed: unknown
+    vendor: null
+    serial-number: null
+    asset-tag: null
+    part-number: null
+- handle: 4368
+  type: 17
+  length: 41
+  level: 2.3
+  description: Memory device
+  attributes:
+    array-handle: 4096
+    error-info-handle: 65534
+    total-width: 72
+    data-width: 64
+    size: 4294967296
+    form-factor: fbdimm
+    device-set: 2
+    device-locator: DIMM 9B
+    bank-locator: null
+    memory-type: ddr2-fbdimm
+    memory-type-details:
+      reserved: false
+      other: false
+      unknown: false
+      fast-paged: false
+      static-column: false
+      pseudo-static: false
+      rambus: false
+      synchronous: true
+      cmos: false
+      edo: false
+      window-dram: false
+      cache-dram: false
+      non-volatile: false
+      registered: false
+      unbuffered: false
+      lrdimm: false
+    maximum-speed: 667
+    vendor: null
+    serial-number: null
+    asset-tag: null
+    part-number: null
+- handle: 4369
+  type: 17
+  length: 41
+  level: 2.3
+  description: Memory device
+  attributes:
+    array-handle: 4096
+    error-info-handle: 65534
+    total-width: 72
+    data-width: 64
+    size: 4294967296
+    form-factor: fbdimm
+    device-set: 4
+    device-locator: DIMM 10D
+    bank-locator: null
+    memory-type: ddr2-fbdimm
+    memory-type-details:
+      reserved: false
+      other: false
+      unknown: false
+      fast-paged: false
+      static-column: false
+      pseudo-static: false
+      rambus: false
+      synchronous: true
+      cmos: false
+      edo: false
+      window-dram: false
+      cache-dram: false
+      non-volatile: false
+      registered: false
+      unbuffered: false
+      lrdimm: false
+    maximum-speed: 667
+    vendor: null
+    serial-number: null
+    asset-tag: null
+    part-number: null
+- handle: 4370
+  type: 17
+  length: 41
+  level: 2.3
+  description: Memory device
+  attributes:
+    array-handle: 4096
+    error-info-handle: 65534
+    total-width: 72
+    data-width: 64
+    size: 1073741824
+    form-factor: fbdimm
+    device-set: 6
+    device-locator: DIMM 11F
+    bank-locator: null
+    memory-type: ddr2-fbdimm
+    memory-type-details:
+      reserved: false
+      other: false
+      unknown: false
+      fast-paged: false
+      static-column: false
+      pseudo-static: false
+      rambus: false
+      synchronous: true
+      cmos: false
+      edo: false
+      window-dram: false
+      cache-dram: false
+      non-volatile: false
+      registered: false
+      unbuffered: false
+      lrdimm: false
+    maximum-speed: 667
+    vendor: null
+    serial-number: null
+    asset-tag: null
+    part-number: null
+- handle: 4371
+  type: 17
+  length: 41
+  level: 2.3
+  description: Memory device
+  attributes:
+    array-handle: 4096
+    error-info-handle: 65534
+    total-width: 72
+    data-width: 64
+    size: 0
+    form-factor: fbdimm
+    device-set: 8
+    device-locator: DIMM 12H
+    bank-locator: null
+    memory-type: ddr2-fbdimm
+    memory-type-details:
+      reserved: false
+      other: false
+      unknown: false
+      fast-paged: false
+      static-column: false
+      pseudo-static: false
+      rambus: false
+      synchronous: true
+      cmos: false
+      edo: false
+      window-dram: false
+      cache-dram: false
+      non-volatile: false
+      registered: false
+      unbuffered: false
+      lrdimm: false
+    maximum-speed: unknown
+    vendor: null
+    serial-number: null
+    asset-tag: null
+    part-number: null
+- handle: 4372
+  type: 17
+  length: 41
+  level: 2.3
+  description: Memory device
+  attributes:
+    array-handle: 4099
+    error-info-handle: 65534
+    total-width: 72
+    data-width: 64
+    size: 0
+    form-factor: fbdimm
+    device-set: 10
+    device-locator: Board 3, DIMM 1A
+    bank-locator: null
+    memory-type: ddr2-fbdimm
+    memory-type-details:
+      reserved: false
+      other: false
+      unknown: false
+      fast-paged: false
+      static-column: false
+      pseudo-static: false
+      rambus: false
+      synchronous: true
+      cmos: false
+      edo: false
+      window-dram: false
+      cache-dram: false
+      non-volatile: false
+      registered: false
+      unbuffered: false
+      lrdimm: false
+    maximum-speed: unknown
+    vendor: null
+    serial-number: null
+    asset-tag: null
+    part-number: null
+- handle: 4373
+  type: 17
+  length: 41
+  level: 2.3
+  description: Memory device
+  attributes:
+    array-handle: 4099
+    error-info-handle: 65534
+    total-width: 72
+    data-width: 64
+    size: 0
+    form-factor: fbdimm
+    device-set: 12
+    device-locator: Board 3, DIMM 2B
+    bank-locator: null
+    memory-type: ddr2-fbdimm
+    memory-type-details:
+      reserved: false
+      other: false
+      unknown: false
+      fast-paged: false
+      static-column: false
+      pseudo-static: false
+      rambus: false
+      synchronous: true
+      cmos: false
+      edo: false
+      window-dram: false
+      cache-dram: false
+      non-volatile: false
+      registered: false
+      unbuffered: false
+      lrdimm: false
+    maximum-speed: unknown
+    vendor: null
+    serial-number: null
+    asset-tag: null
+    part-number: null
+- handle: 4374
+  type: 17
+  length: 41
+  level: 2.3
+  description: Memory device
+  attributes:
+    array-handle: 4099
+    error-info-handle: 65534
+    total-width: 72
+    data-width: 64
+    size: 0
+    form-factor: fbdimm
+    device-set: 14
+    device-locator: Board 3, DIMM 3C
+    bank-locator: null
+    memory-type: ddr2-fbdimm
+    memory-type-details:
+      reserved: false
+      other: false
+      unknown: false
+      fast-paged: false
+      static-column: false
+      pseudo-static: false
+      rambus: false
+      synchronous: true
+      cmos: false
+      edo: false
+      window-dram: false
+      cache-dram: false
+      non-volatile: false
+      registered: false
+      unbuffered: false
+      lrdimm: false
+    maximum-speed: unknown
+    vendor: null
+    serial-number: null
+    asset-tag: null
+    part-number: null
+- handle: 4375
+  type: 17
+  length: 41
+  level: 2.3
+  description: Memory device
+  attributes:
+    array-handle: 4099
+    error-info-handle: 65534
+    total-width: 72
+    data-width: 64
+    size: 0
+    form-factor: fbdimm
+    device-set: 16
+    device-locator: Board 3, DIMM 4D
+    bank-locator: null
+    memory-type: ddr2-fbdimm
+    memory-type-details:
+      reserved: false
+      other: false
+      unknown: false
+      fast-paged: false
+      static-column: false
+      pseudo-static: false
+      rambus: false
+      synchronous: true
+      cmos: false
+      edo: false
+      window-dram: false
+      cache-dram: false
+      non-volatile: false
+      registered: false
+      unbuffered: false
+      lrdimm: false
+    maximum-speed: unknown
+    vendor: null
+    serial-number: null
+    asset-tag: null
+    part-number: null
+- handle: 4376
+  type: 17
+  length: 41
+  level: 2.3
+  description: Memory device
+  attributes:
+    array-handle: 4096
+    error-info-handle: 65534
+    total-width: 72
+    data-width: 64
+    size: 4294967296
+    form-factor: fbdimm
+    device-set: 2
+    device-locator: DIMM 13B
+    bank-locator: null
+    memory-type: ddr2-fbdimm
+    memory-type-details:
+      reserved: false
+      other: false
+      unknown: false
+      fast-paged: false
+      static-column: false
+      pseudo-static: false
+      rambus: false
+      synchronous: true
+      cmos: false
+      edo: false
+      window-dram: false
+      cache-dram: false
+      non-volatile: false
+      registered: false
+      unbuffered: false
+      lrdimm: false
+    maximum-speed: 667
+    vendor: null
+    serial-number: null
+    asset-tag: null
+    part-number: null
+- handle: 4377
+  type: 17
+  length: 41
+  level: 2.3
+  description: Memory device
+  attributes:
+    array-handle: 4096
+    error-info-handle: 65534
+    total-width: 72
+    data-width: 64
+    size: 4294967296
+    form-factor: fbdimm
+    device-set: 4
+    device-locator: DIMM 14D
+    bank-locator: null
+    memory-type: ddr2-fbdimm
+    memory-type-details:
+      reserved: false
+      other: false
+      unknown: false
+      fast-paged: false
+      static-column: false
+      pseudo-static: false
+      rambus: false
+      synchronous: true
+      cmos: false
+      edo: false
+      window-dram: false
+      cache-dram: false
+      non-volatile: false
+      registered: false
+      unbuffered: false
+      lrdimm: false
+    maximum-speed: 667
+    vendor: null
+    serial-number: null
+    asset-tag: null
+    part-number: null
+- handle: 4378
+  type: 17
+  length: 41
+  level: 2.3
+  description: Memory device
+  attributes:
+    array-handle: 4096
+    error-info-handle: 65534
+    total-width: 72
+    data-width: 64
+    size: 1073741824
+    form-factor: fbdimm
+    device-set: 6
+    device-locator: DIMM 15F
+    bank-locator: null
+    memory-type: ddr2-fbdimm
+    memory-type-details:
+      reserved: false
+      other: false
+      unknown: false
+      fast-paged: false
+      static-column: false
+      pseudo-static: false
+      rambus: false
+      synchronous: true
+      cmos: false
+      edo: false
+      window-dram: false
+      cache-dram: false
+      non-volatile: false
+      registered: false
+      unbuffered: false
+      lrdimm: false
+    maximum-speed: 667
+    vendor: null
+    serial-number: null
+    asset-tag: null
+    part-number: null
+- handle: 4379
+  type: 17
+  length: 41
+  level: 2.3
+  description: Memory device
+  attributes:
+    array-handle: 4096
+    error-info-handle: 65534
+    total-width: 72
+    data-width: 64
+    size: 0
+    form-factor: fbdimm
+    device-set: 8
+    device-locator: DIMM 16H
+    bank-locator: null
+    memory-type: ddr2-fbdimm
+    memory-type-details:
+      reserved: false
+      other: false
+      unknown: false
+      fast-paged: false
+      static-column: false
+      pseudo-static: false
+      rambus: false
+      synchronous: true
+      cmos: false
+      edo: false
+      window-dram: false
+      cache-dram: false
+      non-volatile: false
+      registered: false
+      unbuffered: false
+      lrdimm: false
+    maximum-speed: unknown
+    vendor: null
+    serial-number: null
+    asset-tag: null
+    part-number: null
+- handle: 4380
+  type: 17
+  length: 41
+  level: 2.3
+  description: Memory device
+  attributes:
+    array-handle: 4100
+    error-info-handle: 65534
+    total-width: 72
+    data-width: 64
+    size: 0
+    form-factor: fbdimm
+    device-set: 10
+    device-locator: Board 4, DIMM 1A
+    bank-locator: null
+    memory-type: ddr2-fbdimm
+    memory-type-details:
+      reserved: false
+      other: false
+      unknown: false
+      fast-paged: false
+      static-column: false
+      pseudo-static: false
+      rambus: false
+      synchronous: true
+      cmos: false
+      edo: false
+      window-dram: false
+      cache-dram: false
+      non-volatile: false
+      registered: false
+      unbuffered: false
+      lrdimm: false
+    maximum-speed: unknown
+    vendor: null
+    serial-number: null
+    asset-tag: null
+    part-number: null
+- handle: 4381
+  type: 17
+  length: 41
+  level: 2.3
+  description: Memory device
+  attributes:
+    array-handle: 4100
+    error-info-handle: 65534
+    total-width: 72
+    data-width: 64
+    size: 0
+    form-factor: fbdimm
+    device-set: 12
+    device-locator: Board 4, DIMM 2B
+    bank-locator: null
+    memory-type: ddr2-fbdimm
+    memory-type-details:
+      reserved: false
+      other: false
+      unknown: false
+      fast-paged: false
+      static-column: false
+      pseudo-static: false
+      rambus: false
+      synchronous: true
+      cmos: false
+      edo: false
+      window-dram: false
+      cache-dram: false
+      non-volatile: false
+      registered: false
+      unbuffered: false
+      lrdimm: false
+    maximum-speed: unknown
+    vendor: null
+    serial-number: null
+    asset-tag: null
+    part-number: null
+- handle: 4382
+  type: 17
+  length: 41
+  level: 2.3
+  description: Memory device
+  attributes:
+    array-handle: 4100
+    error-info-handle: 65534
+    total-width: 72
+    data-width: 64
+    size: 0
+    form-factor: fbdimm
+    device-set: 14
+    device-locator: Board 4, DIMM 3C
+    bank-locator: null
+    memory-type: ddr2-fbdimm
+    memory-type-details:
+      reserved: false
+      other: false
+      unknown: false
+      fast-paged: false
+      static-column: false
+      pseudo-static: false
+      rambus: false
+      synchronous: true
+      cmos: false
+      edo: false
+      window-dram: false
+      cache-dram: false
+      non-volatile: false
+      registered: false
+      unbuffered: false
+      lrdimm: false
+    maximum-speed: unknown
+    vendor: null
+    serial-number: null
+    asset-tag: null
+    part-number: null
+- handle: 4383
+  type: 17
+  length: 41
+  level: 2.3
+  description: Memory device
+  attributes:
+    array-handle: 4100
+    error-info-handle: 65534
+    total-width: 72
+    data-width: 64
+    size: 0
+    form-factor: fbdimm
+    device-set: 16
+    device-locator: Board 4, DIMM 4D
+    bank-locator: null
+    memory-type: ddr2-fbdimm
+    memory-type-details:
+      reserved: false
+      other: false
+      unknown: false
+      fast-paged: false
+      static-column: false
+      pseudo-static: false
+      rambus: false
+      synchronous: true
+      cmos: false
+      edo: false
+      window-dram: false
+      cache-dram: false
+      non-volatile: false
+      registered: false
+      unbuffered: false
+      lrdimm: false
+    maximum-speed: unknown
+    vendor: null
+    serial-number: null
+    asset-tag: null
+    part-number: null
+- handle: 4864
+  type: 19
+  length: 17
+  level: 2.1
+  description: Memory array mapped address
+  attributes:
+    start-addr: 0
+    end-addr: 39460011008
+    range-size: 39460011008
+    array-handle: 4096
+    partition-width: 2
+- handle: 4865
+  type: 19
+  length: 17
+  level: 2.1
+  description: Memory array mapped address
+  attributes:
+    start-addr: 0
+    end-addr: 39460011008
+    range-size: 39460011008
+    array-handle: 4097
+    partition-width: 2
+- handle: 4866
+  type: 19
+  length: 17
+  level: 2.1
+  description: Memory array mapped address
+  attributes:
+    start-addr: 0
+    end-addr: 39460011008
+    range-size: 39460011008
+    array-handle: 4098
+    partition-width: 2
+- handle: 4867
+  type: 19
+  length: 17
+  level: 2.1
+  description: Memory array mapped address
+  attributes:
+    start-addr: 0
+    end-addr: 39460011008
+    range-size: 39460011008
+    array-handle: 4099
+    partition-width: 2
+- handle: 4868
+  type: 19
+  length: 17
+  level: 2.1
+  description: Memory array mapped address
+  attributes:
+    start-addr: 0
+    end-addr: 39460011008
+    range-size: 39460011008
+    array-handle: 4100
+    partition-width: 2
+- handle: 5120
+  type: 20
+  length: 21
+  level: 2.1
+  description: Memory device mapped address
+  attributes:
+    start-addr: 0
+    end-addr: 39460011008
+    range-size: 39460011008
+    device-handle: 4352
+    array-addr-handle: 4864
+    partition-pos: 1
+    interleave-pos: 1
+    interleave-depth: unknown
+- handle: 5121
+  type: 20
+  length: 21
+  level: 2.1
+  description: Memory device mapped address
+  attributes:
+    start-addr: 0
+    end-addr: 39460011008
+    range-size: 39460011008
+    device-handle: 4353
+    array-addr-handle: 4864
+    partition-pos: 1
+    interleave-pos: 1
+    interleave-depth: unknown
+- handle: 5122
+  type: 20
+  length: 21
+  level: 2.1
+  description: Memory device mapped address
+  attributes:
+    start-addr: 0
+    end-addr: 39460011008
+    range-size: 39460011008
+    device-handle: 4354
+    array-addr-handle: 4864
+    partition-pos: 1
+    interleave-pos: 1
+    interleave-depth: unknown
+- handle: 5123
+  type: 20
+  length: 21
+  level: 2.1
+  description: Memory device mapped address
+  attributes:
+    start-addr: 0
+    end-addr: 0
+    range-size: 0
+    device-handle: 4355
+    array-addr-handle: 4864
+    partition-pos: 1
+    interleave-pos: 1
+    interleave-depth: unknown
+- handle: 5124
+  type: 20
+  length: 21
+  level: 2.1
+  description: Memory device mapped address
+  attributes:
+    start-addr: 0
+    end-addr: 0
+    range-size: 0
+    device-handle: 4356
+    array-addr-handle: 4865
+    partition-pos: 1
+    interleave-pos: 1
+    interleave-depth: unknown
+- handle: 5125
+  type: 20
+  length: 21
+  level: 2.1
+  description: Memory device mapped address
+  attributes:
+    start-addr: 0
+    end-addr: 0
+    range-size: 0
+    device-handle: 4357
+    array-addr-handle: 4865
+    partition-pos: 1
+    interleave-pos: 1
+    interleave-depth: unknown
+- handle: 5126
+  type: 20
+  length: 21
+  level: 2.1
+  description: Memory device mapped address
+  attributes:
+    start-addr: 0
+    end-addr: 0
+    range-size: 0
+    device-handle: 4358
+    array-addr-handle: 4865
+    partition-pos: 1
+    interleave-pos: 1
+    interleave-depth: unknown
+- handle: 5127
+  type: 20
+  length: 21
+  level: 2.1
+  description: Memory device mapped address
+  attributes:
+    start-addr: 0
+    end-addr: 0
+    range-size: 0
+    device-handle: 4359
+    array-addr-handle: 4865
+    partition-pos: 1
+    interleave-pos: 1
+    interleave-depth: unknown
+- handle: 5128
+  type: 20
+  length: 21
+  level: 2.1
+  description: Memory device mapped address
+  attributes:
+    start-addr: 0
+    end-addr: 39460011008
+    range-size: 39460011008
+    device-handle: 4360
+    array-addr-handle: 4864
+    partition-pos: 1
+    interleave-pos: 2
+    interleave-depth: unknown
+- handle: 5129
+  type: 20
+  length: 21
+  level: 2.1
+  description: Memory device mapped address
+  attributes:
+    start-addr: 0
+    end-addr: 39460011008
+    range-size: 39460011008
+    device-handle: 4361
+    array-addr-handle: 4864
+    partition-pos: 1
+    interleave-pos: 2
+    interleave-depth: unknown
+- handle: 5130
+  type: 20
+  length: 21
+  level: 2.1
+  description: Memory device mapped address
+  attributes:
+    start-addr: 0
+    end-addr: 39460011008
+    range-size: 39460011008
+    device-handle: 4362
+    array-addr-handle: 4864
+    partition-pos: 1
+    interleave-pos: 2
+    interleave-depth: unknown
+- handle: 5131
+  type: 20
+  length: 21
+  level: 2.1
+  description: Memory device mapped address
+  attributes:
+    start-addr: 0
+    end-addr: 0
+    range-size: 0
+    device-handle: 4363
+    array-addr-handle: 4864
+    partition-pos: 1
+    interleave-pos: 2
+    interleave-depth: unknown
+- handle: 5132
+  type: 20
+  length: 21
+  level: 2.1
+  description: Memory device mapped address
+  attributes:
+    start-addr: 0
+    end-addr: 0
+    range-size: 0
+    device-handle: 4364
+    array-addr-handle: 4866
+    partition-pos: 1
+    interleave-pos: 2
+    interleave-depth: unknown
+- handle: 5133
+  type: 20
+  length: 21
+  level: 2.1
+  description: Memory device mapped address
+  attributes:
+    start-addr: 0
+    end-addr: 0
+    range-size: 0
+    device-handle: 4365
+    array-addr-handle: 4866
+    partition-pos: 1
+    interleave-pos: 2
+    interleave-depth: unknown
+- handle: 5134
+  type: 20
+  length: 21
+  level: 2.1
+  description: Memory device mapped address
+  attributes:
+    start-addr: 0
+    end-addr: 0
+    range-size: 0
+    device-handle: 4366
+    array-addr-handle: 4866
+    partition-pos: 1
+    interleave-pos: 2
+    interleave-depth: unknown
+- handle: 5135
+  type: 20
+  length: 21
+  level: 2.1
+  description: Memory device mapped address
+  attributes:
+    start-addr: 0
+    end-addr: 0
+    range-size: 0
+    device-handle: 4367
+    array-addr-handle: 4866
+    partition-pos: 1
+    interleave-pos: 2
+    interleave-depth: unknown
+- handle: 5136
+  type: 20
+  length: 21
+  level: 2.1
+  description: Memory device mapped address
+  attributes:
+    start-addr: 0
+    end-addr: 39460011008
+    range-size: 39460011008
+    device-handle: 4368
+    array-addr-handle: 4864
+    partition-pos: 1
+    interleave-pos: 1
+    interleave-depth: unknown
+- handle: 5137
+  type: 20
+  length: 21
+  level: 2.1
+  description: Memory device mapped address
+  attributes:
+    start-addr: 0
+    end-addr: 39460011008
+    range-size: 39460011008
+    device-handle: 4369
+    array-addr-handle: 4864
+    partition-pos: 1
+    interleave-pos: 1
+    interleave-depth: unknown
+- handle: 5138
+  type: 20
+  length: 21
+  level: 2.1
+  description: Memory device mapped address
+  attributes:
+    start-addr: 0
+    end-addr: 39460011008
+    range-size: 39460011008
+    device-handle: 4370
+    array-addr-handle: 4864
+    partition-pos: 1
+    interleave-pos: 1
+    interleave-depth: unknown
+- handle: 5139
+  type: 20
+  length: 21
+  level: 2.1
+  description: Memory device mapped address
+  attributes:
+    start-addr: 0
+    end-addr: 0
+    range-size: 0
+    device-handle: 4371
+    array-addr-handle: 4864
+    partition-pos: 1
+    interleave-pos: 1
+    interleave-depth: unknown
+- handle: 5140
+  type: 20
+  length: 21
+  level: 2.1
+  description: Memory device mapped address
+  attributes:
+    start-addr: 0
+    end-addr: 0
+    range-size: 0
+    device-handle: 4372
+    array-addr-handle: 4867
+    partition-pos: 1
+    interleave-pos: 1
+    interleave-depth: unknown
+- handle: 5141
+  type: 20
+  length: 21
+  level: 2.1
+  description: Memory device mapped address
+  attributes:
+    start-addr: 0
+    end-addr: 0
+    range-size: 0
+    device-handle: 4373
+    array-addr-handle: 4867
+    partition-pos: 1
+    interleave-pos: 1
+    interleave-depth: unknown
+- handle: 5142
+  type: 20
+  length: 21
+  level: 2.1
+  description: Memory device mapped address
+  attributes:
+    start-addr: 0
+    end-addr: 0
+    range-size: 0
+    device-handle: 4374
+    array-addr-handle: 4867
+    partition-pos: 1
+    interleave-pos: 1
+    interleave-depth: unknown
+- handle: 5143
+  type: 20
+  length: 21
+  level: 2.1
+  description: Memory device mapped address
+  attributes:
+    start-addr: 0
+    end-addr: 0
+    range-size: 0
+    device-handle: 4375
+    array-addr-handle: 4867
+    partition-pos: 1
+    interleave-pos: 1
+    interleave-depth: unknown
+- handle: 5144
+  type: 20
+  length: 21
+  level: 2.1
+  description: Memory device mapped address
+  attributes:
+    start-addr: 0
+    end-addr: 39460011008
+    range-size: 39460011008
+    device-handle: 4376
+    array-addr-handle: 4864
+    partition-pos: 1
+    interleave-pos: 2
+    interleave-depth: unknown
+- handle: 5145
+  type: 20
+  length: 21
+  level: 2.1
+  description: Memory device mapped address
+  attributes:
+    start-addr: 0
+    end-addr: 39460011008
+    range-size: 39460011008
+    device-handle: 4377
+    array-addr-handle: 4864
+    partition-pos: 1
+    interleave-pos: 2
+    interleave-depth: unknown
+- handle: 5146
+  type: 20
+  length: 21
+  level: 2.1
+  description: Memory device mapped address
+  attributes:
+    start-addr: 0
+    end-addr: 39460011008
+    range-size: 39460011008
+    device-handle: 4378
+    array-addr-handle: 4864
+    partition-pos: 1
+    interleave-pos: 2
+    interleave-depth: unknown
+- handle: 5147
+  type: 20
+  length: 21
+  level: 2.1
+  description: Memory device mapped address
+  attributes:
+    start-addr: 0
+    end-addr: 0
+    range-size: 0
+    device-handle: 4379
+    array-addr-handle: 4864
+    partition-pos: 1
+    interleave-pos: 2
+    interleave-depth: unknown
+- handle: 5148
+  type: 20
+  length: 21
+  level: 2.1
+  description: Memory device mapped address
+  attributes:
+    start-addr: 0
+    end-addr: 0
+    range-size: 0
+    device-handle: 4380
+    array-addr-handle: 4868
+    partition-pos: 1
+    interleave-pos: 2
+    interleave-depth: unknown
+- handle: 5149
+  type: 20
+  length: 21
+  level: 2.1
+  description: Memory device mapped address
+  attributes:
+    start-addr: 0
+    end-addr: 0
+    range-size: 0
+    device-handle: 4381
+    array-addr-handle: 4868
+    partition-pos: 1
+    interleave-pos: 2
+    interleave-depth: unknown
+- handle: 5150
+  type: 20
+  length: 21
+  level: 2.1
+  description: Memory device mapped address
+  attributes:
+    start-addr: 0
+    end-addr: 0
+    range-size: 0
+    device-handle: 4382
+    array-addr-handle: 4868
+    partition-pos: 1
+    interleave-pos: 2
+    interleave-depth: unknown
+- handle: 5151
+  type: 20
+  length: 21
+  level: 2.1
+  description: Memory device mapped address
+  attributes:
+    start-addr: 0
+    end-addr: 0
+    range-size: 0
+    device-handle: 4383
+    array-addr-handle: 4868
+    partition-pos: 1
+    interleave-pos: 2
+    interleave-depth: unknown
+- handle: 8192
+  type: 32
+  length: 13
+  level: null
+  description: System boot information
+  attributes:
+    status: system-wdt-expired
+- handle: 9728
+  type: 38
+  length: 20
+  level: 2.0
+  description: IPMI device information
+  attributes:
+    interface-type: kcs
+    specification-version: 2.0
+    i2c-target-address: 32
+    nv-storage-address: null
+    base-address: 3235
+    base-address-lsb: 0
+    base-address-type: memory
+    interrupt-trigger-mode: null
+    interrupt-polarity: null
+    interrupt-number: null
+    register-spacing: 1
+- handle: 49408
+  type: 193
+  length: 30
+  level: null
+  description: OEM-specific
+  data: !!binary |
+    wQcAwQEBAg==
+  strings:
+  - 12/07/2007
+  - 07/02/2007
+- handle: 49664
+  type: 194
+  length: 7
+  level: null
+  description: OEM-specific
+  data: !!binary |
+    wgUAwgE=
+- handle: 49920
+  type: 195
+  length: 16
+  level: null
+  description: OEM-specific
+  data: !!binary |
+    wwUAwwE=
+  strings:
+  - $0E110777
+- handle: 50176
+  type: 196
+  length: 7
+  level: null
+  description: OEM-specific
+  data: !!binary |
+    xAUAxAA=
+- handle: 50433
+  type: 197
+  length: 12
+  level: null
+  description: OEM-specific
+  data: !!binary |
+    xQoBxQEEAAH/AQ==
+- handle: 50434
+  type: 197
+  length: 12
+  level: null
+  description: OEM-specific
+  data: !!binary |
+    xQoCxQIECAD/Ag==
+- handle: 50435
+  type: 197
+  length: 12
+  level: null
+  description: OEM-specific
+  data: !!binary |
+    xQoDxQMEEAD/Aw==
+- handle: 50436
+  type: 197
+  length: 12
+  level: null
+  description: OEM-specific
+  data: !!binary |
+    xQoExQQEGAD/BA==
+- handle: 57088
+  type: 223
+  length: 9
+  level: null
+  description: OEM-specific
+  data: !!binary |
+    3wcA32ZGcA==
+- handle: 54017
+  type: 211
+  length: 9
+  level: null
+  description: OEM-specific
+  data: !!binary |
+    0wcB0wEETA==
+- handle: 54018
+  type: 211
+  length: 9
+  level: null
+  description: OEM-specific
+  data: !!binary |
+    0wcC0wIETA==
+- handle: 54019
+  type: 211
+  length: 9
+  level: null
+  description: OEM-specific
+  data: !!binary |
+    0wcD0wMETA==
+- handle: 54020
+  type: 211
+  length: 9
+  level: null
+  description: OEM-specific
+  data: !!binary |
+    0wcE0wQETA==
+- handle: 50688
+  type: 198
+  length: 13
+  level: null
+  description: OEM-specific
+  data: !!binary |
+    xgsAxhcAAAE8AAE=
+- handle: 50944
+  type: 199
+  length: 30
+  level: null
+  description: OEM-specific
+  data: !!binary |
+    xxwAx4QAAAAGIBIQ+QYAALMAAAAHIBQD+wYAAA==
+- handle: 52480
+  type: 205
+  length: 24
+  level: null
+  description: OEM-specific
+  data: !!binary |
+    zRYAzQEBRkFUeAAA4P8AAAAAAAAPAA==
+- handle: 51712
+  type: 202
+  length: 10
+  level: null
+  description: OEM-specific
+  data: !!binary |
+    yggAygAR/wE=
+- handle: 51713
+  type: 202
+  length: 10
+  level: null
+  description: OEM-specific
+  data: !!binary |
+    yggBygER/wI=
+- handle: 51714
+  type: 202
+  length: 10
+  level: null
+  description: OEM-specific
+  data: !!binary |
+    yggCygIR/wM=
+- handle: 51715
+  type: 202
+  length: 10
+  level: null
+  description: OEM-specific
+  data: !!binary |
+    yggDygMR/wQ=
+- handle: 51716
+  type: 202
+  length: 10
+  level: null
+  description: OEM-specific
+  data: !!binary |
+    yggEygQRAQE=
+- handle: 51717
+  type: 202
+  length: 10
+  level: null
+  description: OEM-specific
+  data: !!binary |
+    yggFygURAQI=
+- handle: 51718
+  type: 202
+  length: 10
+  level: null
+  description: OEM-specific
+  data: !!binary |
+    yggGygYRAQM=
+- handle: 51719
+  type: 202
+  length: 10
+  level: null
+  description: OEM-specific
+  data: !!binary |
+    yggHygcRAQQ=
+- handle: 51720
+  type: 202
+  length: 10
+  level: null
+  description: OEM-specific
+  data: !!binary |
+    yggIyggR/wU=
+- handle: 51721
+  type: 202
+  length: 10
+  level: null
+  description: OEM-specific
+  data: !!binary |
+    yggJygkR/wY=
+- handle: 51722
+  type: 202
+  length: 10
+  level: null
+  description: OEM-specific
+  data: !!binary |
+    yggKygoR/wc=
+- handle: 51723
+  type: 202
+  length: 10
+  level: null
+  description: OEM-specific
+  data: !!binary |
+    yggLygsR/wg=
+- handle: 51724
+  type: 202
+  length: 10
+  level: null
+  description: OEM-specific
+  data: !!binary |
+    yggMygwRAgE=
+- handle: 51725
+  type: 202
+  length: 10
+  level: null
+  description: OEM-specific
+  data: !!binary |
+    yggNyg0RAgI=
+- handle: 51726
+  type: 202
+  length: 10
+  level: null
+  description: OEM-specific
+  data: !!binary |
+    yggOyg4RAgM=
+- handle: 51727
+  type: 202
+  length: 10
+  level: null
+  description: OEM-specific
+  data: !!binary |
+    yggPyg8RAgQ=
+- handle: 51728
+  type: 202
+  length: 10
+  level: null
+  description: OEM-specific
+  data: !!binary |
+    yggQyhAR/wk=
+- handle: 51729
+  type: 202
+  length: 10
+  level: null
+  description: OEM-specific
+  data: !!binary |
+    yggRyhER/wo=
+- handle: 51730
+  type: 202
+  length: 10
+  level: null
+  description: OEM-specific
+  data: !!binary |
+    yggSyhIR/ws=
+- handle: 51731
+  type: 202
+  length: 10
+  level: null
+  description: OEM-specific
+  data: !!binary |
+    yggTyhMR/ww=
+- handle: 51732
+  type: 202
+  length: 10
+  level: null
+  description: OEM-specific
+  data: !!binary |
+    yggUyhQRAwE=
+- handle: 51733
+  type: 202
+  length: 10
+  level: null
+  description: OEM-specific
+  data: !!binary |
+    yggVyhURAwI=
+- handle: 51734
+  type: 202
+  length: 10
+  level: null
+  description: OEM-specific
+  data: !!binary |
+    yggWyhYRAwM=
+- handle: 51735
+  type: 202
+  length: 10
+  level: null
+  description: OEM-specific
+  data: !!binary |
+    yggXyhcRAwQ=
+- handle: 51736
+  type: 202
+  length: 10
+  level: null
+  description: OEM-specific
+  data: !!binary |
+    yggYyhgR/w0=
+- handle: 51737
+  type: 202
+  length: 10
+  level: null
+  description: OEM-specific
+  data: !!binary |
+    yggZyhkR/w4=
+- handle: 51738
+  type: 202
+  length: 10
+  level: null
+  description: OEM-specific
+  data: !!binary |
+    yggayhoR/w8=
+- handle: 51739
+  type: 202
+  length: 10
+  level: null
+  description: OEM-specific
+  data: !!binary |
+    yggbyhsR/xA=
+- handle: 51740
+  type: 202
+  length: 10
+  level: null
+  description: OEM-specific
+  data: !!binary |
+    yggcyhwRBAE=
+- handle: 51741
+  type: 202
+  length: 10
+  level: null
+  description: OEM-specific
+  data: !!binary |
+    yggdyh0RBAI=
+- handle: 51742
+  type: 202
+  length: 10
+  level: null
+  description: OEM-specific
+  data: !!binary |
+    yggeyh4RBAM=
+- handle: 51743
+  type: 202
+  length: 10
+  level: null
+  description: OEM-specific
+  data: !!binary |
+    yggfyh8RBAQ=
+- handle: 53504
+  type: 209
+  length: 22
+  level: null
+  description: OEM-specific
+  data: !!binary |
+    0RQA0QAGABzElsWSAAgAHMSWxZQ=
+- handle: 54272
+  type: 212
+  length: 26
+  level: null
+  description: OEM-specific
+  data: !!binary |
+    1BgA1CRDUlUACPP/AAAAAABAAAAAAAAA
+- handle: 54528
+  type: 213
+  length: 30
+  level: null
+  description: OEM-specific
+  data: !!binary |
+    1RwA1QAANgAAAL8fAABGAAAAAAAAAAAAAAAAAA==
+- handle: 54784
+  type: 214
+  length: 46
+  level: null
+  description: OEM-specific
+  data: !!binary |
+    1iwA1jExAAIOIAAAEyAAAABgAAAAIAAAAiAAAAQgAAAGIAAADCAAAAggAAA=
+- handle: 55040
+  type: 215
+  length: 8
+  level: null
+  description: OEM-specific
+  data: !!binary |
+    1wYA1wAF
+- handle: 56064
+  type: 219
+  length: 10
+  level: null
+  description: OEM-specific
+  data: !!binary |
+    2wgA298BAAA=
+- handle: 56320
+  type: 220
+  length: 87
+  level: null
+  description: OEM-specific
+  data: !!binary |
+    3FUA3BAAAcUA/wEBxQH/AgHFAv8DAcUD/wgCxQD/CQLFAf8KAsUC/wsCxQP/EAPFAP8RA8UB/xID
+    xQL/EwPFA/8YBMUA/xkExQH/GgTFAv8bBMUD/w==
+- handle: 55808
+  type: 218
+  length: 127
+  level: null
+  description: OEM-specific
+  data: !!binary |
+    2n0A2gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+    AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+    AAAAAAAAAAAAAAA=
+- handle: 56576
+  type: 221
+  length: 22
+  level: null
+  description: OEM-specific
+  data: !!binary |
+    3RQA3QAGABzElsWTAAgAHMSWxZU=
+- handle: 57344
+  type: 224
+  length: 7
+  level: null
+  description: OEM-specific
+  data: !!binary |
+    4AUA4AA=
+- handle: 32512
+  type: 127
+  length: 6
+  level: null
+  description: End of table
