@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Fix firmware inventory version decoding
 - Fix issues found by PVS-Studio
 - Fix linking of ICU4C artifacts #79
 

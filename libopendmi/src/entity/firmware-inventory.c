@@ -149,7 +149,7 @@ const dmi_entity_spec_t dmi_firmware_inventory_spec =
             .code    = "name",
             .name    = "Name"
         }),
-        DMI_ATTRIBUTE(dmi_firmware_inventory_t, version, VERSION, {
+        DMI_ATTRIBUTE(dmi_firmware_inventory_t, version, STRING, {
             .code    = "version",
             .name    = "Version"
         }),
