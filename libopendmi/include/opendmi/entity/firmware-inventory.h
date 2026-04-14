@@ -11,9 +11,10 @@
 
 #include <opendmi/entity.h>
 
-typedef struct dmi_firmware_inventory          dmi_firmware_inventory_t;
-typedef struct dmi_firmware_inventory_data     dmi_firmware_inventory_data_t;
-typedef union  dmi_firmware_inventory_features dmi_firmware_inventory_features_t;
+typedef struct dmi_firmware_inventory           dmi_firmware_inventory_t;
+typedef struct dmi_firmware_inventory_data      dmi_firmware_inventory_data_t;
+typedef union  dmi_firmware_inventory_features  dmi_firmware_inventory_features_t;
+typedef struct dmi_firmware_inventory_component dmi_firmware_inventory_component_t;
 
 /**
  * @brief Version number formats.
@@ -157,6 +158,22 @@ dmi_packed_union(dmi_firmware_inventory_features)
 };
 
 /**
+ * @brief Firmware inventory component.
+ */
+struct dmi_firmware_inventory_component
+{
+    /**
+     * @brief Component handle.
+     */
+    dmi_handle_t handle;
+
+    /**
+     * @brief Component entity (may be `NULL` in case of invalid handles etc).
+     */
+    dmi_entity_t *entity;
+};
+
+/**
  * @brief Firmware inventory information.
  */
 struct dmi_firmware_inventory
@@ -232,7 +249,7 @@ struct dmi_firmware_inventory
     size_t component_count;
 
     /**
-     * @brief Lists the SMBIOS structure handles that are associated with this
+     * @brief Lists the SMBIOS components that are associated with this
      * firmware, if any. Value of number of associated components field (n)
      * defines the count.
      *
@@ -246,13 +263,7 @@ struct dmi_firmware_inventory
      * * Type 41 handle (for describing the firmware of an onboard device).
      * * Type 43 handle (for describing the firmware of a TPM device).
      */
-    dmi_handle_t *component_handles;
-
-    /**
-     * @brief List of the SMBIOS structure references are associated with this
-     * firmware.
-     */
-    dmi_entity_t **components;
+    dmi_firmware_inventory_component_t *components;
 };
 
 /**

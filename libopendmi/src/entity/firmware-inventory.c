@@ -4,6 +4,8 @@
 //
 // SPDX-License-Identifier: BSD-3-Clause
 //
+#include <assert.h>
+
 #include <opendmi/context.h>
 #include <opendmi/utils.h>
 #include <opendmi/utils/name.h>
@@ -12,6 +14,7 @@
 #include <opendmi/entity/firmware-inventory.h>
 
 static bool dmi_firmware_inventory_decode(dmi_entity_t *entity);
+static bool dmi_firmware_inventory_link(dmi_entity_t *entity);
 static void dmi_firmware_inventory_cleanup(dmi_entity_t *entity);
 
 static const dmi_name_set_t dmi_version_format_names =
@@ -200,14 +203,22 @@ const dmi_entity_spec_t dmi_firmware_inventory_spec =
             .code    = "component-count",
             .name    = "Associated components count"
         }),
-        DMI_ATTRIBUTE_ARRAY(dmi_firmware_inventory_t, component_handles, component_count, HANDLE, {
-            .code    = "component-handles",
-            .name    = "Associated component handles"
+        DMI_ATTRIBUTE_ARRAY(dmi_firmware_inventory_t, components, component_count, STRUCT, {
+            .code    = "components",
+            .name    = "Associated components",
+            .attrs   = (const dmi_attribute_t[]){
+                DMI_ATTRIBUTE(dmi_firmware_inventory_component_t, handle, HANDLE, {
+                    .code = "handle",
+                    .name = "Handle"
+                }),
+                {}
+            }
         }),
         {}
     },
     .handlers = {
         .decode  = dmi_firmware_inventory_decode,
+        .link    = dmi_firmware_inventory_link,
         .cleanup = dmi_firmware_inventory_cleanup
     }
 };
@@ -230,6 +241,8 @@ const char *dmi_firmware_inventory_state_name(dmi_firmware_inventory_state_t val
 static bool dmi_firmware_inventory_decode(dmi_entity_t *entity)
 {
     dmi_firmware_inventory_t *info;
+
+    assert(entity != nullptr);
 
     info = dmi_entity_info(entity, DMI_TYPE(FIRMWARE_INVENTORY));
     if (info == nullptr)
@@ -257,13 +270,52 @@ static bool dmi_firmware_inventory_decode(dmi_entity_t *entity)
 
     if (not dmi_stream_decode(stream, dmi_byte_t, &info->component_count))
         return false;
-    info->component_handles = dmi_alloc_array(entity->context, sizeof(dmi_handle_t), info->component_count);
-    if (info->component_handles == nullptr)
+
+    if (info->component_count > 0) {
+        info->components = dmi_alloc_array(entity->context,
+                                        sizeof(dmi_firmware_inventory_component_t),
+                                        info->component_count);
+        if (info->components == nullptr)
+            return false;
+
+        for (size_t i = 0; i < info->component_count; i++) {
+            dmi_firmware_inventory_component_t *component = &info->components[i];
+
+            if (not dmi_stream_decode(stream, dmi_word_t, &component->handle))
+                return false;
+        }
+    }
+
+    return true;
+}
+
+static bool dmi_firmware_inventory_link(dmi_entity_t *entity)
+{
+    dmi_context_t *context;
+    dmi_registry_t *registry;
+    dmi_firmware_inventory_t *info;
+
+    assert(entity != nullptr);
+
+    info = dmi_entity_info(entity, DMI_TYPE(FIRMWARE_INVENTORY));
+    if (info == nullptr)
         return false;
 
+    if (info->component_count == 0)
+        return true;
+
+    context = entity->context;
+    registry = context->registry;
+
     for (size_t i = 0; i < info->component_count; i++) {
-        if (not dmi_stream_decode(stream, dmi_word_t, &info->component_handles[i]))
-            return false;
+        dmi_firmware_inventory_component_t *component = &info->components[i];
+
+        component->entity = dmi_registry_get(registry, component->handle, DMI_TYPE_INVALID, false);
+        if (component->entity == nullptr) {
+            const dmi_error_t *error = dmi_error_peek_last(context);
+            if (error->reason != DMI_ERROR_ENTITY_NOT_FOUND)
+                return false;
+        }
     }
 
     return true;
@@ -273,10 +325,11 @@ static void dmi_firmware_inventory_cleanup(dmi_entity_t *entity)
 {
     dmi_firmware_inventory_t *info;
 
+    assert(entity != nullptr);
+
     info = dmi_entity_info(entity, DMI_TYPE(FIRMWARE_INVENTORY));
     if (info == nullptr)
         return;
 
-    dmi_free(info->component_handles);
     dmi_free(info->components);
 }
