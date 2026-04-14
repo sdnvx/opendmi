@@ -187,7 +187,11 @@ dmi_type_t dmi_parse_type(dmi_context_t *context, const char *str)
     return (dmi_type_t)value;
 }
 
-void dmi_print_all(dmi_context_t *context, FILE *stream, const dmi_format_t *format)
+void dmi_print_all(
+        dmi_context_t      *context,
+        FILE               *stream,
+        const dmi_format_t *format,
+        bool                dump)
 {
     void *session;
     dmi_registry_iter_t iter;
@@ -211,7 +215,7 @@ void dmi_print_all(dmi_context_t *context, FILE *stream, const dmi_format_t *for
 
     dmi_registry_iter_init(&iter, context->registry, &dmi_filter_config.filter);
     while ((entity = dmi_registry_iter_next(&iter)) != nullptr) {
-        dmi_print_entity(format, entity, session);
+        dmi_print_entity(format, entity, session, dump);
     }
 
     if (format->handlers.table_end != nullptr)
@@ -226,7 +230,8 @@ void dmi_print_all(dmi_context_t *context, FILE *stream, const dmi_format_t *for
 void dmi_print_entity(
         const dmi_format_t *format,
         const dmi_entity_t *entity,
-        void               *session)
+        void               *session,
+        bool                dump)
 {
     assert(format != nullptr);
     assert(entity != nullptr);
@@ -237,7 +242,7 @@ void dmi_print_entity(
 
     format->handlers.entity_start(session, entity);
 
-    if (entity->info) {
+    if (entity->info and not dump) {
         if (format->handlers.entity_attrs_start != nullptr)
             format->handlers.entity_attrs_start(session, entity);
 

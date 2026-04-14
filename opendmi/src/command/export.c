@@ -163,7 +163,7 @@ static int dmi_export_main(dmi_context_t *context, int argc, char *argv[])
         out = stdout;
     }
 
-    dmi_print_all(context, out, dmi_export_config.output_format);
+    dmi_print_all(context, out, dmi_export_config.output_format, dmi_export_config.export_dump);
 
     if (dmi_export_config.output_path != nullptr)
         fclose(out);

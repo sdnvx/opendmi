@@ -31,12 +31,17 @@ __BEGIN_DECLS
 dmi_handle_t dmi_parse_handle(const char *str);
 dmi_type_t dmi_parse_type(dmi_context_t *context, const char *str);
 
-void dmi_print_all(dmi_context_t *context, FILE *stream, const dmi_format_t *format);
+void dmi_print_all(
+        dmi_context_t      *context,
+        FILE               *stream,
+        const dmi_format_t *format,
+        bool                dump);
 
 void dmi_print_entity(
         const dmi_format_t *format,
         const dmi_entity_t *entity,
-        void               *session);
+        void               *session,
+        bool                dump);
 
 __END_DECLS
 
