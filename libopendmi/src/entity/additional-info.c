@@ -4,7 +4,16 @@
 //
 // SPDX-License-Identifier: BSD-3-Clause
 //
+#include <assert.h>
+
+#include <opendmi/context.h>
+#include <opendmi/log.h>
+#include <opendmi/utils.h>
+
 #include <opendmi/entity/additional-info.h>
+
+static bool dmi_additional_info_decode(dmi_entity_t *entity);
+static void dmi_additional_info_cleanup(dmi_entity_t *entity);
 
 const dmi_entity_spec_t dmi_additional_info_spec =
 {
@@ -12,8 +21,122 @@ const dmi_entity_spec_t dmi_additional_info_spec =
     .name            = "Additional information",
     .type            = DMI_TYPE(ADDITIONAL_INFO),
     .minimum_version = DMI_VERSION(2, 6, 0),
-    .minimum_length  = 0x05,
+    .minimum_length  = 0x0B,
+    .decoded_length  = sizeof(dmi_additional_info_t),
     .attributes      = (const dmi_attribute_t[]) {
-        DMI_ATTRIBUTE_NULL
+        DMI_ATTRIBUTE_ARRAY(dmi_additional_info_t, entries, entry_count, STRUCT, {
+            .code  = "entries",
+            .name  = "Entries",
+            .attrs = (const dmi_attribute_t[]){
+                DMI_ATTRIBUTE(dmi_additional_info_entry_t, ref_handle, HANDLE, {
+                    .code  = "referenced-handle",
+                    .name  = "Referenced handle"
+                }),
+                DMI_ATTRIBUTE(dmi_additional_info_entry_t, ref_offset, INTEGER, {
+                    .code  = "referenced-offset",
+                    .name  = "Referenced offset",
+                    .flags = DMI_ATTRIBUTE_FLAG_HEX
+                }),
+                DMI_ATTRIBUTE(dmi_additional_info_entry_t, string, STRING, {
+                    .code = "string",
+                    .name = "String value"
+                }),
+                // TODO: Add binary value attribute
+                {}
+            }
+        }),
+        {}
+    },
+    .handlers = {
+        .decode  = dmi_additional_info_decode,
+        .cleanup = dmi_additional_info_cleanup
     }
 };
+
+static bool dmi_additional_info_decode(dmi_entity_t *entity)
+{
+    dmi_additional_info_t *info;
+
+    assert(entity != nullptr);
+
+    info = dmi_entity_info(entity, DMI_TYPE(ADDITIONAL_INFO));
+    if (info == nullptr)
+        return false;
+
+    dmi_context_t *context = entity->context;
+    dmi_stream_t *stream   = &entity->stream;
+
+    if (not dmi_stream_decode(stream, dmi_byte_t, &info->entry_count)) {
+        dmi_log_error(context->logger, "Unable to decode additional information entries count: 0x%04X",
+                      entity->handle);
+        return false;
+    }
+
+    info->entries = dmi_alloc_array(context,
+                                    sizeof(dmi_additional_info_entry_t), info->entry_count);
+    if (info->entries == nullptr)
+        return false;
+
+    for (size_t i = 0; i < info->entry_count; i++) {
+        dmi_additional_info_entry_t *entry = &info->entries[i];
+
+        size_t entry_length;
+
+        bool status =
+            dmi_stream_decode(stream, dmi_byte_t, &entry_length) and
+            dmi_stream_decode(stream, dmi_word_t, &entry->ref_handle) and
+            dmi_stream_decode(stream, dmi_byte_t, &entry->ref_offset) and
+            dmi_stream_decode_str(stream, &entry->string);
+        if (not status) {
+            dmi_log_error(context->logger,
+                          "Additional information entry body truncated: 0x%04X[%zu]",
+                          entity->handle, i);
+            return false;
+        }
+
+        entry->value_length = entry_length - 5;
+
+        if (entry->ref_offset < sizeof(dmi_header_t)) {
+            dmi_log_warning(context->logger,
+                            "Invalid additional info entry offset: 0x%04X[%zu]: offset=%u",
+                            entity->handle, i, entry->ref_offset);
+        }
+
+        if (entry->value_length > sizeof(entry->value)) {
+            dmi_log_error(context->logger,
+                          "Value length exceeds buffer size: 0x%04X[%zu]: %zu bytes",
+                          entity->handle, i, entry->value_length);
+            return false;
+        }
+
+        size_t remaining = dmi_stream_remaining(stream);
+        if (entry->value_length > remaining) {
+            dmi_log_warning(context->logger,
+                            "Truncated additional information entry value: "
+                            "0x%04X[%zu]: length=%zu remaining=%zu",
+                            entity->handle, i, entry->value_length, remaining);
+            entry->value_length = remaining;
+        }
+
+        if (not dmi_stream_read_data(stream, entry->value, entry->value_length)) {
+            dmi_log_error(context->logger, "Unable to decode additional information entry value: 0x%04X[%zu]",
+                          entity->handle, i);
+            return false;
+        }
+    }
+
+    return true;
+}
+
+static void dmi_additional_info_cleanup(dmi_entity_t *entity)
+{
+    dmi_additional_info_t *info;
+
+    assert(entity != nullptr);
+
+    info = dmi_entity_info(entity, DMI_TYPE(ADDITIONAL_INFO));
+    if (info == nullptr)
+        return;
+
+    dmi_free(info->entries);
+}

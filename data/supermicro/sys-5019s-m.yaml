@@ -1113,57 +1113,81 @@ table:
   length: 29
   level: 2.6
   description: Additional information
-  data: !!binary |
-    KBs8AAEXHAAAAF9BU1QBEf//////////////
+  attributes:
+    entries:
+    - referenced-handle: 28
+      referenced-offset: 0
+      string: null
 - handle: 61
   type: 40
   length: 29
   level: 2.6
   description: Additional information
-  data: !!binary |
-    KBs9AAEXHQAAAF9BU1QBEf//////////////
+  attributes:
+    entries:
+    - referenced-handle: 29
+      referenced-offset: 0
+      string: null
 - handle: 62
   type: 40
   length: 29
   level: 2.6
   description: Additional information
-  data: !!binary |
-    KBs+AAEXHgAAAF9BU1QBEYaAKBWGgAIAAgAA
+  attributes:
+    entries:
+    - referenced-handle: 30
+      referenced-offset: 0
+      string: null
 - handle: 63
   type: 40
   length: 29
   level: 2.6
   description: Additional information
-  data: !!binary |
-    KBs/AAEXIwAAAF9BU1QBEQMaACDZFYQIAwAA
+  attributes:
+    entries:
+    - referenced-handle: 35
+      referenced-offset: 0
+      string: null
 - handle: 64
   type: 40
   length: 29
   level: 2.6
   description: Additional information
-  data: !!binary |
-    KBtAAAEXJAAAAF9BU1QBEYaAMxXZFTMVAgAA
+  attributes:
+    entries:
+    - referenced-handle: 36
+      referenced-offset: 0
+      string: null
 - handle: 65
   type: 40
   length: 29
   level: 2.6
   description: Additional information
-  data: !!binary |
-    KBtBAAEXJQAAAF9BU1QBEYaAMxXZFTMVAgAA
+  attributes:
+    entries:
+    - referenced-handle: 37
+      referenced-offset: 0
+      string: null
 - handle: 66
   type: 40
   length: 29
   level: 2.6
   description: Additional information
-  data: !!binary |
-    KBtCAAEXJgAAAF9BU1QBEf//////////////
+  attributes:
+    entries:
+    - referenced-handle: 38
+      referenced-offset: 0
+      string: null
 - handle: 67
   type: 40
   length: 29
   level: 2.6
   description: Additional information
-  data: !!binary |
-    KBtDAAEXJwAAAF9BU1QBEf//////////////
+  attributes:
+    entries:
+    - referenced-handle: 39
+      referenced-offset: 0
+      string: null
 - handle: 68
   type: 136
   length: 8

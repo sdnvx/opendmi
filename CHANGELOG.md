@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Add additional information structure decoding #76
 - Add firmware inventory components linking #70
 - Add `--dump` option to `show` and `export` commands
 - Add regression test script #93

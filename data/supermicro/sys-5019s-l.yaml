@@ -1071,29 +1071,41 @@ table:
   length: 29
   level: 2.6
   description: Additional information
-  data: !!binary |
-    KBs4AAEXHAAAAF9BU1QBEf//////////////
+  attributes:
+    entries:
+    - referenced-handle: 28
+      referenced-offset: 0
+      string: null
 - handle: 57
   type: 40
   length: 29
   level: 2.6
   description: Additional information
-  data: !!binary |
-    KBs5AAEXHQAAAF9BU1QBEf//////////////
+  attributes:
+    entries:
+    - referenced-handle: 29
+      referenced-offset: 0
+      string: null
 - handle: 58
   type: 40
   length: 29
   level: 2.6
   description: Additional information
-  data: !!binary |
-    KBs6AAEXHgAAAF9BU1QBEYaA+xCGgAYAAgAA
+  attributes:
+    entries:
+    - referenced-handle: 30
+      referenced-offset: 0
+      string: null
 - handle: 59
   type: 40
   length: 29
   level: 2.6
   description: Additional information
-  data: !!binary |
-    KBs7AAEXHwAAAF9BU1QBEf//////////////
+  attributes:
+    entries:
+    - referenced-handle: 31
+      referenced-offset: 0
+      string: null
 - handle: 60
   type: 136
   length: 8

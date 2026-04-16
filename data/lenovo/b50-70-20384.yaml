@@ -1351,10 +1351,14 @@ table:
   length: 33
   level: 2.6
   description: Additional information
-  data: !!binary |
-    KBI8AAIGHgAFAaoHAAAFAEAG
-  strings:
-  - PCIExpressx16
+  attributes:
+    entries:
+    - referenced-handle: 30
+      referenced-offset: 5
+      string: PCIExpressx16
+    - referenced-handle: 0
+      referenced-offset: 5
+      string: null
 - handle: 61
   type: 41
   length: 42

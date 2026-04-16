@@ -174,16 +174,26 @@ table:
   length: 133
   level: 2.6
   description: Additional information
-  data: !!binary |
-    KDsJAAYJBAABAQAAAAAJBAAPAuYHAAAJAQAaAwAAAAAJAQAaBAAAAAAJAQAZBQMAAAAJAQAZBgEA
-    AAA=
-  strings:
-  - To Be Filled By O.E.M. 1
-  - YEAR
-  - Mordor 1
-  - PRODUCT_LINE
-  - PRODUCT_SKU
-  - FEATURES
+  attributes:
+    entries:
+    - referenced-handle: 4
+      referenced-offset: 1
+      string: To Be Filled By O.E.M. 1
+    - referenced-handle: 4
+      referenced-offset: 15
+      string: YEAR
+    - referenced-handle: 1
+      referenced-offset: 26
+      string: Mordor 1
+    - referenced-handle: 1
+      referenced-offset: 26
+      string: PRODUCT_LINE
+    - referenced-handle: 1
+      referenced-offset: 25
+      string: PRODUCT_SKU
+    - referenced-handle: 1
+      referenced-offset: 25
+      string: FEATURES
 - handle: 10
   type: 44
   length: 11
@@ -687,10 +697,11 @@ table:
   length: 43
   level: 2.6
   description: Additional information
-  data: !!binary |
-    KA4eAAEJAAAFAQAAAAA=
-  strings:
-  - AGESA!V9 ComboAM5PI 1.0.8.0
+  attributes:
+    entries:
+    - referenced-handle: 0
+      referenced-offset: 5
+      string: AGESA!V9 ComboAM5PI 1.0.8.0
 - handle: 31
   type: 60
   length: 167

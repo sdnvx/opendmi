@@ -798,13 +798,23 @@ table:
   length: 113
   level: 2.6
   description: Additional information
-  data: !!binary |
-    KDI4AAUJHwABAQAAAAAJAQAPAB4AAAAJAQAaAgAAAAAJAQAaAwAAAAAJAQAZBAAAAAA=
-  strings:
-  - To Be Filled By O.E.M. 1
-  - Mordor 1.11
-  - PRODUCT_LINE
-  - PRODUCT_SKU
+  attributes:
+    entries:
+    - referenced-handle: 31
+      referenced-offset: 1
+      string: To Be Filled By O.E.M. 1
+    - referenced-handle: 1
+      referenced-offset: 15
+      string: null
+    - referenced-handle: 1
+      referenced-offset: 26
+      string: Mordor 1.11
+    - referenced-handle: 1
+      referenced-offset: 26
+      string: PRODUCT_LINE
+    - referenced-handle: 1
+      referenced-offset: 25
+      string: PRODUCT_SKU
 - handle: 57
   type: 44
   length: 11

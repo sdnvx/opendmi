@@ -596,11 +596,14 @@ table:
   length: 49
   level: 2.6
   description: Additional information
-  data: !!binary |
-    KBcrAAIJAQAaAQEAAAAJAQAZAgAAAAA=
-  strings:
-  - PRODUCT_LINE
-  - PRODUCT_SKU
+  attributes:
+    entries:
+    - referenced-handle: 1
+      referenced-offset: 26
+      string: PRODUCT_LINE
+    - referenced-handle: 1
+      referenced-offset: 25
+      string: PRODUCT_SKU
 - handle: 56
   type: 16
   length: 25

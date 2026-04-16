@@ -639,11 +639,14 @@ table:
   length: 49
   level: 2.6
   description: Additional information
-  data: !!binary |
-    KBcjAAIJAgANAQEAAAAJAgANAgAAAAA=
-  strings:
-  - PRODUCT_LINE
-  - PRODUCT_SKU
+  attributes:
+    entries:
+    - referenced-handle: 2
+      referenced-offset: 13
+      string: PRODUCT_LINE
+    - referenced-handle: 2
+      referenced-offset: 13
+      string: PRODUCT_SKU
 - handle: 36
   type: 41
   length: 25

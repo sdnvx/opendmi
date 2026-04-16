@@ -554,10 +554,11 @@ table:
   length: 51
   level: 2.6
   description: Additional information
-  data: !!binary |
-    KA4ZAAEJAAAFAQAAAAA=
-  strings:
-  - AGESA!V9 StrixKrackanPI-FP8 1.1.0.1
+  attributes:
+    entries:
+    - referenced-handle: 0
+      referenced-offset: 5
+      string: AGESA!V9 StrixKrackanPI-FP8 1.1.0.1
 - handle: 26
   type: 8
   length: 21

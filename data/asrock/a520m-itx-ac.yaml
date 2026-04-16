@@ -380,10 +380,11 @@ table:
   length: 40
   level: 2.6
   description: Additional information
-  data: !!binary |
-    KA4MAAEJoQABAQAAAAA=
-  strings:
-  - To Be Filled By O.E.M. 1
+  attributes:
+    entries:
+    - referenced-handle: 161
+      referenced-offset: 1
+      string: To Be Filled By O.E.M. 1
 - handle: 13
   type: 44
   length: 11

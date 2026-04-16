@@ -1032,11 +1032,14 @@ table:
   length: 57
   level: 2.6
   description: Additional information
-  data: !!binary |
-    KBEyAAIGDgAFAaoGAAAFAgA=
-  strings:
-  - PCIExpressx16
-  - 'Compiler Version: VC 9.0'
+  attributes:
+    entries:
+    - referenced-handle: 14
+      referenced-offset: 5
+      string: PCIExpressx16
+    - referenced-handle: 0
+      referenced-offset: 5
+      string: 'Compiler Version: VC 9.0'
 - handle: 51
   type: 41
   length: 16
