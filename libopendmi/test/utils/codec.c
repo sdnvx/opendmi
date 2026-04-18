@@ -256,7 +256,7 @@ static void test_decode_bcd(void **pstate)
         result = __dmi_decode_bcd(value, length);
         assert_uint_equal(result, expected);
 
-        uint64_t mask = (1uL << length * CHAR_BIT) - 1;
+        uint64_t mask = (UINT64_C(1) << (length * CHAR_BIT)) - 1;
 
         if (length > sizeof(uint32_t)) {
             assert_true(false);
