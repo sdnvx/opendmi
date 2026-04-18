@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Migrate onboard devices information decoder to stream API
 - Migrate string property decoder to stream API
 
 ## [0.3.1] - April 17, 2026

@@ -12,9 +12,7 @@
 #include <opendmi/entity.h>
 
 typedef struct dmi_onboard_device                  dmi_onboard_device_t;
-typedef struct dmi_onboard_device_data             dmi_onboard_device_data_t;
 typedef struct dmi_onboard_device_instance         dmi_onboard_device_instance_t;
-typedef struct dmi_onboard_device_instance_data    dmi_onboard_device_instance_data_t;
 typedef union  dmi_onboard_device_instance_details dmi_onboard_device_instance_details_t;
 
 /**
@@ -63,48 +61,6 @@ dmi_packed_union(dmi_onboard_device_instance_details)
     };
 };
 
-dmi_packed_struct(dmi_onboard_device_instance_data)
-{
-    /**
-     * @brief Device type and status.
-     */
-    dmi_byte_t details;
-
-    /**
-     * @brief String number of device description.
-     */
-    dmi_string_t description;
-};
-
-/**
- * @brief Onboard devices information structure (type 10, obsolette).
- *
- * The information in this structure defines the attributes of devices that are
- * onboard (soldered onto) a system element, usually the baseboard. In general,
- * an entry in this table implies that the firmware has some level of control
- * over the enabling of the associated device for use by the system.
- *
- * @note
- * Because this structure was originally defined with the Length implicitly
- * defining the number of devices present, no further fields can be added to
- * this structure without adversely affecting existing software’s ability to
- * properly parse the data. Thus, if additional fields are required for this
- * structure type, a brand-new structure must be defined to add a device
- * count field, carry over the existing fields, and add the new information.
- */
-dmi_packed_struct(dmi_onboard_device_data)
-{
-    /**
-     * @brief SMBIOS structure header.
-     */
-    dmi_header_t header;
-
-    /**
-     * @brief Device instances data.
-     */
-    dmi_onboard_device_instance_data_t instances[];
-};
-
 struct dmi_onboard_device_instance
 {
     /**
@@ -123,6 +79,22 @@ struct dmi_onboard_device_instance
     const char *description;
 };
 
+/**
+ * @brief Onboard devices information structure (type 10, obsolette).
+ *
+ * The information in this structure defines the attributes of devices that are
+ * onboard (soldered onto) a system element, usually the baseboard. In general,
+ * an entry in this table implies that the firmware has some level of control
+ * over the enabling of the associated device for use by the system.
+ *
+ * @note
+ * Because this structure was originally defined with the Length implicitly
+ * defining the number of devices present, no further fields can be added to
+ * this structure without adversely affecting existing software’s ability to
+ * properly parse the data. Thus, if additional fields are required for this
+ * structure type, a brand-new structure must be defined to add a device
+ * count field, carry over the existing fields, and add the new information.
+ */
 struct dmi_onboard_device
 {
     /**

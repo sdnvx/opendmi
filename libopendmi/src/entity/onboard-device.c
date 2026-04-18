@@ -160,34 +160,35 @@ const char *dmi_onboard_device_type_name(dmi_onboard_device_type_t value)
 static bool dmi_onboard_device_decode(dmi_entity_t *entity)
 {
     dmi_onboard_device_t *info;
-    const dmi_onboard_device_data_t *data;
-
-    data = dmi_entity_data(entity, DMI_TYPE(ONBOARD_DEVICE));
-    if (data == nullptr)
-        return false;
 
     info = dmi_entity_info(entity, DMI_TYPE(ONBOARD_DEVICE));
     if (info == nullptr)
         return false;
 
-    info->instance_count = (entity->body_length - sizeof(dmi_header_t)) /
-                           sizeof(dmi_onboard_device_instance_data_t);
+    dmi_stream_t *stream = &entity->stream;
+
+    //
+    // According to SMBIOS specification, the number of devices should be
+    // determined as (length - sizeof(header)) / 2.
+    //
+    info->instance_count = (entity->body_length - sizeof(dmi_header_t)) / 2;
 
     info->instances = dmi_alloc_array(entity->context, sizeof(dmi_onboard_device_instance_t), info->instance_count);
     if (info->instances == nullptr)
         return false;
 
     for (size_t i = 0; i < info->instance_count; i++) {
+        dmi_onboard_device_instance_details_t details;
         dmi_onboard_device_instance_t *instance = &info->instances[i];
-        const dmi_onboard_device_instance_data_t *instance_data = &data->instances[i];
 
-        dmi_onboard_device_instance_details_t details = {
-            .__value = dmi_decode(instance_data->details)
-        };
+        bool status =
+            dmi_stream_decode(stream, dmi_byte_t, &details.__value) and
+            dmi_stream_decode_str(stream, &instance->description);
+        if (not status)
+            return false;
 
         instance->type        = details.type;
         instance->is_enabled  = details.is_enabled;
-        instance->description = dmi_entity_string(entity, instance_data->description);
     }
 
     return true;
