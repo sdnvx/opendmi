@@ -114,7 +114,7 @@ static dmi_data_t *dmi_windows_read_table(dmi_context_t *context, size_t *plengt
     RAW_SMBIOS_DATA *data = dmi_cast(data, session->TableBuffer);
 
     *plength = data->Length;
-    return dmi_data(data->SMBIOSTableData);
+    return data->SMBIOSTableData;
 }
 
 static bool dmi_windows_close(dmi_context_t *context)
