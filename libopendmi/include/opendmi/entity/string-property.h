@@ -11,8 +11,7 @@
 
 #include <opendmi/entity.h>
 
-typedef struct dmi_string_property      dmi_string_property_t;
-typedef struct dmi_string_property_data dmi_string_property_data_t;
+typedef struct dmi_string_property dmi_string_property_t;
 
 /**
  * @brief String property structure (type 46).
@@ -24,30 +23,6 @@ typedef struct dmi_string_property_data dmi_string_property_data_t;
  *
  * @since SMBIOS 3.5
  */
-dmi_packed_struct(dmi_string_property_data)
-{
-    /**
-     * @brief SMBIOS structure header.
-     */
-    dmi_header_t header;
-
-    /**
-     * @brief Property identifier.
-     */
-    dmi_word_t ident;
-
-    /**
-     * @brief Property value.
-     */
-    dmi_string_t value;
-
-    /**
-     * @brief Handle corresponding to the structure this string property
-     * applies to.
-     */
-    dmi_handle_t parent_handle;
-};
-
 struct dmi_string_property
 {
     /**

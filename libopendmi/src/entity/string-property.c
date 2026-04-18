@@ -54,21 +54,17 @@ const dmi_entity_spec_t dmi_string_property_spec =
 static bool dmi_string_property_decode(dmi_entity_t *entity)
 {
     dmi_string_property_t *info;
-    const dmi_string_property_data_t *data;
-
-    data = dmi_entity_data(entity, DMI_TYPE(STRING_PROPERTY));
-    if (data == nullptr)
-        return false;
 
     info = dmi_entity_info(entity, DMI_TYPE(STRING_PROPERTY));
     if (info == nullptr)
         return false;
 
-    info->ident         = dmi_decode(data->ident);
-    info->value         = dmi_entity_string(entity, data->value);
-    info->parent_handle = dmi_decode(data->parent_handle);
+    dmi_stream_t *stream = &entity->stream;
 
-    return true;
+    return
+        dmi_stream_decode(stream, dmi_word_t, &info->ident) and
+        dmi_stream_decode_str(stream, &info->value) and
+        dmi_stream_decode(stream, dmi_word_t, &info->parent_handle);
 }
 
 static bool dmi_string_property_link(dmi_entity_t *entity)
