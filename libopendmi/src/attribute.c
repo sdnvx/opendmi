@@ -470,7 +470,10 @@ static char *dmi_attribute_format_size(
         unsigned int i;
 
         static const char *units[] = {
-            "bytes", "KiB", "MiB", "GiB", "TiB", "PiB", nullptr
+            "bytes",
+            "KiB", "MiB", "GiB", "TiB", "PiB",
+            "EiB", "ZiB", "YiB", "RiB", "QiB",
+            nullptr
         };
 
         for (i = 0; units[i]; i++) {

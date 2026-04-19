@@ -204,26 +204,31 @@ table:
   description: Memory module information
   attributes:
     socket: A0
-    bank-connections: 1
-    current-speed: 0
+    bank-connection-1: 1
+    bank-connection-2: 0
+    current-speed: null
     current-type:
-      other: false
-      unknown: false
+      other: true
+      unknown: true
       standard: false
       fpm: false
-      edo: false
+      edo: true
       parity: false
       ecc: false
       simm: false
-      dimm: true
-      burst-edo: true
+      dimm: false
+      burst-edo: false
       sdram: false
-    installed-size: 11534336
-    enabled-size: 0
-    disabled: false
-    bank-count: 1
+    installed-size:
+      size: 2147483648
+      bank-count: 2
+      status: present
+    enabled-size:
+      size: 2147483648
+      bank-count: 2
+      status: present
     error-status:
-      uncorrectable: true
+      uncorrectable: false
       correctable: false
       event-log: false
 - handle: 7
@@ -233,26 +238,31 @@ table:
   description: Memory module information
   attributes:
     socket: A1
-    bank-connections: 131075
-    current-speed: 0
+    bank-connection-1: 3
+    bank-connection-2: 2
+    current-speed: null
     current-type:
-      other: false
-      unknown: false
+      other: true
+      unknown: true
       standard: false
       fpm: false
-      edo: false
+      edo: true
       parity: false
       ecc: false
       simm: false
       dimm: false
       burst-edo: false
-      sdram: true
-    installed-size: 12582912
-    enabled-size: 0
-    disabled: false
-    bank-count: 1
+      sdram: false
+    installed-size:
+      size: 4294967296
+      bank-count: 2
+      status: present
+    enabled-size:
+      size: 4294967296
+      bank-count: 2
+      status: present
     error-status:
-      uncorrectable: true
+      uncorrectable: false
       correctable: false
       event-log: false
 - handle: 8

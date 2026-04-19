@@ -309,12 +309,13 @@ table:
   description: Memory module information
   attributes:
     socket: DIMM0
-    bank-connections: 1
+    bank-connection-1: 1
+    bank-connection-2: 0
     current-speed: 60
     current-type:
-      other: true
+      other: false
       unknown: false
-      standard: true
+      standard: false
       fpm: false
       edo: false
       parity: false
@@ -323,14 +324,18 @@ table:
       dimm: true
       burst-edo: false
       sdram: true
-    installed-size: 30408704
-    enabled-size: 0
-    disabled: false
-    bank-count: 1
+    installed-size:
+      size: 562949953421312
+      bank-count: 1
+      status: present
+    enabled-size:
+      size: 562949953421312
+      bank-count: 1
+      status: present
     error-status:
       uncorrectable: false
       correctable: false
-      event-log: true
+      event-log: false
 - handle: 10
   type: 6
   length: 19
@@ -338,12 +343,13 @@ table:
   description: Memory module information
   attributes:
     socket: DIMM1
-    bank-connections: 131075
+    bank-connection-1: 3
+    bank-connection-2: 2
     current-speed: 60
     current-type:
-      other: true
+      other: false
       unknown: false
-      standard: true
+      standard: false
       fpm: false
       edo: false
       parity: false
@@ -352,14 +358,18 @@ table:
       dimm: true
       burst-edo: false
       sdram: true
-    installed-size: 30408704
-    enabled-size: 0
-    disabled: false
-    bank-count: 1
+    installed-size:
+      size: 562949953421312
+      bank-count: 1
+      status: present
+    enabled-size:
+      size: 562949953421312
+      bank-count: 1
+      status: present
     error-status:
       uncorrectable: false
       correctable: false
-      event-log: true
+      event-log: false
 - handle: 11
   type: 6
   length: 19
@@ -367,12 +377,13 @@ table:
   description: Memory module information
   attributes:
     socket: DIMM2
-    bank-connections: 262149
+    bank-connection-1: 5
+    bank-connection-2: 4
     current-speed: 60
     current-type:
-      other: true
+      other: false
       unknown: false
-      standard: true
+      standard: false
       fpm: false
       edo: false
       parity: false
@@ -381,14 +392,18 @@ table:
       dimm: true
       burst-edo: false
       sdram: true
-    installed-size: 30408704
-    enabled-size: 0
-    disabled: false
-    bank-count: 1
+    installed-size:
+      size: 562949953421312
+      bank-count: 1
+      status: present
+    enabled-size:
+      size: 562949953421312
+      bank-count: 1
+      status: present
     error-status:
       uncorrectable: false
       correctable: false
-      event-log: true
+      event-log: false
 - handle: 12
   type: 6
   length: 19
@@ -396,12 +411,13 @@ table:
   description: Memory module information
   attributes:
     socket: DIMM3
-    bank-connections: 393223
+    bank-connection-1: 7
+    bank-connection-2: 6
     current-speed: 60
     current-type:
-      other: true
+      other: false
       unknown: false
-      standard: true
+      standard: false
       fpm: false
       edo: false
       parity: false
@@ -410,14 +426,18 @@ table:
       dimm: true
       burst-edo: false
       sdram: true
-    installed-size: 30408704
-    enabled-size: 0
-    disabled: false
-    bank-count: 1
+    installed-size:
+      size: 562949953421312
+      bank-count: 1
+      status: present
+    enabled-size:
+      size: 562949953421312
+      bank-count: 1
+      status: present
     error-status:
       uncorrectable: false
       correctable: false
-      event-log: true
+      event-log: false
 - handle: 13
   type: 8
   length: 24

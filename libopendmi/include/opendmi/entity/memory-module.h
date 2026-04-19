@@ -13,7 +13,7 @@
 #include <opendmi/utils/name.h>
 
 typedef struct dmi_memory_module       dmi_memory_module_t;
-typedef struct dmi_memory_module_data  dmi_memory_module_data_t;
+typedef struct dmi_memory_module_size  dmi_memory_module_size_t;
 typedef union  dmi_memory_module_type  dmi_memory_module_type_t;
 typedef union  dmi_memory_module_error dmi_memory_module_error_t;
 
@@ -80,60 +80,39 @@ dmi_packed_union(dmi_memory_module_error)
     };
 };
 
+typedef enum dmi_memory_module_size_status
+{
+    DMI_MEMORY_MODULE_SIZE_STATUS_PRESENT,          ///< Present
+    DMI_MEMORY_MODULE_SIZE_STATUS_INVALID,          ///< Invalid
+    DMI_MEMORY_MODULE_SIZE_STATUS_NOT_DETERMINABLE, ///< Not determinable
+    DMI_MEMORY_MODULE_SIZE_STATUS_NOT_ENABLED,      ///< Not enabled
+    DMI_MEMORY_MODULE_SIZE_STATUS_NOT_INSTALLED,    ///< Not installed
+} dmi_memory_module_size_status_t;
+
+/**
+ * @brief Memory mode size.
+ */
+struct dmi_memory_module_size
+{
+    /**
+     * @brief Size of module in bytes, if applicable.
+     */
+    dmi_size_t value;
+
+    /**
+     * @brief Number of bank connections per module.
+     */
+    unsigned bank_count;
+
+    /**
+     * @brief Status.
+     */
+    dmi_memory_module_size_status_t status;
+};
+
 /**
  * @brief Memory module information structure (type 6, obsolete).
  */
-struct dmi_memory_module_data
-{
-    /**
-     * @brief SMBIOS structure header.
-     */
-    dmi_header_t header;
-
-    /**
-     * @brief String number for socket reference designation. Example: "J202".
-     */
-    dmi_string_t socket;
-
-    /**
-     * @brief Each nibble indicates a bank (RAS#) connection. 0x0F means no
-     * connection.
-     *
-     * Example: If banks 1 & 3 (RAS# 1 & 3) were connected to a SIMM socket
-     * the byte for that socket would be 13h. If only bank 2 (RAS 2) were
-     * connected, the byte for that socket would be 0x2F.
-     */
-    dmi_byte_t bank_connections;
-
-    /**
-     * @brief Speed of the memory module, in ns (for example, 70 for a 70ns
-     * module). If the speed is unknown, the field is set to 0.
-     */
-    dmi_byte_t current_speed;
-
-    /**
-     * @brief The physical characteristics of the memory modules that are
-     * supported by (and currently installed in) the system.
-     */
-    dmi_word_t current_type;
-
-    /**
-     * @brief The size of the memory module that is installed in the socket.
-     */
-    dmi_byte_t installed_size;
-
-    /**
-     * @brief The amount of memory currently enabled for the system’s use from
-     * the module.
-     */
-    dmi_byte_t enabled_size;
-
-    /**
-     * @brief Error status.
-     */
-    dmi_byte_t error_status;
-};
-
 struct dmi_memory_module
 {
     /**
@@ -166,34 +145,13 @@ struct dmi_memory_module
     /**
      * @brief The size of the memory module that is installed in the socket.
      */
-    dmi_size_t installed_size;
-
-    /**
-     * @brief Set to `true` if the installed size is determinable.
-     */
-    bool has_installed_size;
+    dmi_memory_module_size_t installed_size;
 
     /**
      * @brief The amount of memory currently enabled for the system’s use from
      * the module.
      */
-    dmi_size_t enabled_size;
-
-    /**
-     * @brief Set to `true` if the enabled size is not determinable.
-     */
-    bool has_enabled_size;
-
-    /**
-     * @brief Set to `true`, if a module is known to be installed in a connector,
-     * but all memory in the module has been disabled due to error.
-     */
-    bool is_disabled;
-
-    /**
-     * @brief Number of bank connections per module.
-     */
-    unsigned short bank_count;
+    dmi_memory_module_size_t enabled_size;
 
     /**
      * @brief Error status.
@@ -207,5 +165,11 @@ extern const dmi_name_set_t dmi_memory_module_type_names;
  * @brief Memory module information entity specification.
  */
 extern const dmi_entity_spec_t dmi_memory_module_spec;
+
+__BEGIN_DECLS
+
+const char *dmi_memory_module_size_status_name(dmi_memory_module_size_status_t value);
+
+__END_DECLS
 
 #endif // !OPENDMI_ENTITY_MEMORY_MODULE_H

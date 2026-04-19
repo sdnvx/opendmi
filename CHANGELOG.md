@@ -9,8 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Migrate memory module information decoder to stream API
 - Migrate onboard devices information decoder to stream API
 - Migrate string property decoder to stream API
+
+### Fixed
+
+- Fix memory module installed/enabled size decoding
+- Fix memory module bank count decoding
 
 ## [0.3.1] - April 17, 2026
 

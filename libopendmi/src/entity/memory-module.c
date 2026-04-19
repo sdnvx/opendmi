@@ -5,6 +5,7 @@
 // SPDX-License-Identifier: BSD-3-Clause
 //
 #include <stdlib.h>
+#include <assert.h>
 
 #include <opendmi/context.h>
 #include <opendmi/value.h>
@@ -14,11 +15,12 @@
 #include <opendmi/entity/memory-module.h>
 
 static bool dmi_memory_module_decode(dmi_entity_t *entity);
+static void dmi_memory_module_decode_size(dmi_memory_module_size_t *psize, dmi_byte_t value);
 
 const dmi_name_set_t dmi_memory_module_type_names =
 {
     .code  = "memory-module-types",
-    .names = (dmi_name_t[]){
+    .names = (const dmi_name_t[]){
         DMI_NAME_OTHER(0),
         DMI_NAME_UNKNOWN(1),
         {
@@ -70,10 +72,43 @@ const dmi_name_set_t dmi_memory_module_type_names =
     }
 };
 
+static const dmi_name_set_t dmi_memory_module_size_status_names =
+{
+    .code = "memory-module-size-statuses",
+    .names = (const dmi_name_t[]){
+        {
+            .id   = DMI_MEMORY_MODULE_SIZE_STATUS_INVALID,
+            .code = "invalid",
+            .name = "Invalid"
+        },
+        {
+            .id   = DMI_MEMORY_MODULE_SIZE_STATUS_PRESENT,
+            .code = "present",
+            .name = "Present"
+        },
+        {
+            .id   = DMI_MEMORY_MODULE_SIZE_STATUS_NOT_DETERMINABLE,
+            .code = "not-determinable",
+            .name = "Not determinable"
+        },
+        {
+            .id   = DMI_MEMORY_MODULE_SIZE_STATUS_NOT_ENABLED,
+            .code = "not-enabled",
+            .name = "Not enabled"
+        },
+        {
+            .id   = DMI_MEMORY_MODULE_SIZE_STATUS_NOT_INSTALLED,
+            .code = "not-installed",
+            .name = "Not installed"
+        },
+        {}
+    }
+};
+
 static const dmi_name_set_t dmi_memory_module_error_names =
 {
     .code  = "memory-module-errors",
-    .names = (dmi_name_t[]){
+    .names = (const dmi_name_t[]){
         {
             .id   = 0,
             .code = "uncorrectable",
@@ -115,43 +150,75 @@ const dmi_entity_spec_t dmi_memory_module_spec =
     },
     .type            = DMI_TYPE(MEMORY_MODULE),
     .minimum_version = DMI_VERSION(2, 0, 0),
-    .minimum_length  = 0x08,
+    .minimum_length  = 0x0C,
     .decoded_length  = sizeof(dmi_memory_module_t),
     .attributes      = (const dmi_attribute_t[]){
         DMI_ATTRIBUTE(dmi_memory_module_t, socket, STRING, {
             .code   = "socket",
             .name   = "Socket designator"
         }),
-        DMI_ATTRIBUTE(dmi_memory_module_t, bank_connections, INTEGER, {
-            .code   = "bank-connections",
-            .name   = "Bank connections",
-            .flags  = DMI_ATTRIBUTE_FLAG_HEX
+        DMI_ATTRIBUTE(dmi_memory_module_t, bank_connections[0], INTEGER, {
+            .code   = "bank-connection-1",
+            .name   = "Bank connection 1",
+            .unspec = dmi_value_ptr((unsigned short)0xF)
+        }),
+        DMI_ATTRIBUTE(dmi_memory_module_t, bank_connections[1], INTEGER, {
+            .code   = "bank-connection-2",
+            .name   = "Bank connection 2",
+            .unspec = dmi_value_ptr((unsigned short)0xF)
         }),
         DMI_ATTRIBUTE(dmi_memory_module_t, current_speed, INTEGER, {
             .code   = "current-speed",
             .name   = "Current speed",
-            .unit   = DMI_UNIT_NANOSECOND
+            .unit   = DMI_UNIT_NANOSECOND,
+            .unspec = dmi_value_ptr((unsigned short)0)
         }),
         DMI_ATTRIBUTE(dmi_memory_module_t, current_type, SET, {
             .code   = "current-type",
             .name   = "Current type",
             .values = &dmi_memory_module_type_names
         }),
-        DMI_ATTRIBUTE(dmi_memory_module_t, installed_size, SIZE, {
+        DMI_ATTRIBUTE(dmi_memory_module_t, installed_size, STRUCT, {
             .code   = "installed-size",
-            .name   = "Installed size"
+            .name   = "Installed size",
+            .attrs  = (const dmi_attribute_t[]){
+                DMI_ATTRIBUTE(dmi_memory_module_size_t, value, SIZE, {
+                    .code   = "size",
+                    .name   = "Size",
+                    .unspec = dmi_value_ptr((dmi_size_t)0)
+                }),
+                DMI_ATTRIBUTE(dmi_memory_module_size_t, bank_count, INTEGER, {
+                    .code   = "bank-count",
+                    .name   = "Bank count"
+                }),
+                DMI_ATTRIBUTE(dmi_memory_module_size_t, status, ENUM, {
+                    .code   = "status",
+                    .name   = "Status",
+                    .values = &dmi_memory_module_size_status_names
+                }),
+                {}
+            }
         }),
-        DMI_ATTRIBUTE(dmi_memory_module_t, enabled_size, SIZE, {
+        DMI_ATTRIBUTE(dmi_memory_module_t, enabled_size, STRUCT, {
             .code   = "enabled-size",
-            .name   = "Enabled size"
-        }),
-        DMI_ATTRIBUTE(dmi_memory_module_t, is_disabled, BOOL, {
-            .code   = "disabled",
-            .name   = "Disabled"
-        }),
-        DMI_ATTRIBUTE(dmi_memory_module_t, bank_count, INTEGER, {
-            .code   = "bank-count",
-            .name   = "Bank count"
+            .name   = "Enabled size",
+            .attrs  = (const dmi_attribute_t[]){
+                DMI_ATTRIBUTE(dmi_memory_module_size_t, value, SIZE, {
+                    .code   = "size",
+                    .name   = "Size",
+                    .unspec = dmi_value_ptr((dmi_size_t)0)
+                }),
+                DMI_ATTRIBUTE(dmi_memory_module_size_t, bank_count, INTEGER, {
+                    .code   = "bank-count",
+                    .name   = "Bank count"
+                }),
+                DMI_ATTRIBUTE(dmi_memory_module_size_t, status, ENUM, {
+                    .code   = "status",
+                    .name   = "Status",
+                    .values = &dmi_memory_module_size_status_names
+                }),
+                {}
+            }
         }),
         DMI_ATTRIBUTE(dmi_memory_module_t, error_status, SET, {
             .code   = "error-status",
@@ -165,53 +232,90 @@ const dmi_entity_spec_t dmi_memory_module_spec =
     }
 };
 
+const char *dmi_memory_module_size_status_name(dmi_memory_module_size_status_t value)
+{
+    return dmi_name_lookup(&dmi_memory_module_size_status_names, (int)value);
+}
+
 static bool dmi_memory_module_decode(dmi_entity_t *entity)
 {
     dmi_memory_module_t *info;
-    const dmi_memory_module_data_t *data;
 
-    data = dmi_entity_data(entity, DMI_TYPE(MEMORY_MODULE));
-    if (data == nullptr)
-        return false;
+    assert(entity != nullptr);
 
     info = dmi_entity_info(entity, DMI_TYPE(MEMORY_MODULE));
     if (info == nullptr)
         return false;
 
-    info->socket = dmi_entity_string(entity, data->socket);
+    dmi_context_t *context = entity->context;
+    dmi_stream_t *stream = &entity->stream;
+
+    dmi_byte_t bank_connections;
+    dmi_byte_t installed_size;
+    dmi_byte_t enabled_size;
+
+    bool status =
+        dmi_stream_decode_str(stream, &info->socket) and
+        dmi_stream_decode(stream, dmi_byte_t, &bank_connections) and
+        dmi_stream_decode(stream, dmi_byte_t, &info->current_speed) and
+        dmi_stream_decode(stream, dmi_word_t, &info->current_type.__value) and
+        dmi_stream_decode(stream, dmi_byte_t, &installed_size) and
+        dmi_stream_decode(stream, dmi_byte_t, &enabled_size) and
+        dmi_stream_decode(stream, dmi_byte_t, &info->error_status.__value);
+    if (not status)
+        return false;
 
     // Decode bank connections
-    dmi_byte_t bank_connections = dmi_decode(data->bank_connections);
     info->bank_connections[0] = (bank_connections & 0x0Fu);
     info->bank_connections[1] = (bank_connections & 0xF0u) >> 4;
 
-    // Decode speed and type
-    info->current_speed        = dmi_decode(data->current_speed);
-    info->current_type.__value = dmi_decode(data->current_type);
-
     // Decode installed size
-    dmi_byte_t installed_size = dmi_decode(data->installed_size) & 0x7Fu;
-    if (installed_size != 0x7Du)
-        info->has_installed_size = true;
-    if (installed_size != 0x7Fu)
-        info->installed_size = (dmi_size_t)(installed_size & 0x7Fu) << 20;
-
-    // Decode enabled size
-    dmi_byte_t enabled_size = dmi_decode(data->enabled_size) & 0x7Fu;
-    if (enabled_size != 0x7Du)
-        info->has_enabled_size = true;
-    if (enabled_size != 0x7Fu) {
-        if (enabled_size == 0x7Eu)
-            info->is_disabled = true;
-        else if (enabled_size != 0x7Du)
-            info->enabled_size = (dmi_size_t)(enabled_size & 0x7Fu) << 20;
+    dmi_memory_module_decode_size(&info->installed_size, installed_size);
+    if (info->installed_size.status == DMI_MEMORY_MODULE_SIZE_STATUS_INVALID) {
+        dmi_log_warning(context->logger,
+                        "Installed memory size is out of range: 0x%04hX: 0x%02hX",
+                        entity->handle, installed_size);
     }
 
-    // Decode bank count
-    info->bank_count = dmi_decode(data->enabled_size) & 0x80u ? 2 : 1;
-
-    // Decode error status
-    info->error_status.__value = dmi_decode(data->error_status);
+    // Decode enabled size
+    dmi_memory_module_decode_size(&info->enabled_size, enabled_size);
+    if (info->enabled_size.status == DMI_MEMORY_MODULE_SIZE_STATUS_INVALID) {
+        dmi_log_warning(context->logger,
+                        "Enabled memory size is out of range: 0x%04hX: 0x%02hX",
+                        entity->handle, enabled_size);
+    }
 
     return true;
+}
+
+static void dmi_memory_module_decode_size(dmi_memory_module_size_t *psize, dmi_byte_t value)
+{
+    assert(psize != nullptr);
+
+    psize->value      = 0;
+    psize->bank_count = value & 0x80u ? 2 : 1;
+
+    dmi_byte_t power = value & 0x7Fu;
+
+    switch (power) {
+    case 0x7Fu:
+        psize->status = DMI_MEMORY_MODULE_SIZE_STATUS_NOT_INSTALLED;
+        break;
+
+    case 0x7Eu:
+        psize->status = DMI_MEMORY_MODULE_SIZE_STATUS_NOT_ENABLED;
+        break;
+
+    case 0x7Du:
+        psize->status = DMI_MEMORY_MODULE_SIZE_STATUS_NOT_DETERMINABLE;
+        break;
+
+    default:
+        if ((uint64_t)power < sizeof(uint64_t) / CHAR_BIT - 20) {
+            psize->value  = ((dmi_size_t)1 << power) << 20;
+            psize->status = DMI_MEMORY_MODULE_SIZE_STATUS_PRESENT;
+        } else {
+            psize->status = DMI_MEMORY_MODULE_SIZE_STATUS_INVALID;
+        }
+    }
 }
