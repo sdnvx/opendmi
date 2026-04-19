@@ -4,6 +4,8 @@
 //
 // SPDX-License-Identifier: BSD-3-Clause
 //
+#include <assert.h>
+
 #include <opendmi/context.h>
 #include <opendmi/utils.h>
 #include <opendmi/utils/name.h>
@@ -252,6 +254,8 @@ static bool dmi_memory_controller_decode(dmi_entity_t *entity)
     dmi_memory_controller_t *info;
     const dmi_memory_controller_data_t *data;
 
+    assert(entity != nullptr);
+
     data = dmi_entity_data(entity, DMI_TYPE(MEMORY_CONTROLLER));
     if (data == nullptr)
         return false;
@@ -306,6 +310,8 @@ static bool dmi_memory_controller_link(dmi_entity_t *entity)
     dmi_registry_t *registry;
     dmi_memory_controller_t *info;
 
+    assert(entity != nullptr);
+
     info = dmi_entity_info(entity, DMI_TYPE(MEMORY_CONTROLLER));
     if (info == nullptr)
         return false;
@@ -318,6 +324,26 @@ static bool dmi_memory_controller_link(dmi_entity_t *entity)
 
     for (size_t i = 0; i < info->slot_count; i++) {
         info->modules[i] = dmi_registry_get(registry, info->module_handles[i], DMI_TYPE(MEMORY_MODULE), false);
+
+        if (info->modules[i] == nullptr)
+            continue;
+
+        dmi_memory_module_t *module = dmi_entity_info(info->modules[i], DMI_TYPE(MEMORY_MODULE));
+
+        // Bind memory controller to module
+        module->controller = entity;
+
+        // Check module installed size value
+        if (module->installed_size.status == DMI_MEMORY_MODULE_SIZE_STATUS_PRESENT) {
+            if (module->installed_size.value > info->maximum_module_size)
+                module->installed_size.status = DMI_MEMORY_MODULE_SIZE_STATUS_INVALID;
+        }
+
+        // Check module enabled size value
+        if (module->enabled_size.status == DMI_MEMORY_MODULE_SIZE_STATUS_PRESENT) {
+            if (module->enabled_size.value > info->maximum_module_size)
+                module->enabled_size.status = DMI_MEMORY_MODULE_SIZE_STATUS_INVALID;
+        }
     }
 
     return true;

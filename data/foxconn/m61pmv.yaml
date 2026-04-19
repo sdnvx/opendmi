@@ -256,11 +256,11 @@ table:
     installed-size:
       size: 4294967296
       bank-count: 2
-      status: present
+      status: invalid
     enabled-size:
       size: 4294967296
       bank-count: 2
-      status: present
+      status: invalid
     error-status:
       uncorrectable: false
       correctable: false

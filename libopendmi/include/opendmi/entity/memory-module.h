@@ -116,6 +116,11 @@ struct dmi_memory_module_size
 struct dmi_memory_module
 {
     /**
+     * @brief Memory controller entity.
+     */
+    dmi_entity_t *controller;
+
+    /**
      * @brief Socket reference designator. Example: "202".
      */
     const char *socket;

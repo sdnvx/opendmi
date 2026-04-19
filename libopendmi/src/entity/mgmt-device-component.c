@@ -4,6 +4,8 @@
 //
 // SPDX-License-Identifier: BSD-3-Clause
 //
+#include <assert.h>
+
 #include <opendmi/context.h>
 #include <opendmi/utils.h>
 #include <opendmi/utils/codec.h>
@@ -81,24 +83,30 @@ static bool dmi_mgmt_device_component_link(dmi_entity_t *entity)
     };
 
     dmi_mgmt_device_component_t *info;
-    dmi_registry_t *registry;
+
+    assert(entity != nullptr);
 
     info = dmi_entity_info(entity, DMI_TYPE(MGMT_DEVICE_COMPONENT));
     if (info == nullptr)
         return false;
 
-    registry = entity->context->registry;
+    dmi_context_t *context = entity->context;
+    dmi_registry_t *registry = context->registry;
+
+    bool relaxed = not(context->flags & DMI_CONTEXT_FLAG_STRICT);
 
     info->device = dmi_registry_get(registry, info->device_handle, DMI_TYPE(MGMT_DEVICE), false);
-    if (info->device == nullptr)
+    if ((info->device == nullptr) and (not relaxed))
         return false;
 
     info->component = dmi_registry_get_any(registry, info->component_handle, dmi_component_types, false);
-    if (info->component == nullptr)
+    if ((info->component == nullptr) and (not relaxed))
         return false;
 
     if (info->threshold_handle != DMI_HANDLE_INVALID) {
         info->threshold = dmi_registry_get(registry, info->threshold_handle, DMI_TYPE(MGMT_DEVICE_THRESHOLD), false);
+        if ((info->threshold == nullptr) and (not relaxed))
+            return false;
     }
 
     return true;

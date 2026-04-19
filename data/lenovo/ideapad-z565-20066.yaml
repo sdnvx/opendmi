@@ -765,11 +765,11 @@ table:
     installed-size:
       size: 9223372036854775808
       bank-count: 1
-      status: present
+      status: invalid
     enabled-size:
       size: 9223372036854775808
       bank-count: 1
-      status: present
+      status: invalid
     error-status:
       uncorrectable: false
       correctable: false
@@ -865,11 +865,11 @@ table:
     installed-size:
       size: 9223372036854775808
       bank-count: 1
-      status: present
+      status: invalid
     enabled-size:
       size: 9223372036854775808
       bank-count: 1
-      status: present
+      status: invalid
     error-status:
       uncorrectable: false
       correctable: false

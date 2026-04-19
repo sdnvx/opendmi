@@ -7,8 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Add memory module size checks on controller linking
+
 ### Changed
 
+- Enable linking on show command
+- Relaxed linking of memory controllers information
 - Migrate memory module information decoder to stream API
 - Migrate onboard devices information decoder to stream API
 - Migrate string property decoder to stream API
