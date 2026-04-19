@@ -11,10 +11,8 @@
 
 #include <opendmi/entity.h>
 
-typedef struct dmi_memory_channel             dmi_memory_channel_t;
-typedef struct dmi_memory_channel_data        dmi_memory_channel_data_t;
-typedef struct dmi_memory_channel_device      dmi_memory_channel_device_t;
-typedef struct dmi_memory_channel_device_data dmi_memory_channel_device_data_t;
+typedef struct dmi_memory_channel        dmi_memory_channel_t;
+typedef struct dmi_memory_channel_device dmi_memory_channel_device_t;
 
 /**
  * @brief Memory channel types.
@@ -28,66 +26,6 @@ typedef enum dmi_memory_channel_type
     DMI_MEMORY_CHANNEL_TYPE_SYNCLINK = 0x04, ///< SyncLink
     __DMI_MEMORY_CHANNEL_TYPE_COUNT
 } dmi_memory_channel_type_t;
-
-/**
- * @brief Memory channel device data.
- */
-dmi_packed_struct(dmi_memory_channel_device_data)
-{
-    /**
-     * @brief Channel load provided by the memory device associated with
-     * this channel.
-     */
-    dmi_byte_t load;
-
-    /**
-     * @brief Structure handle that identifies the memory device associated
-     * with this channel.
-     */
-    dmi_handle_t handle;
-};
-
-/**
- * @brief Memory channel structure (type 37).
- *
- * The information in this structure provides the correlation between a memory
- * channel and its associated memory devices. Each device presents one or more
- * loads to the channel. The sum of all device loads cannot exceed the
- * channel's defined maximum.
- *
- * @since SMBIOS 2.3
- */
-dmi_packed_struct(dmi_memory_channel_data)
-{
-    /**
-     * @brief SMBIOS structure header.
-     */
-    dmi_header_t header;
-
-    /**
-     * @brief Type of memory associated with the channel.
-     */
-    dmi_byte_t type;
-
-    /**
-     * @brief Maximum load supported by the channel. The sum of all device
-     * loads cannot exceed this value.
-     */
-    dmi_byte_t maximum_load;
-
-    /**
-     * @brief Number of memory devices (Type 11h) that are associated with
-     * this channel. This value also defines the number of load/handle pairs
-     * that follow.
-     */
-    dmi_byte_t device_count;
-
-    /**
-     * @brief Channel loads provided by memory devices associated with this
-     * channel.
-     */
-    dmi_memory_channel_device_data_t devices[];
-};
 
 /**
  * @brief Memory channel device.
@@ -114,12 +52,14 @@ struct dmi_memory_channel_device
 };
 
 /**
- * @brief Memory channel.
+ * @brief Memory channel structure (type 37).
  *
  * The information in this structure provides the correlation between a memory
  * channel and its associated memory devices. Each device presents one or more
  * loads to the channel. The sum of all device loads cannot exceed the
  * channel's defined maximum.
+ *
+ * @since SMBIOS 2.3
  */
 struct dmi_memory_channel
 {

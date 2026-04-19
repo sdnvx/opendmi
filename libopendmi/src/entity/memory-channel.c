@@ -101,31 +101,35 @@ const char *dmi_memory_channel_type_name(dmi_memory_channel_type_t value)
 static bool dmi_memory_channel_decode(dmi_entity_t *entity)
 {
     dmi_memory_channel_t *info;
-    const dmi_memory_channel_data_t *data;
-
-    data = dmi_entity_data(entity, DMI_TYPE(MEMORY_CHANNEL));
-    if (data == nullptr)
-        return false;
 
     info = dmi_entity_info(entity, DMI_TYPE(MEMORY_CHANNEL));
     if (info == nullptr)
         return false;
 
-    info->type         = dmi_decode(data->type);
-    info->maximum_load = dmi_decode(data->maximum_load);
-    info->device_count = dmi_decode(data->device_count);
+    dmi_stream_t *stream = &entity->stream;
 
-    info->devices = dmi_alloc_array(entity->context, sizeof(dmi_memory_channel_device_t),
-                                    info->device_count);
-    if (info->devices == nullptr)
+    bool status =
+        dmi_stream_decode(stream, dmi_byte_t, &info->type) and
+        dmi_stream_decode(stream, dmi_byte_t, &info->maximum_load) and
+        dmi_stream_decode(stream, dmi_byte_t, &info->device_count);
+    if (not status)
         return false;
 
-    for (size_t i = 0; i < info->device_count; i++) {
-        dmi_memory_channel_device_t *device = &info->devices[i];
-        const dmi_memory_channel_device_data_t *device_data = &data->devices[i];
+    if (info->device_count > 0) {
+        info->devices = dmi_alloc_array(entity->context, sizeof(dmi_memory_channel_device_t),
+                                        info->device_count);
+        if (info->devices == nullptr)
+            return false;
 
-        device->load   = dmi_decode(device_data->load);
-        device->handle = dmi_decode(device_data->handle);
+        for (size_t i = 0; i < info->device_count; i++) {
+            dmi_memory_channel_device_t *device = &info->devices[i];
+
+            status =
+                dmi_stream_decode(stream, dmi_byte_t, &device->load) and
+                dmi_stream_decode(stream, dmi_word_t, &device->handle);
+            if (not status)
+                return false;
+        }
     }
 
     return true;
@@ -140,6 +144,9 @@ static bool dmi_memory_channel_link(dmi_entity_t *entity)
     info = dmi_entity_info(entity, DMI_TYPE(MEMORY_CHANNEL));
     if (info == nullptr)
         return false;
+
+    if (info->device_count == 0)
+        return true;
 
     registry = entity->context->registry;
 

@@ -311,7 +311,7 @@ static void dmi_memory_module_decode_size(dmi_memory_module_size_t *psize, dmi_b
         break;
 
     default:
-        if ((uint64_t)power < sizeof(uint64_t) / CHAR_BIT - 20) {
+        if ((uint64_t)power < (sizeof(uint64_t) * CHAR_BIT - 20)) {
             psize->value  = ((dmi_size_t)1 << power) << 20;
             psize->status = DMI_MEMORY_MODULE_SIZE_STATUS_PRESENT;
         } else {
