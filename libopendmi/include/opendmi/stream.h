@@ -111,6 +111,10 @@ bool dmi_stream_read_data(dmi_stream_t *stream, void *ptr, size_t length);
  */
 bool dmi_stream_read_data_at(const dmi_stream_t *stream, void *ptr, size_t offset, size_t length);
 
+bool dmi_stream_skip(dmi_stream_t *stream, size_t length);
+
+size_t dmi_stream_remaining(const dmi_stream_t *stream);
+
 /**
  * @brief Check whether all data in the stream has been consumed.
  *
@@ -119,8 +123,6 @@ bool dmi_stream_read_data_at(const dmi_stream_t *stream, void *ptr, size_t offse
  * @return `true` if there are no remaining bytes to read, `false` otherwise.
  */
 bool dmi_stream_is_done(const dmi_stream_t *stream);
-
-size_t dmi_stream_remaining(const dmi_stream_t *stream);
 
 /**
  * @brief Reset the stream cursor to the beginning.

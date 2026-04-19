@@ -12,11 +12,10 @@
 #include <opendmi/entity.h>
 
 typedef struct dmi_firmware_language       dmi_firmware_language_t;
-typedef struct dmi_firmware_language_data  dmi_firmware_language_data_t;
 typedef union  dmi_firmware_language_flags dmi_firmware_language_flags_t;
 
 /**
- * @brief Firmware language flags
+ * @brief Firmware language flags.
  */
 dmi_packed_union(dmi_firmware_language_flags)
 {
@@ -43,40 +42,6 @@ dmi_packed_union(dmi_firmware_language_flags)
 /**
  * @brief Firmware language information structure (type 13).
  */
-dmi_packed_struct(dmi_firmware_language_data)
-{
-    /**
-     * @brief SMBIOS structure header.
-     */
-    dmi_header_t header;
-
-    /**
-     * @brief Number of languages available. Each available language has a
-     * description string. This field contains the number of strings that
-     * follow the formatted area of the structure.
-     *
-     * @since SMBIOS 2.0
-     */
-    dmi_byte_t language_count;
-
-    /**
-     * @brief Flags.
-     * @since SMBIOS 2.1
-     */
-    dmi_byte_t flags;
-
-    /**
-     * @brief Reserved for future use.
-     * @since SMBIOS 2.0
-     */
-    dmi_byte_t __reserved[15];
-
-    /**
-     * @brief String number (one-based) of the currently installed language.
-     */
-    dmi_string_t current_language;
-};
-
 struct dmi_firmware_language
 {
     /**
@@ -90,10 +55,9 @@ struct dmi_firmware_language
     const char **languages;
 
     /**
-     * @brief If set to `true`, the language strings use the abbreviated
-     * format. Otherwise, the strings use the long format.
+     * @brief Flags.
      */
-    bool is_abbreviated;
+    dmi_firmware_language_flags_t flags;
 
     /**
      * @brief Currently installed language.

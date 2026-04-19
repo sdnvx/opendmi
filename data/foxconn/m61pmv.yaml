@@ -741,12 +741,12 @@ table:
   level: 2.0
   description: Firmware language information
   attributes:
-    language-count: 3
     languages:
     - n|US|iso8859-1
     - n|US|iso8859-1
     - r|CA|iso8859-1
-    is-abbreviated: false
+    flags:
+      is-abbreviated: false
     current-language: n|US|iso8859-1
 - handle: 37
   type: 16

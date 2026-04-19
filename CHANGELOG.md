@@ -9,12 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Add `dmi_stream_skip()` and `dmi_stream_remaining()` functions
 - Add memory module size checks on controller linking
 
 ### Changed
 
 - Enable linking on show command
 - Relaxed linking of memory controllers information
+- Normalize firmware language information structure layout
+- Migrate firware language information decoder to stream API
 - Migrate memory channel information decoder to stream API
 - Migrate memory controller information decoder to stream API
 - Migrate memory module information decoder to stream API

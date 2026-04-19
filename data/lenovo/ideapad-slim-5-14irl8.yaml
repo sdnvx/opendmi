@@ -839,7 +839,6 @@ table:
   level: 2.0
   description: Firmware language information
   attributes:
-    language-count: 8
     languages:
     - en|US|iso8859-1,0
     - fr|FR|iso8859-1,0
@@ -849,7 +848,8 @@ table:
     - es|ES|iso8859-1,0
     - de|DE|iso8859-1,0
     - pt|PT|iso8859-1,0
-    is-abbreviated: false
+    flags:
+      is-abbreviated: false
     current-language: en|US|iso8859-1,0
 - handle: 38
   type: 14

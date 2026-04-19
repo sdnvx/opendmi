@@ -755,7 +755,6 @@ table:
   level: 2.0
   description: Firmware language information
   attributes:
-    language-count: 8
     languages:
     - eng
     - fra
@@ -765,7 +764,8 @@ table:
     - chs
     - chi
     - jpn
-    is-abbreviated: true
+    flags:
+      is-abbreviated: true
     current-language: rus
 - handle: 48
   type: 127

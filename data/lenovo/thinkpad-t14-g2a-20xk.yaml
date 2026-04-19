@@ -916,7 +916,6 @@ table:
   level: 2.0
   description: Firmware language information
   attributes:
-    language-count: 6
     languages:
     - en-US
     - fr-FR
@@ -924,7 +923,8 @@ table:
     - ko-KR
     - zh-CHT
     - zh-CHS
-    is-abbreviated: true
+    flags:
+      is-abbreviated: true
     current-language: en-US
 - handle: 44
   type: 22

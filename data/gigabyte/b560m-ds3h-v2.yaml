@@ -1647,7 +1647,6 @@ table:
   level: 2.0
   description: Firmware language information
   attributes:
-    language-count: 14
     languages:
     - en|US|iso8859-1
     - zh|TW|unicode
@@ -1663,7 +1662,8 @@ table:
     - id|ID|iso8859-1
     - tr|TR|iso8859-1
     - pl|PL|iso8859-1
-    is-abbreviated: false
+    flags:
+      is-abbreviated: false
     current-language: ru|RU|iso8859-5
 - handle: 98
   type: 8

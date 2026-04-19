@@ -13,6 +13,19 @@
 static bool dmi_firmware_language_decode(dmi_entity_t *entity);
 static void dmi_firmware_language_cleanup(dmi_entity_t *entity);
 
+static const dmi_name_set_t dmi_firmware_language_flag_names =
+{
+    .code = "firmware-language-flags",
+    .names = (const dmi_name_t[]){
+        {
+            .id   = 0,
+            .code = "is-abbreviated",
+            .name = "Abbreviated"
+        },
+        {}
+    }
+};
+
 const dmi_entity_spec_t dmi_firmware_language_spec =
 {
     .code            = "firmware-language",
@@ -25,24 +38,21 @@ const dmi_entity_spec_t dmi_firmware_language_spec =
     },
     .type            = DMI_TYPE(FIRMWARE_LANGUAGE),
     .minimum_version = DMI_VERSION(2, 0, 0),
-    .minimum_length  = 0x05,
+    .minimum_length  = 0x16,
     .decoded_length  = sizeof(dmi_firmware_language_t),
     .attributes      = (const dmi_attribute_t[]) {
-        DMI_ATTRIBUTE(dmi_firmware_language_t, language_count, INTEGER, {
-            .code = "language-count",
-            .name = "Language count"
-        }),
         DMI_ATTRIBUTE_ARRAY(dmi_firmware_language_t, languages, language_count, STRING, {
-            .code = "languages",
-            .name = "Languages"
+            .code   = "languages",
+            .name   = "Languages"
         }),
-        DMI_ATTRIBUTE(dmi_firmware_language_t, is_abbreviated, BOOL, {
-            .code = "is-abbreviated",
-            .name = "Abbreviated"
+        DMI_ATTRIBUTE(dmi_firmware_language_t, flags, SET, {
+            .code   = "flags",
+            .name   = "Flags",
+            .values = &dmi_firmware_language_flag_names
         }),
         DMI_ATTRIBUTE(dmi_firmware_language_t, current_language, STRING, {
-            .code = "current-language",
-            .name = "Current language"
+            .code   = "current-language",
+            .name   = "Current language"
         }),
         DMI_ATTRIBUTE_NULL
     },
@@ -55,32 +65,30 @@ const dmi_entity_spec_t dmi_firmware_language_spec =
 static bool dmi_firmware_language_decode(dmi_entity_t *entity)
 {
     dmi_firmware_language_t *info;
-    const dmi_firmware_language_data_t *data;
-
-    data = dmi_entity_data(entity, DMI_TYPE(FIRMWARE_LANGUAGE));
-    if (data == nullptr)
-        return false;
 
     info = dmi_entity_info(entity, DMI_TYPE(FIRMWARE_LANGUAGE));
     if (info == nullptr)
         return false;
 
-    info->language_count = dmi_decode(data->language_count);
+    dmi_stream_t *stream = &entity->stream;
 
-    info->languages = dmi_alloc_array(entity->context, sizeof(const char *), info->language_count);
-    if (info->languages == nullptr)
+    bool status =
+        dmi_stream_decode(stream, dmi_byte_t, &info->language_count) and
+        dmi_stream_decode(stream, dmi_byte_t, &info->flags.__value) and
+        dmi_stream_skip(stream, 15) and
+        dmi_stream_decode_str(stream, &info->current_language);
+    if (not status)
         return false;
 
-    for (size_t i = 0; i < info->language_count; i++) {
-        info->languages[i] = dmi_entity_string(entity, (dmi_string_t)(i + 1));
+    if (info->language_count > 0) {
+        info->languages = dmi_alloc_array(entity->context, sizeof(const char *), info->language_count);
+        if (info->languages == nullptr)
+            return false;
+
+        for (size_t i = 0; i < info->language_count; i++) {
+            info->languages[i] = dmi_entity_string(entity, (dmi_string_t)(i + 1));
+        }
     }
-
-    dmi_firmware_language_flags_t flags = {
-        .__value = dmi_decode(data->flags)
-    };
-
-    info->is_abbreviated   = flags.is_abbreviated;
-    info->current_language = dmi_entity_string(entity, data->current_language);
 
     return true;
 }

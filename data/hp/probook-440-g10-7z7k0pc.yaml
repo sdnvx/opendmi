@@ -144,7 +144,6 @@ table:
   level: 2.0
   description: Firmware language information
   attributes:
-    language-count: 15
     languages:
     - enUS
     - deDE
@@ -161,7 +160,8 @@ table:
     - zhCN
     - zhTW
     - ruRU
-    is-abbreviated: true
+    flags:
+      is-abbreviated: true
     current-language: enUS
 - handle: 24
   type: 2

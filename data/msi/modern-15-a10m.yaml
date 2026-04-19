@@ -1275,12 +1275,12 @@ table:
   level: 2.0
   description: Firmware language information
   attributes:
-    language-count: 3
     languages:
     - en|US|iso8859-1
     - zh|CN|unicode
     - zh|TW|unicode
-    is-abbreviated: false
+    flags:
+      is-abbreviated: false
     current-language: null
 - handle: 75
   type: 41

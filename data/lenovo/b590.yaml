@@ -762,7 +762,6 @@ table:
   level: 2.0
   description: Firmware language information
   attributes:
-    language-count: 7
     languages:
     - enUS
     - frFR
@@ -771,7 +770,8 @@ table:
     - zhCA
     - zhCA
     - ruRU
-    is-abbreviated: true
+    flags:
+      is-abbreviated: true
     current-language: enUS
 - handle: 44
   type: 22

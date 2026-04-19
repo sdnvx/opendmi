@@ -753,10 +753,10 @@ table:
   level: 2.0
   description: Firmware language information
   attributes:
-    language-count: 1
     languages:
     - enUS
-    is-abbreviated: true
+    flags:
+      is-abbreviated: true
     current-language: enUS
 - handle: 42
   type: 15
