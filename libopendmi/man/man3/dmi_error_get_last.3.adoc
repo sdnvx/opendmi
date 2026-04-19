@@ -1,9 +1,9 @@
 = dmi_error_get_last(3)
 The OpenDMI contributors
-OpenDMI 0.3.1
+OpenDMI 0.3.2
 
 :doctype: manpage
-:release-version: 0.3.1
+:release-version: 0.3.2
 :manmanual: OpenDMI Manual
 :mansource: OpenDMI {release-version}
 
