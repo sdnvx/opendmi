@@ -170,7 +170,7 @@ const dmi_entity_spec_t dmi_memory_controller_spec =
     .name            = "Memory controller information",
     .type            = DMI_TYPE(MEMORY_CONTROLLER),
     .minimum_version = DMI_VERSION(2, 0, 0),
-    .minimum_length  = 0x08,
+    .minimum_length  = 0x0F,
     .decoded_length  = sizeof(dmi_memory_controller_t),
     .attributes      = (const dmi_attribute_t[]){
         DMI_ATTRIBUTE(dmi_memory_controller_t, error_detection, ENUM, {
@@ -252,32 +252,32 @@ const char *dmi_memory_interleave_name(dmi_memory_interleave_t value)
 static bool dmi_memory_controller_decode(dmi_entity_t *entity)
 {
     dmi_memory_controller_t *info;
-    const dmi_memory_controller_data_t *data;
 
     assert(entity != nullptr);
-
-    data = dmi_entity_data(entity, DMI_TYPE(MEMORY_CONTROLLER));
-    if (data == nullptr)
-        return false;
 
     info = dmi_entity_info(entity, DMI_TYPE(MEMORY_CONTROLLER));
     if (info == nullptr)
         return false;
 
-    info->error_detection  = dmi_decode(data->error_detection);
-    info->error_correction = (dmi_error_correct_caps_t) {
-        .__value = dmi_decode(data->error_correction)
-    };
+    dmi_stream_t *stream = &entity->stream;
 
-    info->supported_interleave = dmi_decode(data->supported_interleave);
-    info->current_interleave   = dmi_decode(data->current_interleave);
-    info->slot_count           = dmi_decode(data->slot_count);
-    info->maximum_module_size  = 1ULL << (dmi_decode(data->maximum_module_size) + 20);
-    info->maximum_memory_size  = info->maximum_module_size * info->slot_count;
+    dmi_byte_t maximum_module_size;
 
-    info->supported_speeds.__value  = dmi_decode(data->supported_speeds);
-    info->supported_types.__value   = dmi_decode(data->supported_types);
-    info->required_voltages.__value = dmi_decode(data->required_voltages);
+    bool status =
+        dmi_stream_decode(stream, dmi_byte_t, &info->error_detection) and
+        dmi_stream_decode(stream, dmi_byte_t, &info->error_correction.__value) and
+        dmi_stream_decode(stream, dmi_byte_t, &info->supported_interleave) and
+        dmi_stream_decode(stream, dmi_byte_t, &info->current_interleave) and
+        dmi_stream_decode(stream, dmi_byte_t, &maximum_module_size) and
+        dmi_stream_decode(stream, dmi_word_t, &info->supported_speeds.__value) and
+        dmi_stream_decode(stream, dmi_word_t, &info->supported_types.__value) and
+        dmi_stream_decode(stream, dmi_byte_t, &info->required_voltages.__value) and
+        dmi_stream_decode(stream, dmi_byte_t, &info->slot_count);
+    if (not status)
+        return false;
+
+    info->maximum_module_size = 1uLL << (maximum_module_size + 20);
+    info->maximum_memory_size = info->maximum_module_size * info->slot_count;
 
     info->module_handles = dmi_alloc_array(entity->context, sizeof(dmi_handle_t),
                                            info->slot_count);
@@ -286,21 +286,17 @@ static bool dmi_memory_controller_decode(dmi_entity_t *entity)
     }
 
     for (size_t i = 0; i < info->slot_count; i++) {
-        info->module_handles[i] = dmi_decode(data->module_handles[i]);
+        if (not dmi_stream_decode(stream, dmi_word_t, &info->module_handles[i]))
+            return false;
     }
 
-    const dmi_data_t *extra_start = entity->data + sizeof(*data) +
-                                    sizeof(dmi_handle_t) * info->slot_count;
+    if (dmi_stream_is_done(stream))
+        return true;
 
-    if (entity->body_length > (size_t)(extra_start - entity->data)) {
-        entity->level = dmi_version(2, 1, 0);
+    entity->level = dmi_version(2, 1, 0);
 
-        const dmi_memory_controller_extra_t *extra = dmi_cast(extra, extra_start);
-
-        info->enabled_error_correction = (dmi_error_correct_caps_t) {
-            .__value = dmi_decode(extra->enabled_error_correction)
-        };
-    }
+    if (not dmi_stream_decode(stream, dmi_byte_t, &info->enabled_error_correction.__value))
+        return false;
 
     return true;
 }

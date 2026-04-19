@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Enable linking on show command
 - Relaxed linking of memory controllers information
+- Migrate memory controller information decoder to stream API
 - Migrate memory module information decoder to stream API
 - Migrate onboard devices information decoder to stream API
 - Migrate string property decoder to stream API

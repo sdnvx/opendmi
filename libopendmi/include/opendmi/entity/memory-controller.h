@@ -12,8 +12,6 @@
 #include <opendmi/entity/memory-module.h>
 
 typedef struct dmi_memory_controller       dmi_memory_controller_t;
-typedef struct dmi_memory_controller_data  dmi_memory_controller_data_t;
-typedef struct dmi_memory_controller_extra dmi_memory_controller_extra_t;
 typedef union  dmi_memory_module_speed     dmi_memory_module_speed_t;
 typedef union  dmi_memory_module_voltage   dmi_memory_module_voltage_t;
 typedef union  dmi_error_correct_caps      dmi_error_correct_caps_t;
@@ -126,83 +124,6 @@ dmi_packed_union(dmi_memory_module_voltage)
  * types to allow existing DMI browsers to properly display the system’s memory
  * attributes.
  */
-dmi_packed_struct(dmi_memory_controller_data)
-{
-    /**
-     * @brief SMBIOS structure header.
-     */
-    dmi_header_t header;
-
-    /**
-     * @brief Error detecting method.
-     */
-    dmi_byte_t error_detection;
-
-    /**
-     * @brief Error correcting capabilities.
-     */
-    dmi_byte_t error_correction;
-
-    /**
-     * @brief Supported interleave.
-     */
-    dmi_byte_t supported_interleave;
-
-    /**
-     * @brief Current interleave.
-     */
-    dmi_byte_t current_interleave;
-
-    /**
-     * Size of the largest memory module supported (per slot), specified as
-     * `n`, where `2**n` is the maximum size in MiB.
-     *
-     * The maximum amount of memory supported by this controller is that value
-     * times the number of slots, as specified in offset `0Eh` of this
-     * structure.
-     */
-    dmi_byte_t maximum_module_size;
-
-    /**
-     * @brief Supported memory module speeds.
-     */
-    dmi_word_t supported_speeds;
-
-    /**
-     * @brief Supported memory module types.
-     */
-    dmi_word_t supported_types;
-
-    /**
-     * @brief Required voltages for each of the memory module sockets
-     * controlled by this controller.
-     */
-    dmi_byte_t required_voltages;
-
-    /**
-     * @brief Defines how many of the memory module Information blocks are
-     * controlled by this controller.
-     */
-    dmi_byte_t slot_count;
-
-    /**
-     * @brief Lists memory information structure handles controlled by this
-     * controller.
-     */
-    dmi_handle_t module_handles[];
-};
-
-/**
- * @since SMBIOS 2.1
- */
-dmi_packed_struct(dmi_memory_controller_extra)
-{
-    dmi_byte_t enabled_error_correction;
-};
-
-/**
- * @brief Memory controller information.
- */
 struct dmi_memory_controller
 {
     /**
@@ -252,14 +173,25 @@ struct dmi_memory_controller
     dmi_memory_module_voltage_t required_voltages;
 
     /**
-     * @brief Memory module slots count.
+     * @brief Defines how many of the memory module Information blocks are
+     * controlled by this controller.
      */
     size_t slot_count;
 
+    /**
+     * @brief Lists memory information structure handles controlled by this
+     * controller.
+     */
     dmi_handle_t *module_handles;
 
     dmi_entity_t **modules;
 
+    /**
+     * @brief Identifies the error-correcting capabilities that were enabled
+     * when the structure was built.
+     *
+     * @since SMBIOS 2.1
+     */
     dmi_error_correct_caps_t enabled_error_correction;
 };
 
