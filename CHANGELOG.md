@@ -26,6 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Fix build & and CI on Windows #110
 - Fix memory module installed/enabled size decoding
 - Fix memory module bank count decoding
 
